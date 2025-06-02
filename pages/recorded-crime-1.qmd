@@ -1,0 +1,28 @@
+---
+title: "recorded-crime-1"
+---
+
+
+
+```{r}
+#| include: FALSE
+
+library(here)
+source(paste0(here(), "/data_prep/data_prep.R"))
+```
+
+## Row
+
+### Column {width=50%}
+
+```{r}
+
+```
+
+
+### Column {width=50%}
+
+```{r}
+
+```
+
