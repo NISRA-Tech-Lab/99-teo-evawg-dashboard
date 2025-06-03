@@ -22,4 +22,4 @@ library(data.table)
 library(quarto)
 library(foreign)
 
-currentyyear <- 2023
+currentyear <- 2023
