@@ -21,5 +21,6 @@ library(kableExtra)
 library(data.table)
 library(quarto)
 library(foreign)
+library(writexl)
 
 currentyear <- 2023
