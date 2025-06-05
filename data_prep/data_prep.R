@@ -55,7 +55,7 @@ nilt_currentyr_percent <- nilt_currentyr_data_long %>%
 
 # Remove existing current year data
 nilt_historical_data <- nilt_historical_data %>%
-  filter(year != currentyear)
+  filter(year < currentyear)
 
 # Append and write updated historical data
 updated_historical_data <- bind_rows(nilt_historical_data, nilt_currentyr_percent)
