@@ -3,8 +3,6 @@
 .RData
 .Ruserdata
 data/
-data/*.xlsx
-data/*.xls
-data/*.csv
-data/data_portal_data/*.csv
-
+docs/
+data/
+*.html
