@@ -24,3 +24,14 @@ library(foreign)
 library(writexl)
 
 currentyear <- 2023
+
+##### COLOURS #####
+nisra_palette <- c(
+  nisra_green_decoration = "#CEDC20",
+  nisra_blue = "#3878c5",
+  nisra_navy = "#00205b",
+  nisra_col3_green = "#68a41e", 
+  nisra_col4_purple = "#732777"
+)
+
+nisra_colours <- unname(nisra_palette)
