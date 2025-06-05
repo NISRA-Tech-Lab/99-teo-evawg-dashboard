@@ -16,6 +16,73 @@ source(paste0(here(), "/data_prep/data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+chart1_data <- nilt_historical_data
+
+plot_ly() %>%
+  add_trace(data = chart1_data, x = ~year, y = ~GBVPHYVA, type = 'scatter',
+            mode = 'lines+markers', name = 'GBVPHYVA',
+            line = list(color = nisra_colours[1]),
+            marker = list(color = nisra_colours[1]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = chart1_data, x = ~year, y = ~GBVSEXVA, type = 'scatter',
+            mode = 'lines+markers', name = 'GBVSEXVA',
+            line = list(color = nisra_colours[2]),
+            marker = list(color = nisra_colours[2]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = chart1_data, x = ~year, y = ~GBVPSYVA, type = 'scatter',
+            mode = 'lines+markers', name = 'GBVPSYVA',
+            line = list(color = nisra_colours[3]),
+            marker = list(color = nisra_colours[3]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = chart1_data, x = ~year, y = ~GBVECONV, type = 'scatter',
+            mode = 'lines+markers', name = 'GBVECONV',
+            line = list(color = nisra_colours[4]),
+            marker = list(color = nisra_colours[4]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = chart1_data, x = ~year, y = ~GBVONLV, type = 'scatter',
+            mode = 'lines+markers', name = 'GBVONLV',
+            line = list(color = nisra_colours[5]),
+            marker = list(color = nisra_colours[5]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  layout(
+    title = list(
+      text = "Experienced Violence Over Time",
+      y = 0.98,
+      x = 0.5,
+      xanchor = "center"
+    ),
+    margin = list(t = 100),
+    xaxis = list(
+      title = list(
+        text = "Year",
+        font = list(size = 14)
+      ),
+      tickmode = "array",
+      tickvals = chart1_data$year,
+      showgrid = FALSE
+    ),
+    yaxis = list(
+      title = "",  
+      automargin = TRUE,
+      titlefont = list(size = 0),
+      standoff = 0,
+      showgrid = FALSE
+    ),
+    legend = list(title = list(text = "Variable")),
+    annotations = list(
+      list(
+        x = -0.008,
+        xref = "paper",
+        xanchor = "center",
+        y = 1.1,
+        yref = "paper",
+        yanchor = "bottom",
+        text = "Percentage %",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    )
+  )
 
 ```
 
