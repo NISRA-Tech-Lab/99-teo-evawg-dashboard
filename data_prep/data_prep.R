@@ -13,7 +13,7 @@ nilt_previousyr_data <- read.spss(
 )
 
 nilt_currentyr_data <- read.spss(
-  paste0(here(), "/data/nilt23w1.sav"),
+  paste0(here(), "/data/NILT23TEOv2.sav"),
   to.data.frame = TRUE
 )
 
@@ -28,12 +28,14 @@ ylt_currentyr_data <- read.spss(
 )
 
 ylt_currentyr_plus1_data <- read.spss(
-  paste0(here(), "/data/ylt24.sav"),
+  paste0(here(), "/data/YLT2024.sav"),
   to.data.frame = TRUE
 )
 
 
 ################################################################################
+
+# ADD CURRENT YEAR'S EXPERIENCED VIOLENCE % FIGURES TO HISTORICAL NILT DATA FILE
 
 # Build initial long response data (excluding NA)
 nilt_currentyr_data_long <- nilt_currentyr_data %>%
@@ -65,3 +67,11 @@ write_xlsx(updated_historical_data, paste0(here(), "/data/nilt_historical.xlsx")
 nilt_historical_data <- read_excel(
   paste0(here(), "/data/nilt_historical.xlsx")
 )
+
+################################################################################
+
+# NILT CHART 1 DATA 
+
+chart1_data <- nilt_historical_data
+
+################################################################################
