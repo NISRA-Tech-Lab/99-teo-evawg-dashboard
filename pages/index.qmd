@@ -20,27 +20,27 @@ chart1_data <- nilt_historical_data
 
 plot_ly() %>%
   add_trace(data = chart1_data, x = ~year, y = ~GBVPHYVA, type = 'scatter',
-            mode = 'lines+markers', name = 'GBVPHYVA',
+            mode = 'lines+markers', name = 'Physical violence',
             line = list(color = nisra_colours[1]),
             marker = list(color = nisra_colours[1]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = chart1_data, x = ~year, y = ~GBVSEXVA, type = 'scatter',
-            mode = 'lines+markers', name = 'GBVSEXVA',
+            mode = 'lines+markers', name = 'Sexual violence',
             line = list(color = nisra_colours[2]),
             marker = list(color = nisra_colours[2]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = chart1_data, x = ~year, y = ~GBVPSYVA, type = 'scatter',
-            mode = 'lines+markers', name = 'GBVPSYVA',
+            mode = 'lines+markers', name = 'Psychological violence',
             line = list(color = nisra_colours[3]),
             marker = list(color = nisra_colours[3]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = chart1_data, x = ~year, y = ~GBVECONV, type = 'scatter',
-            mode = 'lines+markers', name = 'GBVECONV',
+            mode = 'lines+markers', name = 'Economic violence',
             line = list(color = nisra_colours[4]),
             marker = list(color = nisra_colours[4]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = chart1_data, x = ~year, y = ~GBVONLV, type = 'scatter',
-            mode = 'lines+markers', name = 'GBVONLV',
+            mode = 'lines+markers', name = 'Online violence',
             line = list(color = nisra_colours[5]),
             marker = list(color = nisra_colours[5]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
@@ -68,7 +68,7 @@ plot_ly() %>%
       standoff = 0,
       showgrid = FALSE
     ),
-    legend = list(title = list(text = "Variable")),
+    legend = list(title = list(text = "")),
     annotations = list(
       list(
         x = -0.008,
