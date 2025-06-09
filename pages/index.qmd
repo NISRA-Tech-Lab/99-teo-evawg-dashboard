@@ -16,30 +16,29 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
-chart1_data <- nilt_historical_data
 
 plot_ly() %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVPHYVA, type = 'scatter',
+  add_trace(data = nilt_chart1_data, x = ~year, y = ~GBVPHYVA, type = 'scatter',
             mode = 'lines+markers', name = 'Physical violence',
             line = list(color = nisra_colours[1]),
             marker = list(color = nisra_colours[1]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVSEXVA, type = 'scatter',
+  add_trace(data = nilt_chart1_data, x = ~year, y = ~GBVSEXVA, type = 'scatter',
             mode = 'lines+markers', name = 'Sexual violence',
             line = list(color = nisra_colours[2]),
             marker = list(color = nisra_colours[2]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVPSYVA, type = 'scatter',
+  add_trace(data = nilt_chart1_data, x = ~year, y = ~GBVPSYVA, type = 'scatter',
             mode = 'lines+markers', name = 'Psychological violence',
             line = list(color = nisra_colours[3]),
             marker = list(color = nisra_colours[3]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVECONV, type = 'scatter',
+  add_trace(data = nilt_chart1_data, x = ~year, y = ~GBVECONV, type = 'scatter',
             mode = 'lines+markers', name = 'Economic violence',
             line = list(color = nisra_colours[4]),
             marker = list(color = nisra_colours[4]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVONLV, type = 'scatter',
+  add_trace(data = nilt_chart1_data, x = ~year, y = ~GBVONLV, type = 'scatter',
             mode = 'lines+markers', name = 'Online violence',
             line = list(color = nisra_colours[5]),
             marker = list(color = nisra_colours[5]),
@@ -58,7 +57,7 @@ plot_ly() %>%
         font = list(size = 14)
       ),
       tickmode = "array",
-      tickvals = chart1_data$year,
+      tickvals = nilt_chart1_data$year,
       showgrid = FALSE,
     showline = TRUE,  
     linecolor = "black", 
