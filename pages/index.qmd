@@ -8,7 +8,7 @@ title: "NILT"
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/data_prep.R"))
+source(paste0(here(), "/data_prep/main_data_prep.R"))
 ```
 
 ## Row
@@ -59,14 +59,20 @@ plot_ly() %>%
       ),
       tickmode = "array",
       tickvals = chart1_data$year,
-      showgrid = FALSE
+      showgrid = FALSE,
+    showline = TRUE,  
+    linecolor = "black", 
+    linewidth = 1 
     ),
     yaxis = list(
       title = "",  
       automargin = TRUE,
       titlefont = list(size = 0),
       standoff = 0,
-      showgrid = FALSE
+      showgrid = FALSE,
+    showline = TRUE, 
+    linecolor = "black",
+    linewidth = 1
     ),
     legend = list(title = list(text = "")),
     annotations = list(
@@ -82,7 +88,8 @@ plot_ly() %>%
         font = list(size = 14)
       )
     )
-  )
+  )%>%
+  config(displayModeBar = FALSE)
 
 ```
 
