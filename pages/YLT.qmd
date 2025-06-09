@@ -7,7 +7,7 @@ title: "YLT"
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/data_prep.R"))
+source(paste0(here(), "/data_prep/main_data_prep.R"))
 ```
 
 ## Row
@@ -15,6 +15,73 @@ source(paste0(here(), "/data_prep/data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+plot_ly() %>%
+  add_trace(data = ylt_chart1_data, x = ~year, y = ~GVTYPV1, type = 'scatter',
+            mode = 'lines+markers', name = 'Physical violence',
+            line = list(color = nisra_colours[1]),
+            marker = list(color = nisra_colours[1]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = ylt_chart1_data, x = ~year, y = ~GVTYPV2, type = 'scatter',
+            mode = 'lines+markers', name = 'Sexual violence',
+            line = list(color = nisra_colours[2]),
+            marker = list(color = nisra_colours[2]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = ylt_chart1_data, x = ~year, y = ~GVTYPV3, type = 'scatter',
+            mode = 'lines+markers', name = 'Psychological violence',
+            line = list(color = nisra_colours[3]),
+            marker = list(color = nisra_colours[3]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = ylt_chart1_data, x = ~year, y = ~GVTYPV4, type = 'scatter',
+            mode = 'lines+markers', name = 'Online violence',
+            line = list(color = nisra_colours[4]),
+            marker = list(color = nisra_colours[4]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  layout(
+    title = list(
+      text = "Experienced Violence Over Time",
+      y = 0.98,
+      x = 0.5,
+      xanchor = "center"
+    ),
+    margin = list(t = 100),
+    xaxis = list(
+      title = list(
+        text = "Year",
+        font = list(size = 14)
+      ),
+      tickmode = "array",
+      tickvals = ylt_chart1_data$year,
+      showgrid = FALSE,
+      showline = TRUE,  
+      linecolor = "black", 
+      linewidth = 1 
+    ),
+    yaxis = list(
+      title = "",  
+      automargin = TRUE,
+      titlefont = list(size = 0),
+      standoff = 0,
+      showgrid = FALSE,
+      showline = TRUE, 
+      linecolor = "black",
+      linewidth = 1
+    ),
+    legend = list(title = list(text = "")),
+    annotations = list(
+      list(
+        x = -0.008,
+        xref = "paper",
+        xanchor = "center",
+        y = 1.1,
+        yref = "paper",
+        yanchor = "bottom",
+        text = "Percentage %",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
 
 ```
 

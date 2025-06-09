@@ -26,7 +26,6 @@ ylt_previousyr_data <- read.spss(
   to.data.frame = TRUE
 )
 
-
 ylt_currentyr_data <- read.spss(
   paste0(here(), "/data/YLT2024.sav"),
   to.data.frame = TRUE
@@ -72,7 +71,7 @@ nilt_historical_data <- read_excel(
 
 # NILT CHART 1 DATA 
 
-chart1_data <- nilt_historical_data
+nilt_chart1_data <- nilt_historical_data
 
 ################################################################################
 
@@ -106,3 +105,11 @@ write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical.xlsx"))
 ylt_historical_data <- read_excel(
   paste0(here(), "/data/ylt_historical.xlsx")
 )
+
+################################################################################
+
+# YLT CHART 1 DATA 
+
+ylt_chart1_data <- ylt_historical_data
+
+################################################################################
