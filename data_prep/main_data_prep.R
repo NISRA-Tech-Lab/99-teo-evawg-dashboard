@@ -7,6 +7,10 @@ nilt_historical_data <- read_excel(
   paste0(here(), "/data/nilt_historical.xlsx")
 )
 
+ylt_historical_data <- read_excel(
+  paste0(here(), "/data/ylt_historical.xlsx")
+)
+
 nilt_previousyr_data <- read.spss(
   paste0(here(), "/data/nilt22w1.sav"),
   to.data.frame = TRUE
@@ -18,16 +22,12 @@ nilt_currentyr_data <- read.spss(
 )
 
 ylt_previousyr_data <- read.spss(
-  paste0(here(), "/data/ylt22w2.sav"),
-  to.data.frame = TRUE
-)
-
-ylt_currentyr_data <- read.spss(
   paste0(here(), "/data/ylt23w1.sav"),
   to.data.frame = TRUE
 )
 
-ylt_currentyr_plus1_data <- read.spss(
+
+ylt_currentyr_data <- read.spss(
   paste0(here(), "/data/YLT2024.sav"),
   to.data.frame = TRUE
 )
@@ -52,12 +52,12 @@ nilt_currentyr_percent <- nilt_currentyr_data_long %>%
   mutate(Percent = (Yes / (Yes + No)) * 100) %>%
   select(Variable, Percent) %>%
   pivot_wider(names_from = Variable, values_from = Percent) %>%
-  mutate(year = currentyear) %>%
+  mutate(year = nilt_currentyear) %>%
   select(year, everything())
 
 # Remove existing current year data
 nilt_historical_data <- nilt_historical_data %>%
-  filter(year < currentyear)
+  filter(year < nilt_currentyear)
 
 # Append and write updated historical data
 updated_historical_data <- bind_rows(nilt_historical_data, nilt_currentyr_percent)
@@ -75,3 +75,34 @@ nilt_historical_data <- read_excel(
 chart1_data <- nilt_historical_data
 
 ################################################################################
+
+# Build initial long response data (excluding NA)
+ylt_currentyr_data_long <- ylt_currentyr_data %>%
+  select(GVTYPV1, GVTYPV2, GVTYPV3, GVTYPV4) %>%
+  pivot_longer(everything(), names_to = "Variable", values_to = "Response") %>%
+  filter(!is.na(Response)) %>%
+  mutate(Response = as.character(Response))
+
+# Calculate counts (Ticked/Not ticked) and experienced violence percent directly
+ylt_currentyr_percent <- ylt_currentyr_data_long %>%
+  count(Variable, Response, name = "Count") %>%
+  complete(Response = c("Ticked", "Not Ticked"), Variable, fill = list(Count = 0)) %>%
+  pivot_wider(names_from = Response, values_from = Count) %>%
+  mutate(Percent = (Ticked / (Ticked + `Not Ticked`)) * 100) %>%
+  select(Variable, Percent) %>%
+  pivot_wider(names_from = Variable, values_from = Percent) %>%
+  mutate(year = ylt_currentyear) %>%
+  select(year, everything())
+
+# Remove existing current year data
+ylt_historical_data <- ylt_historical_data %>%
+  filter(year < ylt_currentyear)
+
+# Append and write updated historical data
+updated_historical_data <- bind_rows(ylt_historical_data, ylt_currentyr_percent)
+
+write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical.xlsx"))
+
+ylt_historical_data <- read_excel(
+  paste0(here(), "/data/ylt_historical.xlsx")
+)
