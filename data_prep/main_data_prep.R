@@ -3,8 +3,12 @@ source(paste0(here(), "/config.R"))
 
 # READ IN THE DATA
 
-nilt_historical_data <- read_excel(
-  paste0(here(), "/data/nilt_historical.xlsx")
+nilt_historical_chart1 <- read_excel(
+  paste0(here(), "/data/nilt_historical_chart1.xlsx")
+)
+
+nilt_historical_chart2 <- read_excel(
+  paste0(here(), "/data/nilt_historical_chart2.xlsx")
 )
 
 ylt_historical_data <- read_excel(
@@ -55,23 +59,17 @@ nilt_currentyr_percent <- nilt_currentyr_data_long %>%
   select(year, everything())
 
 # Remove existing current year data
-nilt_historical_data <- nilt_historical_data %>%
+nilt_historical_chart1 <- nilt_historical_chart1 %>%
   filter(year < nilt_currentyear)
 
 # Append and write updated historical data
-updated_historical_data <- bind_rows(nilt_historical_data, nilt_currentyr_percent)
+updated_historical_data <- bind_rows(nilt_historical_chart1, nilt_currentyr_percent)
 
-write_xlsx(updated_historical_data, paste0(here(), "/data/nilt_historical.xlsx"))
+write_xlsx(updated_historical_data, paste0(here(), "/data/nilt_historical_chart1.xlsx"))
 
-nilt_historical_data <- read_excel(
-  paste0(here(), "/data/nilt_historical.xlsx")
+nilt_historical_chart1 <- read_excel(
+  paste0(here(), "/data/nilt_historical_chart1.xlsx")
 )
-
-################################################################################
-
-# NILT CHART 1 DATA 
-
-nilt_chart1_data <- nilt_historical_data
 
 ################################################################################
 
@@ -113,3 +111,58 @@ ylt_historical_data <- read_excel(
 ylt_chart1_data <- ylt_historical_data
 
 ################################################################################
+
+
+nilt_variable_by_gender <- function(df, var, gender_var = "RSEX") {
+  df %>%
+    filter(!is.na(.data[[var]]), !is.na(.data[[gender_var]])) %>%
+    filter(.data[[var]] %in% c("Yes", "No")) %>%
+    group_by(.data[[gender_var]]) %>%
+    summarise(
+      yes = sum(.data[[var]] == "Yes"),
+      total = n(),
+      percentage_yes = round(100 * yes / total, 1),
+      .groups = "drop"
+    ) %>%
+    mutate(variable = var)
+}
+
+nilt_vars <- c("GBVPHYVA", "GBVSEXVA", "GBVPSYVA", "GBVECONV", "GBVONLV")
+
+nilt_gender_data <- bind_rows(
+  lapply(nilt_vars, function(v) nilt_variable_by_gender(nilt_currentyr_data, v))
+)
+nilt_gender_data$year <- nilt_currentyear
+
+nilt_gender_data <- nilt_gender_data %>%
+  select(year, variable, RSEX, percentage_yes) %>%
+  rename(
+    gender = RSEX
+  )
+
+# Remove existing current year data
+nilt_historical_chart2 <- nilt_historical_chart2 %>%
+  filter(year < nilt_currentyear)
+
+# Ensure 'variable' column exists and is character
+if (!"variable" %in% names(nilt_historical_chart2)) {
+  nilt_historical_chart2$variable <- as.character(NA)
+} else {
+  nilt_historical_chart2$variable <- as.character(nilt_historical_chart2$variable)
+}
+
+# Ensure 'gender' column exists and is character
+if (!"gender" %in% names(nilt_historical_chart2)) {
+  nilt_historical_chart2$gender <- as.character(NA)
+} else {
+  nilt_historical_chart2$gender <- as.character(nilt_historical_chart2$gender)
+}
+
+# Append and write updated historical data
+updated_historical_data <- bind_rows(nilt_historical_chart2, nilt_gender_data)
+
+write_xlsx(updated_historical_data, paste0(here(), "/data/nilt_historical_chart2.xlsx"))
+
+nilt_historical_chart2 <- read_excel(
+  paste0(here(), "/data/nilt_historical_chart2.xlsx")
+)
