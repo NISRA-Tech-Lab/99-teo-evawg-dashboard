@@ -22,6 +22,9 @@ library(data.table)
 library(quarto)
 library(foreign)
 library(writexl)
+library(htmlwidgets)
+library(jsonlite)
+library(glue)
 
 currentyear <- 2023
 nilt_currentyear <- 2023
