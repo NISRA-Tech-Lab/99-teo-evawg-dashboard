@@ -38,6 +38,40 @@ ylt_historical_data <- read_excel(
 
 
 ################################################################################
+# ADD CURRENT YEAR'S EXPERIENCED VIOLENCE % FIGURES TO nilt_historical_chart1 DATA FILE
+# 
+# # Build initial long response data (excluding NA)
+# nilt_previousyr_data_long <- nilt_previousyr_data %>%
+#   select(GBVPHYV, GBVSEXV, GBVPSYV, GBVECONV, GBVONLV) %>%
+#   pivot_longer(everything(), names_to = "Variable", values_to = "Response") %>%
+#   filter(!is.na(Response)) %>%
+#   mutate(Response = as.character(Response))
+# 
+# # Calculate counts (Yes/No) and experienced violence perc directly
+# nilt_previousyr_percent <- nilt_previousyr_data_long %>%
+#   count(Variable, Response, name = "Count") %>%
+#   complete(Response = c("Yes", "No"), Variable, fill = list(Count = 0)) %>%
+#   pivot_wider(names_from = Response, values_from = Count) %>%
+#   mutate(Percent = (Yes / (Yes + No)) * 100) %>%
+#   select(Variable, Percent) %>%
+#   pivot_wider(names_from = Variable, values_from = Percent) %>%
+#   mutate(year = nilt_currentyear-1) %>%
+#   select(year, everything())
+# 
+# # Remove existing previous year data
+# nilt_historical_chart1 <- nilt_historical_chart1 %>%
+#   filter(year < nilt_currentyear-1)
+# 
+# # Append and write updated historical data
+# updated_historical_data <- bind_rows(nilt_historical_chart1, nilt_previousyr_percent)
+# 
+# write_xlsx(updated_historical_data, paste0(here(), "/data/nilt_historical_chart1.xlsx"))
+# 
+# nilt_historical_chart1 <- read_excel(
+#   paste0(here(), "/data/nilt_historical_chart1.xlsx")
+# )
+
+
 
 # ADD CURRENT YEAR'S EXPERIENCED VIOLENCE % FIGURES TO nilt_historical_chart1 DATA FILE
 
