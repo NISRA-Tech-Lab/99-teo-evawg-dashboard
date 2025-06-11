@@ -38,55 +38,22 @@ ylt_historical_data <- read_excel(
 
 
 ################################################################################
-# ADD CURRENT YEAR'S EXPERIENCED VIOLENCE % FIGURES TO nilt_historical_chart1 DATA FILE
-# 
-# # Build initial long response data (excluding NA)
-# nilt_previousyr_data_long <- nilt_previousyr_data %>%
-#   select(GBVPHYV, GBVSEXV, GBVPSYV, GBVECONV, GBVONLV) %>%
-#   pivot_longer(everything(), names_to = "Variable", values_to = "Response") %>%
-#   filter(!is.na(Response)) %>%
-#   mutate(Response = as.character(Response))
-# 
-# # Calculate counts (Yes/No) and experienced violence perc directly
-# nilt_previousyr_percent <- nilt_previousyr_data_long %>%
-#   count(Variable, Response, name = "Count") %>%
-#   complete(Response = c("Yes", "No"), Variable, fill = list(Count = 0)) %>%
-#   pivot_wider(names_from = Response, values_from = Count) %>%
-#   mutate(Percent = (Yes / (Yes + No)) * 100) %>%
-#   select(Variable, Percent) %>%
-#   pivot_wider(names_from = Variable, values_from = Percent) %>%
-#   mutate(year = nilt_currentyear-1) %>%
-#   select(year, everything())
-# 
-# # Remove existing previous year data
-# nilt_historical_chart1 <- nilt_historical_chart1 %>%
-#   filter(year < nilt_currentyear-1)
-# 
-# # Append and write updated historical data
-# updated_historical_data <- bind_rows(nilt_historical_chart1, nilt_previousyr_percent)
-# 
-# write_xlsx(updated_historical_data, paste0(here(), "/data/nilt_historical_chart1.xlsx"))
-# 
-# nilt_historical_chart1 <- read_excel(
-#   paste0(here(), "/data/nilt_historical_chart1.xlsx")
-# )
-
-
 
 # ADD CURRENT YEAR'S EXPERIENCED VIOLENCE % FIGURES TO nilt_historical_chart1 DATA FILE
 
-# Build initial long response data (excluding NA)
+# Step 1: Reshape the data into long format and retain weights
 nilt_currentyr_data_long <- nilt_currentyr_data %>%
-  select(GBVPHYVA, GBVSEXVA, GBVPSYVA, GBVECONV, GBVONLV) %>%
-  pivot_longer(everything(), names_to = "Variable", values_to = "Response") %>%
-  filter(!is.na(Response)) %>%
+  select(WTFACTOR, GBVPHYVA, GBVSEXVA, GBVPSYVA, GBVECONV, GBVONLV) %>%
+  pivot_longer(cols = -WTFACTOR, names_to = "Variable", values_to = "Response") %>%
+  filter(Response %in% c("Yes", "No")) %>%  # Only keep Yes/No responses
   mutate(Response = as.character(Response))
 
-# Calculate counts (Yes/No) and experienced violence perc directly
+# Step 2: Calculate weighted totals for Yes and No responses
 nilt_currentyr_percent <- nilt_currentyr_data_long %>%
-  count(Variable, Response, name = "Count") %>%
-  complete(Response = c("Yes", "No"), Variable, fill = list(Count = 0)) %>%
-  pivot_wider(names_from = Response, values_from = Count) %>%
+  group_by(Variable, Response) %>%
+  summarise(WeightSum = sum(WTFACTOR, na.rm = TRUE), .groups = "drop") %>%
+  complete(Response = c("Yes", "No"), Variable, fill = list(WeightSum = 0)) %>%
+  pivot_wider(names_from = Response, values_from = WeightSum) %>%
   mutate(Percent = (Yes / (Yes + No)) * 100) %>%
   select(Variable, Percent) %>%
   pivot_wider(names_from = Variable, values_from = Percent) %>%
@@ -110,32 +77,43 @@ nilt_historical_chart1 <- read_excel(
 
 # ADD CURRENT YEAR'S % FIGURES TO nilt_historical_chart2 DATA FILE
 
-nilt_variable_by_gender <- function(df, var, gender_var = "RSEX") {
+# Weighted version of nilt_variable_by_gender
+nilt_variable_by_gender <- function(df, var, gender_var = "RSEX", weight_var = "WTFACTOR") {
   df %>%
-    filter(!is.na(.data[[var]]), !is.na(.data[[gender_var]])) %>%
-    filter(.data[[var]] %in% c("Yes", "No")) %>%
+    filter(
+      !is.na(.data[[var]]),
+      !is.na(.data[[gender_var]]),
+      .data[[var]] %in% c("Yes", "No"),
+      !is.na(.data[[weight_var]])
+    ) %>%
+    mutate(
+      weight = .data[[weight_var]],
+      is_yes = ifelse(.data[[var]] == "Yes", 1, 0)
+    ) %>%
     group_by(.data[[gender_var]]) %>%
     summarise(
-      yes = sum(.data[[var]] == "Yes"),
-      total = n(),
-      percentage_yes = round(100 * yes / total, 1),
+      weighted_yes = sum(weight * is_yes, na.rm = TRUE),
+      weighted_total = sum(weight, na.rm = TRUE),
+      percentage_yes = round(100 * weighted_yes / weighted_total, 1),
       .groups = "drop"
     ) %>%
     mutate(variable = var)
 }
 
+# List of variables of interest
 nilt_vars <- c("GBVPHYVA", "GBVSEXVA", "GBVPSYVA", "GBVECONV", "GBVONLV")
 
+# Apply weighted function across variables
 nilt_gender_data <- bind_rows(
   lapply(nilt_vars, function(v) nilt_variable_by_gender(nilt_currentyr_data, v))
 )
+
+# Final formatting
 nilt_gender_data$year <- nilt_currentyear
 
 nilt_gender_data <- nilt_gender_data %>%
   select(year, variable, RSEX, percentage_yes) %>%
-  rename(
-    gender = RSEX
-  )
+  rename(gender = RSEX)
 
 # Remove existing current year data
 nilt_historical_chart2 <- nilt_historical_chart2 %>%
