@@ -59,9 +59,9 @@ plot_ly() %>%
       tickmode = "array",
       tickvals = nilt_historical_chart1$year,
       showgrid = FALSE,
-    showline = TRUE,  
-    linecolor = "black", 
-    linewidth = 1 
+      showline = TRUE,  
+      linecolor = "black", 
+      linewidth = 1 
     ),
     yaxis = list(
       title = "",  
@@ -69,9 +69,9 @@ plot_ly() %>%
       titlefont = list(size = 0),
       standoff = 0,
       showgrid = FALSE,
-    showline = TRUE, 
-    linecolor = "black",
-    linewidth = 1
+      showline = TRUE, 
+      linecolor = "black",
+      linewidth = 1
     ),
     legend = list(title = list(text = "")),
     annotations = list(
@@ -86,9 +86,13 @@ plot_ly() %>%
         showarrow = FALSE,
         font = list(size = 14)
       )
+    ),
+    hoverlabel = list(
+      font = list(color = "white")  # <-- Sets hover text to white
     )
-  )%>%
+  ) %>%
   config(displayModeBar = FALSE)
+
 
 ```
 
@@ -97,8 +101,14 @@ plot_ly() %>%
 
 ```{r}
 
+# Ensure the year column is treated as a categorical variable
+nilt_historical_chart2$year <- as.character(nilt_historical_chart2$year)
+
 # Wrap the data in SharedData for Crosstalk interactivity
 shared_nilt <- SharedData$new(nilt_historical_chart2, key = ~variable, group = "vars")
+
+# Get the unique years for setting tick values
+unique_years <- sort(unique(nilt_historical_chart2$year))
 
 # Single-selection dropdown for 'variable'
 filter_select(
@@ -126,13 +136,29 @@ plot_ly(shared_nilt,
     title = "Percentage Saying Yes Over Time",
     xaxis = list(
       title = "Year",
-      showgrid = FALSE  
+      showgrid = FALSE,
+      showline = TRUE,         
+      linecolor = "black",     
+      linewidth = 1,
+      tickvals = unique_years,     # Force ticks only at these values
+      ticktext = unique_years      # Match tick labels exactly
     ),
     yaxis = list(
       title = "Percentage Saying Yes",
-      showgrid = FALSE  
+      showgrid = FALSE,
+      showline = TRUE,         
+      linecolor = "black",    
+      linewidth = 1  
     ),
-    legend = list(title = list(text = "Gender"))
-  )
+    legend = list(title = list(text = "Gender")),
+    
+    # Set hover text color to white
+    hoverlabel = list(
+      font = list(color = "white")
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
+
+
 
 ```
