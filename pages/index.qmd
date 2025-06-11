@@ -97,165 +97,208 @@ plot_ly() %>%
 
 ```{r}
 
-# Ensure year is numeric
-nilt_historical_chart2 <- nilt_historical_chart2 %>%
-  mutate(year = as.numeric(year)) %>%
-  arrange(variable, gender, year)
+# # Ensure year is numeric
+# nilt_historical_chart2 <- nilt_historical_chart2 %>%
+#   mutate(year = as.numeric(year)) %>%
+#   arrange(variable, gender, year)
+# 
+# # Extract colours from nisra_colours
+# male_colour <- nisra_colours[1]
+# female_colour <- nisra_colours[2]
+# 
+# # Create initial plot
+# plt <- plot_ly(
+#   data = nilt_historical_chart2 %>% filter(variable == "GBVSEXVA"),
+#   x = ~year,
+#   y = ~percentage_yes,
+#   color = ~gender,
+#   type = "scatter",
+#   mode = "lines+markers",
+#   hovertemplate = "Year: %{x}<br>Gender: %{color}<br>% Yes: %{y:.1f}%%<extra></extra>"
+# ) %>%
+#   layout(
+#     title = "Sexual Violence: Percentage Breakdown by Gender",
+#     xaxis = list(
+#       title = "Year",
+#       tickformat = ".0f",
+#       dtick = 1,
+#       tickmode = "linear",
+#       showgrid = FALSE,
+#       showline = TRUE,
+#       linecolor = "black",
+#       linewidth = 1
+#     ),
+#     yaxis = list(
+#       title = "",
+#       showgrid = FALSE,
+#       showline = TRUE,
+#       linecolor = "black",
+#       linewidth = 1
+#     ),
+#     legend = list(title = list(text = "Gender")),
+#     annotations = list(
+#       list(
+#         x = -0.1,
+#         y = 1.05,
+#         text = "Percentage %",
+#         xref = "paper",
+#         yref = "paper",
+#         showarrow = FALSE,
+#         font = list(size = 14)
+#       )
+#     )
+#   )
+# 
+# # Convert data to JSON
+# data_json <- toJSON(nilt_historical_chart2, auto_unbox = TRUE)
+# 
+# # JavaScript for dropdown and dynamic chart update
+# js_code <- glue("
+#   function(el, x) {{
+#     const container = document.createElement('div');
+#     container.style.marginBottom = '10px';
+#     const label = document.createElement('label');
+#     label.innerText = 'Select a Variable:   ';
+#     const select = document.createElement('select');
+# 
+#     const data = {data_json};
+# 
+#     const variableLabels = {{
+#       'GBVECONV': 'Economic Violence',
+#       'GBVONLV': 'Online Violence',
+#       'GBVPHYVA': 'Physical Violence',
+#       'GBVPSYVA': 'Psychological Violence',
+#       'GBVSEXVA': 'Sexual Violence'
+#     }};
+# 
+#     const variables = [...new Set(data.map(d => d.variable))];
+#     variables.forEach(v => {{
+#       const opt = document.createElement('option');
+#       opt.value = v;
+#       opt.text = variableLabels[v] || v;
+#       if (v === 'GBVSEXVA') opt.selected = true;
+#       select.appendChild(opt);
+#     }});
+# 
+#     container.appendChild(label);
+#     container.appendChild(select);
+#     el.parentNode.insertBefore(container, el);
+# 
+#     function updateChart(selectedVar) {{
+#       const filtered = data.filter(d => d.variable === selectedVar);
+#       const male = filtered.filter(d => d.gender === 'Male');
+#       const female = filtered.filter(d => d.gender === 'Female');
+# 
+#       Plotly.react(el, [
+#         {{
+#           x: male.map(d => d.year),
+#           y: male.map(d => d.percentage_yes),
+#           type: 'scatter',
+#           mode: 'lines+markers',
+#           name: 'Male',
+#           line: {{ color: '{male_colour}' }},
+#           marker: {{ color: '{male_colour}' }}
+#         }},
+#         {{
+#           x: female.map(d => d.year),
+#           y: female.map(d => d.percentage_yes),
+#           type: 'scatter',
+#           mode: 'lines+markers',
+#           name: 'Female',
+#           line: {{ color: '{female_colour}' }},
+#           marker: {{ color: '{female_colour}' }}
+#         }}
+#       ],
+#       {{
+#         title: variableLabels[selectedVar] + ': Percentage Breakdown by Gender',
+#         xaxis: {{
+#           title: 'Year',
+#           tickformat: '.0f',
+#           dtick: 1,
+#           tickmode: 'linear',
+#           showgrid: false,
+#           showline: true,
+#           linecolor: 'black',
+#           linewidth: 1
+#         }},
+#         yaxis: {{
+#           title: '',
+#           showgrid: false,
+#           showline: true,
+#           linecolor: 'black',
+#           linewidth: 1
+#         }},
+#         legend: {{ title: {{ text: 'Gender' }} }},
+#         annotations: [{{
+#           x: -0.11,
+#           y: 1.115,
+#           text: 'Percentage %',
+#           xref: 'paper',
+#           yref: 'paper',
+#           showarrow: false,
+#           font: {{ size: 14 }}
+#         }}]
+#       }});
+#     }}
+# 
+#     select.addEventListener('change', function() {{
+#       updateChart(this.value);
+#     }});
+# 
+#     updateChart(select.value);
+#   }}
+# ")
+# 
+# # Attach JavaScript to plot
+# 
+# plt <- config(plt, displayModeBar = FALSE)
+# onRender(plt, js_code)
+# 
+# 
 
-# Extract colours from nisra_colours
-male_colour <- nisra_colours[1]
-female_colour <- nisra_colours[2]
 
-# Create initial plot
-plt <- plot_ly(
-  data = nilt_historical_chart2 %>% filter(variable == "GBVSEXVA"),
-  x = ~year,
-  y = ~percentage_yes,
-  color = ~gender,
-  type = "scatter",
-  mode = "lines+markers",
-  hovertemplate = "Year: %{x}<br>Gender: %{color}<br>% Yes: %{y:.1f}%%<extra></extra>"
-) %>%
+
+
+
+
+
+
+# Wrap the data in SharedData for Crosstalk interactivity
+shared_nilt <- SharedData$new(nilt_historical_chart2, key = ~variable, group = "vars")
+
+# Single-selection dropdown for 'variable'
+filter_select(
+  id = "var_filter",
+  selected = "GBVSEXVA",
+  label = "Select Variable",
+  sharedData = shared_nilt,
+  group = ~variable,
+  multiple = FALSE   # Only allow one variable selection at a time
+)
+
+# Plotly interactive line chart
+plot_ly(shared_nilt, 
+        x = ~year, 
+        y = ~percentage_yes, 
+        color = ~gender, 
+        type = 'scatter', 
+        mode = 'lines+markers',
+        hoverinfo = "text",
+        text = ~paste("Year:", year,
+                      "<br>Variable:", variable,
+                      "<br>Gender:", gender,
+                      "<br>Percentage Yes:", percentage_yes)) %>%
   layout(
-    title = "Sexual Violence: Percentage Breakdown by Gender",
+    title = "Percentage Saying Yes Over Time",
     xaxis = list(
       title = "Year",
-      tickformat = ".0f",
-      dtick = 1,
-      tickmode = "linear",
-      showgrid = FALSE,
-      showline = TRUE,
-      linecolor = "black",
-      linewidth = 1
+      showgrid = FALSE  
     ),
     yaxis = list(
-      title = "",
-      showgrid = FALSE,
-      showline = TRUE,
-      linecolor = "black",
-      linewidth = 1
+      title = "Percentage Saying Yes",
+      showgrid = FALSE  
     ),
-    legend = list(title = list(text = "Gender")),
-    annotations = list(
-      list(
-        x = -0.1,
-        y = 1.05,
-        text = "Percentage %",
-        xref = "paper",
-        yref = "paper",
-        showarrow = FALSE,
-        font = list(size = 14)
-      )
-    )
+    legend = list(title = list(text = "Gender"))
   )
-
-# Convert data to JSON
-data_json <- toJSON(nilt_historical_chart2, auto_unbox = TRUE)
-
-# JavaScript for dropdown and dynamic chart update
-js_code <- glue("
-  function(el, x) {{
-    const container = document.createElement('div');
-    container.style.marginBottom = '10px';
-    const label = document.createElement('label');
-    label.innerText = 'Select a Variable:   ';
-    const select = document.createElement('select');
-
-    const data = {data_json};
-
-    const variableLabels = {{
-      'GBVECONV': 'Economic Violence',
-      'GBVONLV': 'Online Violence',
-      'GBVPHYVA': 'Physical Violence',
-      'GBVPSYVA': 'Psychological Violence',
-      'GBVSEXVA': 'Sexual Violence'
-    }};
-
-    const variables = [...new Set(data.map(d => d.variable))];
-    variables.forEach(v => {{
-      const opt = document.createElement('option');
-      opt.value = v;
-      opt.text = variableLabels[v] || v;
-      if (v === 'GBVSEXVA') opt.selected = true;
-      select.appendChild(opt);
-    }});
-
-    container.appendChild(label);
-    container.appendChild(select);
-    el.parentNode.insertBefore(container, el);
-
-    function updateChart(selectedVar) {{
-      const filtered = data.filter(d => d.variable === selectedVar);
-      const male = filtered.filter(d => d.gender === 'Male');
-      const female = filtered.filter(d => d.gender === 'Female');
-
-      Plotly.react(el, [
-        {{
-          x: male.map(d => d.year),
-          y: male.map(d => d.percentage_yes),
-          type: 'scatter',
-          mode: 'lines+markers',
-          name: 'Male',
-          line: {{ color: '{male_colour}' }},
-          marker: {{ color: '{male_colour}' }}
-        }},
-        {{
-          x: female.map(d => d.year),
-          y: female.map(d => d.percentage_yes),
-          type: 'scatter',
-          mode: 'lines+markers',
-          name: 'Female',
-          line: {{ color: '{female_colour}' }},
-          marker: {{ color: '{female_colour}' }}
-        }}
-      ],
-      {{
-        title: variableLabels[selectedVar] + ': Percentage Breakdown by Gender',
-        xaxis: {{
-          title: 'Year',
-          tickformat: '.0f',
-          dtick: 1,
-          tickmode: 'linear',
-          showgrid: false,
-          showline: true,
-          linecolor: 'black',
-          linewidth: 1
-        }},
-        yaxis: {{
-          title: '',
-          showgrid: false,
-          showline: true,
-          linecolor: 'black',
-          linewidth: 1
-        }},
-        legend: {{ title: {{ text: 'Gender' }} }},
-        annotations: [{{
-          x: -0.11,
-          y: 1.115,
-          text: 'Percentage %',
-          xref: 'paper',
-          yref: 'paper',
-          showarrow: false,
-          font: {{ size: 14 }}
-        }}]
-      }});
-    }}
-
-    select.addEventListener('change', function() {{
-      updateChart(this.value);
-    }});
-
-    updateChart(select.value);
-  }}
-")
-
-# Attach JavaScript to plot
-
-plt <- config(plt, displayModeBar = FALSE)
-onRender(plt, js_code)
-
-
-
-
 
 ```

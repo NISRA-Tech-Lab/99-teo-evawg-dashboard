@@ -26,6 +26,7 @@ library(htmlwidgets)
 library(jsonlite)
 library(glue)
 
+
 currentyear <- 2023
 nilt_currentyear <- 2023
 ylt_currentyear <- 2024
