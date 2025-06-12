@@ -31,11 +31,13 @@ ylt_previousyr_data <- read.spss(
   to.data.frame = TRUE
 )
 
-ylt_historical_data <- read_excel(
-  paste0(here(), "/data/ylt_historical.xlsx")
+ylt_historical_chart1 <- read_excel(
+  paste0(here(), "/data/ylt_historical_chart1.xlsx")
 )
 
-
+ylt_historical_chart2 <- read_excel(
+  paste0(here(), "/data/ylt_historical_chart2.xlsx")
+)
 
 ################################################################################
 
@@ -144,6 +146,8 @@ nilt_historical_chart2 <- read_excel(
 
 ################################################################################
 
+# ADD CURRENT YEAR'S EXPERIENCED VIOLENCE % FIGURES TO ylt_historical_chart1 DATA FILE
+
 # Build initial long response data (excluding NA)
 ylt_currentyr_data_long <- ylt_currentyr_data %>%
   select(GVTYPV1, GVTYPV2, GVTYPV3, GVTYPV4) %>%
@@ -163,21 +167,81 @@ ylt_currentyr_percent <- ylt_currentyr_data_long %>%
   select(year, everything())
 
 # Remove existing current year data
-ylt_historical_data <- ylt_historical_data %>%
+ylt_historical_chart1 <- ylt_historical_chart1 %>%
   filter(year < ylt_currentyear)
 
 # Append and write updated historical data
-updated_historical_data <- bind_rows(ylt_historical_data, ylt_currentyr_percent)
+updated_historical_data <- bind_rows(ylt_historical_chart1, ylt_currentyr_percent)
 
-write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical.xlsx"))
+write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical_chart1.xlsx"))
 
-ylt_historical_data <- read_excel(
-  paste0(here(), "/data/ylt_historical.xlsx")
+ylt_historical_chart1 <- read_excel(
+  paste0(here(), "/data/ylt_historical_chart1.xlsx")
 )
 
 ################################################################################
 
-# YLT CHART 1 DATA 
+# ADD CURRENT YEAR'S % FIGURES TO ylt_historical_chart2 DATA FILE
 
-ylt_chart1_data <- ylt_historical_data
+ylt_variable_by_gender <- function(df, var, gender_var = "RSEX") {
+  df %>%
+    filter(
+      !is.na(.data[[var]]),
+      !is.na(.data[[gender_var]]),
+      .data[[gender_var]] %in% c("Male", "Female"),
+      .data[[var]] %in% c("Ticked", "Not Ticked")
+    ) %>%
+    group_by(.data[[gender_var]]) %>%
+    summarise(
+      ticked = sum(.data[[var]] == "Ticked"),
+      total = n(),
+      percentage_yes = round(100 * ticked / total, 1),
+      .groups = "drop"
+    ) %>%
+    mutate(variable = var)
+}
 
+# Define the relevant YLT variables
+ylt_vars <- c("GVTYPV1", "GVTYPV2", "GVTYPV3", "GVTYPV4")
+
+# Apply the function across all variables and bind results
+ylt_gender_data <- bind_rows(
+  lapply(ylt_vars, function(v) ylt_variable_by_gender(ylt_currentyr_data, v))
+)
+
+# Add year and format the final dataframe
+ylt_gender_data$year <- ylt_currentyear
+
+ylt_gender_data <- ylt_gender_data %>%
+  select(year, variable, RSEX, percentage_yes) %>%
+  rename(
+    gender = RSEX
+  )
+
+
+# Remove existing current year data
+ylt_historical_chart2 <- ylt_historical_chart2 %>%
+  filter(year < ylt_currentyear)
+
+# Ensure 'variable' column exists and is character
+if (!"variable" %in% names(ylt_historical_chart2)) {
+  ylt_historical_chart2$variable <- as.character(NA)
+} else {
+  ylt_historical_chart2$variable <- as.character(ylt_historical_chart2$variable)
+}
+
+# Ensure 'gender' column exists and is character
+if (!"gender" %in% names(ylt_historical_chart2)) {
+  ylt_historical_chart2$gender <- as.character(NA)
+} else {
+  ylt_historical_chart2$gender <- as.character(ylt_historical_chart2$gender)
+}
+
+# Append and write updated historical data
+updated_historical_data <- bind_rows(ylt_historical_chart2, ylt_gender_data)
+
+write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical_chart2.xlsx"))
+
+ylt_historical_chart2 <- read_excel(
+  paste0(here(), "/data/ylt_historical_chart2.xlsx")
+)
