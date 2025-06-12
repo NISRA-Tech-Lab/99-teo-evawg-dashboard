@@ -5,7 +5,7 @@ library(quarto)
 library(here)
 
 # Run to render website
-quarto_render(input = paste0(here(), "/pages/index.qmd"),
+quarto_render(input = paste0(here(), "/pages"),
               as_job = FALSE)
 
 # After render is complete run this to see output in browser
