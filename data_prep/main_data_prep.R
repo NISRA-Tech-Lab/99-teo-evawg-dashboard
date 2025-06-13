@@ -146,6 +146,40 @@ nilt_historical_chart2 <- read_excel(
 
 ################################################################################
 
+# ADD PREVIOUS YEAR'S EXPERIENCED VIOLENCE % FIGURES TO ylt_historical_chart1 DATA FILE
+
+# # Build initial long response data (excluding NA)
+# ylt_previousyr_data_long <- ylt_previousyr_data %>%
+#   select(GVTYPV1, GVTYPV2, GVTYPV3, GVTYPV4) %>%
+#   pivot_longer(everything(), names_to = "Variable", values_to = "Response") %>%
+#   filter(!is.na(Response)) %>%
+#   mutate(Response = as.character(Response))
+# 
+# # Calculate counts (Ticked/Not ticked) and experienced violence percent directly
+# ylt_previousyr_percent <- ylt_previousyr_data_long %>%
+#   count(Variable, Response, name = "Count") %>%
+#   complete(Response = c("Ticked", "Not ticked"), Variable, fill = list(Count = 0)) %>%
+#   pivot_wider(names_from = Response, values_from = Count) %>%
+#   mutate(Percent = (Ticked / (Ticked + `Not ticked`)) * 100) %>%
+#   select(Variable, Percent) %>%
+#   pivot_wider(names_from = Variable, values_from = Percent) %>%
+#   mutate(year = ylt_currentyear-1) %>%
+#   select(year, everything())
+# 
+# # Remove existing previous year data
+# ylt_historical_chart1 <- ylt_historical_chart1 %>%
+#   filter(year < ylt_currentyear-1)
+# 
+# # Append and write updated historical data
+# updated_historical_data <- bind_rows(ylt_historical_chart1, ylt_previousyr_percent)
+# 
+# write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical_chart1.xlsx"))
+# 
+# ylt_historical_chart1 <- read_excel(
+#   paste0(here(), "/data/ylt_historical_chart1.xlsx")
+# )
+
+
 # ADD CURRENT YEAR'S EXPERIENCED VIOLENCE % FIGURES TO ylt_historical_chart1 DATA FILE
 
 # Build initial long response data (excluding NA)

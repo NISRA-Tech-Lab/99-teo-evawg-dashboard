@@ -92,6 +92,63 @@ plot_ly() %>%
 ### Column {width=50%}
 
 ```{r}
+# Ensure the year column is treated as a categorical variable
+ylt_historical_chart2$year <- as.character(ylt_historical_chart2$year)
+
+# Wrap the data in SharedData for Crosstalk interactivity
+shared_ylt <- SharedData$new(ylt_historical_chart2, key = ~variable, group = "vars")
+
+# Get the unique years for setting tick values
+unique_years <- sort(unique(ylt_historical_chart2$year))
+
+# Single-selection dropdown for 'variable'
+filter_select(
+  id = "var_filter",
+  selected = "GVTYPV2",
+  label = "Select Variable",
+  sharedData = shared_ylt,
+  group = ~variable,
+  multiple = FALSE   # Only allow one variable selection at a time
+)
+
+# Plotly interactive line chart
+plot_ly(shared_ylt, 
+        x = ~year, 
+        y = ~percentage_yes, 
+        color = ~gender, 
+        type = 'scatter', 
+        mode = 'lines+markers',
+        hoverinfo = "text",
+        text = ~paste("Year:", year,
+                      "<br>Variable:", variable,
+                      "<br>Gender:", gender,
+                      "<br>Percentage Yes:", percentage_yes)) %>%
+  layout(
+    title = "Percentage Saying Yes Over Time",
+    xaxis = list(
+      title = "Year",
+      showgrid = FALSE,
+      showline = TRUE,         
+      linecolor = "black",     
+      linewidth = 1,
+      tickvals = unique_years,     
+      ticktext = unique_years      
+    ),
+    yaxis = list(
+      title = "Percentage Saying Yes",
+      showgrid = FALSE,
+      showline = TRUE,         
+      linecolor = "black",    
+      linewidth = 1  
+    ),
+    legend = list(title = list(text = "Gender")),
+    
+    # Set hover text color to white
+    hoverlabel = list(
+      font = list(color = "white")
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
 
 ```
 
