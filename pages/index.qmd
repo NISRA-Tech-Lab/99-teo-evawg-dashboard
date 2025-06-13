@@ -79,7 +79,7 @@ plot_ly() %>%
         x = -0.008,
         xref = "paper",
         xanchor = "center",
-        y = 1.1,
+        y = 1.025,
         yref = "paper",
         yanchor = "bottom",
         text = "Percentage %",
@@ -101,26 +101,40 @@ plot_ly() %>%
 
 ```{r}
 
-# Ensure the year column is treated as a categorical variable
-nilt_historical_chart2$year <- as.character(nilt_historical_chart2$year)
-
-# Wrap the data in SharedData for Crosstalk interactivity
-shared_nilt <- SharedData$new(nilt_historical_chart2, key = ~variable, group = "vars")
-
-# Get the unique years for setting tick values
-unique_years <- sort(unique(nilt_historical_chart2$year))
-
-# Single-selection dropdown for 'variable'
-filter_select(
-  id = "var_filter",
-  selected = "GBVSEXVA",
-  label = "Select Variable",
-  sharedData = shared_nilt,
-  group = ~variable,
-  multiple = FALSE   # Only allow one variable selection at a time
+# Step 1: Map variable codes to readable violence type names
+violence_labels <- c(
+  GBVPHYVA = "Physical violence",
+  GBVSEXVA = "Sexual violence",
+  GBVPSYVA = "Psychological violence",
+  GBVECONV = "Economic violence",
+  GBVONLV  = "Online violence"
 )
 
-# Plotly interactive line chart
+# Step 2: Prepare data
+nilt_historical_chart2$year <- as.character(nilt_historical_chart2$year)
+nilt_historical_chart2$variable_label <- recode(nilt_historical_chart2$variable, !!!violence_labels)
+
+# Step 3: Wrap the data in SharedData for Crosstalk interactivity
+shared_nilt <- SharedData$new(
+  nilt_historical_chart2,
+  key = ~variable,
+  group = "violence_type"
+)
+
+# Step 4: Get the unique years for setting tick values
+unique_years <- sort(unique(nilt_historical_chart2$year))
+
+# Step 5: Single-selection dropdown for 'variable'
+filter_select(
+  id = "var_filter",
+  selected = "Sexual violence",
+  label = "Select Violence Type",
+  sharedData = shared_nilt,
+  group = ~variable_label,
+  multiple = FALSE
+)
+
+# Step 6: Plotly interactive line chart with custom y-axis annotation
 plot_ly(shared_nilt, 
         x = ~year, 
         y = ~percentage_yes, 
@@ -129,36 +143,51 @@ plot_ly(shared_nilt,
         mode = 'lines+markers',
         hoverinfo = "text",
         text = ~paste("Year:", year,
-                      "<br>Variable:", variable,
+                      "<br>Violence Type:", variable_label,
                       "<br>Gender:", gender,
                       "<br>Percentage Yes:", percentage_yes)) %>%
   layout(
     title = "Percentage Saying Yes Over Time",
+    
     xaxis = list(
       title = "Year",
       showgrid = FALSE,
-      showline = TRUE,         
-      linecolor = "black",     
+      showline = TRUE,
+      linecolor = "black",
       linewidth = 1,
-      tickvals = unique_years,     # Force ticks only at these values
-      ticktext = unique_years      # Match tick labels exactly
+      tickvals = unique_years,
+      ticktext = unique_years
     ),
-    yaxis = list(
-      title = "Percentage Saying Yes",
-      showgrid = FALSE,
-      showline = TRUE,         
-      linecolor = "black",    
-      linewidth = 1  
-    ),
-    legend = list(title = list(text = "Gender")),
     
-    # Set hover text color to white
+    yaxis = list(
+      title = "",  # remove y-axis title
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1
+    ),
+    
+    legend = list(title = list(text = "")),
+    margin = list(t = 110),  
+    annotations = list(
+      list(
+        x = -0.008,
+        xref = "paper",
+        xanchor = "center",
+        y = 1.025,
+        yref = "paper",
+        yanchor = "bottom",
+        text = "Percentage %",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    ),
+    
     hoverlabel = list(
       font = list(color = "white")
     )
   ) %>%
   config(displayModeBar = FALSE)
-
 
 
 ```
