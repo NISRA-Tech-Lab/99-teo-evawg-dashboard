@@ -6,12 +6,17 @@ source(paste0(here(), "/config.R"))
 nilt_currentyr_data <- read.spss(
   paste0(here(), "/data/NILT23TEOv2.sav"),
   to.data.frame = TRUE
-)
+) %>%
+  mutate(
+    RAGE_num = as.numeric(as.character(RAGE)),
+    age_18_29 = ifelse(RAGE_num >= 18 & RAGE_num <= 29, "yes", "no")
+  )
 
 nilt_previousyr_data <- read.spss(
   paste0(here(), "/data/nilt22w1.sav"),
   to.data.frame = TRUE
-)
+) 
+
 
 nilt_historical_chart1 <- read_excel(
   paste0(here(), "/data/nilt_historical_chart1.xlsx")
