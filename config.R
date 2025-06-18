@@ -3,7 +3,6 @@ library(knitr)
 library(crosstalk)
 library(DT)
 library(ggplot2) 
-library(plotly)
 library(stringr)
 library(reshape2)
 library(readxl)
@@ -22,6 +21,9 @@ library(data.table)
 library(quarto)
 library(foreign)
 library(writexl)
+library(fs)
+library(httr)
+library(plotly)
 
 currentyear <- 2023
 
