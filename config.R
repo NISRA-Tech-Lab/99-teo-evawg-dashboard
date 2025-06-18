@@ -25,7 +25,12 @@ library(fs)
 library(httr)
 library(plotly)
 
+
+
+
 currentyear <- 2023
+nilt_currentyear <- 2023
+ylt_currentyear <- 2024
 
 ##### COLOURS #####
 nisra_palette <- c(
@@ -37,3 +42,4 @@ nisra_palette <- c(
 )
 
 nisra_colours <- unname(nisra_palette)
+
