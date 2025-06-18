@@ -1,5 +1,6 @@
 ---
 title: "domestic-abuse-1"
+
 ---
 
 
@@ -8,7 +9,7 @@ title: "domestic-abuse-1"
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/data_prep.R"))
+source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 ```
 
 ## Row
@@ -17,12 +18,125 @@ source(paste0(here(), "/data_prep/data_prep.R"))
 
 ```{r}
 
+# Calculate dynamic range
+y_min_incident <- floor(min(domestic_abuse_inc_crime$Incidents) / 1000) * 1000
+y_max_incident <- ceiling(max(domestic_abuse_inc_crime$Incidents) / 1000) * 1000
+tick_vals <- seq(y_min_incident, y_max_incident, by = 1000)
+
+# Plot
+fig_2 <- plot_ly(
+  domestic_abuse_inc_crime,
+  x = ~Year,
+  y = ~Incidents,
+  type = 'scatter',
+  mode = 'lines+markers',
+  line = list(color = 'nisra_blue'),
+  hoverinfo = 'text',
+  text = ~paste0(Year, ": ", round(Crimes / 1000, 1))  # No 'k'
+) %>%
+  layout(
+    showlegend = FALSE,
+    font = list(family = "Arial", size = 14),
+    margin(b = 150),
+    xaxis = list(
+      title = list(text = "Year", standoff = 10),
+      showline = TRUE,
+      linecolor = "#000000",
+      showgrid = FALSE,
+      ticks = "outside",
+      tickwidth = 2,
+      tickangle = 0,
+      dtick = 2,
+      automargin = TRUE
+    ),
+    yaxis = list(
+      title = "",
+      showline = TRUE,
+      linecolor = "#000000",
+      showgrid = FALSE,
+      range = c(y_min_incident, y_max_incident),
+      tickvals = tick_vals,
+      ticktext = format(tick_vals / 1000, nsmall = 1)
+    ),
+    annotations = list(
+      list(
+        x = 0.02, y = 1.03,
+        text = "Incidents (Thousands)",
+        showarrow = FALSE,
+        xref = "paper", yref = "paper",
+        xanchor = "center", yanchor = "middle",
+        font = list(size = 14, color = "black")
+      )
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
+
+fig_2
+
+
 ```
 
 
 ### Column {width=50%}
 
-```{r}
+```{r echo = FALSE, fig.show='hold'}
+
+library(plotly)
+
+# Calculate dynamic range
+y_min_crime <- floor(min(domestic_abuse_inc_crime$Crimes) / 1000) * 1000
+y_max_crime <- ceiling(max(domestic_abuse_inc_crime$Crimes) / 1000) * 1000
+tick_vals <- seq(y_min_crime, y_max_crime, by = 1000)
+
+# Plot
+fig_1 <- plot_ly(
+  domestic_abuse_inc_crime,
+  x = ~Year,
+  y = ~Crimes,
+  type = 'scatter',
+  mode = 'lines+markers',
+  line = list(color = 'nisra_blue'),
+  hoverinfo = 'text',
+  text = ~paste0(Year, ": ", round(Crimes / 1000, 1))  # No 'k'
+) %>%
+  layout(
+    showlegend = FALSE,
+    font = list(family = "Arial", size = 14),
+    margin(b = 150),
+    xaxis = list(
+      title = list(text = "Year", standoff = 10),
+      showline = TRUE,
+      linecolor = "#000000",
+      showgrid = FALSE,
+      ticks = "outside",
+      tickwidth = 2,
+      tickangle = 0,
+      dtick = 2,
+      automargin = TRUE
+    ),
+    yaxis = list(
+      title = "",
+      showline = TRUE,
+      linecolor = "#000000",
+      showgrid = FALSE,
+      range = c(y_min_crime, y_max_crime),
+      tickvals = tick_vals,
+      ticktext = format(tick_vals / 1000, nsmall = 1)
+    ),
+    annotations = list(
+      list(
+        x = 0.02, y = 1.03,
+        text = "Crimes (Thousands)",
+        showarrow = FALSE,
+        xref = "paper", yref = "paper",
+        xanchor = "center", yanchor = "middle",
+        font = list(size = 14, color = "black")
+      )
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
+
+fig_1
 
 ```
 
