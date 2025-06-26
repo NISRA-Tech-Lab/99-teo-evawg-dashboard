@@ -74,6 +74,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
 
 
 <link rel="stylesheet" href="style.css">
@@ -133,6 +151,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./domestic-abuse-2.html">
  <span class="dropdown-text">Domestic Abuse Experience Total</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./domestic-abuse-3.html">
+ <span class="dropdown-text">Percentage of DA Crimes</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -172,10 +194,24 @@ ul.task-list li input[type="checkbox"] {
 <div id="cookie-banner" class="bslib-grid-item html-fill-item"></div>
 <script src="cookies_script.js"></script>
 
-<div class="bslib-grid-item html-fill-item bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
-<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 50fr);
+<div class="bslib-grid-item html-fill-item bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 50fr) minmax(3em, 50fr);
 grid-auto-rows: minmax(0, 1fr);">
-<div class="bslib-grid" style="display: grid; grid-template-rows: ; grid-auto-columns: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-044f54fc674da4d57ee6" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-044f54fc674da4d57ee6">{"x":{"visdat":{"25b0140f7da0":["function () ","plotlyVisDat"],"25b010d63166":["function () ","data"],"25b0234f6c3c":["function () ","data"],"25b029291034":["function () ","data"],"25b012cd7049":["function () ","data"],"25b042b07ada":["function () ","data"]},"cur_data":"25b042b07ada","attrs":{"25b010d63166":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines+markers","name":"Physical violence","line":{"color":"#CEDC20"},"marker":{"color":"#CEDC20"},"hovertemplate":"Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","inherit":true},"25b0234f6c3c":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines+markers","name":"Sexual violence","line":{"color":"#3878c5"},"marker":{"color":"#3878c5"},"hovertemplate":"Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","inherit":true},"25b029291034":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines+markers","name":"Psychological violence","line":{"color":"#00205b"},"marker":{"color":"#00205b"},"hovertemplate":"Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","inherit":true},"25b012cd7049":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines+markers","name":"Economic violence","line":{"color":"#68a41e"},"marker":{"color":"#68a41e"},"hovertemplate":"Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","inherit":true},"25b042b07ada":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines+markers","name":"Online violence","line":{"color":"#732777"},"marker":{"color":"#732777"},"hovertemplate":"Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":100,"r":10},"title":{"text":"Experienced Violence Over Time","y":0.97999999999999998,"x":0.5,"xanchor":"center"},"xaxis":{"domain":[0,1],"automargin":true,"title":{"text":"Year","font":{"size":14}},"tickmode":"array","tickvals":[2022,2023],"showgrid":false},"yaxis":{"domain":[0,1],"automargin":true,"title":"","titlefont":{"size":0},"standoff":0,"showgrid":false},"legend":{"title":{"text":""}},"annotations":[{"x":-0.0080000000000000002,"xref":"paper","xanchor":"center","y":1.1000000000000001,"yref":"paper","yanchor":"bottom","text":"Percentage %","showarrow":false,"font":{"size":14}}],"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2022,2023],"y":[8.2064299999999992,5.9880239520958094],"type":"scatter","mode":"lines+markers","name":"Physical violence","line":{"color":"#CEDC20"},"marker":{"color":"#CEDC20","line":{"color":"rgba(31,119,180,1)"}},"hovertemplate":["Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>"],"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2022,2023],"y":[6.4297800000000001,5.5888223552894214],"type":"scatter","mode":"lines+markers","name":"Sexual violence","line":{"color":"#3878c5"},"marker":{"color":"#3878c5","line":{"color":"rgba(255,127,14,1)"}},"hovertemplate":["Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>"],"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2022,2023],"y":[15.397631000000001,11.47704590818363],"type":"scatter","mode":"lines+markers","name":"Psychological violence","line":{"color":"#00205b"},"marker":{"color":"#00205b","line":{"color":"rgba(44,160,44,1)"}},"hovertemplate":["Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>"],"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2022,2023],"y":[3.4686970000000001,2.9940119760479038],"type":"scatter","mode":"lines+markers","name":"Economic violence","line":{"color":"#68a41e"},"marker":{"color":"#68a41e","line":{"color":"rgba(214,39,40,1)"}},"hovertemplate":["Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>"],"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2022,2023],"y":[7.7834180000000002,5.0898203592814371],"type":"scatter","mode":"lines+markers","name":"Online violence","line":{"color":"#732777"},"marker":{"color":"#732777","line":{"color":"rgba(148,103,189,1)"}},"hovertemplate":["Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>","Year: %{x}<br>Value: %{y:.2f}%<extra><\/extra>"],"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div><div class="bslib-grid" style="display: grid; grid-template-rows: ; grid-auto-columns: minmax(0, 1fr);">
 
 
 <div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden">

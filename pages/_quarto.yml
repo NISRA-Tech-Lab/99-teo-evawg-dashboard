@@ -22,6 +22,8 @@ website:
             href: domestic-abuse-1.qmd
           - text: Domestic Abuse Experience Total
             href: domestic-abuse-2.qmd
+          - text: Percentage of DA Crimes
+            href: domestic-abuse-3.qmd
       - href: criminal-justice.qmd
         text: CRIMINAL JUSTICE
 format:

@@ -1,5 +1,5 @@
 ---
-title: "domestic-abuse-2"
+title: "domestic-abuse-3"
 ---
 
 
@@ -23,8 +23,10 @@ fig_3 <- plot_ly(
   y = ~Percentage,
   type = 'bar',
   line = list(color = 'nisra_blue'),
-  hoverinfo = 'text',
-  text = ~paste0(`Crime Categories`, ": ", round(Percentage), "%")  # No 'k'
+  text = ~paste0(round(Percentage), "%"),
+  textposition = "outside",
+  hovertext = ~paste0(`Crime Categories`, ": ", round(Percentage), "%"),  # No 'k'
+  hoverinfo = 'text'
 ) %>%
   layout(
     showlegend = FALSE,
@@ -61,11 +63,3 @@ fig_3 <- plot_ly(
 
 fig_3
 ```
-
-
-### Column {width=50%}
-
-```{r}
-
-```
-
