@@ -15,6 +15,76 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+plot_ly() %>%
+  add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV1, type = 'scatter',
+            mode = 'lines+markers', name = 'Physical violence',
+            line = list(color = nisra_colours[2]),
+            marker = list(color = nisra_colours[2]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV2, type = 'scatter',
+            mode = 'lines+markers', name = 'Sexual violence',
+            line = list(color = nisra_colours[3]),
+            marker = list(color = nisra_colours[3]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV3, type = 'scatter',
+            mode = 'lines+markers', name = 'Psychological violence',
+            line = list(color = nisra_colours[4]),
+            marker = list(color = nisra_colours[4]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV4, type = 'scatter',
+            mode = 'lines+markers', name = 'Online violence',
+            line = list(color = nisra_colours[5]),
+            marker = list(color = nisra_colours[5]),
+            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+  layout(
+    title = list(
+      text = "Experienced Violence Over Time",
+      y = 0.98,
+      x = 0.5,
+      xanchor = "center"
+    ),
+    margin = list(t = 100),
+    xaxis = list(
+      title = list(
+        text = "Year",
+        font = list(size = 14)
+      ),
+      tickmode = "array",
+      tickvals = ylt_historical_chart1$year,
+      showgrid = FALSE,
+      showline = TRUE,  
+      linecolor = "black", 
+      linewidth = 1 
+    ),
+    yaxis = list(
+      title = "",  
+      automargin = TRUE,
+      titlefont = list(size = 0),
+      standoff = 0,
+      showgrid = FALSE,
+      showline = TRUE, 
+      linecolor = "black",
+      linewidth = 1
+    ),
+    legend = list(title = list(text = "")),
+    annotations = list(
+      list(
+        x = -0.008,
+        xref = "paper",
+        xanchor = "center",
+        y = 1.025,
+        yref = "paper",
+        yanchor = "bottom",
+        text = "Percentage %",
+        showarrow = FALSE,
+        font = list(size = 14)
+        )
+      ),
+    hoverlabel = list(
+      font = list(color = "white")  # <-- Sets hover text to white
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
 
 ```
 
@@ -22,6 +92,100 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+library(dplyr)
+library(crosstalk)
+library(plotly)
+
+# 1. Map codes → readable violence-type names
+violence_labels <- c(
+  GVTYPV1 = "Physical violence",
+  GVTYPV2 = "Sexual violence",
+  GVTYPV3 = "Psychological violence",
+  GVTYPV4 = "Online violence"
+)
+
+# 2. Prepare data (recode + drop rows with unknown codes)
+ylt_historical_chart2 <- ylt_historical_chart2 %>%
+  mutate(
+    year           = as.character(year),
+    variable_label = recode(variable, !!!violence_labels)
+  ) %>%
+  filter(!is.na(variable_label))
+
+# 3. Crosstalk wrapper 
+shared_ylt <- SharedData$new(
+  ylt_historical_chart2,
+  key   = ~variable,
+  group = "violence_type"
+)
+
+# 4. Year tick values
+unique_years <- sort(unique(ylt_historical_chart2$year))
+
+# 5. Dropdown (single-select, no “(All)” CSS workaround optional) ─
+filter_select(
+  id         = "var_filter",
+  label      = "Select Violence Type",
+  sharedData = shared_ylt,
+  group      = ~variable_label,
+  selected   = "Sexual violence",
+  multiple   = FALSE      
+)
+
+# 6. Plotly line chart with y-axis annotation and extra top margin ─
+plot_ly(shared_ylt,
+        x     = ~year,
+        y     = ~percentage_yes,
+        color = ~gender,
+        type  = "scatter",
+        mode  = "lines+markers",
+        hoverinfo = "text",
+        text  = ~paste("Year:", year,
+                       "<br>Violence Type:", variable_label,
+                       "<br>Gender:",        gender,
+                       "<br>Percentage Yes:", percentage_yes)) %>%
+  layout(
+    title = "Percentage Saying Yes Over Time",
+
+    xaxis = list(
+      title     = "Year",
+      showgrid  = FALSE,
+      showline  = TRUE,
+      linecolor = "black",
+      linewidth = 1,
+      tickvals  = unique_years,
+      ticktext  = unique_years
+    ),
+
+    yaxis = list(
+      title     = "",          # remove default y-axis title
+      showgrid  = FALSE,
+      showline  = TRUE,
+      linecolor = "black",
+      linewidth = 1
+    ),
+
+    legend = list(title = list(text = "")),   # blank legend title
+
+    margin = list(t = 110),                   # top margin for annotation
+
+    annotations = list(
+      list(
+        x          = -0.008,
+        xref       = "paper",
+        xanchor    = "center",
+        y          = 1.025,
+        yref       = "paper",
+        yanchor    = "bottom",
+        text       = "Percentage %",
+        showarrow  = FALSE,
+        font       = list(size = 14)
+      )
+    ),
+
+    hoverlabel = list(font = list(color = "white"))
+  ) %>%
+  config(displayModeBar = FALSE)
 
 ```
 
