@@ -16,7 +16,7 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
-
+#| fig-height: 10
 plot_ly() %>%
   add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVPHYVA, type = 'scatter',
             mode = 'lines+markers', name = 'Physical violence',
@@ -100,7 +100,8 @@ plot_ly() %>%
 ### Column {width=50%}
 
 ```{r}
-
+#| fig-height: 8
+#| title: title
 # Step 1: Map variable codes to readable violence type names
 violence_labels <- c(
   GBVPHYVA = "Physical violence",
@@ -191,3 +192,23 @@ plot_ly(shared_nilt,
 
 
 ```
+
+::: {.hidden}
+
+```{js}
+
+document.addEventListener("DOMContentLoaded", function() {
+  
+  let cells = document.getElementsByClassName("cell-output-display");
+  
+  for (let i = 0; i < cells.length; i ++) {
+    cells[i].classList.remove("html-fill-item");
+    cells[i].classList.remove("html-fill-container");
+  }
+
+});
+
+
+```
+
+:::
