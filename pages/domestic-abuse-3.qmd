@@ -16,6 +16,13 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+
+
+# Reorder the factor levels to match the data frame order
+types_of_da_crimes$`Crime Categories` <- factor(types_of_da_crimes$`Crime Categories`, 
+                                                levels = types_of_da_crimes$`Crime Categories`)
+
+
 # Plotly graph
 fig_3 <- plot_ly(
   types_of_da_crimes,

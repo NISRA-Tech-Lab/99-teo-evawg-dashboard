@@ -145,50 +145,6 @@ fig_2
 
 ```{r}
 
-# # Plotly graph
-# fig_3 <- plot_ly(
-#   types_of_da_crimes,
-#   x = ~`Crime Categories`,
-#   y = ~Percentage,
-#   type = 'bar',
-#   line = list(color = 'nisra_blue'),
-#   hoverinfo = 'text',
-#   text = ~paste0(`Crime Categories`, ": ", round(Percentage), "%")  # No 'k'
-# ) %>%
-#   layout(
-#     showlegend = FALSE,
-#     font = list(family = "Arial", size = 14),
-#     xaxis = list(
-#       title = list(text = "", standoff = 10),
-#       showline = TRUE,
-#       linecolor = "#000000",
-#       showgrid = FALSE,
-#       tickwidth = 2,
-#       tickangle = 0,
-#       dtick = 2,
-#       automargin = TRUE,
-#       ticks = "outside"
-#     ),
-#     yaxis = list(
-#       title = "",
-#       showline = TRUE,
-#       linecolor = "#000000",
-#       showgrid = FALSE
-#     ),
-#     annotations = list(
-#       list(
-#         x = 0.04, y = 1.03,
-#         text = "Percentage of DA Crimes",
-#         showarrow = FALSE,
-#         xref = "paper", yref = "paper",
-#         xanchor = "center", yanchor = "middle",
-#         font = list(size = 14, color = "black")
-#       )
-#     )
-# ) %>%
-#   config(displayModeBar = FALSE)
-# 
-# fig_3
 
 ```
 
