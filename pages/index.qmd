@@ -16,30 +16,29 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
-chart1_data <- nilt_historical_data
-
+#| fig-height: 10
 plot_ly() %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVPHYVA, type = 'scatter',
+  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVPHYVA, type = 'scatter',
             mode = 'lines+markers', name = 'Physical violence',
             line = list(color = nisra_colours[1]),
             marker = list(color = nisra_colours[1]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVSEXVA, type = 'scatter',
+  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVSEXVA, type = 'scatter',
             mode = 'lines+markers', name = 'Sexual violence',
             line = list(color = nisra_colours[2]),
             marker = list(color = nisra_colours[2]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVPSYVA, type = 'scatter',
+  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVPSYVA, type = 'scatter',
             mode = 'lines+markers', name = 'Psychological violence',
             line = list(color = nisra_colours[3]),
             marker = list(color = nisra_colours[3]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVECONV, type = 'scatter',
+  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVECONV, type = 'scatter',
             mode = 'lines+markers', name = 'Economic violence',
             line = list(color = nisra_colours[4]),
             marker = list(color = nisra_colours[4]),
             hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = chart1_data, x = ~year, y = ~GBVONLV, type = 'scatter',
+  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVONLV, type = 'scatter',
             mode = 'lines+markers', name = 'Online violence',
             line = list(color = nisra_colours[5]),
             marker = list(color = nisra_colours[5]),
@@ -58,15 +57,21 @@ plot_ly() %>%
         font = list(size = 14)
       ),
       tickmode = "array",
-      tickvals = chart1_data$year,
-      showgrid = FALSE
+      tickvals = nilt_historical_chart1$year,
+      showgrid = FALSE,
+      showline = TRUE,  
+      linecolor = "black", 
+      linewidth = 1 
     ),
     yaxis = list(
       title = "",  
       automargin = TRUE,
       titlefont = list(size = 0),
       standoff = 0,
-      showgrid = FALSE
+      showgrid = FALSE,
+      showline = TRUE, 
+      linecolor = "black",
+      linewidth = 1
     ),
     legend = list(title = list(text = "")),
     annotations = list(
@@ -74,15 +79,20 @@ plot_ly() %>%
         x = -0.008,
         xref = "paper",
         xanchor = "center",
-        y = 1.1,
+        y = 1.025,
         yref = "paper",
         yanchor = "bottom",
         text = "Percentage %",
         showarrow = FALSE,
         font = list(size = 14)
       )
+    ),
+    hoverlabel = list(
+      font = list(color = "white")  # <-- Sets hover text to white
     )
-  )
+  ) %>%
+  config(displayModeBar = FALSE)
+
 
 ```
 
@@ -90,5 +100,115 @@ plot_ly() %>%
 ### Column {width=50%}
 
 ```{r}
+#| fig-height: 8
+#| title: title
+# Step 1: Map variable codes to readable violence type names
+violence_labels <- c(
+  GBVPHYVA = "Physical violence",
+  GBVSEXVA = "Sexual violence",
+  GBVPSYVA = "Psychological violence",
+  GBVECONV = "Economic violence",
+  GBVONLV  = "Online violence"
+)
+
+# Step 2: Prepare data
+nilt_historical_chart2$year <- as.character(nilt_historical_chart2$year)
+nilt_historical_chart2$variable_label <- recode(nilt_historical_chart2$variable, !!!violence_labels)
+
+# Step 3: Wrap the data in SharedData for Crosstalk interactivity
+shared_nilt <- SharedData$new(
+  nilt_historical_chart2,
+  key = ~variable,
+  group = "violence_type"
+)
+
+# Step 4: Get the unique years for setting tick values
+unique_years <- sort(unique(nilt_historical_chart2$year))
+
+# Step 5: Single-selection dropdown for 'variable'
+filter_select(
+  id = "var_filter",
+  selected = "Sexual violence",
+  label = "Select Violence Type",
+  sharedData = shared_nilt,
+  group = ~variable_label,
+  multiple = FALSE
+)
+
+# Step 6: Plotly interactive line chart with custom y-axis annotation
+plot_ly(shared_nilt, 
+        x = ~year, 
+        y = ~percentage_yes, 
+        color = ~gender, 
+        type = 'scatter', 
+        mode = 'lines+markers',
+        hoverinfo = "text",
+        text = ~paste("Year:", year,
+                      "<br>Violence Type:", variable_label,
+                      "<br>Gender:", gender,
+                      "<br>Percentage Yes:", percentage_yes)) %>%
+  layout(
+    title = "Percentage Saying Yes Over Time",
+    
+    xaxis = list(
+      title = "Year",
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1,
+      tickvals = unique_years,
+      ticktext = unique_years
+    ),
+    
+    yaxis = list(
+      title = "",  # remove y-axis title
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1
+    ),
+    
+    legend = list(title = list(text = "")),
+    margin = list(t = 110),  
+    annotations = list(
+      list(
+        x = -0.008,
+        xref = "paper",
+        xanchor = "center",
+        y = 1.025,
+        yref = "paper",
+        yanchor = "bottom",
+        text = "Percentage %",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    ),
+    
+    hoverlabel = list(
+      font = list(color = "white")
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
+
 
 ```
+
+::: {.hidden}
+
+```{js}
+
+document.addEventListener("DOMContentLoaded", function() {
+  
+  let cells = document.getElementsByClassName("cell-output-display");
+  
+  for (let i = 0; i < cells.length; i ++) {
+    cells[i].classList.remove("html-fill-item");
+    cells[i].classList.remove("html-fill-container");
+  }
+
+});
+
+
+```
+
+:::
