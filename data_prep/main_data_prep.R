@@ -13,9 +13,13 @@ nilt_currentyr_data <- read.spss(
   )
 
 nilt_previousyr_data <- read.spss(
-  paste0(here(), "/data/nilt22w1.sav"),
+  paste0(here(), "/data/NILT 2022.sav"),
   to.data.frame = TRUE
-) 
+) %>%
+  mutate(
+    RAGE_num = as.numeric(as.character(RAGE)),
+    age_18_29 = ifelse(RAGE_num >= 18 & RAGE_num <= 29, "yes", "no")
+  )
 
 
 nilt_historical_chart1 <- read_excel(
@@ -24,6 +28,10 @@ nilt_historical_chart1 <- read_excel(
 
 nilt_historical_chart2 <- read_excel(
   paste0(here(), "/data/nilt_historical_chart2.xlsx")
+)
+
+nilt_historical_chart3 <- read_excel(
+  paste0(here(), "/data/nilt_historical_chart3.xlsx")
 )
 
 ylt_currentyr_data <- read.spss(
@@ -148,6 +156,173 @@ write_xlsx(updated_historical_data, paste0(here(), "/data/nilt_historical_chart2
 nilt_historical_chart2 <- read_excel(
   paste0(here(), "/data/nilt_historical_chart2.xlsx")
 )
+
+################################################################################
+# ADD PREVIOUS YEAR'S % FIGURES TO nilt_historical_chart3 DATA FILE
+
+# Weighted function by age group
+# nilt_variable_by_age <- function(df, var, age_var = "age_18_29", weight_var = "WTFACTOR") {
+#   df_filtered <- df %>%
+#     filter(
+#       !is.na(.data[[var]]),
+#       .data[[var]] %in% c("Yes", "No"),
+#       !is.na(.data[[weight_var]])
+#     ) %>%
+#     mutate(
+#       weight = .data[[weight_var]],
+#       is_yes = ifelse(.data[[var]] == "Yes", 1, 0)
+#     )
+# 
+#   # For age group 18-29
+#   age_18_29 <- df_filtered %>%
+#     filter(.data[[age_var]] == "yes") %>%
+#     summarise(
+#       weighted_yes = sum(weight * is_yes, na.rm = TRUE),
+#       weighted_total = sum(weight, na.rm = TRUE),
+#       percentage_yes = round(100 * weighted_yes / weighted_total, 1)
+#     ) %>%
+#     mutate(age = "Age 18-29", variable = var)
+# 
+#   # For all age groups
+#   age_all <- df_filtered %>%
+#     summarise(
+#       weighted_yes = sum(weight * is_yes, na.rm = TRUE),
+#       weighted_total = sum(weight, na.rm = TRUE),
+#       percentage_yes = round(100 * weighted_yes / weighted_total, 1)
+#     ) %>%
+#     mutate(age = "Whole Population", variable = var)
+# 
+#   bind_rows(age_18_29, age_all)
+# }
+# 
+# # List of variables of interest
+# nilt_vars <- c("GBVPHYV", "GBVSEXV", "GBVPSYV", "GBVECONV", "GBVONLV")
+# 
+# # Apply across variables
+# nilt_age_data <- bind_rows(
+#   lapply(nilt_vars, function(v) nilt_variable_by_age(nilt_previousyr_data, v))
+# )
+# 
+# # Add year column
+# nilt_age_data$year <- nilt_currentyear-1
+# 
+# # Final formatting
+# nilt_age_data <- nilt_age_data %>%
+#   select(year, variable, age, percentage_yes)
+# 
+# # Remove existing current year data
+# nilt_historical_chart3 <- nilt_historical_chart3 %>%
+#   filter(year < nilt_currentyear-1)
+# 
+# # Ensure 'variable' column exists and is character
+# if (!"variable" %in% names(nilt_historical_chart3)) {
+#   nilt_historical_chart3$variable <- as.character(NA)
+# } else {
+#   nilt_historical_chart3$variable <- as.character(nilt_historical_chart3$variable)
+# }
+# 
+# # Ensure 'age' column exists and is character
+# if (!"age" %in% names(nilt_historical_chart3)) {
+#   nilt_historical_chart3$age <- as.character(NA)
+# } else {
+#   nilt_historical_chart3$age <- as.character(nilt_historical_chart3$age)
+# }
+# 
+# # Append current year data
+# updated_historical_data <- bind_rows(nilt_historical_chart3, nilt_age_data)
+# 
+# # Write to Excel file
+# write_xlsx(updated_historical_data,  paste0(here(), "/data/nilt_historical_chart3.xlsx"))
+# 
+# # Reload to verify
+# nilt_historical_chart3 <- read_excel(
+#   paste0(here(), "/data/nilt_historical_chart3.xlsx")
+# )
+
+
+
+# ADD CURRENT YEAR'S % FIGURES TO nilt_historical_chart3 DATA FILE
+
+# Weighted function by age group
+nilt_variable_by_age <- function(df, var, age_var = "age_18_29", weight_var = "WTFACTOR") {
+  df_filtered <- df %>%
+    filter(
+      !is.na(.data[[var]]),
+      .data[[var]] %in% c("Yes", "No"),
+      !is.na(.data[[weight_var]])
+    ) %>%
+    mutate(
+      weight = .data[[weight_var]],
+      is_yes = ifelse(.data[[var]] == "Yes", 1, 0)
+    )
+  
+  # For age group 18-29
+  age_18_29 <- df_filtered %>%
+    filter(.data[[age_var]] == "yes") %>%
+    summarise(
+      weighted_yes = sum(weight * is_yes, na.rm = TRUE),
+      weighted_total = sum(weight, na.rm = TRUE),
+      percentage_yes = round(100 * weighted_yes / weighted_total, 1)
+    ) %>%
+    mutate(age = "Age 18-29", variable = var)
+  
+  # For all age groups
+  age_all <- df_filtered %>%
+    summarise(
+      weighted_yes = sum(weight * is_yes, na.rm = TRUE),
+      weighted_total = sum(weight, na.rm = TRUE),
+      percentage_yes = round(100 * weighted_yes / weighted_total, 1)
+    ) %>%
+    mutate(age = "Whole Population", variable = var)
+  
+  bind_rows(age_18_29, age_all)
+}
+
+# List of variables of interest
+nilt_vars <- c("GBVPHYVA", "GBVSEXVA", "GBVPSYVA", "GBVECONV", "GBVONLV")
+
+# Apply across variables
+nilt_age_data <- bind_rows(
+  lapply(nilt_vars, function(v) nilt_variable_by_age(nilt_currentyr_data, v))
+)
+
+# Add year column
+nilt_age_data$year <- nilt_currentyear
+
+# Final formatting
+nilt_age_data <- nilt_age_data %>%
+  select(year, variable, age, percentage_yes)
+
+# Remove existing current year data
+nilt_historical_chart3 <- nilt_historical_chart3 %>%
+  filter(year < nilt_currentyear)
+
+# Ensure 'variable' column exists and is character
+if (!"variable" %in% names(nilt_historical_chart3)) {
+  nilt_historical_chart3$variable <- as.character(NA)
+} else {
+  nilt_historical_chart3$variable <- as.character(nilt_historical_chart3$variable)
+}
+
+# Ensure 'age' column exists and is character
+if (!"age" %in% names(nilt_historical_chart3)) {
+  nilt_historical_chart3$age <- as.character(NA)
+} else {
+  nilt_historical_chart3$age <- as.character(nilt_historical_chart3$age)
+}
+
+# Append current year data
+updated_historical_data <- bind_rows(nilt_historical_chart3, nilt_age_data)
+
+# Write to Excel file
+write_xlsx(updated_historical_data,  paste0(here(), "/data/nilt_historical_chart3.xlsx"))
+
+# Reload to verify
+nilt_historical_chart3 <- read_excel(
+  paste0(here(), "/data/nilt_historical_chart3.xlsx")
+)
+
+
 
 ################################################################################
 

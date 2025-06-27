@@ -16,6 +16,7 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+#| title: title
 #| fig-height: 10
 plot_ly() %>%
   add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVPHYVA, type = 'scatter',
@@ -100,7 +101,6 @@ plot_ly() %>%
 ### Column {width=50%}
 
 ```{r}
-#| fig-height: 8
 #| title: title
 # Step 1: Map variable codes to readable violence type names
 violence_labels <- c(
@@ -212,3 +212,95 @@ document.addEventListener("DOMContentLoaded", function() {
 ```
 
 :::
+
+```{r}
+#| title: title
+# Step 1: Map variable codes to readable violence type names
+violence_labels <- c(
+  GBVPHYVA = "Physical violence",
+  GBVSEXVA = "Sexual violence",
+  GBVPSYVA = "Psychological violence",
+  GBVECONV = "Economic violence",
+  GBVONLV  = "Online violence"
+)
+
+# Step 2: Prepare data
+nilt_historical_chart3$year <- as.character(nilt_historical_chart3$year)
+nilt_historical_chart3$variable_label <- recode(nilt_historical_chart3$variable, !!!violence_labels)
+
+# Step 3: Wrap the data in SharedData for Crosstalk interactivity
+shared_nilt_age <- SharedData$new(
+  nilt_historical_chart3,
+  key = ~variable,
+  group = "violence_type_age"
+)
+
+# Step 4: Get the unique years for setting tick values
+unique_years_age <- sort(unique(nilt_historical_chart3$year))
+
+# Step 5: Single-selection dropdown for 'variable'
+filter_select(
+  id = "var_filter_age",
+  selected = "Sexual violence",
+  label = "Select Violence Type",
+  sharedData = shared_nilt_age,
+  group = ~variable_label,
+  multiple = FALSE
+)
+
+# Step 6: Plotly interactive line chart by age group
+plot_ly(shared_nilt_age, 
+        x = ~year, 
+        y = ~percentage_yes, 
+        color = ~age, 
+        type = 'scatter', 
+        mode = 'lines+markers',
+        hoverinfo = "text",
+        text = ~paste("Year:", year,
+                      "<br>Violence Type:", variable_label,
+                      "<br>Age Group:", age,
+                      "<br>Percentage Yes:", percentage_yes)) %>%
+  layout(
+    title = "Percentage Saying Yes Over Time by Age Group",
+    
+    xaxis = list(
+      title = "Year",
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1,
+      tickvals = unique_years_age,
+      ticktext = unique_years_age
+    ),
+    
+    yaxis = list(
+      title = "",  # remove y-axis title
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1
+    ),
+    
+    legend = list(title = list(text = "")),
+    margin = list(t = 110),  
+    annotations = list(
+      list(
+        x = -0.008,
+        xref = "paper",
+        xanchor = "center",
+        y = 1.025,
+        yref = "paper",
+        yanchor = "bottom",
+        text = "Percentage %",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    ),
+    
+    hoverlabel = list(
+      font = list(color = "white")
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
+```
+
