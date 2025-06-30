@@ -259,11 +259,9 @@ plot_ly(shared_nilt_age,
         type = 'scatter', 
         mode = 'lines+markers',
         hoverinfo = "text",
-text = ~paste(
-  year,
-  "<br>", age,
-  "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes)
-)) %>%
+        text = ~paste(year,
+                      "<br>", age,
+                      "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes))) %>%
   layout(
     title = "Percentage Saying Yes Over Time by Age Group",
     
