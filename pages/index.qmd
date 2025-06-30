@@ -23,27 +23,27 @@ plot_ly() %>%
             mode = 'lines+markers', name = 'Physical violence',
             line = list(color = nisra_colours[1]),
             marker = list(color = nisra_colours[1]),
-            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVSEXVA, type = 'scatter',
             mode = 'lines+markers', name = 'Sexual violence',
             line = list(color = nisra_colours[2]),
             marker = list(color = nisra_colours[2]),
-            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVPSYVA, type = 'scatter',
             mode = 'lines+markers', name = 'Psychological violence',
             line = list(color = nisra_colours[3]),
             marker = list(color = nisra_colours[3]),
-            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVECONV, type = 'scatter',
             mode = 'lines+markers', name = 'Economic violence',
             line = list(color = nisra_colours[4]),
             marker = list(color = nisra_colours[4]),
-            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVONLV, type = 'scatter',
             mode = 'lines+markers', name = 'Online violence',
             line = list(color = nisra_colours[5]),
             marker = list(color = nisra_colours[5]),
-            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   layout(
     title = list(
       text = "Experienced Violence Over Time",
@@ -72,7 +72,8 @@ plot_ly() %>%
       showgrid = FALSE,
       showline = TRUE, 
       linecolor = "black",
-      linewidth = 1
+      linewidth = 1,
+      rangemode = "tozero"
     ),
     legend = list(title = list(text = "")),
     annotations = list(
@@ -143,10 +144,11 @@ plot_ly(shared_nilt,
         type = 'scatter', 
         mode = 'lines+markers',
         hoverinfo = "text",
-        text = ~paste("Year:", year,
-                      "<br>Violence Type:", variable_label,
-                      "<br>Gender:", gender,
-                      "<br>Percentage Yes:", percentage_yes)) %>%
+        text = ~paste(
+                year,
+                "<br>", gender,
+                "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes)
+)) %>%
   layout(
     title = "Percentage Saying Yes Over Time",
     
@@ -165,7 +167,8 @@ plot_ly(shared_nilt,
       showgrid = FALSE,
       showline = TRUE,
       linecolor = "black",
-      linewidth = 1
+      linewidth = 1,
+      rangemode = "tozero"
     ),
     
     legend = list(title = list(text = "")),
@@ -256,10 +259,11 @@ plot_ly(shared_nilt_age,
         type = 'scatter', 
         mode = 'lines+markers',
         hoverinfo = "text",
-        text = ~paste("Year:", year,
-                      "<br>Violence Type:", variable_label,
-                      "<br>Age Group:", age,
-                      "<br>Percentage Yes:", percentage_yes)) %>%
+text = ~paste(
+  year,
+  "<br>", age,
+  "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes)
+)) %>%
   layout(
     title = "Percentage Saying Yes Over Time by Age Group",
     
@@ -278,7 +282,8 @@ plot_ly(shared_nilt_age,
       showgrid = FALSE,
       showline = TRUE,
       linecolor = "black",
-      linewidth = 1
+      linewidth = 1,
+      rangemode = "tozero"
     ),
     
     legend = list(title = list(text = "")),

@@ -273,7 +273,7 @@ nilt_variable_by_age <- function(df, var, age_var = "age_18_29", weight_var = "W
       weighted_total = sum(weight, na.rm = TRUE),
       percentage_yes = round(100 * weighted_yes / weighted_total, 1)
     ) %>%
-    mutate(age = "Whole Population", variable = var)
+    mutate(age = "Whole population", variable = var)
   
   bind_rows(age_18_29, age_all)
 }

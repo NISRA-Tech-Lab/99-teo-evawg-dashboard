@@ -15,6 +15,8 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+#| title: title
+#| fig-height: 10
 plot_ly() %>%
   add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV1, type = 'scatter',
             mode = 'lines+markers', name = 'Physical violence',
@@ -64,7 +66,8 @@ plot_ly() %>%
       showgrid = FALSE,
       showline = TRUE, 
       linecolor = "black",
-      linewidth = 1
+      linewidth = 1,
+      rangemode = "tozero"
     ),
     legend = list(title = list(text = "")),
     annotations = list(
@@ -92,10 +95,8 @@ plot_ly() %>%
 ### Column {width=50%}
 
 ```{r}
-library(dplyr)
-library(crosstalk)
-library(plotly)
-
+#| title: title
+#| fig-height: 9
 # 1. Map codes → readable violence-type names
 violence_labels <- c(
   GVTYPV1 = "Physical violence",
@@ -162,7 +163,8 @@ plot_ly(shared_ylt,
       showgrid  = FALSE,
       showline  = TRUE,
       linecolor = "black",
-      linewidth = 1
+      linewidth = 1,
+      rangemode = "tozero"
     ),
 
     legend = list(title = list(text = "")),   # blank legend title
@@ -188,4 +190,22 @@ plot_ly(shared_ylt,
   config(displayModeBar = FALSE)
 
 ```
+::: {.hidden}
 
+```{js}
+
+document.addEventListener("DOMContentLoaded", function() {
+  
+  let cells = document.getElementsByClassName("cell-output-display");
+  
+  for (let i = 0; i < cells.length; i ++) {
+    cells[i].classList.remove("html-fill-item");
+    cells[i].classList.remove("html-fill-container");
+  }
+
+});
+
+
+```
+
+:::
