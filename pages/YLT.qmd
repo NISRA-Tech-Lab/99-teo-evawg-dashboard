@@ -15,27 +15,29 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+#| title: title
+#| fig-height: 10
 plot_ly() %>%
   add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV1, type = 'scatter',
             mode = 'lines+markers', name = 'Physical violence',
             line = list(color = nisra_colours[2]),
             marker = list(color = nisra_colours[2]),
-            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV2, type = 'scatter',
             mode = 'lines+markers', name = 'Sexual violence',
             line = list(color = nisra_colours[3]),
             marker = list(color = nisra_colours[3]),
-            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV3, type = 'scatter',
             mode = 'lines+markers', name = 'Psychological violence',
             line = list(color = nisra_colours[4]),
             marker = list(color = nisra_colours[4]),
-            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV4, type = 'scatter',
             mode = 'lines+markers', name = 'Online violence',
             line = list(color = nisra_colours[5]),
             marker = list(color = nisra_colours[5]),
-            hovertemplate = "Year: %{x}<br>Value: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   layout(
     title = list(
       text = "Experienced Violence Over Time",
@@ -64,7 +66,8 @@ plot_ly() %>%
       showgrid = FALSE,
       showline = TRUE, 
       linecolor = "black",
-      linewidth = 1
+      linewidth = 1,
+      rangemode = "tozero"
     ),
     legend = list(title = list(text = "")),
     annotations = list(
@@ -92,10 +95,8 @@ plot_ly() %>%
 ### Column {width=50%}
 
 ```{r}
-library(dplyr)
-library(crosstalk)
-library(plotly)
-
+#| title: title
+#| fig-height: 9
 # 1. Map codes → readable violence-type names
 violence_labels <- c(
   GVTYPV1 = "Physical violence",
@@ -140,10 +141,10 @@ plot_ly(shared_ylt,
         type  = "scatter",
         mode  = "lines+markers",
         hoverinfo = "text",
-        text  = ~paste("Year:", year,
-                       "<br>Violence Type:", variable_label,
-                       "<br>Gender:",        gender,
-                       "<br>Percentage Yes:", percentage_yes)) %>%
+        text  = ~paste(
+                year,
+                "<br>", gender,
+                "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes))) %>%
   layout(
     title = "Percentage Saying Yes Over Time",
 
@@ -162,7 +163,8 @@ plot_ly(shared_ylt,
       showgrid  = FALSE,
       showline  = TRUE,
       linecolor = "black",
-      linewidth = 1
+      linewidth = 1,
+      rangemode = "tozero"
     ),
 
     legend = list(title = list(text = "")),   # blank legend title
@@ -188,4 +190,22 @@ plot_ly(shared_ylt,
   config(displayModeBar = FALSE)
 
 ```
+::: {.hidden}
 
+```{js}
+
+document.addEventListener("DOMContentLoaded", function() {
+  
+  let cells = document.getElementsByClassName("cell-output-display");
+  
+  for (let i = 0; i < cells.length; i ++) {
+    cells[i].classList.remove("html-fill-item");
+    cells[i].classList.remove("html-fill-container");
+  }
+
+});
+
+
+```
+
+:::
