@@ -16,13 +16,15 @@ source(paste0(here(), "/data_prep/pps_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+#| title: title
 
 plot_ly(
   data = pps_chart1_data,
   labels = ~classification_group,
   values = ~count,
   type = 'pie',
-  textinfo = 'label+percent',
+  textinfo = 'label',
+  textposition = 'outside',
   hoverinfo = 'text',
   text = ~paste0(
     classification_group, "<br>",
@@ -39,12 +41,13 @@ plot_ly(
 ```
 
 ```{r}
+#| title: title
 
 plot_ly(
   labels = c("Female", "Male"),
   values = c(pps_chart2_data$Female, pps_chart2_data$Male),
   type = 'pie',
-  textinfo = 'label+percent',
+  textinfo = 'label',
   hoverinfo = 'text',
   text = paste0(
     c("Female", "Male"), "<br>",
