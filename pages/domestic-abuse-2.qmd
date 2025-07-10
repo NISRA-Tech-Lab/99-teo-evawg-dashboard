@@ -61,7 +61,7 @@ fig_4 <- plot_ly(
     ),
     annotations = list(
       list(
-        x = 0.1, y = 1.03,
+        x = 0.1, y = 1.025,
         text = "Percentage of DA Experience by Gender",
         showarrow = FALSE,
         xref = "paper", yref = "paper",
@@ -101,12 +101,27 @@ fig_5 <- plot_ly(
   layout(
     title = "Domestic Abuse Experience by Gender and Category",
     xaxis = list(title = "Gender", showgrid = FALSE),
-    yaxis = list(title = "Percentage", showgrid = FALSE,
-                 showline = TRUE),
+    yaxis = list(
+      title = "",  # Remove default title
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "#000000"
+    ),
     plot_bgcolor = "white",
     paper_bgcolor = "white",
     legend = list(title = list(text = "Category")),
-    margin = list(l = 60, r = 60, t = 60, b = 60)
+    margin = list(l = 80, r = 60, t = 60, b = 60),
+    annotations = list(
+      list(
+        text = "Percentage (%)",
+        xref = "paper",
+        yref = "paper",
+         x = -0.08, y = 1.09,   # Center vertically
+        showarrow = FALSE,
+        textangle = 0,
+        font = list(size = 14)
+      )
+    )
   )
 
 # Add filter controls and display
@@ -119,5 +134,6 @@ bscols(
 ```
 
 ```{r}
+
 
 ```
