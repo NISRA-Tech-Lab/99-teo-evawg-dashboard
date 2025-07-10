@@ -61,7 +61,7 @@ fig_4 <- plot_ly(
     ),
     annotations = list(
       list(
-        x = 0.1, y = 1.025,
+        x = 0.11, y = 1.025,
         text = "Percentage of DA Experience by Gender",
         showarrow = FALSE,
         xref = "paper", yref = "paper",
