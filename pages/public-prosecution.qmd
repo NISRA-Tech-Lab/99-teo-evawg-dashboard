@@ -66,7 +66,47 @@ plot_ly(
 
 ### Column {width=50%}
 
-# Median time taken for cases to be dealt with at courts by offence type
-```{r}
 
+```{r}
+#| title: Median time taken for cases to be dealt with at courts by offence type
+
+# Define reversed order (this is the KEY FIX)
+offence_order <- rev(pps_chart3_data$offence)
+
+# Plot the chart with y-axis annotation
+plot_ly(
+  data = pps_chart3_data,
+  x = ~days,
+  y = ~offence,
+  type = 'bar',
+  orientation = 'h',
+  text = ~hover_text,
+  hoverinfo = 'text',
+  textposition = 'none',
+  marker = list(color = '#005EB8')
+) %>%
+layout(
+  title = "Number of Days by Offence",
+  xaxis = list(title = "Days"),
+  yaxis = list(
+    title = list(text = ""),  # This properly removes the y-axis title
+    categoryorder = "array",
+    categoryarray = offence_order
+  ),
+  annotations = list(
+    list(
+      x = -0.07,
+      xref = "paper",
+      xanchor = "center",
+      y = 1.025,
+      yref = "paper",
+      yanchor = "bottom",
+      text = "Offence",
+      showarrow = FALSE,
+      font = list(size = 14)
+    )
+  ),
+  font = list(family = "Arial", size = 12),
+  margin = list(l = 150)
+)
 ```

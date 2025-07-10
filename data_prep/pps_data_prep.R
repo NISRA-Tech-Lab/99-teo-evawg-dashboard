@@ -25,8 +25,20 @@ victims_pps <- read_excel(temp_file,
                                     range = "A3:F13")
 
 
+# Define URL and temp file
+pps_url <- "https://www.justice-ni.gov.uk/sites/default/files/publications/justice/202324%20case%20processing%20time%20tables%20-%20%20open%20data%20format.ods"
+temp_file <- tempfile(fileext = ".ods")
+
+# Download the file
+GET(pps_url, write_disk(temp_file, overwrite = TRUE))
+
+# Now read the .ods file from disk
+time_taken_pps <- read_ods(temp_file, sheet = "5", range = "A4:G17")
+
+
+
 ################################################################################
-### CHART 1 (FILES RECEIVED PIE CHART) DATA PREP FOR PPS
+### CHART 1 DATA PREP FOR PPS (FILES RECEIVED PIE CHART) 
 
 pps_chart1_data <- files_received_pps %>%
   mutate(classification_group = case_when(
@@ -44,8 +56,7 @@ pps_chart1_data <- files_received_pps %>%
   ) 
 
 ################################################################################
-### CHART 2 (MALE/FEMALE VICTIMS FILES RECEIVED PIE CHART) DATA PREP FOR PPS
-
+### CHART 2 DATA PREP FOR PPS (MALE/FEMALE VICTIMS FILES RECEIVED PIE CHART) 
 pps_chart2_data <- victims_pps[nrow(victims_pps), 2:3]
 
 # Calculate total
@@ -55,3 +66,18 @@ total <- sum(pps_chart2_data)
 pps_chart2_data$Female_percent <- round((pps_chart2_data$Female / total) * 100, 2)
 pps_chart2_data$Male_percent   <- round((pps_chart2_data$Male / total) * 100, 2)
 
+################################################################################
+### CHART 3 DATA PREP FOR PPS (Median time taken for cases to be dealt with at courts by offence type) 
+
+# Select and rename columns
+pps_chart3_data <- time_taken_pps[, c(1, ncol(time_taken_pps) - 1)]
+colnames(pps_chart3_data) <- c("offence", "days")
+
+# Sort the data frame by descending 'days'
+pps_chart3_data <- pps_chart3_data[order(pps_chart3_data$days, decreasing = TRUE), ]
+
+# Make 'offence' a character column (preserves order in plotly)
+pps_chart3_data$offence <- as.character(pps_chart3_data$offence)
+
+# Create hover text
+pps_chart3_data$hover_text <- paste(pps_chart3_data$offence, ":", pps_chart3_data$days)
