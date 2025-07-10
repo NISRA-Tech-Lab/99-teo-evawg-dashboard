@@ -66,6 +66,7 @@ plot_ly(
 
 ### Column {width=50%}
 
+# Median time taken for cases to be dealt with at courts by offence type
 ```{r}
 
 ```
