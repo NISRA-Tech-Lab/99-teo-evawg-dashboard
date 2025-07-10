@@ -101,7 +101,8 @@ fig_5 <- plot_ly(
   layout(
     title = "Domestic Abuse Experience by Gender and Category",
     xaxis = list(title = "Gender", showgrid = FALSE),
-    yaxis = list(title = "Percentage", showgrid = FALSE),
+    yaxis = list(title = "Percentage", showgrid = FALSE,
+                 showline = TRUE),
     plot_bgcolor = "white",
     paper_bgcolor = "white",
     legend = list(title = list(text = "Category")),
@@ -117,3 +118,6 @@ bscols(
 
 ```
 
+```{r}
+
+```
