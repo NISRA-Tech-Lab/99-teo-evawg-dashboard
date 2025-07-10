@@ -19,26 +19,34 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 
 ```{r}
 
-# Calculate dynamic range
-y_min_incident <- floor(min(domestic_abuse_inc_crime$Incidents) / 1000) * 1000
-y_max_incident <- ceiling(max(domestic_abuse_inc_crime$Incidents) / 1000) * 1000
-tick_vals <- seq(y_min_incident, y_max_incident, by = 1000)
+# Calculate dynamic y-axis range from both Incidents and Crimes
+y_min <- floor(min(c(combined_data$Incidents, combined_data$Crimes)) / 1000) * 1000
+y_max <- ceiling(max(c(combined_data$Incidents, combined_data$Crimes)) / 1000) * 1000
+tick_vals <- seq(y_min, y_max, by = 1000)
 
-# Plot
 fig_1 <- plot_ly(
-  domestic_abuse_inc_crime,
+  combined_data,
   x = ~Year,
   y = ~Incidents,
   type = 'scatter',
   mode = 'lines+markers',
+  name = "Incidents",
   line = list(color = 'nisra_blue'),
   hoverinfo = 'text',
-  text = ~paste0(Year, ": ", round(Crimes / 1000, 1))  # No 'k'
+  text = ~paste0("Incidents - ", Year, ": ", round(Incidents / 1000, 1))
 ) %>%
+  add_trace(
+    y = ~Crimes,
+    mode = 'lines+markers',
+    name = "Crimes",
+    line = list(color = 'nisra_col3_green'),
+    text = ~paste0("Crimes - ", Year, ": ", round(Crimes / 1000, 1)),
+    hoverinfo = 'text'
+  ) %>%
   layout(
-    showlegend = FALSE,
+    showlegend = TRUE,
     font = list(family = "Arial", size = 14),
-    margin(b = 150),
+    margin = list(b = 150),
     xaxis = list(
       title = list(text = "Year", standoff = 10),
       showline = TRUE,
@@ -55,14 +63,14 @@ fig_1 <- plot_ly(
       showline = TRUE,
       linecolor = "#000000",
       showgrid = FALSE,
-      range = c(y_min_incident, y_max_incident),
+      range = c(y_min, y_max),
       tickvals = tick_vals,
       ticktext = format(tick_vals / 1000, nsmall = 1)
     ),
     annotations = list(
       list(
-        x = 0.02, y = 1.03,
-        text = "Incidents (Thousands)",
+        x = 0.09, y = 1.03,
+        text = "Incidents and Crimes (Thousands)",
         showarrow = FALSE,
         xref = "paper", yref = "paper",
         xanchor = "center", yanchor = "middle",
@@ -81,104 +89,6 @@ fig_1
 ### Column {width=100%}
 
 ```{r echo = FALSE, fig.show='hold'}
-
-library(plotly)
-
-# Calculate dynamic range
-y_min_crime <- floor(min(domestic_abuse_inc_crime$Crimes) / 1000) * 1000
-y_max_crime <- ceiling(max(domestic_abuse_inc_crime$Crimes) / 1000) * 1000
-tick_vals <- seq(y_min_crime, y_max_crime, by = 1000)
-
-# Plot
-fig_2 <- plot_ly(
-  domestic_abuse_inc_crime,
-  x = ~Year,
-  y = ~Crimes,
-  type = 'scatter',
-  mode = 'lines+markers',
-  line = list(color = 'nisra_blue'),
-  hoverinfo = 'text',
-  text = ~paste0(Year, ": ", round(Crimes / 1000, 1))  # No 'k'
-) %>%
-  layout(
-    showlegend = FALSE,
-    font = list(family = "Arial", size = 14),
-    margin(b = 150),
-    xaxis = list(
-      title = list(text = "Year", standoff = 10),
-      showline = TRUE,
-      linecolor = "#000000",
-      showgrid = FALSE,
-      ticks = "outside",
-      tickwidth = 2,
-      tickangle = 0,
-      dtick = 2,
-      automargin = TRUE
-    ),
-    yaxis = list(
-      title = "",
-      showline = TRUE,
-      linecolor = "#000000",
-      showgrid = FALSE,
-      range = c(y_min_crime, y_max_crime),
-      tickvals = tick_vals,
-      ticktext = format(tick_vals / 1000, nsmall = 1)
-    ),
-    annotations = list(
-      list(
-        x = 0.02, y = 1.03,
-        text = "Crimes (Thousands)",
-        showarrow = FALSE,
-        xref = "paper", yref = "paper",
-        xanchor = "center", yanchor = "middle",
-        font = list(size = 14, color = "black")
-      )
-    )
-  ) %>%
-  config(displayModeBar = FALSE)
-
-fig_2
-
 ```
 
-
-
-```{r}
-
-
-```
-
-
-```{r}
-
-# # Create the pie chart
-# fig_4 <- plot_ly(
-#   types_of_da_crimes,
-#   labels = ~`Crime Categories`,
-#   values = ~`Percentage`,
-#   type = 'pie',
-#   textinfo = 'none',
-#   hoverinfo = 'label+value+percent',
-#   marker = list(line = list(color = '#000000', width = 2)),
-#   domain = list(x = c(0, 1), y = c(0, 0.85)) # Moves the pie chart downward
-# ) %>%
-#   layout(
-#   title = "Types of Domestic Abuse Crimes (Percentage)",
-#   font = list(family = "Arial", size = 14),
-#   margin = list(t = 20, b = 20, l = 20, r = 20), # Reduce margins
-#   height = 500,
-#   width = 500,
-#  showlegend = TRUE
-#   )
-# 
-# # Display the chart
-# fig_4
-
-```
-
-```{r}
-
-
-
-```
 

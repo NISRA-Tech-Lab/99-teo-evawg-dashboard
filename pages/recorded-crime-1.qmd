@@ -82,8 +82,6 @@ line_chart <- plot_ly(shared_crime,
     )
   )
 
-
-
 # Display with Crosstalk filter
 bscols(
   widths = c(3, 9),
