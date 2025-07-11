@@ -29,7 +29,6 @@ fig_3 <- plot_ly(
   x = ~`Crime Categories`,
   y = ~Percentage,
   type = 'bar',
-  line = list(color = 'nisra_blue'),
   text = ~paste0(round(Percentage), "%"),
   textposition = "outside",
   hovertext = ~paste0(`Crime Categories`, ": ", round(Percentage), "%"),  # No 'k'
