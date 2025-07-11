@@ -80,4 +80,4 @@ pps_chart3_data <- pps_chart3_data[order(pps_chart3_data$days, decreasing = TRUE
 pps_chart3_data$offence <- as.character(pps_chart3_data$offence)
 
 # Create hover text
-pps_chart3_data$hover_text <- paste(pps_chart3_data$offence, ":", pps_chart3_data$days)
+pps_chart3_data$hover_text <- paste0(pps_chart3_data$offence, ": ", pps_chart3_data$days)
