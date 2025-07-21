@@ -36,7 +36,8 @@ plot_ly(
   layout(
     title = paste0("Files received by PPS by Police in ", currentyear, "/", substr(currentyear + 1, 3, 4)),
     showlegend = TRUE
-  )
+  )%>%
+  config(displayModeBar = FALSE)
 
 ```
 
@@ -59,7 +60,8 @@ plot_ly(
   layout(
     title = paste0("Gender Breakdown of Victims on Files Received ", currentyear, "/", substr(currentyear + 1, 3, 4)),
     showlegend = TRUE
-  )
+  )%>%
+  config(displayModeBar = FALSE)
 
 ```
 
@@ -69,8 +71,9 @@ plot_ly(
 
 ```{r}
 #| title: Median time taken for cases to be dealt with at courts by offence type
+#| fig-height: 10
 
-# Define reversed order (this is the KEY FIX)
+# Define reversed order
 offence_order <- rev(pps_chart3_data$offence)
 
 # Plot the chart with y-axis annotation
@@ -86,10 +89,10 @@ plot_ly(
   marker = list(color = '#005EB8')
 ) %>%
 layout(
-  title = "Number of Days by Offence",
+  title = "",
   xaxis = list(title = "Days"),
   yaxis = list(
-    title = list(text = ""),  # This properly removes the y-axis title
+    title = list(text = ""),  
     categoryorder = "array",
     categoryarray = offence_order
   ),
@@ -107,6 +110,7 @@ layout(
     )
   ),
   font = list(family = "Arial", size = 12),
-  margin = list(l = 150)
-)
+  margin = list(l = 150, t = 80)
+)%>%
+  config(displayModeBar = FALSE)
 ```
