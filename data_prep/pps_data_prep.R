@@ -81,3 +81,8 @@ pps_chart3_data$offence <- as.character(pps_chart3_data$offence)
 
 # Create hover text
 pps_chart3_data$hover_text <- paste0(pps_chart3_data$offence, ": ", pps_chart3_data$days, " days")
+
+# Add spaces to end of the offences so that y axis labels aren't too close to y axis.
+pps_chart3_data$offence <- paste0(pps_chart3_data$offence, "  ")
+
+
