@@ -17,6 +17,63 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 
 ```{r}
 
+
+# Ensure the order is preserved
+exp_of_da_crimes_18_19$Gender <- factor(
+ exp_of_da_crimes_18_19$Gender,
+ levels = c("Men", "Women", "All adults") # Adjust based on your actual data
+)
+
+
+# Plotly bar chart
+fig_4 <- plot_ly(
+  exp_of_da_crimes_18_19,
+  x = ~Gender,
+  y = ~Percentage,
+  type = 'bar',
+  text = ~paste0(round(Percentage, 1), "%"),
+  textposition = "outside",
+  hovertext = ~paste0(Gender, ": ", round(Percentage, 1), "%"),
+  hoverinfo = 'text',
+  marker = list(color = 'nisra_blue')
+) %>%
+  layout(
+    showlegend = FALSE,
+    font = list(family = "Arial", size = 14),
+    plot_bgcolor = "white",
+    paper_bgcolor = "white",
+    xaxis = list(
+      title = list(text = "", standoff = 10),
+      showline = TRUE,
+      linecolor = "#000000",
+      showgrid = FALSE,
+      tickwidth = 2,
+      tickangle = 0,
+      dtick = 2,
+      automargin = TRUE,
+      ticks = "outside"
+    ),
+    yaxis = list(
+      title = "",
+      showline = TRUE,
+      linecolor = "#000000",
+      showgrid = FALSE
+    ),
+    annotations = list(
+      list(
+        x = 0.11, y = 1.025,
+        text = "Percentage of DA Experience by Gender",
+        showarrow = FALSE,
+        xref = "paper", yref = "paper",
+        xanchor = "center", yanchor = "middle",
+        font = list(size = 14, color = "black")
+      )
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
+
+fig_4
+
 ```
 
 
@@ -24,5 +81,59 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 
 ```{r}
 
+# Ensure Gender is ordered
+last_3_years_da$Gender <- factor(last_3_years_da$Gender, levels = c("Men", "Women", "All Adults"))
+
+# Create SharedData object
+shared_data <- SharedData$new(last_3_years_da, key = ~Categories, group = "abuse")
+
+# Create the plot
+fig_5 <- plot_ly(
+  data = shared_data,
+  x = ~Gender,
+  y = ~Percentage,
+  color = ~Categories,
+  type = 'scatter',
+  mode = 'lines+markers',
+  text = ~paste(Categories, Gender, ":", Percentage, "%"),
+  hoverinfo = 'text'
+) %>%
+  layout(
+    title = "Domestic Abuse Experience by Gender and Category",
+    xaxis = list(title = "Gender", showgrid = FALSE),
+    yaxis = list(
+      title = "",  # Remove default title
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "#000000"
+    ),
+    plot_bgcolor = "white",
+    paper_bgcolor = "white",
+    legend = list(title = list(text = "Category")),
+    margin = list(l = 80, r = 60, t = 60, b = 60),
+    annotations = list(
+      list(
+        text = "Percentage (%)",
+        xref = "paper",
+        yref = "paper",
+         x = -0.08, y = 1.09,   # Center vertically
+        showarrow = FALSE,
+        textangle = 0,
+        font = list(size = 14)
+      )
+    )
+  )
+
+# Add filter controls and display
+bscols(
+  widths = c(3, 9),
+  filter_select("category", "Filter by Category", shared_data, ~Categories),
+  fig_5
+)
+
 ```
 
+```{r}
+
+
+```

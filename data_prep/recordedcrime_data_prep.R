@@ -16,8 +16,49 @@ GET(police_rec_crime_url,
 # Create a data frame for the data in the temp file
 police_rec_crime_98_24 <- read_excel(temp_file,
                                      sheet = "Table 2.2",
-                                     range = "A3:AC204")
+                                     range = "A3:AA57")
 
 pivot_tab_vic_gen_age <- read_excel(temp_file,
                                     sheet = "Pivot Table-Victim Gender_Age",
                                     range = "A12:T629")
+
+# data manipulation for `police_rec_crime_98_24` is done here
+
+# Dropping NA's in the data frame
+police_rec_crime_98_24 <- police_rec_crime_98_24[-c(1,25), ]
+
+# Selecting rows in the data frame
+police_rec_crime_98_24 <- police_rec_crime_98_24[c(2,13,28,40,47),]
+
+# Converting the data frame to numeric from row 2
+police_rec_crime_98_24 <- police_rec_crime_98_24 %>%
+  mutate(across(2:ncol(.), as.numeric))
+
+
+police_rec_crime_98_24$Offence[police_rec_crime_98_24$Offence %in% 
+                                 c("Homicide35", "Violence with injury5,29,33,34",
+                                   "Violence without injury5,29", 
+                                   "Stalking and Harassment29,30", 
+                                   "TOTAL SEXUAL OFFENCES10,14")] <- 
+  c("Homicide", "Violence with injury",  "Violence without injury", 
+    "Stalking and Harassment", "Total Sexual Offences")
+
+# Pivoting the data frame for sorting the categories according to years
+police_rec_crime_98_24 <- pivot_longer(
+  police_rec_crime_98_24,
+  cols = -Offence,         
+  names_to = "Year",      
+  values_to = "Value"       
+)
+
+# Formating the data frame using regex pattern to match any digits before and after a slash
+police_rec_crime_98_24 <- police_rec_crime_98_24 %>%
+  mutate(Year = str_replace_all(Year, "(\\d+)/(\\d+)", function(x) {
+    parts <- str_match(x, "(\\d+)/(\\d+)")
+    before <- substr(parts[2], nchar(parts[2]) - 1, nchar(parts[2]))  # last 2 digits before slash
+    after  <- substr(parts[3], 1, 2)                                  # first 2 digits after slash
+    paste0(before, "/", after)
+  }))
+
+
+
