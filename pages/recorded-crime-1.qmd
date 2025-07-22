@@ -17,20 +17,20 @@ source(paste0(here(), "/data_prep/recordedcrime_data_prep.R"))
 
 ```{r}
 # Ensure Year is an ordered factor
-police_rec_crime_98_24$Year <- factor(police_rec_crime_98_24$Year, levels = unique(police_rec_crime_98_24$Year), ordered = TRUE)
+police_rec_crime$Year <- factor(police_rec_crime$Year, levels = unique(police_rec_crime$Year), ordered = TRUE)
 
 # Create numeric version of Year for regression
-police_rec_crime_98_24$Year_num <- as.numeric(police_rec_crime_98_24$Year)
+police_rec_crime$Year_num <- as.numeric(police_rec_crime$Year)
 
 # Get unique years and select alternate ones
-years <- unique(police_rec_crime_98_24$Year)
+years <- unique(police_rec_crime$Year)
 alternate_years <- years[seq(1, length(years), by = 2)]
 
 # Create SharedData object for Crosstalk
-shared_crime <- SharedData$new(police_rec_crime_98_24, group = "crime_group")
+shared_crime <- SharedData$new(police_rec_crime, group = "crime_group")
 
 # Compute trend lines
-trend_lines <- police_rec_crime_98_24 %>%
+trend_lines <- police_rec_crime %>%
   group_by(Offence) %>%
   do({
     model <- lm(Value ~ Year_num, data = .)
