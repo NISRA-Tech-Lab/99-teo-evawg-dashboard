@@ -22,6 +22,9 @@ domestic_abuse_mot_by_off <- read_excel(temp_file,
                                         sheet = "Table 2.1",
                                         range = "A4:W45")
 
+################################################################################
+# domestic_abuse_inc_crime data prep
+
 # renaming the columns in the data frame
 colnames(domestic_abuse_inc_crime) <- c("Year", "Incidents", "Crimes")
 
@@ -30,9 +33,8 @@ colnames(domestic_abuse_inc_crime) <- c("Year", "Incidents", "Crimes")
 domestic_abuse_inc_crime$Year <- sub("^\\d{2}([0-9]{2}/[0-9]{2})$", "\\1", 
                                      domestic_abuse_inc_crime$Year)
 
-
-# data prep done here for `domestic_abuse_mot_by_off`
-
+################################################################################
+# domestic_abuse_mot_by_off data prep
 
 domestic_abuse_mot_by_off <- domestic_abuse_mot_by_off[-1, ]
 domestic_abuse_mot_by_off <- domestic_abuse_mot_by_off[-39, ]
@@ -48,6 +50,8 @@ domestic_abuse_mot_by_off <- domestic_abuse_mot_by_off [-c(4,5,6,7,9,10,11,12,14
 # dropping last 2 columns in the data frame
 domestic_abuse_mot_by_off <- domestic_abuse_mot_by_off[, -((ncol(domestic_abuse_mot_by_off)-1)
                                                            :ncol(domestic_abuse_mot_by_off))]
+
+################################################################################
 
 # URL being functioned and saved onto a temp file
 types_of_da_crimes_url <- "https://www.psni.police.uk/system/files/2025-05/386082373/Domestic%20Abuse%20Tables%20Period%20Ending%2031st%20March%202025.xlsx"
@@ -67,7 +71,7 @@ latest_data <- read_excel(temp_file,
                           sheet = "Table 6 and Figure 2",
                           range = "A61:C75")
 
-
+################################################################################
 ##data prep for `types_of_da_crimes`
 
 # dropping the previous year column
@@ -116,10 +120,10 @@ latest_row <- data.frame(
 latest_data <- latest_row
 
 # Combine the two data frames
-combined_data <- rbind(domestic_abuse_inc_crime, latest_data)
+domestic_abuse_inc_crime <- rbind(domestic_abuse_inc_crime, latest_data)
 
 # Optional: reset row names
-rownames(combined_data) <- NULL
+rownames(domestic_abuse_inc_crime) <- NULL
 
 
 # URL being functioned and saved onto a temp file
