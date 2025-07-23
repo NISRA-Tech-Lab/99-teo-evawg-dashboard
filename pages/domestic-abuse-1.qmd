@@ -18,29 +18,28 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 
 
 ```{r}
-
-# Calculate dynamic y-axis range from both Incidents and Crimes
-y_min <- floor(min(c(combined_data$Incidents, combined_data$Crimes)) / 1000) * 1000
-y_max <- ceiling(max(c(combined_data$Incidents, combined_data$Crimes)) / 1000) * 1000
-tick_vals <- seq(y_min, y_max, by = 1000)
+#| title: title
+#| fig-height: 10
 
 fig_1 <- plot_ly(
-  combined_data,
+  domestic_abuse_inc_crime,
   x = ~Year,
   y = ~Incidents,
   type = 'scatter',
   mode = 'lines+markers',
   name = "Incidents",
-  line = list(color = 'nisra_blue'),
+  line = list(color = nisra_colours[[3]]),
+  marker = list(color = nisra_colours[[3]]),
   hoverinfo = 'text',
-  text = ~paste0("Incidents - ", Year, ": ", round(Incidents / 1000, 1))
+  text = ~paste0(Year, "<br>Incidents: ", format(Incidents, big.mark = ","))
 ) %>%
   add_trace(
     y = ~Crimes,
     mode = 'lines+markers',
     name = "Crimes",
-    line = list(color = 'nisra_col3_green'),
-    text = ~paste0("Crimes - ", Year, ": ", round(Crimes / 1000, 1)),
+    line = list(color = nisra_colours[[2]]),
+    marker = list(color = nisra_colours[[2]]),
+    text = ~paste0(Year, "<br>Crimes: ", format(Crimes, big.mark = ",")),
     hoverinfo = 'text'
   ) %>%
   layout(
@@ -59,18 +58,17 @@ fig_1 <- plot_ly(
       automargin = TRUE
     ),
     yaxis = list(
-      title = "",
+      title = "",                
       showline = TRUE,
       linecolor = "#000000",
       showgrid = FALSE,
-      range = c(y_min, y_max),
-      tickvals = tick_vals,
-      ticktext = format(tick_vals / 1000, nsmall = 1)
+      rangemode = "tozero",      
+      tickformat = ",.0f"        
     ),
     annotations = list(
       list(
-        x = 0.09, y = 1.03,
-        text = "Incidents and Crimes (Thousands)",
+        x = 0.01, y = 1.03,
+        text = "Incidents and Crimes",
         showarrow = FALSE,
         xref = "paper", yref = "paper",
         xanchor = "center", yanchor = "middle",
