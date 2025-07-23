@@ -26,6 +26,8 @@ website:
             href: domestic-abuse-3.qmd
       - href: criminal-justice.qmd
         text: CRIMINAL JUSTICE
+      - href: public-prosecution.qmd
+        text: PUBLIC PROSECUTION SERVICE
 format:
   dashboard:
     css: style.css
