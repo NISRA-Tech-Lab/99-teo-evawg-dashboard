@@ -10,20 +10,14 @@ website:
         text: NILT
       - href: YLT.qmd
         text: YLT
-      - text: RECORDED CRIME
-        menu: 
-          - text: Recorded Crime Total
-            href: recorded-crime-1.qmd
-          - text: Recorded Crime Victims Total
-            href: recorded-crime-2.qmd 
+      - href: recorded-crime.qmd
+        text: RECORDED CRIME
       - text: DOMESTIC ABUSE
         menu: 
-          - text: Domestic Abuse Crimes Total
+          - text: Domestic Abuse Reported Crimes
             href: domestic-abuse-1.qmd
           - text: Domestic Abuse Experience Total
             href: domestic-abuse-2.qmd
-          - text: Percentage of DA Crimes
-            href: domestic-abuse-3.qmd
       - href: criminal-justice.qmd
         text: CRIMINAL JUSTICE
       - href: public-prosecution.qmd
