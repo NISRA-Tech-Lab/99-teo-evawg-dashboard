@@ -459,3 +459,78 @@ write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical_chart2.
 ylt_historical_chart2 <- read_excel(
   paste0(here(), "/data/ylt_historical_chart2.xlsx")
 )
+
+################################################################################
+#CRIMINAL JUSTICE DATA PREP (Likelihood of reporting crimes chart)
+
+crim_justice_data <- nilt_currentyr_data
+
+# List of crime variables
+crime_vars <- c("REPSEXAB", "REPDOMAB", "REPBURG", "REPROB", "REPPHYA")
+
+# Recode Likely responses
+crim_justice_data <- crim_justice_data %>%
+  mutate(across(all_of(crime_vars), ~case_when(
+    . %in% c("Very likely", "Fairly likely") ~ "likely",
+    . %in% c("Not very likely", "Not at all likely", "I don't know") ~ "not_likely",
+    TRUE ~ NA_character_
+  )))
+
+# Function to compute weighted proportion of "likely" by gender
+get_likely_by_gender <- function(data, variable, weight_var, gender_var) {
+  data %>%
+    filter(!is.na(.data[[variable]]), !is.na(.data[[gender_var]])) %>%
+    mutate(likely_flag = ifelse(.data[[variable]] == "likely", 1, 0)) %>%
+    group_by(Gender = .data[[gender_var]]) %>%
+    summarise(
+      total_weight = sum(.data[[weight_var]], na.rm = TRUE),
+      likely_weight = sum(.data[[weight_var]] * likely_flag, na.rm = TRUE),
+      pct_likely = round(100 * likely_weight / total_weight, 2),
+      .groups = "drop"
+    ) %>%
+    select(Gender, pct_likely) %>%
+    mutate(Crime = variable)
+}
+
+# Compute percentages by gender for each crime
+gender_crime_data <- lapply(crime_vars, function(var) {
+  get_likely_by_gender(crim_justice_data, var, "WTFACTOR", "RSEX")
+}) %>%
+  bind_rows()
+
+# Compute "All" category
+all_crime_data <- lapply(crime_vars, function(var) {
+  crim_justice_data %>%
+    filter(!is.na(.data[[var]])) %>%
+    mutate(likely_flag = ifelse(.data[[var]] == "likely", 1, 0)) %>%
+    summarise(
+      total_weight = sum(WTFACTOR, na.rm = TRUE),
+      likely_weight = sum(WTFACTOR * likely_flag, na.rm = TRUE)
+    ) %>%
+    mutate(
+      pct_likely = round(100 * likely_weight / total_weight, 2),
+      Gender = "All",
+      Crime = var
+    ) %>%
+    select(Gender, pct_likely, Crime)
+}) %>%
+  bind_rows()
+
+# Combine gender-specific and overall data
+criminal_justice_likelihood_chart1 <- bind_rows(gender_crime_data, all_crime_data)
+
+# Optional: Clean crime labels for clarity
+criminal_justice_likelihood_chart1 <- criminal_justice_likelihood_chart1 %>%
+  mutate(Crime = recode(Crime,
+                        REPSEXAB = "Sexual abuse/violence",
+                        REPDOMAB = "Domestic abuse/violence",
+                        REPBURG = "Break-in/burglary in their home",
+                        REPROB = "Other robbery/theft",
+                        REPPHYA = "Other physical assault/violence"
+  ))
+
+# Set Gender factor order: All, Male, Female
+criminal_justice_likelihood_chart1$Gender <- factor(
+  criminal_justice_likelihood_chart1$Gender,
+  levels = c("All", "Male", "Female")
+)

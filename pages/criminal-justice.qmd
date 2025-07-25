@@ -8,22 +8,64 @@ title: "criminal-justice"
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/recordedcrime_data_prep.R"))
+source(paste0(here(), "/data_prep/main_data_prep.R"))
 ```
 
 ## Row
 
-### Column {width=50%}
+### Column {width=100%}
 
 ```{r}
+#| title: title
+
+
+# Build hover text manually
+criminal_justice_likelihood_chart1$hover_text <- paste0(
+  nilt_currentyear, "\n",
+  "Gender: ", criminal_justice_likelihood_chart1$Gender, "\n",
+  criminal_justice_likelihood_chart1$Crime, ": ",
+  round(criminal_justice_likelihood_chart1$pct_likely, 2), "%"
+)
+
+# Create Plotly chart
+plot_ly(
+  data = criminal_justice_likelihood_chart1,
+  x = ~Crime,
+  y = ~pct_likely,
+  color = ~Gender,
+  colors = c(nisra_colours[1], nisra_colours[2], nisra_colours[5]),
+  type = 'bar',
+  text = ~hover_text,
+  textposition = 'auto',
+  hoverinfo = 'text'  # Use the custom text
+) %>%
+  layout(
+  barmode = 'group',
+  yaxis = list(
+    title = '',
+    tickformat = '.0f',
+    range = c(0, max(criminal_justice_likelihood_chart1$pct_likely) + 10)
+  ),
+  xaxis = list(title = '', tickangle = 0),
+  legend = list(title = list(text = 'Gender')),
+  margin = list(b = 100, t = 80),
+  annotations = list(
+    list(
+      x = -0.008,
+      xref = "paper",
+      xanchor = "center",
+      y = 1.025,
+      yref = "paper",
+      yanchor = "bottom",
+      text = "Percentage %",
+      showarrow = FALSE,
+      font = list(size = 14)
+    )
+  )
+)%>%
+  config(displayModeBar = FALSE)
 
 
 ```
 
 
-### Column {width=50%}
-
-```{r}
-
-
-```
