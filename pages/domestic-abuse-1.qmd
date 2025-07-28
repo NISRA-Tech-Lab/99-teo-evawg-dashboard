@@ -22,8 +22,8 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 #| fig-height: 10
 
 fig_1 <- plot_ly(
-  domestic_abuse_inc_crime,
-  x = ~Year,
+  DA_chart1_data,
+  x = ~yaxis_year,
   y = ~Incidents,
   type = 'scatter',
   mode = 'lines+markers',
@@ -48,22 +48,27 @@ fig_1 <- plot_ly(
     margin = list(b = 150),
     xaxis = list(
       title = list(text = "Year", standoff = 10),
+      type = "category",  # <-- Treat x-axis as categorical
+      categoryorder = "array",
+      categoryarray = DA_chart1_data$yaxis_year,  # <-- Ensure ordering matches data
+      tickmode = "array",
+      tickvals = DA_chart1_data$yaxis_year,
+      ticktext = DA_chart1_data$yaxis_year,
       showline = TRUE,
       linecolor = "#000000",
       showgrid = FALSE,
       ticks = "outside",
       tickwidth = 2,
       tickangle = 0,
-      dtick = 2,
       automargin = TRUE
     ),
     yaxis = list(
-      title = "",                
+      title = "",
       showline = TRUE,
       linecolor = "#000000",
       showgrid = FALSE,
-      rangemode = "tozero",      
-      tickformat = ",.0f"        
+      rangemode = "tozero",
+      tickformat = ",.0f"
     ),
     annotations = list(
       list(
