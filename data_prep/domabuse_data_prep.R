@@ -4,7 +4,7 @@ source(paste0(here(), "/config.R"))
 ################################################################################
 # DOMESTIC ABUSE REPORTED CRIMES: CHART 1 (DATA FROM DATA PORTAL)
 
-# Step 1: Read CSV data from PxStat API
+# Step 1: Read CSV data from data portal
 DA_chart1_CSV_data <- read.csv("https://ws-data.nisra.gov.uk/public/api.restful/PxStat.Data.Cube_API.ReadDataset/DOMDEA/CSV/1.0/en")
 
 # Step 2: Filter for Northern Ireland only and drop unwanted columns
@@ -42,50 +42,63 @@ DA_chart1_data <- rbind(new_row, DA_chart1_data)
 ################################################################################
 # DOMESTIC ABUSE REPORTED CRIMES: CHART 2
 
-# URL being functioned and saved onto a temp file
-types_of_da_crimes_url <- "https://www.psni.police.uk/system/files/2025-05/386082373/Domestic%20Abuse%20Tables%20Period%20Ending%2031st%20March%202025.xlsx"
+# Step 1: Define and download the Excel file
+DA_chart2_url <- "https://www.psni.police.uk/system/files/2025-05/386082373/Domestic%20Abuse%20Tables%20Period%20Ending%2031st%20March%202025.xlsx"
 temp_file <- tempfile(fileext = ".xlsx")
 
-# Download the file using httr::GET
-GET(types_of_da_crimes_url,
-    write_disk(temp_file,
-               overwrite = TRUE),
+GET(DA_chart2_url,
+    write_disk(temp_file, overwrite = TRUE),
     httr::config(ssl_verifypeer = FALSE))
 
-# Create a data frame for the data in the temp file
-types_of_da_crimes <- read_excel(temp_file,
-                                 sheet = "Table 1 and Figures 5 & 6",
-                                 range = "A5:C15")
-latest_data <- read_excel(temp_file,
-                          sheet = "Table 6 and Figure 2",
-                          range = "A61:C75")
+# Step 2: Read in the relevant worksheet and range
+DA_chart2_data <- read_excel(temp_file,
+                             sheet = "Table 1 and Figures 5 & 6",
+                             range = "A5:C15")
+
+# Step 3: Drop the previous year column
+DA_chart2_data <- DA_chart2_data[, -2]
+
+# Step 4: Rename columns
+colnames(DA_chart2_data) <- c("Crime Type", "Count")
+
+# Step 5: Extract the total value
+total <- DA_chart2_data$Count[DA_chart2_data$`Crime Type` == "Total crime (domestic abuse motivation)"]
+
+# Step 6: Add Percentage column
+DA_chart2_data <- DA_chart2_data %>%
+  mutate(Percentage = round((Count / total) * 100, 0))
+
+# Step 7: Clean up label replacements
+DA_chart2_data$`Crime Type`[4] <- "Stalking and Harassment"
+DA_chart2_data$`Crime Type`[2] <- "Violence with injury (including homicide and death or serious injury-unlawful driving)"
+
+# Step 8: Drop the first and last rows 
+DA_chart2_data <- DA_chart2_data[-c(1, 10), ]
+
+# Step 9: Recode and combine using case_when
+DA_chart2_data <- DA_chart2_data %>%
+  mutate(`Crime Type` = case_when(
+    `Crime Type` %in% c("Theft (including burglary)",
+                        "Criminal damage",
+                        "Breach of non-molestation order",
+                        "All other offences") ~ "All other offences",
+    TRUE ~ `Crime Type`
+  )) %>%
+  group_by(`Crime Type`) %>%
+  summarise(
+    Count = sum(Count, na.rm = TRUE),
+    Percentage = sum(Percentage, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(Count)) 
 
 
-##data prep for `types_of_da_crimes`
 
-# dropping the previous year column
-types_of_da_crimes <- types_of_da_crimes[, -2]
-
-# setting column headings for the data frame
-colnames(types_of_da_crimes) <- c("Crime Categories", "Count of crime recorded")
-
-
-# Extract the total value
-total <- types_of_da_crimes$`Count of crime recorded`[types_of_da_crimes$`Crime Categories`
-                                                      == "Total crime (domestic abuse motivation)"]
-
-# Adding a new column for percentage values for crime recorded
-types_of_da_crimes$Percentage <- round((types_of_da_crimes$`Count of crime recorded`
-                                        / total) * 100, )
-
-# Replacing column values in a data frame
-types_of_da_crimes$`Crime Categories`[4] <- "Stalking and Harassment"
-
-types_of_da_crimes$`Crime Categories`[2] <- "Violence with injury (including homicide and death or serious injury-unlawful driving)"
-
-# dropping the first and last column of `types_of_da_crimes`
-
-types_of_da_crimes <- types_of_da_crimes[-c(1, 10), ]
+### CHECK WITH BRENDA WHAT THIS DATA IS FOR?####################################
+# latest_data <- read_excel(temp_file,
+#                           sheet = "Table 6 and Figure 2",
+#                           range = "A61:C75")
+################################################################################
 
 
 

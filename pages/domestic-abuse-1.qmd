@@ -21,7 +21,7 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 #| title: title
 #| fig-height: 10
 
-fig_1 <- plot_ly(
+DA_chart1 <- plot_ly(
   DA_chart1_data,
   x = ~yaxis_year,
   y = ~Incidents,
@@ -83,7 +83,7 @@ fig_1 <- plot_ly(
   ) %>%
   config(displayModeBar = FALSE)
 
-fig_1
+DA_chart1
 
 
 ```
@@ -92,58 +92,37 @@ fig_1
 ### Column {width=50%}
 
 ```{r}
-
-
-# Reorder the factor levels to match the data frame order
-types_of_da_crimes$`Crime Categories` <- factor(types_of_da_crimes$`Crime Categories`, 
-                                                levels = types_of_da_crimes$`Crime Categories`)
-
-
-# Plotly graph
-fig_3 <- plot_ly(
-  types_of_da_crimes,
-  x = ~`Crime Categories`,
-  y = ~Percentage,
-  type = 'bar',
-  text = ~paste0(round(Percentage), "%"),
-  textposition = "outside",
-  hovertext = ~paste0(`Crime Categories`, ": ", round(Percentage), "%"),  # No 'k'
-  hoverinfo = 'text'
+DA_chart2 <- plot_ly(
+  data = DA_chart2_data,
+  labels = ~`Crime Type`,
+  values = ~Percentage,
+  type = 'pie',
+  text = ~paste0(Percentage, "%"),  # <-- This replaces textinfo = "percent"
+  textinfo = "text",                # <-- Use your custom percent values
+  sort = FALSE,
+  direction = "clockwise",
+  marker = list(colors = nisra_colours[1:5]),
+  hoverinfo = 'text',
+  hovertext = ~paste0(
+    da_currentyear, "<br>",
+    `Crime Type`, ": ", format(Count, big.mark = ","), "<br>",
+    "Share: ", Percentage, "%"
+  )
 ) %>%
   layout(
-    showlegend = FALSE,
+    title = paste("Domestic Abuse Crime Breakdown -", da_currentyear),
     font = list(family = "Arial", size = 14),
-    xaxis = list(
-      title = list(text = "", standoff = 10),
-      showline = TRUE,
-      linecolor = "#000000",
-      showgrid = FALSE,
-      tickwidth = 2,
-      tickangle = 0,
-      dtick = 2,
-      automargin = TRUE,
-      ticks = "outside"
-    ),
-    yaxis = list(
-      title = "",
-      showline = TRUE,
-      linecolor = "#000000",
-      showgrid = FALSE
-    ),
-    annotations = list(
-      list(
-        x = 0.04, y = 1.03,
-        text = "Percentage of DA Crimes",
-        showarrow = FALSE,
-        xref = "paper", yref = "paper",
-        xanchor = "center", yanchor = "middle",
-        font = list(size = 14, color = "black")
-      )
+    showlegend = TRUE,
+    legend = list(x = 1, y = 0.5),
+    pie = list(
+      direction = "clockwise",   
+      rotation = 0               
     )
-) %>%
+  ) %>%
   config(displayModeBar = FALSE)
 
-fig_3
+DA_chart2
+
 ```
 
 ```{r echo = FALSE, fig.show='hold'}
