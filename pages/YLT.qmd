@@ -84,7 +84,7 @@ plot_ly() %>%
         )
       ),
     hoverlabel = list(
-      font = list(color = "white")  # <-- Sets hover text to white
+      font = list(color = "white")  
     )
   ) %>%
   config(displayModeBar = FALSE)
@@ -141,7 +141,7 @@ plot_ly(shared_ylt,
         type  = "scatter",
         mode  = "lines+markers",
         hoverinfo = "text",
-        text  = ~paste(
+        text  = ~paste0(
                 year,
                 "<br>", gender,
                 "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes))) %>%

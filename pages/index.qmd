@@ -144,7 +144,7 @@ plot_ly(shared_nilt,
         type = 'scatter', 
         mode = 'lines+markers',
         hoverinfo = "text",
-        text = ~paste(
+        text = ~paste0(
                 year,
                 "<br>", gender,
                 "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes)
@@ -259,7 +259,7 @@ plot_ly(shared_nilt_age,
         type = 'scatter', 
         mode = 'lines+markers',
         hoverinfo = "text",
-        text = ~paste(year,
+        text = ~paste0(year,
                       "<br>", age,
                       "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes))) %>%
   layout(
