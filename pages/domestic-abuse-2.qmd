@@ -16,63 +16,56 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+#| title: Percentage of Domestic Abuse Experience by Gender 2018/19
+#| fig-height: 10
 
-
-# Ensure the order is preserved
-exp_of_da_crimes_18_19$Gender <- factor(
- exp_of_da_crimes_18_19$Gender,
- levels = c("Men", "Women", "All adults") # Adjust based on your actual data
-)
-
-
-# Plotly bar chart
-fig_4 <- plot_ly(
-  exp_of_da_crimes_18_19,
+DA_chart3 <- plot_ly(
+  data = DA_chart3_data,
   x = ~Gender,
   y = ~Percentage,
   type = 'bar',
-  text = ~paste0(round(Percentage, 1), "%"),
-  textposition = "outside",
-  hovertext = ~paste0(Gender, ": ", round(Percentage, 1), "%"),
-  hoverinfo = 'text',
-  marker = list(color = 'nisra_blue')
+  marker = list(color = nisra_colours[2]),
+  text = ~paste0(
+    da_chart3_currentyear, "<br>",
+    Gender, ": ", Percentage, "%"
+  ),
+  hoverinfo = "text",       
+  textposition = "none"     
 ) %>%
   layout(
-    showlegend = FALSE,
-    font = list(family = "Arial", size = 14),
-    plot_bgcolor = "white",
-    paper_bgcolor = "white",
+    title = " ",
+    margin = list(t = 50),  
     xaxis = list(
-      title = list(text = "", standoff = 10),
-      showline = TRUE,
-      linecolor = "#000000",
-      showgrid = FALSE,
-      tickwidth = 2,
-      tickangle = 0,
-      dtick = 2,
-      automargin = TRUE,
-      ticks = "outside"
+      title = "Gender",
+      showline = TRUE,      
+      linecolor = "black"   
     ),
     yaxis = list(
-      title = "",
-      showline = TRUE,
-      linecolor = "#000000",
-      showgrid = FALSE
+      title = "",           
+      showline = TRUE,      
+      linecolor = "black",  
+      zeroline = FALSE      
     ),
     annotations = list(
       list(
-        x = 0.11, y = 1.025,
-        text = "Percentage of DA Experience by Gender",
+        x = -0.07,          
+        y = 1.05,           
+        text = "Percentage %",
+        xref = "paper",
+        yref = "paper",
         showarrow = FALSE,
-        xref = "paper", yref = "paper",
-        xanchor = "center", yanchor = "middle",
-        font = list(size = 14, color = "black")
+        xanchor = "left",
+        yanchor = "bottom",
+        font = list(size = 14)
       )
     )
   ) %>%
   config(displayModeBar = FALSE)
 
-fig_4
+DA_chart3
+
+
+
 
 ```
 
@@ -80,60 +73,66 @@ fig_4
 ### Column {width=50%}
 
 ```{r}
+#| title: Title
+#| fig-height: 10
 
-# Ensure Gender is ordered
-last_3_years_da$Gender <- factor(last_3_years_da$Gender, levels = c("Men", "Women", "All Adults"))
+#Create hover text dynamically
+DA_chart4_data$hover_text <- paste0(
+  DA_chart4_data$Gender, "<br>",
+  DA_chart4_data$Categories, ": ", 
+  DA_chart4_data$Percentage, "%"
+)
 
-# Create SharedData object
-shared_data <- SharedData$new(last_3_years_da, key = ~Categories, group = "abuse")
+# Calculate dynamic y-axis range with 5% padding above max value
+y_max <- max(DA_chart4_data$Percentage, na.rm = TRUE) * 1.05
 
-# Create the plot
-fig_5 <- plot_ly(
-  data = shared_data,
-  x = ~Gender,
+DA_chart4 <- plot_ly(
+  data = DA_chart4_data,
+  x = ~Categories,
   y = ~Percentage,
-  color = ~Categories,
-  type = 'scatter',
-  mode = 'lines+markers',
-  text = ~paste(Categories, Gender, ":", Percentage, "%"),
+  color = ~Gender,
+  colors = c(nisra_colours[1], nisra_colours[2], nisra_colours[5]),
+  type = 'bar',
+  text = ~hover_text,        
+  textposition = 'auto',     
   hoverinfo = 'text'
 ) %>%
   layout(
-    title = "Domestic Abuse Experience by Gender and Category",
-    xaxis = list(title = "Gender", showgrid = FALSE),
+    barmode = 'group',        
     yaxis = list(
-      title = "",  # Remove default title
-      showgrid = FALSE,
-      showline = TRUE,
-      linecolor = "#000000"
+      title = '',
+      tickformat = '.0f',
+      range = c(0, y_max),     
+      showline = TRUE,        
+      linecolor = 'black',    
+      linewidth = 1           
     ),
-    plot_bgcolor = "white",
-    paper_bgcolor = "white",
-    legend = list(title = list(text = "Category")),
-    margin = list(l = 80, r = 60, t = 60, b = 60),
+    xaxis = list(
+      title = '',
+      tickangle = 0,
+      showline = TRUE,
+      linecolor = 'black',
+      linewidth = 1
+    ),
+    legend = list(title = list(text = 'Gender')),
+    margin = list(t = 50),
     annotations = list(
       list(
-        text = "Percentage (%)",
+        x = -0.008,
         xref = "paper",
+        xanchor = "center",
+        y = 1.025,
         yref = "paper",
-         x = -0.08, y = 1.09,   # Center vertically
+        yanchor = "bottom",
+        text = "Percentage %",
         showarrow = FALSE,
-        textangle = 0,
         font = list(size = 14)
       )
     )
-  )
+  ) %>%
+  config(displayModeBar = FALSE)
 
-# Add filter controls and display
-bscols(
-  widths = c(3, 9),
-  filter_select("category", "Filter by Category", shared_data, ~Categories),
-  fig_5
-)
-
-```
-
-```{r}
+DA_chart4
 
 
 ```
