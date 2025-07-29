@@ -70,7 +70,7 @@ DA_chart2_data <- DA_chart2_data %>%
 
 # Step 7: Clean up label replacements
 DA_chart2_data$`Crime Type`[4] <- "Stalking and Harassment"
-DA_chart2_data$`Crime Type`[2] <- "Violence with injury (including homicide and death or serious injury-unlawful driving)"
+DA_chart2_data$`Crime Type`[2] <- "Violence with injury [Note 1]"
 
 # Step 8: Drop the first and last rows 
 DA_chart2_data <- DA_chart2_data[-c(1, 10), ]

@@ -18,7 +18,7 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 
 
 ```{r}
-#| title: title
+#| title: Number of Domestic Abuse Crimes & Incidents 2023/24
 #| fig-height: 10
 
 DA_chart1 <- plot_ly(
@@ -92,13 +92,16 @@ DA_chart1
 ### Column {width=50%}
 
 ```{r}
+#| title: Types of Domestic Abuse Crimes 2023/24
+#| fig-height: 10
+
 DA_chart2 <- plot_ly(
   data = DA_chart2_data,
   labels = ~`Crime Type`,
   values = ~Percentage,
   type = 'pie',
-  text = ~paste0(Percentage, "%"),  # <-- This replaces textinfo = "percent"
-  textinfo = "text",                # <-- Use your custom percent values
+  text = ~paste0(Percentage, "%"),  
+  textinfo = "text",                
   sort = FALSE,
   direction = "clockwise",
   marker = list(colors = nisra_colours[1:5]),
@@ -110,7 +113,7 @@ DA_chart2 <- plot_ly(
   )
 ) %>%
   layout(
-    title = paste("Domestic Abuse Crime Breakdown -", da_currentyear),
+    title = " ",
     font = list(family = "Arial", size = 14),
     showlegend = TRUE,
     legend = list(x = 1, y = 0.5),
@@ -124,7 +127,7 @@ DA_chart2 <- plot_ly(
 DA_chart2
 
 ```
-
+Note 1: Including homicide and death or serious injury-unlawful driving.
 ```{r echo = FALSE, fig.show='hold'}
 ```
 
