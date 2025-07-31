@@ -2,7 +2,7 @@ library(here)
 source(paste0(here(), "/config.R"))
 
 ################################################################################
-# DOMESTIC ABUSE REPORTED CRIMES: CHART 1 (DATA FROM DATA PORTAL)
+# DOMESTIC ABUSE: CHART 1 (DATA FROM DATA PORTAL)
 
 # Step 1: Read CSV data from data portal
 DA_chart1_CSV_data <- read.csv("https://ws-data.nisra.gov.uk/public/api.restful/PxStat.Data.Cube_API.ReadDataset/DOMDEA/CSV/1.0/en")
@@ -40,7 +40,7 @@ new_row <- data.frame(
 DA_chart1_data <- rbind(new_row, DA_chart1_data) 
 
 ################################################################################
-# DOMESTIC ABUSE REPORTED CRIMES: CHART 2
+# DOMESTIC ABUSE: CHART 2
 
 # Step 1: Define and download the Excel file
 DA_chart2_url <- "https://www.psni.police.uk/system/files/2025-05/386082373/Domestic%20Abuse%20Tables%20Period%20Ending%2031st%20March%202025.xlsx"
@@ -94,132 +94,44 @@ DA_chart2_data <- DA_chart2_data %>%
 
 
 ################################################################################
-# DOMESTIC ABUSE EXPERIENCE TOTAL PAGE
+# DOMESTIC ABUSE: CHART 3
 
 # URL being functioned and saved onto a temp file
-DA_chart_3_and_4_url <- "https://www.justice-ni.gov.uk/sites/default/files/publications/justice/experience%20of%20domestic%20abuse%20findings%20from%20the%20201819%20niscs.xl_.XLSX"
+DA_chart3_url <- "https://www.justice-ni.gov.uk/sites/default/files/publications/justice/experience%20of%20domestic%20abuse%20findings%20from%20the%20201819%20niscs.xl_.XLSX"
 temp_file <- tempfile(fileext = ".xlsx")
 
 # Download the file using httr::GET
-GET(DA_chart_3_and_4_url,
+GET(DA_chart3_url,
     write_disk(temp_file,
                overwrite = TRUE),
     httr::config(ssl_verifypeer = FALSE))
 
 
 # Create a data frame for the data in the temp file
-DA_chart3_data <- read_excel(temp_file,
-                                     sheet = "Table_3",
-                                     range = "A5:B8")
+lifetime_data <- read_excel(temp_file,
+                                     sheet = "Table_1",
+                                     range = "B5:D6")
 
-DA_chart4_data <- read_excel(temp_file,
+last3years_data <- read_excel(temp_file,
                               sheet = "Table_5",
-                              range = "A5:D10")
+                              range = "B5:D6")
 
+# Add the 'category' column to each dataframe
+lifetime_data$category <- "Lifetime"
+last3years_data$category <- "Last Three Years"
 
-################################################################################
-# DA CHART 3 DATA PREP
+# Combine the dataframes into a new dataframe
+DA_chart3_data <- rbind(lifetime_data, last3years_data)
 
-# Renaming Columns
-names(DA_chart3_data) <- c("Gender", "Percentage")
+# Convert to long format data
+DA_chart3_data <- DA_chart3_data %>%
+  pivot_longer(cols = c(Men, Women, `All Adults`),
+               names_to = "Group",
+               values_to = "Value")
 
-# Round the Percentage column to 1 decimal place
-DA_chart3_data$Percentage <- round(DA_chart3_data$Percentage, 1)
-
-# Ensure the order is preserved
-DA_chart3_data$Gender <- factor(
-  DA_chart3_data$Gender,
-  levels = c("Men", "Women", "All adults") # Adjust based on your actual data
-)
-
-################################################################################
-# DA CHART 4 DATA PREP
-
-# Rename one column
-DA_chart4_data <- DA_chart4_data %>%
-  rename(`Categories` = `% victims once or more, last three years`)
-
-# Round the Percentage column to 1 decimal place for all genders
-DA_chart4_data$Men <- round(DA_chart4_data$Men, 1)
-
-DA_chart4_data$Women <- round(DA_chart4_data$Women, 1)
-
-DA_chart4_data$`All Adults` <- round(DA_chart4_data$`All Adults`, 1)
-
-
-# Pivot the data from wide to long format
-DA_chart4_data <- DA_chart4_data %>%
-  pivot_longer(
-    cols = c(Men, Women, `All Adults`),  
-    names_to = "Gender",
-    values_to = "Percentage"
-  )
-
-################################################################################
-
-
-
-
-
-
-
-
-
-
-
-### CHECK WITH BRENDA WHAT THIS DATA IS FOR?####################################
-# latest_data <- read_excel(temp_file,
-#                           sheet = "Table 6 and Figure 2",
-#                           range = "A61:C75")
-################################################################################
-
-
-
-
-
-
-
-
-
-
-
-
-# URL being functioned and saved onto a temp file
-domestic_abuse_inc_crime_url <- "https://www.psni.police.uk/system/files/2025-01/1059392717/Domestic%20Abuse%20Incidents%20and%20Crimes%20in%20Northern%20Ireland%202004-05%20to%202023-24%20-%20Revised.xlsx"
-temp_file <- tempfile(fileext = ".xlsx")
-
-# Download the file using httr::GET
-GET(domestic_abuse_inc_crime_url,
-    write_disk(temp_file,
-               overwrite = TRUE),
-    httr::config(ssl_verifypeer = FALSE))
-
-
-domestic_abuse_mot_by_off <- read_excel(temp_file,
-                                        sheet = "Table 2.1",
-                                        range = "A4:W45")
-
-
-
-# data prep done here for `domestic_abuse_mot_by_off`
-
-
-domestic_abuse_mot_by_off <- domestic_abuse_mot_by_off[-1, ]
-domestic_abuse_mot_by_off <- domestic_abuse_mot_by_off[-39, ]
-
-# Rearranging row indices
-rownames(domestic_abuse_mot_by_off) <- NULL
-
-# Dropping the columns in the data frame
-domestic_abuse_mot_by_off <- domestic_abuse_mot_by_off [-c(4,5,6,7,9,10,11,12,14,
-                                                           15,16,17,19,21,22,23,
-                                                           26,27,28,29,31,
-                                                           32,33,34), ]
-# dropping last 2 columns in the data frame
-domestic_abuse_mot_by_off <- domestic_abuse_mot_by_off[, -((ncol(domestic_abuse_mot_by_off)-1)
-                                                           :ncol(domestic_abuse_mot_by_off))]
-
-
+# Round all numeric columns to 1dp
+DA_chart3_data <- DA_chart3_data %>%
+  mutate(across(where(is.numeric), ~ round(.x, 1)))
 
 
 

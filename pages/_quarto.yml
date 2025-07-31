@@ -12,12 +12,8 @@ website:
         text: YLT
       - href: recorded-crime.qmd
         text: RECORDED CRIME
-      - text: DOMESTIC ABUSE
-        menu: 
-          - text: Domestic Abuse Reported Crimes
-            href: domestic-abuse-1.qmd
-          - text: Domestic Abuse Experience Total
-            href: domestic-abuse-2.qmd
+      - href: domestic-abuse.qmd
+        text: DOMESTIC ABUSE
       - href: criminal-justice.qmd
         text: CRIMINAL JUSTICE
       - href: public-prosecution.qmd

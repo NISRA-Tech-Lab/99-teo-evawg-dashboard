@@ -18,7 +18,7 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 
 
 ```{r}
-#| title: Number of Domestic Abuse Crimes & Incidents 2023/24
+#| title: Number of Domestic Abuse Crimes & Incidents 2004-2025
 #| fig-height: 10
 
 DA_chart1 <- plot_ly(
@@ -45,7 +45,7 @@ DA_chart1 <- plot_ly(
   layout(
     showlegend = TRUE,
     font = list(family = "Arial", size = 14),
-    margin = list(b = 150),
+    margin = list(t = 50),
     xaxis = list(
       title = list(text = "Year", standoff = 10),
       type = "category",  # <-- Treat x-axis as categorical
@@ -92,7 +92,7 @@ DA_chart1
 ### Column {width=50%}
 
 ```{r}
-#| title: Types of Domestic Abuse Crimes 2023/24
+#| title: Types of Domestic Abuse Crimes 2024/25
 #| fig-height: 10
 
 DA_chart2 <- plot_ly(
@@ -128,7 +128,48 @@ DA_chart2
 
 ```
 Note 1: Including homicide and death or serious injury-unlawful driving.
-```{r echo = FALSE, fig.show='hold'}
+```{r}
+#| title: Percentage of Domestic Abuse Experience by Gender 2018/19
+#| fig-height: 10
+
+DA_chart3 <- plot_ly(
+  data = DA_chart3_data,
+  x = ~Group,
+  y = ~Value,
+  color = ~category,
+  colors = nisra_colours[2:3],  
+  type = "bar",
+  barmode = "group"
+) %>%
+  layout(
+    title = "",
+    margin = list(t = 50),
+    xaxis = list(title = "Group"),
+    yaxis = list(
+      title = "",        
+      showline = TRUE,   
+      zeroline = TRUE,   
+      showticklabels = TRUE  
+    ),
+    legend = list(title = list(text = "Category")),
+    annotations = list(
+      list(
+        x = -0.008,
+        xref = "paper",
+        xanchor = "center",
+        y = 1.025,
+        yref = "paper",
+        yanchor = "bottom",
+        text = "Percentage %",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
+
+DA_chart3
+
 ```
 
 
