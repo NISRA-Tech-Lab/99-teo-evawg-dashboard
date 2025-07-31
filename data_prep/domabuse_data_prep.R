@@ -127,7 +127,7 @@ DA_chart3_data <- rbind(lifetime_data, last3years_data)
 DA_chart3_data <- DA_chart3_data %>%
   pivot_longer(cols = c(Men, Women, `All Adults`),
                names_to = "Group",
-               values_to = "Value")
+               values_to = "Percentage")
 
 # Round all numeric columns to 1dp
 DA_chart3_data <- DA_chart3_data %>%

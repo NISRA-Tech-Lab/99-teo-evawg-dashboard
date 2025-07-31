@@ -135,11 +135,13 @@ Note 1: Including homicide and death or serious injury-unlawful driving.
 DA_chart3 <- plot_ly(
   data = DA_chart3_data,
   x = ~Group,
-  y = ~Value,
+  y = ~Percentage,
   color = ~category,
-  colors = nisra_colours[2:3],  
+  colors = nisra_colours[2:3],
   type = "bar",
-  barmode = "group"
+  barmode = "group",
+  text = ~paste0(category, "<br>", Group, ": ", Percentage, "%"),
+  hoverinfo = "text"   
 ) %>%
   layout(
     title = "",
