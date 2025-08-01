@@ -15,59 +15,6 @@ source(paste0(here(), "/data_prep/pps_data_prep.R"))
 
 ### Column {width=50%}
 
-```{r}
-#| title: title
-
-plot_ly(
-  data = pps_chart1_data,
-  labels = ~classification_group,
-  values = ~count,
-  type = 'pie',
-  textinfo = 'label',
-  textposition = 'outside',
-  hoverinfo = 'text',
-  text = ~paste0(
-    classification_group, "<br>",
-    "Count: ", formatC(count, format = "d", big.mark = ","), "<br>",
-    "Share: ", percent, "%"
-  ),
-  marker = list(colors = c(nisra_colours[1], nisra_colours[2], nisra_colours[3]))
-) %>%
-  layout(
-    title = paste0("Files received by PPS by Police in ", currentyear, "/", substr(currentyear + 1, 3, 4)),
-    showlegend = TRUE
-  )%>%
-  config(displayModeBar = FALSE)
-
-```
-
-```{r}
-#| title: title
-
-plot_ly(
-  labels = c("Female", "Male"),
-  values = c(pps_chart2_data$Female, pps_chart2_data$Male),
-  type = 'pie',
-  textinfo = 'label',
-  hoverinfo = 'text',
-  text = paste0(
-    c("Female", "Male"), "<br>",
-    "Count: ", formatC(c(pps_chart2_data$Female, pps_chart2_data$Male), format = "d", big.mark = ","), "<br>",
-    "Share: ", c(pps_chart2_data$Female_percent, pps_chart2_data$Male_percent), "%"
-  ),
-  marker = list(colors = c(nisra_colours[1], nisra_colours[2]))
-) %>%
-  layout(
-    title = paste0("Gender Breakdown of Victims on Files Received ", currentyear, "/", substr(currentyear + 1, 3, 4)),
-    showlegend = TRUE
-  )%>%
-  config(displayModeBar = FALSE)
-
-```
-
-
-### Column {width=50%}
-
 
 ```{r}
 #| title: Median time taken for cases to be dealt with at courts by offence type

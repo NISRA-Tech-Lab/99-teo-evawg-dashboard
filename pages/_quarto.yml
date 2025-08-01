@@ -14,8 +14,6 @@ website:
         text: RECORDED CRIME
       - href: domestic-abuse.qmd
         text: DOMESTIC ABUSE
-      - href: criminal-justice.qmd
-        text: CRIMINAL JUSTICE
       - href: public-prosecution.qmd
         text: PUBLIC PROSECUTION SERVICE
 format:

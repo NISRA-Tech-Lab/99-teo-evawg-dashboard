@@ -35,37 +35,6 @@ GET(pps_url, write_disk(temp_file, overwrite = TRUE))
 # Now read the .ods file from disk
 time_taken_pps <- read_ods(temp_file, sheet = "5", range = "A4:G17")
 
-
-
-################################################################################
-### CHART 1 DATA PREP FOR PPS (FILES RECEIVED PIE CHART) 
-
-pps_chart1_data <- files_received_pps %>%
-  mutate(classification_group = case_when(
-    `Offence Classification 2` == "Violence against the person" ~ "Violence against the person",
-    `Offence Classification 2` == "Sexual Offences" ~ "Sexual Offences",
-    TRUE ~ "All other file classifications"
-  )) %>%
-  group_by(classification_group) %>%
-  summarise(
-    `count` = sum(`2023/24 (Number)`, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  mutate(
-    `percent` = round(100 * `count` / sum(`count`), 1)
-  ) 
-
-################################################################################
-### CHART 2 DATA PREP FOR PPS (MALE/FEMALE VICTIMS FILES RECEIVED PIE CHART) 
-pps_chart2_data <- victims_pps[nrow(victims_pps), 2:3]
-
-# Calculate total
-total <- sum(pps_chart2_data)
-
-# Add percentage columns
-pps_chart2_data$Female_percent <- round((pps_chart2_data$Female / total) * 100, 2)
-pps_chart2_data$Male_percent   <- round((pps_chart2_data$Male / total) * 100, 2)
-
 ################################################################################
 ### CHART 3 DATA PREP FOR PPS (Median time taken for cases to be dealt with at courts by offence type) 
 
