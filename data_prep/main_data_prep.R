@@ -4,7 +4,7 @@ source(paste0(here(), "/config.R"))
 # READ IN THE DATA
 
 nilt_currentyr_data <- read.spss(
-  paste0(here(), "/data/NILT23TEOv2.sav"),
+  paste0(data_folder, "/NILT23TEOv2.sav"),
   to.data.frame = TRUE
 ) %>%
   mutate(
@@ -13,7 +13,7 @@ nilt_currentyr_data <- read.spss(
   )
 
 nilt_previousyr_data <- read.spss(
-  paste0(here(), "/data/NILT 2022.sav"),
+  paste0(data_folder, "/NILT 2022.sav"),
   to.data.frame = TRUE
 ) %>%
   mutate(
@@ -23,33 +23,33 @@ nilt_previousyr_data <- read.spss(
 
 
 nilt_historical_chart1 <- read_excel(
-  paste0(here(), "/data/nilt_historical_chart1.xlsx")
+  paste0(data_folder, "/nilt_historical_chart1.xlsx")
 )
 
 nilt_historical_chart2 <- read_excel(
-  paste0(here(), "/data/nilt_historical_chart2.xlsx")
+  paste0(data_folder, "/nilt_historical_chart2.xlsx")
 )
 
 nilt_historical_chart3 <- read_excel(
-  paste0(here(), "/data/nilt_historical_chart3.xlsx")
+  paste0(data_folder, "/nilt_historical_chart3.xlsx")
 )
 
 ylt_currentyr_data <- read.spss(
-  paste0(here(), "/data/YLT2024.sav"),
+  paste0(data_folder, "/YLT2024.sav"),
   to.data.frame = TRUE
 )
 
 ylt_previousyr_data <- read.spss(
-  paste0(here(), "/data/ylt23w1.sav"),
+  paste0(data_folder, "/ylt23w1.sav"),
   to.data.frame = TRUE
 )
 
 ylt_historical_chart1 <- read_excel(
-  paste0(here(), "/data/ylt_historical_chart1.xlsx")
+  paste0(data_folder, "/ylt_historical_chart1.xlsx")
 )
 
 ylt_historical_chart2 <- read_excel(
-  paste0(here(), "/data/ylt_historical_chart2.xlsx")
+  paste0(data_folder, "/ylt_historical_chart2.xlsx")
 )
 
 ################################################################################
