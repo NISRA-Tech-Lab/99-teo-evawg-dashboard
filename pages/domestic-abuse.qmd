@@ -115,17 +115,56 @@ DA_chart2 <- plot_ly(
   layout(
     title = " ",
     font = list(family = "Arial", size = 14),
-    showlegend = TRUE,
-    legend = list(x = 1, y = 0.5),
+    showlegend = FALSE,
     pie = list(
       direction = "clockwise",   
       rotation = 0               
+    ),
+    annotations = list(
+    list(
+      text = "Violence without injury",
+      x = 0.82,                
+      y = 0.82,              
+      showarrow = FALSE,
+      xanchor = 'center',
+      yanchor = 'bottom'
+    ),
+    list(
+      text = "Violence with injury",
+      x = 0.55,                
+      y = -0.05,              
+      showarrow = FALSE,
+      xanchor = 'center',
+      yanchor = 'bottom'
+    ),
+    list(
+      text = "Stalking and Harassment",
+      x = 0.12,                
+      y = 0.22,              
+      showarrow = FALSE,
+      xanchor = 'center',
+      yanchor = 'bottom'
+    ),
+    list(
+      text = "Sexual offences",
+      x = 0.15,                
+      y = 0.7,              
+      showarrow = FALSE,
+      xanchor = 'center',
+      yanchor = 'bottom'
+    ),
+    list(
+      text = "All other offences",
+      x = 0.3,                
+      y = 0.95,              
+      showarrow = FALSE,
+      xanchor = 'center',
+      yanchor = 'bottom'
     )
-  ) %>%
-  config(displayModeBar = FALSE)
+  )
+) %>% config(displayModeBar = FALSE)
 
 DA_chart2
-
 ```
 Note 1: Including homicide and death or serious injury-unlawful driving.
 ```{r}
