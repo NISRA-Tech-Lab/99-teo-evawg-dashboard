@@ -90,7 +90,8 @@ DA_chart2_data <- DA_chart2_data %>%
     Percentage = sum(Percentage, na.rm = TRUE),
     .groups = "drop"
   ) %>%
-  arrange(desc(Count)) 
+  arrange(desc(Count)) %>% 
+  slice(c(setdiff(1:nrow(.), grep("All other offences", .$`Crime Type`)), grep("All other offences", .$`Crime Type`)))
 
 
 ################################################################################
