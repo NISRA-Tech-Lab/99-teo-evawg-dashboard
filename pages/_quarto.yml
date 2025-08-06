@@ -20,6 +20,9 @@ format:
   dashboard:
     css: style.css
     fig-responsive: true
+    include-in-header: 
+      text: |
+        <script src = "dashboard.js"></script>
     include-before-body:
       text: |
         <div id = "cookie-banner"></div>
