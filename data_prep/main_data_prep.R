@@ -32,7 +32,8 @@ nilt_historical_chart2 <- read_excel(
 
 nilt_historical_chart3 <- read_excel(
   paste0(data_folder, "/nilt_historical_chart3.xlsx")
-)
+) %>% mutate(age = case_when(age == "Whole population" ~ "All respondents",
+                             TRUE ~ age))
 
 ylt_currentyr_data <- read.spss(
   paste0(data_folder, "/YLT2024.sav"),
@@ -273,7 +274,7 @@ nilt_variable_by_age <- function(df, var, age_var = "age_18_29", weight_var = "W
       weighted_total = sum(weight, na.rm = TRUE),
       percentage_yes = round(100 * weighted_yes / weighted_total, 1)
     ) %>%
-    mutate(age = "Whole population", variable = var)
+    mutate(age = "All respondents", variable = var)
   
   bind_rows(age_18_29, age_all)
 }
