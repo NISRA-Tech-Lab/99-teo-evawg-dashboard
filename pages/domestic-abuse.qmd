@@ -52,8 +52,8 @@ DA_chart1 <- plot_ly(
       categoryorder = "array",
       categoryarray = DA_chart1_data$yaxis_year,  # <-- Ensure ordering matches data
       tickmode = "array",
-      tickvals = DA_chart1_data$yaxis_year,
-      ticktext = DA_chart1_data$yaxis_year,
+      tickvals = DA_chart1_data$yaxis_year[seq(1, length(DA_chart1_data$yaxis_year), by = 5)],
+      ticktext = DA_chart1_data$yaxis_year[seq(1, length(DA_chart1_data$yaxis_year), by = 5)],
       showline = TRUE,
       linecolor = "#000000",
       showgrid = FALSE,

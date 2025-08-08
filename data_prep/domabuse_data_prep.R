@@ -23,7 +23,7 @@ colnames(DA_chart1_data) <- c("Year", "Incidents", "Crimes")
 
 # Step 5: Add formatted y-axis year labels as a new column
 DA_chart1_data$yaxis_year <- gsub("^20", "", DA_chart1_data$Year)     
-DA_chart1_data$yaxis_year <- gsub("/", "/\n", DA_chart1_data$yaxis_year)
+# DA_chart1_data$yaxis_year <- gsub("/", "/\n", DA_chart1_data$yaxis_year)
 
 # Step 6: Fix NA values for Incidents in 2005/06 and 2006/07
 DA_chart1_data$Incidents[DA_chart1_data$Year == "2005/06"] <- 23059
@@ -34,7 +34,7 @@ new_row <- data.frame(
   Year = "2004/05",
   Incidents = 20959,
   Crimes = 9647,
-  yaxis_year = gsub("/", "/\n", gsub("^20", "", "2004/05"))
+  yaxis_year = "04/05"
 )
 
 DA_chart1_data <- rbind(new_row, DA_chart1_data) 
