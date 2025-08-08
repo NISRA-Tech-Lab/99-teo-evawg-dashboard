@@ -100,8 +100,9 @@ DA_chart2 <- plot_ly(
   labels = ~`Crime Type`,
   values = ~Percentage,
   type = 'pie',
-  text = ~paste0(Percentage, "%"),  
-  textinfo = "text",                
+  text = ~`Crime Type`,  
+  textinfo = "text",
+  textposition = "outside",
   sort = FALSE,
   direction = "clockwise",
   marker = list(colors = nisra_colours[1:5]),
@@ -119,50 +120,18 @@ DA_chart2 <- plot_ly(
     pie = list(
       direction = "clockwise",   
       rotation = 0               
-    ),
-    annotations = list(
-    list(
-      text = "Violence without injury",
-      x = 0.82,                
-      y = 0.82,              
-      showarrow = FALSE,
-      xanchor = 'center',
-      yanchor = 'bottom'
-    ),
-    list(
-      text = "Violence with injury",
-      x = 0.55,                
-      y = -0.05,              
-      showarrow = FALSE,
-      xanchor = 'center',
-      yanchor = 'bottom'
-    ),
-    list(
-      text = "Stalking and Harassment",
-      x = 0.12,                
-      y = 0.22,              
-      showarrow = FALSE,
-      xanchor = 'center',
-      yanchor = 'bottom'
-    ),
-    list(
-      text = "Sexual offences",
-      x = 0.15,                
-      y = 0.7,              
-      showarrow = FALSE,
-      xanchor = 'center',
-      yanchor = 'bottom'
-    ),
-    list(
-      text = "All other offences",
-      x = 0.3,                
-      y = 0.95,              
-      showarrow = FALSE,
-      xanchor = 'center',
-      yanchor = 'bottom'
-    )
-  )
-) %>% config(displayModeBar = FALSE)
+    )) %>% 
+  add_trace(data = DA_chart2_data,
+  labels = ~`Crime Type`,
+  values = ~Percentage,
+  type = 'pie',
+  text = ~paste0(Percentage, "%"),  
+  textinfo = "text",
+  textposition = "inside",
+  sort = FALSE,
+  direction = "clockwise",
+  marker = list("rgba(255,0,0,0.5)")) %>% 
+  config(displayModeBar = FALSE) 
 
 DA_chart2
 ```
