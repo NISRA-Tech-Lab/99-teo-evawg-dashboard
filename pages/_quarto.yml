@@ -7,15 +7,15 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: NILT
+        text: Gender-Based Violence - Adults
       - href: YLT.qmd
-        text: YLT
+        text: Gender-Based Violence - Age 16
       - href: recorded-crime.qmd
-        text: RECORDED CRIME
+        text: Recorded Crime
       - href: domestic-abuse.qmd
-        text: DOMESTIC ABUSE
+        text: Domestic Abuse
       - href: public-prosecution.qmd
-        text: PUBLIC PROSECUTION SERVICE
+        text: Public Prosecution Service
 format:
   dashboard:
     css: style.css

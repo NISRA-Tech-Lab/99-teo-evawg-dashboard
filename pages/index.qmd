@@ -16,8 +16,9 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
-#| title: title
+#| title: Experience of gender-based violence in the last five years  (% of all respondents)
 #| fig-height: 10
+
 plot_ly() %>%
   add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVPHYVA, type = 'scatter',
             mode = 'lines+markers', name = 'Physical violence',
@@ -45,13 +46,7 @@ plot_ly() %>%
             marker = list(color = nisra_colours[5]),
             hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   layout(
-    title = list(
-      text = "Experienced Violence Over Time",
-      y = 0.98,
-      x = 0.5,
-      xanchor = "center"
-    ),
-    margin = list(t = 100),
+    margin = list(t = 40),
     xaxis = list(
       title = list(
         text = "Year",
@@ -102,7 +97,8 @@ plot_ly() %>%
 ### Column {width=50%}
 
 ```{r}
-#| title: title
+#| title: Experience of gender-based violence in the last five years, by gender (%)
+
 # Step 1: Map variable codes to readable violence type names
 violence_labels <- c(
   GBVPHYVA = "Physical violence",
@@ -150,9 +146,7 @@ plot_ly(shared_nilt,
                 "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes)
 )) %>%
   layout(
-    title = "Percentage Saying Yes Over Time",
-    
-    xaxis = list(
+      xaxis = list(
       title = "Year",
       showgrid = FALSE,
       showline = TRUE,
@@ -163,7 +157,7 @@ plot_ly(shared_nilt,
     ),
     
     yaxis = list(
-      title = "",  # remove y-axis title
+      title = "",  
       showgrid = FALSE,
       showline = TRUE,
       linecolor = "black",
@@ -172,7 +166,7 @@ plot_ly(shared_nilt,
     ),
     
     legend = list(title = list(text = "")),
-    margin = list(t = 110),  
+    margin = list(t = 40),  
     annotations = list(
       list(
         x = -0.008,
@@ -196,28 +190,10 @@ plot_ly(shared_nilt,
 
 ```
 
-::: {.hidden}
-
-```{js}
-
-document.addEventListener("DOMContentLoaded", function() {
-  
-  let cells = document.getElementsByClassName("cell-output-display");
-  
-  for (let i = 0; i < cells.length; i ++) {
-    cells[i].classList.remove("html-fill-item");
-    cells[i].classList.remove("html-fill-container");
-  }
-
-});
-
-
-```
-
-:::
 
 ```{r}
-#| title: title
+#| title: Experience of gender-based violence in the last five years, by age (%)
+
 # Step 1: Map variable codes to readable violence type names
 violence_labels <- c(
   GBVPHYVA = "Physical violence",
@@ -263,9 +239,7 @@ plot_ly(shared_nilt_age,
                       "<br>", age,
                       "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes))) %>%
   layout(
-    title = "Percentage Saying Yes Over Time by Age Group",
-    
-    xaxis = list(
+      xaxis = list(
       title = "Year",
       showgrid = FALSE,
       showline = TRUE,
@@ -285,7 +259,7 @@ plot_ly(shared_nilt_age,
     ),
     
     legend = list(title = list(text = "")),
-    margin = list(t = 110),  
+    margin = list(t = 40),  
     annotations = list(
       list(
         x = -0.008,
@@ -307,3 +281,5 @@ plot_ly(shared_nilt_age,
   config(displayModeBar = FALSE)
 ```
 
+## Row
+Source: [Ending Violence Against Women and Girls: Experiences and attitudes of adults in Northern Ireland in 2023](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.executiveoffice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2F2024-12%2Fdata-tables.xlsx&wdOrigin=BROWSELINK)
