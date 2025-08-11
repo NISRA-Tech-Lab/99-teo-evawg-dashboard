@@ -15,8 +15,9 @@ source(paste0(here(), "/data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
-#| title: title
+#| title: Respondents who have experienced gender-based violence in the last year because of their gender
 #| fig-height: 10
+
 plot_ly() %>%
   add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV1, type = 'scatter',
             mode = 'lines+markers', name = 'Physical violence',
@@ -39,13 +40,7 @@ plot_ly() %>%
             marker = list(color = nisra_colours[5]),
             hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
   layout(
-    title = list(
-      text = "Experienced Violence Over Time",
-      y = 0.98,
-      x = 0.5,
-      xanchor = "center"
-    ),
-    margin = list(t = 100),
+    margin = list(t = 40),
     xaxis = list(
       title = list(
         text = "Year",
@@ -95,8 +90,9 @@ plot_ly() %>%
 ### Column {width=50%}
 
 ```{r}
-#| title: title
-#| fig-height: 9
+#| title: Respondents who have experienced gender-based violence in the last year, by gender
+#| fig-height: 10
+
 # 1. Map codes → readable violence-type names
 violence_labels <- c(
   GVTYPV1 = "Physical violence",
@@ -146,9 +142,7 @@ plot_ly(shared_ylt,
                 "<br>", gender,
                 "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes))) %>%
   layout(
-    title = "Percentage Saying Yes Over Time",
-
-    xaxis = list(
+      xaxis = list(
       title     = "Year",
       showgrid  = FALSE,
       showline  = TRUE,
@@ -157,20 +151,16 @@ plot_ly(shared_ylt,
       tickvals  = unique_years,
       ticktext  = unique_years
     ),
-
     yaxis = list(
-      title     = "",          # remove default y-axis title
+      title     = "",          
       showgrid  = FALSE,
       showline  = TRUE,
       linecolor = "black",
       linewidth = 1,
       rangemode = "tozero"
     ),
-
-    legend = list(title = list(text = "")),   # blank legend title
-
-    margin = list(t = 110),                   # top margin for annotation
-
+    legend = list(title = list(text = "")),   
+    margin = list(t = 40),                   
     annotations = list(
       list(
         x          = -0.008,
@@ -184,28 +174,11 @@ plot_ly(shared_ylt,
         font       = list(size = 14)
       )
     ),
-
     hoverlabel = list(font = list(color = "white"))
   ) %>%
   config(displayModeBar = FALSE)
 
 ```
-::: {.hidden}
 
-```{js}
-
-document.addEventListener("DOMContentLoaded", function() {
-  
-  let cells = document.getElementsByClassName("cell-output-display");
-  
-  for (let i = 0; i < cells.length; i ++) {
-    cells[i].classList.remove("html-fill-item");
-    cells[i].classList.remove("html-fill-container");
-  }
-
-});
-
-
-```
-
-:::
+## Row
+Source: [Ending Violence Against Women and Girls: Experiences and Attitudes of 16 year olds in Northern Ireland in 2024](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.executiveoffice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2F2025-05%2Fdata-tables%2520%25281%2529.xlsx&wdOrigin=BROWSELINK)
