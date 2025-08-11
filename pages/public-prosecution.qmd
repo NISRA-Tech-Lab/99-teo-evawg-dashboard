@@ -11,21 +11,17 @@ library(here)
 source(paste0(here(), "/data_prep/pps_data_prep.R"))
 ```
 
-## Row
-
-### Column {width=50%}
-
 
 ```{r}
-#| title: Median time taken for cases to be dealt with at courts by offence type
+#| title: Median time taken for cases to be dealt with at court in 2023/24
 #| fig-height: 10
 
 # Define reversed order
-offence_order <- rev(pps_chart3_data$offence)
+offence_order <- rev(pps_chart1_data$offence)
 
-# Plot the chart with y-axis annotation
+
 plot_ly(
-  data = pps_chart3_data,
+  data = pps_chart1_data,
   x = ~days,
   y = ~offence,
   type = 'bar',
@@ -33,7 +29,7 @@ plot_ly(
   text = ~hover_text,
   hoverinfo = 'text',
   textposition = 'none',
-  marker = list(color = '#005EB8')
+  marker = list(color = nisra_colours[2])
 ) %>%
 layout(
   title = "",
@@ -62,3 +58,5 @@ layout(
   config(displayModeBar = FALSE)
 
 ```
+Average is measured as the median number of days taken, i.e., the number of days at which 50% of those cases included under counting rules has been completed. This is an overview of the time taken for a case to be disposed at court from the date that case began its journey through the criminal justice system, based on a start point of the date the offence was reported to, or detected by, the PSNI.   
+Source: [Time taken  for cases dealt with at courts by offence type, 2019-20 to 2023-24 (Worksheet 5)]( https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.justice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2Fpublications%2Fjustice%2F202324%2520case%2520processing%2520time%2520tables%2520-%2520%2520open%2520data%2520format.ods&wdOrigin=BROWSELINK)

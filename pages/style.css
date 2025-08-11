@@ -1,7 +1,16 @@
 /* CSS Stylesheet*/
 
 div.chart-title {
-font-size: 17px;
+  font-size: 17px;
+  background-color: #1a6ecc; 
+  color: white;              
+  padding: 5px 10px;         
+  border-radius: 4px;        
+}
+
+.card-header, .chart-title-container {
+  background-color: #1a6ecc;
+  color: white; 
 }
 
 div.navbar-inverse.navbar-fixed-top {
