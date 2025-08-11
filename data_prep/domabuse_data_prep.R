@@ -21,20 +21,15 @@ DA_chart1_data <- pivot_wider(
 # Step 4: Rename columns
 colnames(DA_chart1_data) <- c("Year", "Incidents", "Crimes")
 
-# Step 5: Add formatted y-axis year labels as a new column
-DA_chart1_data$yaxis_year <- gsub("^20", "", DA_chart1_data$Year)     
-# DA_chart1_data$yaxis_year <- gsub("/", "/\n", DA_chart1_data$yaxis_year)
-
-# Step 6: Fix NA values for Incidents in 2005/06 and 2006/07
+# Step 5: Fix NA values for Incidents in 2005/06 and 2006/07
 DA_chart1_data$Incidents[DA_chart1_data$Year == "2005/06"] <- 23059
 DA_chart1_data$Incidents[DA_chart1_data$Year == "2006/07"] <- 23456
 
-# Step 7: Add a new row for 2004/05 with Incidents and Crimes values
+# Step 6: Add a new row for 2004/05 with Incidents and Crimes values
 new_row <- data.frame(
   Year = "2004/05",
   Incidents = 20959,
-  Crimes = 9647,
-  yaxis_year = "04/05"
+  Crimes = 9647
 )
 
 DA_chart1_data <- rbind(new_row, DA_chart1_data) 

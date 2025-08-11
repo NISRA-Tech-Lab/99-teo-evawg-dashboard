@@ -18,12 +18,12 @@ source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
 
 
 ```{r}
-#| title: Number of Domestic Abuse Crimes & Incidents 2004-2025
+#| title: Number of police recorded domestic abuse incidents and crimes
 #| fig-height: 10
 
 DA_chart1 <- plot_ly(
   DA_chart1_data,
-  x = ~yaxis_year,
+  x = ~Year,
   y = ~Incidents,
   type = 'scatter',
   mode = 'lines+markers',
@@ -45,15 +45,15 @@ DA_chart1 <- plot_ly(
   layout(
     showlegend = TRUE,
     font = list(family = "Arial", size = 14),
-    margin = list(t = 50),
+    margin = list(t = 40),
     xaxis = list(
       title = list(text = "Year", standoff = 10),
-      type = "category",  # <-- Treat x-axis as categorical
+      type = "category",  
       categoryorder = "array",
-      categoryarray = DA_chart1_data$yaxis_year,  # <-- Ensure ordering matches data
+      categoryarray = DA_chart1_data$Year,  
       tickmode = "array",
-      tickvals = DA_chart1_data$yaxis_year[seq(1, length(DA_chart1_data$yaxis_year), by = 5)],
-      ticktext = DA_chart1_data$yaxis_year[seq(1, length(DA_chart1_data$yaxis_year), by = 5)],
+      tickvals = DA_chart1_data$Year[seq(1, length(DA_chart1_data$Year), by = 5)],
+      ticktext = DA_chart1_data$Year[seq(1, length(DA_chart1_data$Year), by = 5)],
       showline = TRUE,
       linecolor = "#000000",
       showgrid = FALSE,
@@ -72,7 +72,7 @@ DA_chart1 <- plot_ly(
     ),
     annotations = list(
       list(
-        x = 0.01, y = 1.03,
+        x = 0.01, y = 1.05,
         text = "Incidents and Crimes",
         showarrow = FALSE,
         xref = "paper", yref = "paper",
@@ -87,12 +87,13 @@ DA_chart1
 
 
 ```
-
+Police recorded crime data is a victim oriented approach to crime recording. A crime will be recorded as having a domestic abuse motivation where it meets the relevant definition provided above. Not all domestic abuse incidents will result in the recording of a crime, as what has occurred in the incident may not be of the level of severity that would result in a crime being recorded. (From PSNI DA report)   
+Source: [Trends in domestic abuse incidents and crimes recorded by the police since 2004/05 (Figure 1)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.psni.police.uk%2Fsystem%2Ffiles%2F2025-05%2F386082373%2FDomestic%2520Abuse%2520Tables%2520Period%2520Ending%252031st%2520March%25202025.xlsx&wdOrigin=BROWSELINK)
 
 ### Column {width=50%}
 
 ```{r}
-#| title: Types of Domestic Abuse Crimes 2024/25
+#| title: Percentage of police recorded domestic abuse crimes in 2024/25, by crime type
 #| fig-height: 10
 
 DA_chart2 <- plot_ly(
@@ -129,15 +130,16 @@ DA_chart2 <- plot_ly(
   textinfo = "text",
   textposition = "inside",
   sort = FALSE,
-  direction = "clockwise",
-  marker = list("rgba(255,0,0,0.5)")) %>% 
+  direction = "clockwise") %>% 
   config(displayModeBar = FALSE) 
 
 DA_chart2
 ```
-Note 1: Including homicide and death or serious injury-unlawful driving.
+Note 1: Including homicide and death or serious injury-unlawful driving.   
+Source: [Domestic Abuse Incidents and Crimes Recorded by the Police in Northern Ireland: Update to 31 March 2025(Table 1 and Figures 5 & 6)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.psni.police.uk%2Fsystem%2Ffiles%2F2025-05%2F386082373%2FDomestic%2520Abuse%2520Tables%2520Period%2520Ending%252031st%2520March%25202025.xlsx&wdOrigin=BROWSELINK)
+
 ```{r}
-#| title: Percentage of Domestic Abuse Experience by Gender 2018/19
+#| title: Prevalence of domestic abuse among adults, by gender
 #| fig-height: 10
 
 DA_chart3 <- plot_ly(
@@ -153,7 +155,7 @@ DA_chart3 <- plot_ly(
 ) %>%
   layout(
     title = "",
-    margin = list(t = 50),
+    margin = list(t = 40),
     xaxis = list(title = "Group"),
     yaxis = list(
       title = "",        
@@ -181,5 +183,5 @@ DA_chart3 <- plot_ly(
 DA_chart3
 
 ```
-
+Source: [Findings from the 2018/19 Northern Ireland Safe Community Survey (Table 1 and Table 5)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.justice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2Fpublications%2Fjustice%2Fexperience%2520of%2520domestic%2520abuse%2520findings%2520from%2520the%2520201819%2520niscs.xl_.XLSX&wdOrigin=BROWSELINK)
 
