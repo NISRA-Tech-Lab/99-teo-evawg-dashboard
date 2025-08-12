@@ -6,6 +6,8 @@ website:
   title: "teo-evawg-dashboard"
   navbar:
     left:
+      - href: home.qmd
+        text: Home
       - href: index.qmd
         text: Gender-Based Violence - Adults
       - href: YLT.qmd
@@ -24,6 +26,8 @@ website:
         text: Domestic Abuse
       - href: public-prosecution.qmd
         text: Public Prosecution Service
+      - href: user-notes.qmd
+        text: User notes
 format:
   dashboard:
     css: style.css
