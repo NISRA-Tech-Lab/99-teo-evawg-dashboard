@@ -35,7 +35,7 @@ currentyear <- 2023
 nilt_currentyear <- 2023
 ylt_currentyear <- 2024
 da_currentyear <- "2024/25"
-da_chart3_currentyear <- "2018/19"
+
 
 ##### COLOURS #####
 nisra_palette <- c(
