@@ -28,8 +28,8 @@ DA_chart1 <- plot_ly(
   type = 'scatter',
   mode = 'lines+markers',
   name = "Incidents",
-  line = list(color = nisra_colours[[3]]),
-  marker = list(color = nisra_colours[[3]]),
+  line = list(color = nisra_colours[[1]]),
+  marker = list(color = nisra_colours[[1]]),
   hoverinfo = 'text',
   text = ~paste0(Year, "<br>Incidents: ", format(Incidents, big.mark = ","))
 ) %>%
@@ -147,7 +147,7 @@ DA_chart3 <- plot_ly(
   x = ~Group,
   y = ~Percentage,
   color = ~category,
-  colors = nisra_colours[2:3],
+  colors = nisra_colours[1:2],
   type = "bar",
   barmode = "group",
   text = ~paste0(category, "<br>", Group, ": ", Percentage, "%"),

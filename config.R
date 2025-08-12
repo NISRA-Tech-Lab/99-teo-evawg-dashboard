@@ -39,11 +39,13 @@ da_chart3_currentyear <- "2018/19"
 
 ##### COLOURS #####
 nisra_palette <- c(
-  nisra_green_decoration = "#CEDC20",
   nisra_blue = "#3878c5",
   nisra_navy = "#00205b",
   nisra_col3_green = "#68a41e", 
-  nisra_col4_purple = "#732777"
+  nisra_col4_purple = "#732777",
+  nisra_lilac = "#ce70d2",
+  nisra_olive = "#434700",
+  nisra_brown = "#A88F8F"
 )
 
 nisra_colours <- unname(nisra_palette)
