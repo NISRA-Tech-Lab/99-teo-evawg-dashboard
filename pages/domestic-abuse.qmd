@@ -57,7 +57,7 @@ DA_chart1 <- plot_ly(
       showline = TRUE,
       linecolor = "#000000",
       showgrid = FALSE,
-      ticks = "outside",
+      ticks = "",
       tickwidth = 2,
       tickangle = 0,
       automargin = TRUE
