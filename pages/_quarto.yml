@@ -10,8 +10,16 @@ website:
         text: Gender-Based Violence - Adults
       - href: YLT.qmd
         text: Gender-Based Violence - Age 16
-      - href: recorded-crime.qmd
-        text: Recorded Crime
+      - text: Recorded Crime
+        menu: 
+          - text: Police recorded crime
+            href: recorded-crime-police.qmd
+          - text: Homicide
+            href: recorded-crime-homicide.qmd
+          - text: Victims
+            href: recorded-crime-victims.qmd
+          - text: Policing district
+            href: recorded-crime-policing-district.qmd
       - href: domestic-abuse.qmd
         text: Domestic Abuse
       - href: public-prosecution.qmd

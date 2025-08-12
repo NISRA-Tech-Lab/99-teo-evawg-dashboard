@@ -57,8 +57,8 @@ recorded_crime_total_chart1 <- pivot_longer(
 recorded_crime_total_chart1 <- recorded_crime_total_chart1 %>%
   mutate(Year = str_replace_all(Year, "(\\d+)/(\\d+)", function(x) {
     parts <- str_match(x, "(\\d+)/(\\d+)")
-    before <- substr(parts[2], nchar(parts[2]) - 1, nchar(parts[2]))  # last 2 digits before slash
-    after  <- substr(parts[3], 1, 2)                                  # first 2 digits after slash
+    before <- substr(parts[2], nchar(parts[2]) - 1, nchar(parts[2]))  
+    after  <- substr(parts[3], 1, 2)                                  
     paste0(before, "/", after)
   }))
 
