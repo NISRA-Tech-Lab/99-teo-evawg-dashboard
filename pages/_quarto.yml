@@ -8,10 +8,12 @@ website:
     left:
       - href: home.qmd
         text: Home
-      - href: index.qmd
-        text: Gender-Based Violence - Adults
-      - href: YLT.qmd
-        text: Gender-Based Violence - Age 16
+      - text: Gender-based Violence
+        menu: 
+          - text: Adults
+            href: index.qmd
+          - text: Age 16
+            href: YLT.qmd      
       - text: Recorded Crime
         menu: 
           - text: Police recorded crime
