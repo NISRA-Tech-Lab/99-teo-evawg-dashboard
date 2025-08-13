@@ -83,10 +83,10 @@ nilt_historical_chart1 <- nilt_historical_chart1 %>%
 # Append and write updated historical data
 updated_historical_data <- bind_rows(nilt_historical_chart1, nilt_currentyr_percent)
 
-write_xlsx(updated_historical_data, paste0(here(), "/data/nilt_historical_chart1.xlsx"))
+write_xlsx(updated_historical_data, paste0(data_folder, "/nilt_historical_chart1.xlsx"))
 
 nilt_historical_chart1 <- read_excel(
-  paste0(here(), "/data/nilt_historical_chart1.xlsx")
+  paste0(data_folder, "/nilt_historical_chart1.xlsx")
 )
 
 ################################################################################
@@ -152,10 +152,10 @@ if (!"gender" %in% names(nilt_historical_chart2)) {
 # Append and write updated historical data
 updated_historical_data <- bind_rows(nilt_historical_chart2, nilt_gender_data)
 
-write_xlsx(updated_historical_data, paste0(here(), "/data/nilt_historical_chart2.xlsx"))
+write_xlsx(updated_historical_data, paste0(data_folder, "/nilt_historical_chart2.xlsx"))
 
 nilt_historical_chart2 <- read_excel(
-  paste0(here(), "/data/nilt_historical_chart2.xlsx")
+  paste0(data_folder, "/nilt_historical_chart2.xlsx")
 )
 
 ################################################################################
@@ -233,11 +233,11 @@ nilt_historical_chart2 <- read_excel(
 # updated_historical_data <- bind_rows(nilt_historical_chart3, nilt_age_data)
 # 
 # # Write to Excel file
-# write_xlsx(updated_historical_data,  paste0(here(), "/data/nilt_historical_chart3.xlsx"))
+# write_xlsx(updated_historical_data,  paste0(data_folder, "/nilt_historical_chart3.xlsx"))
 # 
 # # Reload to verify
 # nilt_historical_chart3 <- read_excel(
-#   paste0(here(), "/data/nilt_historical_chart3.xlsx")
+#   paste0(data_folder, "/nilt_historical_chart3.xlsx")
 # )
 
 
@@ -316,11 +316,11 @@ if (!"age" %in% names(nilt_historical_chart3)) {
 updated_historical_data <- bind_rows(nilt_historical_chart3, nilt_age_data)
 
 # Write to Excel file
-write_xlsx(updated_historical_data,  paste0(here(), "/data/nilt_historical_chart3.xlsx"))
+write_xlsx(updated_historical_data,  paste0(data_folder, "/nilt_historical_chart3.xlsx"))
 
 # Reload to verify
 nilt_historical_chart3 <- read_excel(
-  paste0(here(), "/data/nilt_historical_chart3.xlsx")
+  paste0(data_folder, "/nilt_historical_chart3.xlsx")
 )
 
 
@@ -354,10 +354,10 @@ nilt_historical_chart3 <- read_excel(
 # # Append and write updated historical data
 # updated_historical_data <- bind_rows(ylt_historical_chart1, ylt_previousyr_percent)
 # 
-# write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical_chart1.xlsx"))
+# write_xlsx(updated_historical_data, paste0(data_folder, "/ylt_historical_chart1.xlsx"))
 # 
 # ylt_historical_chart1 <- read_excel(
-#   paste0(here(), "/data/ylt_historical_chart1.xlsx")
+#   paste0(data_folder, "/ylt_historical_chart1.xlsx")
 # )
 
 
@@ -388,10 +388,10 @@ ylt_historical_chart1 <- ylt_historical_chart1 %>%
 # Append and write updated historical data
 updated_historical_data <- bind_rows(ylt_historical_chart1, ylt_currentyr_percent)
 
-write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical_chart1.xlsx"))
+write_xlsx(updated_historical_data, paste0(data_folder, "/ylt_historical_chart1.xlsx"))
 
 ylt_historical_chart1 <- read_excel(
-  paste0(here(), "/data/ylt_historical_chart1.xlsx")
+  paste0(data_folder, "/ylt_historical_chart1.xlsx")
 )
 
 ################################################################################
@@ -455,9 +455,9 @@ if (!"gender" %in% names(ylt_historical_chart2)) {
 # Append and write updated historical data
 updated_historical_data <- bind_rows(ylt_historical_chart2, ylt_gender_data)
 
-write_xlsx(updated_historical_data, paste0(here(), "/data/ylt_historical_chart2.xlsx"))
+write_xlsx(updated_historical_data, paste0(data_folder, "/ylt_historical_chart2.xlsx"))
 
 ylt_historical_chart2 <- read_excel(
-  paste0(here(), "/data/ylt_historical_chart2.xlsx")
+  paste0(data_folder, "/ylt_historical_chart2.xlsx")
 )
 
