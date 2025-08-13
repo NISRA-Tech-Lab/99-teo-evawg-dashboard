@@ -8,3 +8,30 @@ title: "Home"
 
 library(here)
 ```
+
+<h1 style="text-align: center;">EVAWG – Dashboard – Homepage</h1>
+
+**What is gender-based violence (GBV)?**  
+GBV is a global issue. It is violence against a person targeted because of their gender. It is a human rights violation that may have long-term effects on the victim. Violence against women and girls is defined by the United Nations as “any act of GBV that results in, or is likely to result in, physical, sexual or psychological harm or suffering to women, including threats of such acts, coercion or arbitrary deprivation of liberty, whether occurring in public or private life.”
+
+**Ending violence against women and girls**  
+Ending all forms of violence, abuse, and harm against women and girls is one of the most pressing challenges facing our society today. The Strategic Framework to End Violence Against Women and Girls (EVAWG) addresses the whole range of GBV, abuse and harm which is disproportionately experienced by women and girls, and which is rooted in gender inequality.  
+Violence, abuse and harm against women and girls happens everywhere, every day and impacts how women and girls live, work, and socialise.
+
+**Gender-Based Violence Surveys**  
+The Northern Ireland Life and Times (NILT) and Young Life and Times (YLT) are representative annual surveys covering Northern Ireland which record the attitudes and opinions of adults and 16-year-olds. The Executive Office has been sponsoring GBV questions in the NILT and the YLT surveys since 2022.
+
+**Recorded Crime**  
+Statistics on police recorded crime in Northern Ireland are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA).
+
+**Domestic Abuse**  
+<u>PSNI:</u>  
+The PSNI has adopted the definition of domestic violence and abuse as outlined in the 2016 Northern Ireland Government Strategy ‘Stopping Domestic and Sexual Violence and Abuse in Northern Ireland’ as:  
+‘threatening, controlling, coercive behaviour, violence or abuse (psychological, virtual, physical, verbal, sexual, financial or emotional) inflicted on anyone (irrespective of age, ethnicity, religion, gender, gender identity, sexual orientation or any form of disability) by a current or former intimate partner or family member’.
+
+<u>Prevalence of domestic abuse among adults - Department of Justice:</u>  
+This section presents findings from the Northern Ireland Safe Community Survey (NISCS).
+
+**Case Processing Times - Department of Justice**  
+The Case Processing Times for Criminal Cases dealt with in the Crown and magistrates’ courts in Northern Ireland are published for the most recent year and refer to the time from which the offence was reported to, or detected by, the police.  
+This data is based on all court cases – Crown Court, adult magistrates’ court, and youth magistrates’ court.
