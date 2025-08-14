@@ -101,9 +101,19 @@ police_recorded_crime_historical_chart1 <- read_excel(
 
 
 
+##########################################################################
 
+# Police recorded crime - homicide chart data
 
+# Create a data frame for the homicide chart data in the temp file and pivot longer
+homicide_age_gender <- read_excel(temp_file,
+                                  sheet = "Tables 3, 4 & 5",
+                                  range = "A13:S18")
 
+homicide_age_gender <- homicide_age_gender %>% rename(Age = ...1) %>%
+  group_by(Age) %>% 
+  pivot_longer(cols = -Age, names_to = "Year", values_to = "Value") %>% 
+  pivot_wider(names_from = Age, values_from = Value)
 
 
 

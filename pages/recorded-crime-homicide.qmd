@@ -16,7 +16,130 @@ source(paste0(here(), "/data_prep/recordedcrime_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
+#| title: Victims of homicide by gender and age
+#| fig-height: 10
 
+
+# Prepare ticks for category years like "2024/25"
+tick_every_5 <- homicide_age_gender$Year[seq(1, length(homicide_age_gender$Year), by = 5)]
+
+plot_ly(homicide_age_gender, x = ~Year) %>%
+  add_trace(
+    y = ~`Female <18`,
+    name = "Female <18",
+    text = ~paste(
+      Year,
+      paste0(
+        "Female <18: ",
+        format(`Female <18`, big.mark = ",")
+      ),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[4]),   # choose a new colour index
+    marker = list(color = nisra_colours[4])
+  ) %>%
+  add_trace(
+    y = ~`Female 18+`,
+    name = "Female 18+",
+    text = ~paste(
+      Year,
+      paste0(
+        "Female 18+: ",
+        format(`Female 18+`, big.mark = ",")
+      ),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[2]),
+    marker = list(color = nisra_colours[2])
+  ) %>%
+  add_trace(
+    y = ~`Male <18`,
+    name = "Male <18",
+    text = ~paste(
+      Year,
+      paste0(
+        "Male <18: ",
+        format(`Male <18`, big.mark = ",")
+      ),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[1]),
+    marker = list(color = nisra_colours[1])
+  ) %>%
+  add_trace(
+    y = ~`Male 18+`,
+    name = "Male 18+",
+    text = ~paste(
+      Year,
+      paste0(
+        "Male 18+: ",
+        format(`Male 18+`, big.mark = ",")
+      ),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[3]),
+    marker = list(color = nisra_colours[3])
+  ) %>%
+  add_trace(
+    y = ~`All Homicides`,
+    name = "All Homicides",
+    text = ~paste(
+      Year,
+      paste0(
+        "All Homicides: ",
+        format(`All Homicides`, big.mark = ",")
+      ),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[5]),
+    marker = list(color = nisra_colours[5])) %>% 
+  layout(
+    margin = list(t = 50),
+    xaxis = list(
+      type = "category",
+      categoryorder = "array",
+      categoryarray = years,
+      tickmode = "array",
+      tickvals = tick_every_5,
+      ticktext = tick_every_5,
+      tickangle = 0,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1,
+      showgrid = FALSE,
+      zeroline = FALSE
+    ),
+    yaxis = list(
+      title = list(text = ""),
+      rangemode = "tozero",
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1,
+      zeroline = FALSE,
+      tickformat = ",d"
+    ),
+    annotations = list(
+      list(
+        x = 0.00, xref = "paper", xanchor = "center",
+        y = 1, yref = "paper", yanchor = "bottom",
+        text = "Number of<br>homicides",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
 ```
 
 
