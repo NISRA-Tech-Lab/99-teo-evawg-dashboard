@@ -26,8 +26,24 @@ tick_every_5 <- years[seq(1, length(years), by = 5)]
 
 plot_ly(police_recorded_crime_historical_chart1, x = ~Year) %>%
   add_trace(
+    y = ~Other,
+    name = "Other",
+    text = ~paste(
+      Year,
+      paste0(
+        "Other: ",
+        format(Other, big.mark = ",")
+      ),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[4]),   # choose a new colour index
+    marker = list(color = nisra_colours[4])
+  ) %>%
+  add_trace(
     y = ~`Violence Against the Person (excluding stalking and harassment)`,
-    name = "Violence Against the Person<br>(excluding stalking<br>and harassment)",  # Legend label with break
+    name = "Violence Against the Person<br>(excluding stalking<br>and harassment)",
     text = ~paste(
       Year,
       paste0(
@@ -97,7 +113,7 @@ plot_ly(police_recorded_crime_historical_chart1, x = ~Year) %>%
       linecolor = "black",
       linewidth = 1,
       zeroline = FALSE,
-      tickformat = ",d"   # full comma-separated format
+      tickformat = ",d"
     ),
     annotations = list(
       list(
