@@ -24,7 +24,7 @@ GET(recorded_crime_url,
 # Create a data frame for the data in the temp file
 police_recorded_crime_chart1_currentyear <- read_excel(temp_file,
                                                        sheet = "Table 15",
-                                                       range = "A3:AB55")
+                                                       range = "A3:AB186")
 
 ################################################################################
 # Police Recorded Crime Chart 1 data
@@ -52,6 +52,23 @@ recorded_crime_sexual <- as.numeric(recorded_crime_chart1_data[
   drop = TRUE
 ])
 
+recorded_crime_other <- sum(
+  as.numeric(recorded_crime_chart1_data[
+    recorded_crime_chart1_data[[1]] %in% c(
+      "TOTAL ROBBERY OFFENCES",
+      "TOTAL THEFT OFFENCES (INCLUDING BURGLARY)",
+      "TOTAL CRIMINAL DAMAGE OFFENCES",
+      "TOTAL DRUG OFFENCES",
+      "TOTAL PUBLIC ORDER OFFENCES",
+      "TOTAL MISCELLANEOUS CRIMES AGAINST SOCIETY",
+      "TOTAL POSSESSION OF WEAPONS OFFENCES"
+    ),
+    2,
+    drop = TRUE
+  ]),
+  na.rm = TRUE
+)
+
 # Calculate violence excluding stalking
 recorded_crime_violence_excluding_stalking <- recorded_crime_violence_total - recorded_crime_stalking
 
@@ -61,6 +78,7 @@ recorded_crime_chart1_currentyr_row_df <- data.frame(
   `Stalking and Harassment` = recorded_crime_stalking,
   `Violence Against the Person (excluding stalking and harassment)` = recorded_crime_violence_excluding_stalking,
   `Sexual` = recorded_crime_sexual,
+  `Other` = recorded_crime_other,  
   stringsAsFactors = FALSE,
   check.names = FALSE  
 )
