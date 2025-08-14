@@ -38,7 +38,7 @@ plot_ly(police_recorded_crime_historical_chart1, x = ~Year) %>%
     ),
     hoverinfo = "text",
     type = "scatter", mode = "lines+markers",
-    line = list(color = nisra_colours[4]),   # choose a new colour index
+    line = list(color = nisra_colours[4]),   
     marker = list(color = nisra_colours[4])
   ) %>%
   add_trace(
@@ -90,7 +90,7 @@ plot_ly(police_recorded_crime_historical_chart1, x = ~Year) %>%
     marker = list(color = nisra_colours[3])
   ) %>%
   layout(
-    margin = list(t = 50),
+    margin = list(t = 60),
     xaxis = list(
       type = "category",
       categoryorder = "array",
