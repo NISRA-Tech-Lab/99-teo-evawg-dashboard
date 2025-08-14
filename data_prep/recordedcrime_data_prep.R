@@ -12,11 +12,11 @@ police_recorded_crime_historical_chart1 <- read_excel(
 
 
 # URL being functioned and saved onto a temp file
-police_recorded_crime_url <-"https://www.psni.police.uk/system/files/2025-05/861739285/Police%20Recorded%20Crime%20Tables%20Period%20Ending%2031st%20March%202025.xlsx"
+recorded_crime_url <-"https://www.psni.police.uk/system/files/2025-05/861739285/Police%20Recorded%20Crime%20Tables%20Period%20Ending%2031st%20March%202025.xlsx"
 temp_file <- tempfile(fileext = ".xlsx")
 
 # Download the file using httr::GET
-GET(police_recorded_crime_url,
+GET(recorded_crime_url,
     write_disk(temp_file,
                overwrite = TRUE),
     httr::config(ssl_verifypeer = FALSE))
