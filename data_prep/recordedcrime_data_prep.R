@@ -26,6 +26,18 @@ police_recorded_crime_chart1_currentyear <- read_excel(temp_file,
                                                        sheet = "Table 15",
                                                        range = "A3:AB186")
 
+police_recorded_crime_victims <- read_excel(temp_file,
+                                            sheet = "Pivot Table-Age Gender",
+                                            range = "A11:E627") %>% 
+  mutate(`12 months: Apr'23 to Mar'24` = NULL,
+         `2024/25` = `12 months: Apr'24 to Mar'25`,
+         Crime_Type = case_when(Crime_Type == "Violence with injury (incl homicide & death or serious injury - unlawful driving)" ~
+                                  "Violence with injury (including homicide & death/serious injury by unlawful driving)",
+                                Crime_Type == "Stalking and Harassment" ~ "Stalking and harassment",
+                                TRUE ~ Crime_Type),
+         .keep = "unused") %>% 
+  fill(c(Victim_Age, Victim_Gender))
+
 ################################################################################
 # Police Recorded Crime Chart 1 data
 
@@ -115,13 +127,62 @@ homicide_age_gender <- homicide_age_gender %>% rename(Age = ...1) %>%
   pivot_longer(cols = -Age, names_to = "Year", values_to = "Value") %>% 
   pivot_wider(names_from = Age, values_from = Value)
 
+##########################################################################
+
+# Recorded crime - victims data prep
+
+recorded_crime_historic_url <-"https://www.psni.police.uk/system/files/2025-01/444101239/Police_Recorded_Crime_in_Northern_Ireland_1998-99_to_2023-24_revised.xlsx"
+temp_file <- tempfile(fileext = ".xlsx")
+
+# Download the file using httr::GET
+GET(recorded_crime_historic_url,
+    write_disk(temp_file,
+               overwrite = TRUE),
+    httr::config(ssl_verifypeer = FALSE))
+
+# Create a data frame for the data in the temp file
+police_recorded_crime_historic_victims <- read_excel(temp_file,
+                                            sheet = "Pivot Table-Victim Gender_Age",
+                                            range = "A13:T629") %>% 
+  fill(c(Victim_Gender, Victim_Age))
+
+all_police_recorded_crime_victims <- left_join(police_recorded_crime_historic_victims, 
+                                               police_recorded_crime_victims) %>% 
+  select(-Victim_Age) %>% 
+  filter(Victim_Gender != "total (gender)" & Crime_Type != "Total police recorded crime") %>% 
+  group_by(Victim_Gender, Crime_Type) %>% 
+  summarise(across(where(is.numeric), \(x) sum(x, na.rm = TRUE))) %>% 
+  ungroup() %>% 
+  mutate(across(where(is.numeric), \(x) x / sum(x) * 100)) 
 
 
+all_police_recorded_crime_victims_gender_total <- left_join(police_recorded_crime_historic_victims, 
+                                                     police_recorded_crime_victims)  %>% 
+  select(-Victim_Age) %>%
+  filter(Victim_Gender == "total (gender)"  & Crime_Type != "Total police recorded crime") %>% 
+  group_by(Victim_Gender, Crime_Type) %>% 
+  summarise(across(where(is.numeric), \(x) sum(x, na.rm = TRUE))) %>% 
+  ungroup() %>% 
+  mutate(across(where(is.numeric), \(x) x / sum(x) * 100))
 
+all_police_recorded_crime_victims_type_total <- left_join(police_recorded_crime_historic_victims, 
+                                                            police_recorded_crime_victims)  %>% 
+  select(-Victim_Age) %>%
+  filter(Crime_Type == "Total police recorded crime" & Victim_Gender != "total (gender)") %>% 
+  group_by(Victim_Gender, Crime_Type) %>% 
+  summarise(across(where(is.numeric), \(x) sum(x, na.rm = TRUE))) %>% 
+  ungroup() %>% 
+  mutate(across(where(is.numeric), \(x) x / sum(x) * 100))
 
-
-
-
+all_police_recorded_crime_victims <- bind_rows(all_police_recorded_crime_victims, all_police_recorded_crime_victims_gender_total, all_police_recorded_crime_victims_type_total) %>%
+  mutate(Crime_Type = case_when(Crime_Type == "Violence with injury (including homicide & death/serious injury by unlawful driving)" ~
+                                  "Violence with injury",
+                                TRUE ~ Crime_Type),
+         Victim_Gender = str_to_title(Victim_Gender)) %>%
+  filter(Crime_Type %in% c("Violence with injury", "Violence without injury",
+                           "Stalking and harassment", "Sexual offences", "Total police recorded crime"),
+         Victim_Gender %in% c("Male", "Female", "Total (Gender)")) %>%
+  pivot_longer(cols = -c(Victim_Gender:Crime_Type), names_to = "Year", values_to = "Value")
 
 
 

@@ -13,16 +13,84 @@ source(paste0(here(), "/data_prep/recordedcrime_data_prep.R"))
 
 ## Row
 
-### Column {width=50%}
+### Column {width=100%}
 
 ```{r}
 
+shared_victims <- SharedData$new(
+  all_police_recorded_crime_victims,
+  key = ~Crime_Type
+)
+
+filter_select(
+  id = "var_filter",
+  selected = "Total police recorded crime",
+  label = "Select Violence Type",
+  sharedData = shared_victims,
+  group = ~Crime_Type,
+  multiple = FALSE
+)
+
+tick_every_5 <- all_police_recorded_crime_victims$Year[seq(1, length(all_police_recorded_crime_victims$Year), by = 5)]
+
+plot_ly(shared_victims, 
+        x = ~Year, 
+        y = ~Value, 
+        color = ~Victim_Gender, 
+        colors = c(nisra_colours[1], nisra_colours[2], nisra_colours[3]),
+        type = 'scatter', 
+        mode = 'lines+markers',
+        hoverinfo = "text",
+        text = ~paste0(
+                Year,
+                "<br>", Victim_Gender,
+                "<br>", Crime_Type, ": ", sprintf("%.2f%%", Value)
+)) %>%
+  layout(
+      xaxis = list(
+      title = "Year",
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1,
+      tickvals = tick_every_5,
+      ticktext = tick_every_5
+    ),
+    
+    yaxis = list(
+      title = "",  
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1,
+      rangemode = "tozero",
+      range = c(0, 60)
+    ),
+    legend = list(title = list(text = "")),
+    margin = list(t = 40),  
+    annotations = list(
+      list(
+        x = -0.008,
+        xref = "paper",
+        xanchor = "center",
+        y = 1.025,
+        yref = "paper",
+        yanchor = "bottom",
+        text = "Percentage %",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    ),
+    
+    hoverlabel = list(
+      font = list(color = "white")
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
+
+
 ```
 
+## Row
 
-### Column {width=50%}
-
-```{r}
-
-```
-
+Please note that crimes in which the gender of the victim was unknown have not been displayed in this chart; therefore, totals may not sum to 100%.
