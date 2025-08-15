@@ -9,7 +9,7 @@ title: "domestic-abuse-1"
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/domabuse_data_prep.R"))
+source(here("data_prep/domabuse_data_prep.R"))
 ```
 
 ## Row
@@ -44,6 +44,8 @@ DA_chart1 <- plot_ly(
   ) %>%
   layout(
     showlegend = TRUE,
+    legend = list(x = 1, xref = "paper", xanchor = "right",
+                  y = 1, yref = "paper", yanchor = "bottom"),
     font = list(family = "Arial", size = 14),
     margin = list(t = 40),
     xaxis = list(
@@ -72,29 +74,30 @@ DA_chart1 <- plot_ly(
     ),
     annotations = list(
       list(
-        x = 0.01, y = 1.05,
+        x = 0, y = 1.02,
         text = "Incidents and Crimes",
         showarrow = FALSE,
         xref = "paper", yref = "paper",
-        xanchor = "center", yanchor = "middle",
+        xanchor = "center", yanchor = "bottom",
         font = list(size = 14, color = "black")
       )
     )
   ) %>%
   config(displayModeBar = FALSE)
 
-DA_chart1
+div(
+  DA_chart1,
+  p("Police recorded crime data is a victim oriented approach to crime recording. A crime will be recorded as having a domestic abuse motivation where it meets the relevant definition provided above. Not all domestic abuse incidents will result in the recording of a crime, as what has occurred in the incident may not be of the level of severity that would result in a crime being recorded. (From PSNI DA report)"),
+  p("Source: ", a(href = "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.psni.police.uk%2Fsystem%2Ffiles%2F2025-05%2F386082373%2FDomestic%2520Abuse%2520Tables%2520Period%2520Ending%252031st%2520March%25202025.xlsx&wdOrigin=BROWSELINK", "Trends in domestic abuse incidents and crimes recorded by the police since 2004/05 (Figure 1)"))
+)
 
 
 ```
-Police recorded crime data is a victim oriented approach to crime recording. A crime will be recorded as having a domestic abuse motivation where it meets the relevant definition provided above. Not all domestic abuse incidents will result in the recording of a crime, as what has occurred in the incident may not be of the level of severity that would result in a crime being recorded. (From PSNI DA report)   
-Source: [Trends in domestic abuse incidents and crimes recorded by the police since 2004/05 (Figure 1)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.psni.police.uk%2Fsystem%2Ffiles%2F2025-05%2F386082373%2FDomestic%2520Abuse%2520Tables%2520Period%2520Ending%252031st%2520March%25202025.xlsx&wdOrigin=BROWSELINK)
 
 ### Column {width=50%}
 
 ```{r}
 #| title: Percentage of police recorded domestic abuse crimes in 2024/25, by crime type
-#| fig-height: 10
 
 DA_chart2 <- plot_ly(
   data = DA_chart2_data,
@@ -133,14 +136,16 @@ DA_chart2 <- plot_ly(
   direction = "clockwise") %>% 
   config(displayModeBar = FALSE) 
 
-DA_chart2
+div(
+  DA_chart2,
+  p("Note 1: Including homicide and death or serious injury-unlawful driving."),
+  p("Source: ", a(href = "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.psni.police.uk%2Fsystem%2Ffiles%2F2025-05%2F386082373%2FDomestic%2520Abuse%2520Tables%2520Period%2520Ending%252031st%2520March%25202025.xlsx&wdOrigin=BROWSELINK", "Domestic Abuse Incidents and Crimes Recorded by the Police in Northern Ireland: Update to 31 March 2025 (Table 1 and Figures 5 & 6)"))
+)
+
 ```
-Note 1: Including homicide and death or serious injury-unlawful driving.   
-Source: [Domestic Abuse Incidents and Crimes Recorded by the Police in Northern Ireland: Update to 31 March 2025 (Table 1 and Figures 5 & 6)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.psni.police.uk%2Fsystem%2Ffiles%2F2025-05%2F386082373%2FDomestic%2520Abuse%2520Tables%2520Period%2520Ending%252031st%2520March%25202025.xlsx&wdOrigin=BROWSELINK)
 
 ```{r}
 #| title: Prevalence of domestic abuse among adults, by gender
-#| fig-height: 10
 
 DA_chart3 <- plot_ly(
   data = DA_chart3_data,
@@ -163,7 +168,9 @@ DA_chart3 <- plot_ly(
       zeroline = TRUE,   
       showticklabels = TRUE  
     ),
-    legend = list(title = list(text = "Category")),
+    legend = list(title = list(text = "Category"),
+                  x = 1, xref = "paper", xanchor = "right",
+                  y = 1, yref = "paper", yanchor = "bottom"),
     annotations = list(
       list(
         x = -0.008,
@@ -180,8 +187,10 @@ DA_chart3 <- plot_ly(
   ) %>%
   config(displayModeBar = FALSE)
 
-DA_chart3
+div(
+  DA_chart3,
+  p("Source: ", a(href = "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.justice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2Fpublications%2Fjustice%2Fexperience%2520of%2520domestic%2520abuse%2520findings%2520from%2520the%2520201819%2520niscs.xl_.XLSX&wdOrigin=BROWSELINK", "Findings from the 2018/19 Northern Ireland Safe Community Survey (Table 1 and Table 5)"))
+  )
 
 ```
-Source: [Findings from the 2018/19 Northern Ireland Safe Community Survey (Table 1 and Table 5)](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.justice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2Fpublications%2Fjustice%2Fexperience%2520of%2520domestic%2520abuse%2520findings%2520from%2520the%2520201819%2520niscs.xl_.XLSX&wdOrigin=BROWSELINK)
 

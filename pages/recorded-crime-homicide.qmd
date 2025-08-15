@@ -8,7 +8,7 @@ title: "recorded-crime"
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/recordedcrime_data_prep.R"))
+source(here("data_prep/recordedcrime_data_prep.R"))
 ```
 
 ## Row
@@ -137,7 +137,8 @@ plot_ly(homicide_age_gender, x = ~Year) %>%
         showarrow = FALSE,
         font = list(size = 14)
       )
-    )
+    ),
+    legend = list(x = 1, xref = "paper", xanchor = "right")
   ) %>%
   config(displayModeBar = FALSE)
 ```

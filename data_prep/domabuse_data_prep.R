@@ -1,5 +1,5 @@
 library(here)
-source(paste0(here(), "/config.R"))
+source(here("config.R"))
 
 ################################################################################
 # DOMESTIC ABUSE: CHART 1 (DATA FROM DATA PORTAL)

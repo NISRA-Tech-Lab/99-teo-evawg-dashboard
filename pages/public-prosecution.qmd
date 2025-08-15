@@ -8,19 +8,18 @@ title: "public_prosecution"
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/pps_data_prep.R"))
+source(here("/data_prep/pps_data_prep.R"))
 ```
 
 
 ```{r}
 #| title: Median time taken for cases to be dealt with at court in 2023/24
-#| fig-height: 10
 
 # Define reversed order
 offence_order <- rev(pps_chart1_data$offence)
 
 
-plot_ly(
+pps_plot <- plot_ly(
   data = pps_chart1_data,
   x = ~days,
   y = ~offence,
@@ -57,6 +56,11 @@ layout(
 ) %>%
   config(displayModeBar = FALSE)
 
+div(
+  pps_plot,
+  p("Average is measured as the median number of days taken, i.e., the number of days at which 50% of those cases included under counting rules has been completed. This is an overview of the time taken for a case to be disposed at court from the date that case began its journey through the criminal justice system, based on a start point of the date the offence was reported to, or detected by, the PSNI."),
+  p("Source: ", a(href = "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.justice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2Fpublications%2Fjustice%2F202324%2520case%2520processing%2520time%2520tables%2520-%2520%2520open%2520data%2520format.ods&wdOrigin=BROWSELINK", "Time taken  for cases dealt with at courts by offence type, 2019-20 to 2023-24 (Worksheet 5)"))
+)
+
 ```
-Average is measured as the median number of days taken, i.e., the number of days at which 50% of those cases included under counting rules has been completed. This is an overview of the time taken for a case to be disposed at court from the date that case began its journey through the criminal justice system, based on a start point of the date the offence was reported to, or detected by, the PSNI.   
-Source: [Time taken  for cases dealt with at courts by offence type, 2019-20 to 2023-24 (Worksheet 5)]( https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.justice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2Fpublications%2Fjustice%2F202324%2520case%2520processing%2520time%2520tables%2520-%2520%2520open%2520data%2520format.ods&wdOrigin=BROWSELINK)
+  
