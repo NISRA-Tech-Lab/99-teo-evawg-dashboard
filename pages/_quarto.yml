@@ -6,12 +6,12 @@ website:
   title: "teo-evawg-dashboard"
   navbar:
     left:
-      - href: home.qmd
+      - href: index.qmd
         text: Home
       - text: Gender-based Violence
         menu: 
           - text: Adults
-            href: index.qmd
+            href: NILT.qmd
           - text: Age 16
             href: YLT.qmd      
       - text: Recorded Crime

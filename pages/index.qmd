@@ -1,287 +1,37 @@
 ---
-title: "NILT"
+title: "Home"
 ---
-
 
 
 ```{r}
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/main_data_prep.R"))
 ```
 
-## Row
+<h1 style="text-align: center;">EVAWG – Dashboard – Homepage</h1>
 
-### Column {width=50%}
+**What is gender-based violence (GBV)?**  
+GBV is a global issue. It is violence against a person targeted because of their gender. It is a human rights violation that may have long-term effects on the victim. Violence against women and girls is defined by the United Nations as “any act of GBV that results in, or is likely to result in, physical, sexual or psychological harm or suffering to women, including threats of such acts, coercion or arbitrary deprivation of liberty, whether occurring in public or private life.”
 
-```{r}
-#| title: Experience of gender-based violence in the last five years  (% of all respondents)
-#| fig-height: 10
+**Ending violence against women and girls**  
+Ending all forms of violence, abuse, and harm against women and girls is one of the most pressing challenges facing our society today. The Strategic Framework to End Violence Against Women and Girls (EVAWG) addresses the whole range of GBV, abuse and harm which is disproportionately experienced by women and girls, and which is rooted in gender inequality.  
+Violence, abuse and harm against women and girls happens everywhere, every day and impacts how women and girls live, work, and socialise.
 
-plot_ly() %>%
-  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVPHYVA, type = 'scatter',
-            mode = 'lines+markers', name = 'Physical violence',
-            line = list(color = nisra_colours[1]),
-            marker = list(color = nisra_colours[1]),
-            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVSEXVA, type = 'scatter',
-            mode = 'lines+markers', name = 'Sexual violence',
-            line = list(color = nisra_colours[2]),
-            marker = list(color = nisra_colours[2]),
-            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVPSYVA, type = 'scatter',
-            mode = 'lines+markers', name = 'Psychological violence',
-            line = list(color = nisra_colours[3]),
-            marker = list(color = nisra_colours[3]),
-            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVECONV, type = 'scatter',
-            mode = 'lines+markers', name = 'Economic violence',
-            line = list(color = nisra_colours[4]),
-            marker = list(color = nisra_colours[4]),
-            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
-  add_trace(data = nilt_historical_chart1, x = ~year, y = ~GBVONLV, type = 'scatter',
-            mode = 'lines+markers', name = 'Online violence',
-            line = list(color = nisra_colours[5]),
-            marker = list(color = nisra_colours[5]),
-            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
-  layout(
-    margin = list(t = 40),
-    xaxis = list(
-      title = list(
-        text = "Year",
-        font = list(size = 14)
-      ),
-      tickmode = "array",
-      tickvals = nilt_historical_chart1$year,
-      showgrid = FALSE,
-      showline = TRUE,  
-      linecolor = "black", 
-      linewidth = 1 
-    ),
-    yaxis = list(
-      title = "",  
-      automargin = TRUE,
-      titlefont = list(size = 0),
-      standoff = 0,
-      showgrid = FALSE,
-      showline = TRUE, 
-      linecolor = "black",
-      linewidth = 1,
-      rangemode = "tozero"
-    ),
-    legend = list(title = list(text = "")),
-    annotations = list(
-      list(
-        x = -0.008,
-        xref = "paper",
-        xanchor = "center",
-        y = 1.025,
-        yref = "paper",
-        yanchor = "bottom",
-        text = "Percentage %",
-        showarrow = FALSE,
-        font = list(size = 14)
-      )
-    ),
-    hoverlabel = list(
-      font = list(color = "white")  # <-- Sets hover text to white
-    )
-  ) %>%
-  config(displayModeBar = FALSE)
+**Gender-Based Violence Surveys**  
+The Northern Ireland Life and Times (NILT) and Young Life and Times (YLT) are representative annual surveys covering Northern Ireland which record the attitudes and opinions of adults and 16-year-olds. The Executive Office has been sponsoring GBV questions in the NILT and the YLT surveys since 2022.
 
+**Recorded Crime**  
+Statistics on police recorded crime in Northern Ireland are collated and produced by statisticians seconded to the Police Service of Northern Ireland (PSNI) from the Northern Ireland Statistics and Research Agency (NISRA).
 
-```
+**Domestic Abuse**  
+<u>PSNI:</u>  
+The PSNI has adopted the definition of domestic violence and abuse as outlined in the 2016 Northern Ireland Government Strategy ‘Stopping Domestic and Sexual Violence and Abuse in Northern Ireland’ as:  
+‘threatening, controlling, coercive behaviour, violence or abuse (psychological, virtual, physical, verbal, sexual, financial or emotional) inflicted on anyone (irrespective of age, ethnicity, religion, gender, gender identity, sexual orientation or any form of disability) by a current or former intimate partner or family member’.
 
+<u>Prevalence of domestic abuse among adults - Department of Justice:</u>  
+This section presents findings from the Northern Ireland Safe Community Survey (NISCS).
 
-### Column {width=50%}
-
-```{r}
-#| title: Experience of gender-based violence in the last five years, by gender (%)
-
-# Step 1: Map variable codes to readable violence type names
-violence_labels <- c(
-  GBVPHYVA = "Physical violence",
-  GBVSEXVA = "Sexual violence",
-  GBVPSYVA = "Psychological violence",
-  GBVECONV = "Economic violence",
-  GBVONLV  = "Online violence"
-)
-
-# Step 2: Prepare data
-nilt_historical_chart2$year <- as.character(nilt_historical_chart2$year)
-nilt_historical_chart2$variable_label <- recode(nilt_historical_chart2$variable, !!!violence_labels)
-
-# Step 3: Wrap the data in SharedData for Crosstalk interactivity
-shared_nilt <- SharedData$new(
-  nilt_historical_chart2,
-  key = ~variable,
-  group = "violence_type"
-)
-
-# Step 4: Get the unique years for setting tick values
-unique_years <- sort(unique(nilt_historical_chart2$year))
-
-# Step 5: Single-selection dropdown for 'variable'
-filter_select(
-  id = "var_filter",
-  selected = "Sexual violence",
-  label = "Select Violence Type",
-  sharedData = shared_nilt,
-  group = ~variable_label,
-  multiple = FALSE
-)
-
-# Step 6: Plotly interactive line chart with custom y-axis annotation
-plot_ly(shared_nilt, 
-        x = ~year, 
-        y = ~percentage_yes, 
-        color = ~gender, 
-        colors = c(nisra_colours[1], nisra_colours[2]),
-        type = 'scatter', 
-        mode = 'lines+markers',
-        hoverinfo = "text",
-        text = ~paste0(
-                year,
-                "<br>", gender,
-                "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes)
-)) %>%
-  layout(
-      xaxis = list(
-      title = "Year",
-      showgrid = FALSE,
-      showline = TRUE,
-      linecolor = "black",
-      linewidth = 1,
-      tickvals = unique_years,
-      ticktext = unique_years
-    ),
-    
-    yaxis = list(
-      title = "",  
-      showgrid = FALSE,
-      showline = TRUE,
-      linecolor = "black",
-      linewidth = 1,
-      rangemode = "tozero"
-    ),
-    
-    legend = list(title = list(text = "")),
-    margin = list(t = 40),  
-    annotations = list(
-      list(
-        x = -0.008,
-        xref = "paper",
-        xanchor = "center",
-        y = 1.025,
-        yref = "paper",
-        yanchor = "bottom",
-        text = "Percentage %",
-        showarrow = FALSE,
-        font = list(size = 14)
-      )
-    ),
-    
-    hoverlabel = list(
-      font = list(color = "white")
-    )
-  ) %>%
-  config(displayModeBar = FALSE)
-
-
-```
-
-
-```{r}
-#| title: Experience of gender-based violence in the last five years, by age (%)
-
-# Step 1: Map variable codes to readable violence type names
-violence_labels <- c(
-  GBVPHYVA = "Physical violence",
-  GBVSEXVA = "Sexual violence",
-  GBVPSYVA = "Psychological violence",
-  GBVECONV = "Economic violence",
-  GBVONLV  = "Online violence"
-)
-
-# Step 2: Prepare data
-nilt_historical_chart3$year <- as.character(nilt_historical_chart3$year)
-nilt_historical_chart3$variable_label <- recode(nilt_historical_chart3$variable, !!!violence_labels)
-
-# Step 3: Wrap the data in SharedData for Crosstalk interactivity
-shared_nilt_age <- SharedData$new(
-  nilt_historical_chart3,
-  key = ~variable,
-  group = "violence_type_age"
-)
-
-# Step 4: Get the unique years for setting tick values
-unique_years_age <- sort(unique(nilt_historical_chart3$year))
-
-# Step 5: Single-selection dropdown for 'variable'
-filter_select(
-  id = "var_filter_age",
-  selected = "Sexual violence",
-  label = "Select Violence Type",
-  sharedData = shared_nilt_age,
-  group = ~variable_label,
-  multiple = FALSE
-)
-
-# Step 6: Plotly interactive line chart by age group
-plot_ly(shared_nilt_age, 
-        x = ~year, 
-        y = ~percentage_yes, 
-        color = ~age, 
-        colors = c(nisra_colours[1], nisra_colours[2]),
-        type = 'scatter', 
-        mode = 'lines+markers',
-        hoverinfo = "text",
-        text = ~paste0(year,
-                      "<br>", age,
-                      "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes))) %>%
-  layout(
-      xaxis = list(
-      title = "Year",
-      showgrid = FALSE,
-      showline = TRUE,
-      linecolor = "black",
-      linewidth = 1,
-      tickvals = unique_years_age,
-      ticktext = unique_years_age
-    ),
-    
-    yaxis = list(
-      title = "",  # remove y-axis title
-      showgrid = FALSE,
-      showline = TRUE,
-      linecolor = "black",
-      linewidth = 1,
-      rangemode = "tozero"
-    ),
-    
-    legend = list(title = list(text = "")),
-    margin = list(t = 40),  
-    annotations = list(
-      list(
-        x = -0.008,
-        xref = "paper",
-        xanchor = "center",
-        y = 1.025,
-        yref = "paper",
-        yanchor = "bottom",
-        text = "Percentage %",
-        showarrow = FALSE,
-        font = list(size = 14)
-      )
-    ),
-    
-    hoverlabel = list(
-      font = list(color = "white")
-    )
-  ) %>%
-  config(displayModeBar = FALSE)
-```
-
-## Row
-Source: [Ending Violence Against Women and Girls: Experiences and attitudes of adults in Northern Ireland in 2023](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.executiveoffice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2F2024-12%2Fdata-tables.xlsx&wdOrigin=BROWSELINK)
+**Case Processing Times - Department of Justice**  
+The Case Processing Times for Criminal Cases dealt with in the Crown and magistrates’ courts in Northern Ireland are published for the most recent year and refer to the time from which the offence was reported to, or detected by, the police.  
+This data is based on all court cases – Crown Court, adult magistrates’ court, and youth magistrates’ court.
