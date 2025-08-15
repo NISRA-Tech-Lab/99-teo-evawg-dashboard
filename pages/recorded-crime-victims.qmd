@@ -31,7 +31,7 @@ filter_select(
   multiple = FALSE
 )
 
-tick_every_5 <- all_police_recorded_crime_victims$Year[seq(1, length(all_police_recorded_crime_victims$Year), by = 5)]
+tick_every_5 <- all_police_recorded_crime_victims$Year[seq(1, length(unique(all_police_recorded_crime_victims$Year)), by = 5)]
 
 plot_ly(shared_victims, 
         x = ~Year, 
