@@ -3,11 +3,12 @@ project:
   output-dir: ../docs
 
 website:
-  title: "teo-evawg-dashboard"
+  title: "Gender-based Violence - Prevalence"
   navbar:
     left:
       - href: index.qmd
         text: Home
+        icon: bi-house-door-fill
       - text: Gender-based Violence
         menu: 
           - text: Adults
