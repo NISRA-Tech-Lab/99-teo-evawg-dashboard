@@ -15,7 +15,7 @@ source(here("data_prep/main_data_prep.R"))
 ### Column {width=50%}
 
 ```{r}
-#| title: Respondents who have experienced gender-based violence in the last year because of their gender
+#| title: Experience of gender-based violence in the last year
 #| fig-height: 10
 
 plot_ly() %>%
@@ -91,7 +91,7 @@ plot_ly() %>%
 ### Column {width=50%}
 
 ```{r}
-#| title: Respondents who have experienced gender-based violence in the last year, by gender
+#| title: Experience of gender-based violence in the last year, by gender
 #| fig-height: 10
 
 # 1. Map codes → readable violence-type names
@@ -184,4 +184,4 @@ plot_ly(shared_ylt,
 ```
 
 ## Row
-Source: [Ending Violence Against Women and Girls: Experiences and Attitudes of 16 year olds in Northern Ireland in 2024](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.executiveoffice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2F2025-05%2Fdata-tables%2520%25281%2529.xlsx&wdOrigin=BROWSELINK)
+Source: [Ending Violence Against Women and Girls: Experiences and Attitudes of 16 year olds in Northern Ireland](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.executiveoffice-ni.gov.uk%2Fsites%2Fdefault%2Ffiles%2F2025-05%2Fdata-tables%2520%25281%2529.xlsx&wdOrigin=BROWSELINK)
