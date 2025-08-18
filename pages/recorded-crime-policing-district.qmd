@@ -13,16 +13,59 @@ source(paste0(here(), "/data_prep/recordedcrime_data_prep.R"))
 
 ## Row
 
-### Column {width=50%}
+### Column {width=100%}
 
 ```{r}
 
+# tmap_mode("view")
+# 
+# tm_shape(map_1_data) +
+# tm_basemap( # Adds background map.
+#     "CartoDB.PositronNoLabels",
+#   alpha = 0.5) +
+#   tm_polygons(
+#     col = "2024_25",
+#     breaks = c(0, 500, 1000, 1500, 2000, Inf),
+#     palette = c("#e8e5e8", "#bdc9e1", "#67a9cf", "#1c9099", "#016c59"),
+#     border.col = "#000",
+#     border.alpha = 1,
+#     labels = c("0 to 500", "500 to 1000", "1000 to 1500",
+#                "1500 to 2000", "2000+")
+#   ) +
+# 
+#   tm_shape(leader_line_3) +
+#   tm_lines(col = "black", lwd = 2) +
+# 
+#   tm_shape(map_1_data) +
+#   tm_text(
+#     "labels",
+#     col = "black",
+#     size = 1.2,
+#     auto.placement = FALSE,
+#     xmod = c(3, 0, 17, 0, 3, 0, 0, 0, 2, 0, -1.5),
+#     ymod = c(0, 0, 5.5, 0, 1, 1, -1, 0, 0, -3, 4)
+#   ) +
+# 
+#   tm_scale_bar(width = 250) +
+#   tm_view(
+#     view.legend.position = c("left", "bottom"),
+#     control.position = c("right", "top"),
+#     leaflet.options = c(
+#       zoomControl = FALSE,
+#       dragging = FALSE,
+#       keyboard = FALSE,
+#       boxZoom = FALSE,
+#       doubleClickZoom = FALSE,
+#       scrollWheelZoom = FALSE,
+#       tap = FALSE,
+#       touchZoom = FALSE,
+#       zoom = 8,
+#       minZoom = 8,
+#       maxZoom = 8,
+#       attributionControl = FALSE
+#     )
+#   )
+
 ```
 
-
-### Column {width=50%}
-
-```{r}
-
-```
 

@@ -25,6 +25,8 @@ library(fs)
 library(httr)
 library(plotly)
 library(readODS)
+library(sf)
+library(tmap)
 
 data_folder <- "T:/Projects/99 - TEO VAWG Dashboard/data"
 
