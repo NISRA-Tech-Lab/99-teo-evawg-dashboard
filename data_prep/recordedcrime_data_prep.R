@@ -10,7 +10,6 @@ police_recorded_crime_historical_chart1 <- read_excel(
   paste0(data_folder, "/police_recorded_crime_historical_chart1.xlsx")
 )
 
-
 # URL being functioned and saved onto a temp file
 recorded_crime_url <-"https://www.psni.police.uk/system/files/2025-05/861739285/Police%20Recorded%20Crime%20Tables%20Period%20Ending%2031st%20March%202025.xlsx"
 temp_file <- tempfile(fileext = ".xlsx")
@@ -25,7 +24,8 @@ GET(recorded_crime_url,
 police_recorded_crime_chart1_currentyear <- read_excel(temp_file,
                                                        sheet = "Table 15",
                                                        range = "A3:AB186")
-
+################################################################################
+#victims page data read in
 police_recorded_crime_victims <- read_excel(temp_file,
                                             sheet = "Pivot Table-Age Gender",
                                             range = "A11:E627") %>% 
@@ -38,77 +38,80 @@ police_recorded_crime_victims <- read_excel(temp_file,
          .keep = "unused") %>% 
   fill(c(Victim_Age, Victim_Gender))
 
-districts <- (c("Belfast", 
-                "Lisburn and Castlereagh", 
-                "Ards and North Down", 
-                "Newry, Mourne and Down", 
-                "Armagh City, Banbridge and Craigavon", 
-                "Mid Ulster", 
-                "Fermanagh and Omagh", 
-                "Derry City and Strabane", 
-                "Causeway Coast and Glens", 
-                "Mid and East Antrim", 
-                "Antrim and Newtownabbey"))
+################################################################################
+#recorded crimes policing map data
 
-a_row <- 40
-
-c_row <- 65
-
-all_districts_data <- list()
-
-for (district in districts) {
-  df <- read_excel(temp_file,
-                   sheet = "Summary-District",
-                   range = paste0("A", a_row, ":C", c_row)) %>%
-    mutate(LGDNAME = district,
-           Crime_Type = `...1`,
-           Crime_Type_2 = case_when(Crime_Type %in% c("Violence with injury (including homicide & death/serious injury by unlawful driving)",
-                                                     "Violence without injury") ~ "Violence against the person (excluding stalking and harassment",
-                                    Crime_Type == "Stalking & Harassment" ~ "Stalking & harassment",
-                                    Crime_Type == "SEXUAL OFFENCES" ~ "Sexual offences",
-                                    Crime_Type %in% c("VICTIM-BASED CRIME", "VIOLENCE AGAINST THE PERSON", "ROBBERY", "THEFT OFFENCES", "OTHER CRIMES AGAINST SOCIETY", "DRUG OFFENCES", "TOTAL POLICE RECORDED CRIME") ~ NA,
-                                    TRUE ~ "Other"),
-           `2024/25` = `Apr'24-Mar'25`,
-           .keep = "none") 
-  
-  all_districts_data[[district]] <- df
-  
-  a_row <- a_row + 31
-  c_row <- c_row + 31
-}
-
-police_recorded_crime_districts <- bind_rows(all_districts_data) %>% 
-  group_by(LGDNAME, Crime_Type_2) %>% 
-  summarise(`Value` = sum(`2024/25`)) %>% 
-  filter(!is.na(Crime_Type_2)) %>% 
-  ungroup()
-
-lgd_shape <- st_read(
-  here("maps/Simplified OSNI Map Loughs Removed.shp"),
-  quiet = TRUE
-)
-
-map_1_data <- left_join(lgd_shape, police_recorded_crime_districts) %>% 
-  mutate(labels = prettyNum(`Value`, big.mark = ",")) %>% 
-  as("Spatial")
-
-
-# Add line for Belfast label
-
-map_proj <- st_transform(map_1_data, crs = 29903) %>%
-  mutate(centroid = st_centroid(geometry))
-
-centroid_3 <- st_coordinates(st_centroid(map_proj$geometry[3]))
-
-label_coords <- centroid_3 + c(13000, 12000)
-
-line_3 <- st_linestring(rbind(centroid_3, label_coords))
-leader_line_3 <- st_sf(geometry = st_sfc(line_3, crs = 29903)) %>%
-  st_transform(crs = 4326)
+# districts <- (c("Belfast", 
+#                 "Lisburn and Castlereagh", 
+#                 "Ards and North Down", 
+#                 "Newry, Mourne and Down", 
+#                 "Armagh City, Banbridge and Craigavon", 
+#                 "Mid Ulster", 
+#                 "Fermanagh and Omagh", 
+#                 "Derry City and Strabane", 
+#                 "Causeway Coast and Glens", 
+#                 "Mid and East Antrim", 
+#                 "Antrim and Newtownabbey"))
+# 
+# a_row <- 40
+# 
+# c_row <- 65
+# 
+# all_districts_data <- list()
+# 
+# for (district in districts) {
+#   df <- read_excel(temp_file,
+#                    sheet = "Summary-District",
+#                    range = paste0("A", a_row, ":C", c_row)) %>%
+#     mutate(LGDNAME = district,
+#            Crime_Type = `...1`,
+#            Crime_Type_2 = case_when(Crime_Type %in% c("Violence with injury (including homicide & death/serious injury by unlawful driving)",
+#                                                      "Violence without injury") ~ "Violence against the person (excluding stalking and harassment",
+#                                     Crime_Type == "Stalking & Harassment" ~ "Stalking & harassment",
+#                                     Crime_Type == "SEXUAL OFFENCES" ~ "Sexual offences",
+#                                     Crime_Type %in% c("VICTIM-BASED CRIME", "VIOLENCE AGAINST THE PERSON", "ROBBERY", "THEFT OFFENCES", "OTHER CRIMES AGAINST SOCIETY", "DRUG OFFENCES", "TOTAL POLICE RECORDED CRIME") ~ NA,
+#                                     TRUE ~ "Other"),
+#            `2024/25` = `Apr'24-Mar'25`,
+#            .keep = "none") 
+#   
+#   all_districts_data[[district]] <- df
+#   
+#   a_row <- a_row + 31
+#   c_row <- c_row + 31
+# }
+# 
+# police_recorded_crime_districts <- bind_rows(all_districts_data) %>% 
+#   group_by(LGDNAME, Crime_Type_2) %>% 
+#   summarise(`Value` = sum(`2024/25`)) %>% 
+#   filter(!is.na(Crime_Type_2)) %>% 
+#   ungroup()
+# 
+# lgd_shape <- st_read(
+#   here("maps/Simplified OSNI Map Loughs Removed.shp"),
+#   quiet = TRUE
+# )
+# 
+# map_1_data <- left_join(lgd_shape, police_recorded_crime_districts) %>% 
+#   mutate(labels = prettyNum(`Value`, big.mark = ",")) %>% 
+#   as("Spatial")
+# 
+# 
+# # Add line for Belfast label
+# 
+# map_proj <- st_transform(map_1_data, crs = 29903) %>%
+#   mutate(centroid = st_centroid(geometry))
+# 
+# centroid_3 <- st_coordinates(st_centroid(map_proj$geometry[3]))
+# 
+# label_coords <- centroid_3 + c(13000, 12000)
+# 
+# line_3 <- st_linestring(rbind(centroid_3, label_coords))
+# leader_line_3 <- st_sf(geometry = st_sfc(line_3, crs = 29903)) %>%
+#   st_transform(crs = 4326)
 
 
 ################################################################################
-# Police Recorded Crime Chart 1 data
+# Police Recorded Crime Chart 1 data prep
 
 #Select two needed columns
 recorded_crime_chart1_data <- police_recorded_crime_chart1_currentyear[, 
@@ -184,7 +187,7 @@ police_recorded_crime_historical_chart1 <- read_excel(
 
 ##########################################################################
 
-# Police recorded crime - homicide chart data
+# Police recorded crime - homicide chart data prep
 
 # Create a data frame for the homicide chart data in the temp file and pivot longer
 homicide_age_gender <- read_excel(temp_file,
