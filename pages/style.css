@@ -114,3 +114,15 @@ a.cookies-infobar_btn, a.cookies-infobar_btn_reject, a.cookiesbarlink {
   font-size: 1.2em;
 }
 
+/* Make the active nav item stand out */
+.navbar-nav .nav-link.active {
+  background-color: #007acc; /* Highlight color */
+  color: white !important;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+/* Optional: change hover effect for active tab */
+.navbar-nav .nav-link.active:hover {
+  background-color: #005f99;
+}

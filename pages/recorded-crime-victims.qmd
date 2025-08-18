@@ -8,7 +8,7 @@ title: "recorded-crime"
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/recordedcrime_data_prep.R"))
+source(here("data_prep/recordedcrime_data_prep.R"))
 ```
 
 ## Row
@@ -44,7 +44,7 @@ plot_ly(shared_victims,
         text = ~paste0(
                 Year,
                 "<br>", Victim_Gender,
-                "<br>", Crime_Type, ": ", sprintf("%.2f%%", Value)
+                "<br>", Crime_Type, ": ", sprintf("%.0f%%", Value)
 )) %>%
   layout(
       xaxis = list(
@@ -66,7 +66,8 @@ plot_ly(shared_victims,
       rangemode = "tozero",
       range = c(0, 60)
     ),
-    legend = list(title = list(text = "")),
+    legend = list(title = list(text = ""),
+                  x = 1, xref = "paper", xanchor = "right"),
     margin = list(t = 40),  
     annotations = list(
       list(
@@ -89,8 +90,9 @@ plot_ly(shared_victims,
   config(displayModeBar = FALSE)
 
 
+p(style ="margin-top: 30px;", "Please note that crimes in which the gender of the victim was unknown have not been displayed in this chart; therefore, totals may not sum to 100%.")
+
+
 ```
 
-## Row
 
-Please note that crimes in which the gender of the victim was unknown have not been displayed in this chart; therefore, totals may not sum to 100%.

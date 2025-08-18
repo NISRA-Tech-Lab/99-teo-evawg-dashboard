@@ -7,7 +7,7 @@ title: "YLT"
 #| include: FALSE
 
 library(here)
-source(paste0(here(), "/data_prep/main_data_prep.R"))
+source(here("data_prep/main_data_prep.R"))
 ```
 
 ## Row
@@ -23,22 +23,22 @@ plot_ly() %>%
             mode = 'lines+markers', name = 'Physical violence',
             line = list(color = nisra_colours[2]),
             marker = list(color = nisra_colours[2]),
-            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.0f}%<extra></extra>") %>%
   add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV2, type = 'scatter',
             mode = 'lines+markers', name = 'Sexual violence',
             line = list(color = nisra_colours[3]),
             marker = list(color = nisra_colours[3]),
-            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.0f}%<extra></extra>") %>%
   add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV3, type = 'scatter',
             mode = 'lines+markers', name = 'Psychological violence',
             line = list(color = nisra_colours[4]),
             marker = list(color = nisra_colours[4]),
-            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.0f}%<extra></extra>") %>%
   add_trace(data = ylt_historical_chart1, x = ~year, y = ~GVTYPV4, type = 'scatter',
             mode = 'lines+markers', name = 'Online violence',
             line = list(color = nisra_colours[5]),
             marker = list(color = nisra_colours[5]),
-            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.2f}%<extra></extra>") %>%
+            hovertemplate = "%{x}<br>%{fullData.name}: %{y:.0f}%<extra></extra>") %>%
   layout(
     margin = list(t = 40),
     xaxis = list(
@@ -64,7 +64,8 @@ plot_ly() %>%
       linewidth = 1,
       rangemode = "tozero"
     ),
-    legend = list(title = list(text = "")),
+    legend = list(title = list(text = ""),
+                  x = 1, xref = "paper", xanchor = "right"),
     annotations = list(
       list(
         x = -0.008,
@@ -141,7 +142,7 @@ plot_ly(shared_ylt,
         text  = ~paste0(
                 year,
                 "<br>", gender,
-                "<br>", variable_label, ": ", sprintf("%.2f%%", percentage_yes))) %>%
+                "<br>", variable_label, ": ", sprintf("%.0f%%", percentage_yes))) %>%
   layout(
       xaxis = list(
       title     = "Year",
@@ -160,7 +161,8 @@ plot_ly(shared_ylt,
       linewidth = 1,
       rangemode = "tozero"
     ),
-    legend = list(title = list(text = "")),   
+    legend = list(title = list(text = ""),
+                  x = 1, xref = "paper", xanchor = "right"),   
     margin = list(t = 40),                   
     annotations = list(
       list(
