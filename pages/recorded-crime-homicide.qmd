@@ -23,7 +23,7 @@ source(here("data_prep/recordedcrime_data_prep.R"))
 # Prepare ticks for category years like "2024/25"
 tick_every_5 <- homicide_age_gender$Year[seq(1, length(homicide_age_gender$Year), by = 5)]
 
-plot_ly(homicide_age_gender, x = ~Year) %>%
+homicide_plot<- plot_ly(homicide_age_gender, x = ~Year) %>%
   add_trace(
     y = ~`Female <18`,
     name = "Female <18",
@@ -141,6 +141,13 @@ plot_ly(homicide_age_gender, x = ~Year) %>%
     legend = list(x = 1, xref = "paper", xanchor = "right")
   ) %>%
   config(displayModeBar = FALSE)
+
+div(
+  homicide_plot,
+  p("Source: ", a(href = "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.psni.police.uk%2Fsystem%2Ffiles%2F2025-05%2F861739285%2FPolice%2520Recorded%2520Crime%2520Tables%2520Period%2520Ending%252031st%2520March%25202025.xlsx&wdOrigin=BROWSELINK 
+(Table 4)
+", "Homicide by age and gender (Table 4)"))
+)
 ```
 
 
@@ -149,4 +156,4 @@ plot_ly(homicide_age_gender, x = ~Year) %>%
 ```{r}
 
 ```
-
+ADD TEXT HERE
