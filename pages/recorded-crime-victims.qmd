@@ -16,6 +16,8 @@ source(here("data_prep/recordedcrime_data_prep.R"))
 ### Column {width=100%}
 
 ```{r}
+#| title: Victims of police recorded crime, by crime type and gender (%)
+#| fig-height: 10
 
 shared_victims <- SharedData$new(
   all_police_recorded_crime_victims,
@@ -33,7 +35,7 @@ filter_select(
 
 tick_every_5 <- all_police_recorded_crime_victims$Year[seq(1, length(unique(all_police_recorded_crime_victims$Year)), by = 5)]
 
-plot_ly(shared_victims, 
+victims_plot<- plot_ly(shared_victims, 
         x = ~Year, 
         y = ~Value, 
         color = ~Victim_Gender, 
@@ -71,7 +73,7 @@ plot_ly(shared_victims,
     margin = list(t = 40),  
     annotations = list(
       list(
-        x = -0.008,
+        x = 0.00,
         xref = "paper",
         xanchor = "center",
         y = 1.025,
@@ -90,7 +92,28 @@ plot_ly(shared_victims,
   config(displayModeBar = FALSE)
 
 
-p(style ="margin-top: 30px;", "Please note that crimes in which the gender of the victim was unknown have not been displayed in this chart; therefore, totals may not sum to 100%.")
+
+div(
+  victims_plot,
+  p(
+    style = "margin-top: 30px;",
+    "Please note that crimes in which the gender of the victim was unknown have not been displayed in this chart; therefore, totals may not sum to 100%."
+  ),
+  p(
+    "Source: ",
+    a(
+      href = "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.psni.police.uk%2Fsystem%2Ffiles%2F2025-01%2F444101239%2FPolice_Recorded_Crime_in_Northern_Ireland_1998-99_to_2023-24_revised.xlsx&wdOrigin=BROWSELINK",
+      "Police recorded crime from 2007/08 - 2023/24 (Pivot Table-Victim Gender_Age)"
+    )
+  ),
+  p(
+    "Source: ",
+    a(
+      href = "https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.psni.police.uk%2Fsystem%2Ffiles%2F2025-05%2F861739285%2FPolice%2520Recorded%2520Crime%2520Tables%2520Period%2520Ending%252031st%2520March%25202025.xlsx&wdOrigin=BROWSELINK",
+      "Police recorded crime 2024/25 (Pivot Table-Victim Gender_Age)"
+    )
+  )
+)
 
 
 ```
