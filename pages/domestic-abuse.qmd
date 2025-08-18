@@ -74,7 +74,7 @@ DA_chart1 <- plot_ly(
     ),
     annotations = list(
       list(
-        x = 0, y = 1.02,
+        x = 0, y = 1.025,
         text = "Incidents and Crimes",
         showarrow = FALSE,
         xref = "paper", yref = "paper",

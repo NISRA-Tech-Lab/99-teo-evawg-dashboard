@@ -132,7 +132,7 @@ homicide_plot<- plot_ly(homicide_age_gender, x = ~Year) %>%
     annotations = list(
       list(
         x = 0.00, xref = "paper", xanchor = "center",
-        y = 1, yref = "paper", yanchor = "bottom",
+        y = 1.025, yref = "paper", yanchor = "bottom",
         text = "Number of<br>homicides",
         showarrow = FALSE,
         font = list(size = 14)
