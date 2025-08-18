@@ -155,7 +155,7 @@ DA_chart3 <- plot_ly(
   colors = nisra_colours[1:2],
   type = "bar",
   barmode = "group",
-  text = ~paste0(category, "<br>", Group, ": ", Percentage, "%"),
+  text = ~paste0(category, "<br>", Group, ": ", round(Percentage), "%"),
   hoverinfo = "text"   
 ) %>%
   layout(

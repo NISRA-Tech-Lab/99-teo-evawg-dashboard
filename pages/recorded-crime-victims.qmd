@@ -44,7 +44,7 @@ plot_ly(shared_victims,
         text = ~paste0(
                 Year,
                 "<br>", Victim_Gender,
-                "<br>", Crime_Type, ": ", sprintf("%.2f%%", Value)
+                "<br>", Crime_Type, ": ", sprintf("%.0f%%", Value)
 )) %>%
   layout(
       xaxis = list(
