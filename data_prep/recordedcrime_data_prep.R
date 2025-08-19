@@ -4,10 +4,13 @@ source(here("config.R"))
 # READ IN THE DATA
 
 ################################################################################
-# Read in Police Recorded Crime Chart 1 data: historical excel file plus current year data
+# Read in Police Recorded Crime Chart 1 & 2 data: historical excel files plus current years data
 
 police_recorded_crime_historical_chart1 <- read_excel(
   paste0(data_folder, "/police_recorded_crime_historical_chart1.xlsx"))
+
+police_recorded_crime_historical_chart2 <- read_excel(
+  paste0(data_folder, "/police_recorded_crime_historical_chart2.xlsx"))
 
 # URL being functioned and saved onto a temp file
 recorded_crime_url <-"https://www.psni.police.uk/system/files/2025-05/861739285/Police%20Recorded%20Crime%20Tables%20Period%20Ending%2031st%20March%202025.xlsx"
@@ -24,12 +27,9 @@ police_recorded_crime_chart1_currentyear <- read_excel(temp_file,
                                                        sheet = "Table 15",
                                                        range = "A3:AB186")
 
-################################################################################
-# Read in Police Recorded Crime Chart 2 data: historical excel file plus current year data
-
-police_recorded_crime_historical_chart2 <- read_excel(
-  paste0(data_folder, "/police_recorded_crime_historical_chart2.xlsx"))
-
+police_recorded_crime_chart2_currentyear <- read_excel(temp_file,
+                                                       sheet = "Tables 9 & 10",
+                                                       range = "A6:F15")
 
 ################################################################################
 #victims page data read in
@@ -131,7 +131,72 @@ police_recorded_crime_historical_chart1 <- read_excel(
   paste0(data_folder, "/police_recorded_crime_historical_chart1.xlsx")
 )
 
+################################################################################
+# Police Recorded Crime Chart 2 data prep
 
+#Select two needed columns
+recorded_crime_chart2_data <- police_recorded_crime_chart2_currentyear[, 
+                              c(1, ncol(police_recorded_crime_chart2_currentyear))]
+
+# Extract current year values
+online_recorded_crime_stalking <- as.numeric(recorded_crime_chart2_data[
+  recorded_crime_chart2_data[[1]] == "Of which: Stalking and harassment", 
+  2,
+  drop = TRUE
+])
+
+online_recorded_crime_violence_total <- as.numeric(recorded_crime_chart2_data[
+  recorded_crime_chart2_data[[1]] == "Violence against the person", 
+  2,
+  drop = TRUE
+])
+
+online_recorded_crime_sexual <- as.numeric(recorded_crime_chart2_data[
+  recorded_crime_chart2_data[[1]] == "Sexual offences", 
+  2,
+  drop = TRUE
+])
+
+online_recorded_crime_other <- sum(
+  as.numeric(recorded_crime_chart2_data[
+    recorded_crime_chart2_data[[1]] %in% c(
+      "Burglary, robbery, theft and criminal damage",
+      "Other crimes against society"),
+    2,
+    drop = TRUE
+  ]),
+  na.rm = TRUE
+)
+
+# Calculate violence excluding stalking
+online_recorded_crime_violence_excluding_stalking <- online_recorded_crime_violence_total - online_recorded_crime_stalking
+
+# Create current year dataframe
+recorded_crime_chart2_currentyr_row_df <- data.frame(
+  `Year` = rc_currentyear,
+  `Stalking and Harassment` = online_recorded_crime_stalking,
+  `Violence Against the Person (excluding stalking and harassment)` = online_recorded_crime_violence_excluding_stalking,
+  `Sexual` = online_recorded_crime_sexual,
+  `Other` = online_recorded_crime_other,  
+  stringsAsFactors = FALSE,
+  check.names = FALSE  
+)
+
+# Remove existing current year data
+police_recorded_crime_historical_chart2 <- police_recorded_crime_historical_chart2 %>%
+  filter(Year < rc_currentyear)
+
+# Append and write updated historical data
+police_recorded_crime_historical_chart2 <- rbind(
+  police_recorded_crime_historical_chart2,
+  recorded_crime_chart2_currentyr_row_df
+)
+
+write_xlsx(police_recorded_crime_historical_chart2, paste0(data_folder, "/police_recorded_crime_historical_chart2.xlsx"))
+
+police_recorded_crime_historical_chart2 <- read_excel(
+  paste0(data_folder, "/police_recorded_crime_historical_chart2.xlsx")
+)
 
 ##########################################################################
 
