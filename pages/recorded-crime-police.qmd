@@ -141,6 +141,117 @@ div(
 ### Column {width=50%}
 
 ```{r}
+#| title: Police recorded online crime by offence
+#| fig-height: 10
 
+# Prepare ticks for category years like "2024/25"
+years <- as.character(police_recorded_crime_historical_chart2$Year)
+tick_every_5 <- years[seq(1, length(years), by = 5)]
+
+prc_plot2 <- plot_ly(police_recorded_crime_historical_chart2, x = ~Year) %>%
+  add_trace(
+    y = ~Other,
+    name = "Other",
+    text = ~paste(
+      Year,
+      paste0("Other: ", format(Other, big.mark = ",")),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[4]),
+    marker = list(color = nisra_colours[4])
+  ) %>%
+  add_trace(
+    y = ~`Violence Against the Person (excluding stalking and harassment)`,
+    name = "Violence Against the Person<br>(excluding stalking<br>and harassment)",
+    text = ~paste(
+      Year,
+      paste0(
+        "Violence Against the Person<br>(excluding stalking and harassment): ",
+        format(`Violence Against the Person (excluding stalking and harassment)`, big.mark = ",")
+      ),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[2]),
+    marker = list(color = nisra_colours[2])
+  ) %>%
+  add_trace(
+    y = ~`Stalking and Harassment`,
+    name = "Stalking and Harassment",
+    text = ~paste(
+      Year,
+      paste0("Stalking and Harassment: ", format(`Stalking and Harassment`, big.mark = ",")),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[1]),
+    marker = list(color = nisra_colours[1])
+  ) %>%
+  add_trace(
+    y = ~Sexual,
+    name = "Sexual",
+    text = ~paste(
+      Year,
+      paste0("Sexual: ", format(Sexual, big.mark = ",")),
+      sep = "<br>"
+    ),
+    hoverinfo = "text",
+    type = "scatter", mode = "lines+markers",
+    line = list(color = nisra_colours[3]),
+    marker = list(color = nisra_colours[3])
+  ) %>%
+  layout(
+    margin = list(t = 60, r = 140),  # extra right margin for the legend outside the plot
+    xaxis = list(
+      type = "category",
+      categoryorder = "array",
+      categoryarray = years,
+      tickmode = "array",
+      tickvals = tick_every_5,
+      ticktext = tick_every_5,
+      tickangle = 0,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1,
+      showgrid = FALSE,
+      zeroline = FALSE
+    ),
+    yaxis = list(
+      title = list(text = ""),
+      rangemode = "tozero",
+      showgrid = FALSE,
+      showline = TRUE,
+      linecolor = "black",
+      linewidth = 1,
+      zeroline = FALSE,
+      tickformat = ",d"
+    ),
+    annotations = list(
+      list(
+        x = 0.00, xref = "paper", xanchor = "center",
+        y = 1.025, yref = "paper", yanchor = "bottom",
+        text = "Number of<br>online crimes",
+        showarrow = FALSE,
+        font = list(size = 14)
+      )
+    ),
+    legend = list(
+      x = 1.05,          
+      xref = "paper",
+      xanchor = "left",  
+      y = 1,
+      yanchor = "top"
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
+
+div(
+  prc_plot2,
+  p("Source: ", a(href = "https://www.psni.police.uk/system/files/2025-01/444101239/Police_Recorded_Crime_in_Northern_Ireland_1998-99_to_2023-24_revised.xlsx", "Police recorded online crime by offence, 2001/02 to 2024/25 (Table 4.1)"))
+)
 ```
 
