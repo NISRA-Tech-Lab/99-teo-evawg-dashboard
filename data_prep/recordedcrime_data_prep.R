@@ -55,8 +55,140 @@ map_data <- read_excel(temp_file,
 
 map_data <- map_data[c(1, 3)]
 
+# Create dataframes for each area
+
+# Define the break points
+break_points <- c(
+  "Belfast City",
+  "Lisburn & Castlereagh City",
+  "Ards and North Down",
+  "Newry, Mourne & Down",
+  "Armagh City, Banbridge & Craigavon",
+  "Mid Ulster",
+  "Fermanagh & Omagh",
+  "Derry City & Strabane",
+  "Causeway Coast & Glens",
+  "Mid & East Antrim",
+  "Antrim & Newtownabbey"
+)
+
+indices <- match(break_points, map_data[[1]])
+end_indices <- c(indices[-1] - 1, nrow(map_data))
+
+# Create cleaned dataframe names
+df_names <- gsub("&", "and", break_points)
+df_names <- tolower(df_names)
+df_names <- gsub("[ ,\\-]+", "_", df_names)
+df_names <- gsub("^_|_$", "", df_names)
+
+# Slice map_data into smaller dataframes for each area
+for (i in seq_along(indices)) {
+  start <- indices[i]
+  end   <- end_indices[i]
+  df_name <- paste0(df_names[i], "_data")
+  assign(df_name, map_data[start:end, ])
+}
 
 
+# Collect all the smaller dataframes into a named list
+df_list <- list(
+  belfast_city              = belfast_city_data,
+  lisburn_and_castlereagh_city = lisburn_and_castlereagh_city_data,
+  ards_and_north_down       = ards_and_north_down_data,
+  newry_mourne_and_down     = newry_mourne_and_down_data,
+  armagh_city_banbridge_and_craigavon = armagh_city_banbridge_and_craigavon_data,
+  mid_ulster                = mid_ulster_data,
+  fermanagh_and_omagh       = fermanagh_and_omagh_data,
+  derry_city_and_strabane   = derry_city_and_strabane_data,
+  causeway_coast_and_glens  = causeway_coast_and_glens_data,
+  mid_and_east_antrim       = mid_and_east_antrim_data,
+  antrim_and_newtownabbey   = antrim_and_newtownabbey_data
+)
+
+###########################
+# Build sexual_map_data
+sexual_map_data <- data.frame(area = character(), value = numeric(), stringsAsFactors = FALSE)
+
+for (area in names(df_list)) {
+  df <- df_list[[area]]
+  
+  row_idx <- which(df[[1]] == "SEXUAL OFFENCES")
+  val <- if (length(row_idx) > 0) as.numeric(df[row_idx, 2]) else NA
+  
+  sexual_map_data <- rbind(
+    sexual_map_data,
+    data.frame(area = area, value = val)
+  )
+}
+
+###########################
+# Build stalking_map_data
+stalking_map_data <- data.frame(area = character(), value = numeric(), stringsAsFactors = FALSE)
+
+for (area in names(df_list)) {
+  df <- df_list[[area]]
+  
+  row_idx <- which(df[[1]] == "Stalking & Harassment")
+  val <- if (length(row_idx) > 0) as.numeric(df[row_idx, 2]) else NA
+  
+  stalking_map_data <- rbind(
+    stalking_map_data,
+    data.frame(area = area, value = val)
+  )
+}
+
+###########################
+# Build violence_map_data
+violence_map_data <- data.frame(area = character(), value = numeric(), stringsAsFactors = FALSE)
+
+for (area in names(df_list)) {
+  df <- df_list[[area]]
+  
+  # Get violence value
+  row_idx_violence <- which(df[[1]] == "VIOLENCE AGAINST THE PERSON")
+  violence_val <- if (length(row_idx_violence) > 0) as.numeric(df[row_idx_violence, 2]) else NA
+  
+  # Get stalking value
+  row_idx_stalking <- which(df[[1]] == "Stalking & Harassment")
+  stalking_val <- if (length(row_idx_stalking) > 0) as.numeric(df[row_idx_stalking, 2]) else 0
+  
+  # Subtract stalking from violence
+  val <- if (!is.na(violence_val)) violence_val - stalking_val else NA
+  
+  violence_map_data <- rbind(
+    violence_map_data,
+    data.frame(area = area, value = val)
+  )
+}
+
+###########################
+# Build other_map_data
+other_map_data <- data.frame(area = character(), value = numeric(), stringsAsFactors = FALSE)
+
+# Categories to include in the sum
+other_cats <- c(
+  "ROBBERY",
+  "THEFT OFFENCES",
+  "CRIMINAL DAMAGE",
+  "DRUG OFFENCES",
+  "POSSESSION OF WEAPONS OFFENCES",
+  "PUBLIC ORDER OFFENCES",
+  "MISCELLANEOUS CRIMES AGAINST SOCIETY"
+)
+
+for (area in names(df_list)) {
+  df <- df_list[[area]]
+  
+  # Use [[2]] to get the raw values, not a tibble
+  vals <- suppressWarnings(as.numeric(df[[2]][df[[1]] %in% other_cats]))
+  
+  val <- if (length(vals) > 0) sum(vals, na.rm = TRUE) else NA
+  
+  other_map_data <- rbind(
+    other_map_data,
+    data.frame(area = area, value = val)
+  )
+}
 
 ################################################################################
 # Police Recorded Crime Chart 1 data prep
