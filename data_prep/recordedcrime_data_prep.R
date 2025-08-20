@@ -105,7 +105,7 @@ df_list <- list(
 
 ###########################
 # Build sexual_map_data
-sexual_map_data <- data.frame(lgd2014name = character(), value = numeric(), stringsAsFactors = FALSE)
+sexual_map_data <- data.frame(lgd2014name = character(), sexual_value = numeric(), stringsAsFactors = FALSE)
 
 for (lgd2014name in names(df_list)) {
   df <- df_list[[lgd2014name]]
@@ -113,13 +113,13 @@ for (lgd2014name in names(df_list)) {
   val <- if (length(row_idx) > 0) as.numeric(df[row_idx, 2]) else NA_real_
   sexual_map_data <- rbind(
     sexual_map_data,
-    data.frame(lgd2014name = lgd2014name, value = val)
+    data.frame(lgd2014name = lgd2014name, sexual_value = val)
   )
 }
 
 ###########################
 # Build stalking_map_data
-stalking_map_data <- data.frame(lgd2014name = character(), value = numeric(), stringsAsFactors = FALSE)
+stalking_map_data <- data.frame(lgd2014name = character(), stalking_value = numeric(), stringsAsFactors = FALSE)
 
 for (lgd2014name in names(df_list)) {
   df <- df_list[[lgd2014name]]
@@ -127,13 +127,13 @@ for (lgd2014name in names(df_list)) {
   val <- if (length(row_idx) > 0) as.numeric(df[row_idx, 2]) else NA_real_
   stalking_map_data <- rbind(
     stalking_map_data,
-    data.frame(lgd2014name = lgd2014name, value = val)
+    data.frame(lgd2014name = lgd2014name, stalking_value = val)
   )
 }
 
 ###########################
 # Build violence_map_data
-violence_map_data <- data.frame(lgd2014name = character(), value = numeric(), stringsAsFactors = FALSE)
+violence_map_data <- data.frame(lgd2014name = character(), violence_value = numeric(), stringsAsFactors = FALSE)
 
 for (lgd2014name in names(df_list)) {
   df <- df_list[[lgd2014name]]
@@ -147,13 +147,13 @@ for (lgd2014name in names(df_list)) {
   val <- if (!is.na(violence_val)) violence_val - stalking_val else NA_real_
   violence_map_data <- rbind(
     violence_map_data,
-    data.frame(lgd2014name = lgd2014name, value = val)
+    data.frame(lgd2014name = lgd2014name, violence_value = val)
   )
 }
 
 ###########################
 # Build other_map_data
-other_map_data <- data.frame(lgd2014name = character(), value = numeric(), stringsAsFactors = FALSE)
+other_map_data <- data.frame(lgd2014name = character(), other_value = numeric(), stringsAsFactors = FALSE)
 
 # Categories to include in the sum
 other_cats <- c(
@@ -172,7 +172,7 @@ for (lgd2014name in names(df_list)) {
   val <- if (length(vals) > 0) sum(vals, na.rm = TRUE) else NA_real_
   other_map_data <- rbind(
     other_map_data,
-    data.frame(lgd2014name = lgd2014name, value = val)
+    data.frame(lgd2014name = lgd2014name, other_value = val)
   )
 }
 
@@ -204,6 +204,24 @@ for (lgd2014name in names(df_list)) {
     data.frame(lgd2014name = lgd2014name, value = val)
   )
 }
+
+# Read in shapefile
+
+# 1) Read shapefile
+NI <- st_read("maps/Simplified OSNI Map Loughs Removed.shp", quiet = TRUE)
+
+# 2) Join your values onto the geometry (direct name match)
+NI_map_data <- NI %>%
+  left_join(sexual_map_data,
+            by = c("LGDNAME" = "lgd2014name")) %>%
+  left_join(stalking_map_data,
+            by = c("LGDNAME" = "lgd2014name")) %>%
+  left_join(violence_map_data,
+            by = c("LGDNAME" = "lgd2014name")) %>%
+  left_join(other_map_data,
+            by = c("LGDNAME" = "lgd2014name"))
+
+
 
 ################################################################################
 # Police Recorded Crime Chart 1 data prep
