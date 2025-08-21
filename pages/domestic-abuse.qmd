@@ -104,6 +104,10 @@ div(
 
 ### Column {width=50%}
 
+### Dpmestic Abuse {.tabset}
+
+#### Chart 2
+
 ```{r}
 #| title: Percentage of police recorded domestic abuse crimes in 2024/25, by crime type
 
@@ -160,6 +164,8 @@ div(
 
 
 ```
+
+#### Chart 3
 
 ```{r}
 #| title: Prevalence of domestic abuse among adults, by gender
