@@ -41,8 +41,8 @@ make_rc_map <- function(df, value_col, title_lab) {
       view.legend.position = c("left", "top"),
       control.position = c("left", "bottom"),
       leaflet.options = c(
-        zoomControl = TRUE,       # allow zoom buttons
-        dragging = TRUE,          # allow panning
+        zoomControl = TRUE,       
+        dragging = TRUE,          
         keyboard = TRUE,
         boxZoom = TRUE,
         doubleClickZoom = TRUE,
