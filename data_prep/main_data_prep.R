@@ -159,89 +159,6 @@ nilt_historical_chart2 <- read_excel(
 )
 
 ################################################################################
-# ADD PREVIOUS YEAR'S % FIGURES TO nilt_historical_chart3 DATA FILE
-
-# Weighted function by age group
-# nilt_variable_by_age <- function(df, var, age_var = "age_18_29", weight_var = "WTFACTOR") {
-#   df_filtered <- df %>%
-#     filter(
-#       !is.na(.data[[var]]),
-#       .data[[var]] %in% c("Yes", "No"),
-#       !is.na(.data[[weight_var]])
-#     ) %>%
-#     mutate(
-#       weight = .data[[weight_var]],
-#       is_yes = ifelse(.data[[var]] == "Yes", 1, 0)
-#     )
-# 
-#   # For age group 18-29
-#   age_18_29 <- df_filtered %>%
-#     filter(.data[[age_var]] == "yes") %>%
-#     summarise(
-#       weighted_yes = sum(weight * is_yes, na.rm = TRUE),
-#       weighted_total = sum(weight, na.rm = TRUE),
-#       percentage_yes = round(100 * weighted_yes / weighted_total, 1)
-#     ) %>%
-#     mutate(age = "Age 18-29", variable = var)
-# 
-#   # For all age groups
-#   age_all <- df_filtered %>%
-#     summarise(
-#       weighted_yes = sum(weight * is_yes, na.rm = TRUE),
-#       weighted_total = sum(weight, na.rm = TRUE),
-#       percentage_yes = round(100 * weighted_yes / weighted_total, 1)
-#     ) %>%
-#     mutate(age = "Whole Population", variable = var)
-# 
-#   bind_rows(age_18_29, age_all)
-# }
-# 
-# # List of variables of interest
-# nilt_vars <- c("GBVPHYV", "GBVSEXV", "GBVPSYV", "GBVECONV", "GBVONLV")
-# 
-# # Apply across variables
-# nilt_age_data <- bind_rows(
-#   lapply(nilt_vars, function(v) nilt_variable_by_age(nilt_previousyr_data, v))
-# )
-# 
-# # Add year column
-# nilt_age_data$year <- nilt_currentyear-1
-# 
-# # Final formatting
-# nilt_age_data <- nilt_age_data %>%
-#   select(year, variable, age, percentage_yes)
-# 
-# # Remove existing current year data
-# nilt_historical_chart3 <- nilt_historical_chart3 %>%
-#   filter(year < nilt_currentyear-1)
-# 
-# # Ensure 'variable' column exists and is character
-# if (!"variable" %in% names(nilt_historical_chart3)) {
-#   nilt_historical_chart3$variable <- as.character(NA)
-# } else {
-#   nilt_historical_chart3$variable <- as.character(nilt_historical_chart3$variable)
-# }
-# 
-# # Ensure 'age' column exists and is character
-# if (!"age" %in% names(nilt_historical_chart3)) {
-#   nilt_historical_chart3$age <- as.character(NA)
-# } else {
-#   nilt_historical_chart3$age <- as.character(nilt_historical_chart3$age)
-# }
-# 
-# # Append current year data
-# updated_historical_data <- bind_rows(nilt_historical_chart3, nilt_age_data)
-# 
-# # Write to Excel file
-# write_xlsx(updated_historical_data,  paste0(data_folder, "/nilt_historical_chart3.xlsx"))
-# 
-# # Reload to verify
-# nilt_historical_chart3 <- read_excel(
-#   paste0(data_folder, "/nilt_historical_chart3.xlsx")
-# )
-
-
-
 # ADD CURRENT YEAR'S % FIGURES TO nilt_historical_chart3 DATA FILE
 
 # Weighted function by age group
@@ -326,41 +243,6 @@ nilt_historical_chart3 <- read_excel(
 
 
 ################################################################################
-
-# ADD PREVIOUS YEAR'S EXPERIENCED VIOLENCE % FIGURES TO ylt_historical_chart1 DATA FILE
-
-# # Build initial long response data (excluding NA)
-# ylt_previousyr_data_long <- ylt_previousyr_data %>%
-#   select(GVTYPV1, GVTYPV2, GVTYPV3, GVTYPV4) %>%
-#   pivot_longer(everything(), names_to = "Variable", values_to = "Response") %>%
-#   filter(!is.na(Response)) %>%
-#   mutate(Response = as.character(Response))
-# 
-# # Calculate counts (Ticked/Not ticked) and experienced violence percent directly
-# ylt_previousyr_percent <- ylt_previousyr_data_long %>%
-#   count(Variable, Response, name = "Count") %>%
-#   complete(Response = c("Ticked", "Not ticked"), Variable, fill = list(Count = 0)) %>%
-#   pivot_wider(names_from = Response, values_from = Count) %>%
-#   mutate(Percent = (Ticked / (Ticked + `Not ticked`)) * 100) %>%
-#   select(Variable, Percent) %>%
-#   pivot_wider(names_from = Variable, values_from = Percent) %>%
-#   mutate(year = ylt_currentyear-1) %>%
-#   select(year, everything())
-# 
-# # Remove existing previous year data
-# ylt_historical_chart1 <- ylt_historical_chart1 %>%
-#   filter(year < ylt_currentyear-1)
-# 
-# # Append and write updated historical data
-# updated_historical_data <- bind_rows(ylt_historical_chart1, ylt_previousyr_percent)
-# 
-# write_xlsx(updated_historical_data, paste0(data_folder, "/ylt_historical_chart1.xlsx"))
-# 
-# ylt_historical_chart1 <- read_excel(
-#   paste0(data_folder, "/ylt_historical_chart1.xlsx")
-# )
-
-
 # ADD CURRENT YEAR'S EXPERIENCED VIOLENCE % FIGURES TO ylt_historical_chart1 DATA FILE
 
 # Build initial long response data (excluding NA)
