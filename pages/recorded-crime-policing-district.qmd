@@ -31,7 +31,7 @@ make_rc_map <- function(df, value_col, title_lab) {
       alpha = 0.5,
       border.alpha = 1,
       legend.show = TRUE,
-      title = title_lab,   # <--- this changes the legend name
+      title = title_lab,   
       popup.vars = setNames(
         c("LGDNAME", value_col),
         c("Council area: ", paste0(title_lab, " value: "))
