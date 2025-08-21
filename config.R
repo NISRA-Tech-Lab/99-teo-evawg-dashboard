@@ -27,6 +27,7 @@ library(plotly)
 library(readODS)
 library(sf)
 library(tmap)
+library(fontawesome)
 
 data_folder <- "T:/Projects/99 - TEO VAWG Dashboard/data"
 
