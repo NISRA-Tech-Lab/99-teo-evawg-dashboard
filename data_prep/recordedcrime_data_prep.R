@@ -177,38 +177,11 @@ for (lgd2014name in names(df_list)) {
 }
 
 ###########################
-# Build other_map_data
-other_map_data <- data.frame(lgd2014name = character(), value = numeric(), stringsAsFactors = FALSE)
-
-# Categories to include in the sum
-other_cats <- c(
-  "ROBBERY",
-  "THEFT OFFENCES",
-  "CRIMINAL DAMAGE",
-  "DRUG OFFENCES",
-  "POSSESSION OF WEAPONS OFFENCES",
-  "PUBLIC ORDER OFFENCES",
-  "MISCELLANEOUS CRIMES AGAINST SOCIETY"
-)
-
-for (lgd2014name in names(df_list)) {
-  df <- df_list[[lgd2014name]]
-  
-  # Use [[2]] to get the raw values, not a tibble
-  vals <- suppressWarnings(as.numeric(df[[2]][df[[1]] %in% other_cats]))
-  
-  val <- if (length(vals) > 0) sum(vals, na.rm = TRUE) else NA
-  
-  other_map_data <- rbind(
-    other_map_data,
-    data.frame(lgd2014name = lgd2014name, value = val)
-  )
-}
 
 # Read in shapefile
 
 # 1) Read shapefile
-NI <- st_read("maps/Simplified OSNI Map Loughs Removed.shp", quiet = TRUE)
+NI <- st_read(here("maps/Simplified OSNI Map Loughs Removed.shp"))
 
 # 2) Join your values onto the geometry (direct name match)
 NI_map_data <- NI %>%
@@ -437,7 +410,6 @@ all_police_recorded_crime_victims <- bind_rows(all_police_recorded_crime_victims
 
 ##########################################################################
 
-# Police recorded crime - policing district data
 
 
 

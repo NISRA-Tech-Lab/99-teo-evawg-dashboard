@@ -1,128 +1,210 @@
-/* CSS Stylesheet*/
+/* ================================
+   Theme variables
+==================================*/
+:root {
+  --brand-blue: #1a6ecc;   /* Primary brand */
+  --brand-blue-dark: #005f99;
+  --brand-blue-mid: #007acc;
+  --text-on-blue: #ffffff; /* High-contrast text on blue */
+  --text-default: #1a1a1a;
+  --muted-border: #dee2e6;
+  --success: #0f8243;
+  --gray-600: #6d6e72;
+}
 
+/* ================================
+   Global typography 
+==================================*/
+html, body {
+  color: var(--text-default);
+}
+
+/* ================================
+   Titles / Cards / Shared headers
+==================================*/
 div.chart-title {
   font-size: 17px;
-  background-color: #1a6ecc; 
-  color: white;              
-  padding: 5px 10px;         
-  border-radius: 4px;        
+  background-color: var(--brand-blue);
+  color: var(--text-on-blue);
+  padding: 5px 10px;
+  border-radius: 4px;
 }
 
-.card-header, .chart-title-container {
-  background-color: #1a6ecc;
-  color: white; 
+.card-header,
+.chart-title-container {
+  background-color: var(--brand-blue);
+  color: var(--text-on-blue);
 }
 
-div.navbar-inverse.navbar-fixed-top {
-font-size: 17px;
+/* Optional: remove default bottom border on headers with tabs */
+.card-header .nav-tabs,
+.chart-title-container .nav-tabs {
+  border-bottom-color: transparent;
 }
 
-div.chart-shim.bootstrap-table.flowing-content-shim {
-font-size: 16px;
+/* ================================
+   Navbar & branding
+==================================*/
+.navbar {
+  background-color: var(--brand-blue);
 }
 
-div.chart-stage.chartstage-flex {
-font-size: 16px;
+/* Ensure all navbar links/brand are readable on blue */
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: var(--text-on-blue) !important;
+  font-size: 17px;
 }
 
+/* Active item highlight */
+.navbar-nav .nav-link.active {
+  background-color: var(--brand-blue-mid);
+  color: var(--text-on-blue) !important;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+/* Hover/Focus for navbar links */
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.navbar-nav .nav-link.active:hover {
+  color: #e6f2ff !important;
+  background-color: var(--brand-blue-dark);
+  border-radius: 4px;
+}
+
+/* Navbar logo placement */
 .navbar-logo img {
-    position: absolute;
-    right: 0px;
+  position: absolute;
+  right: 0;
 }
-
-.nav-tabs-custom .nav-tabs li.active a {
-color: green;
-font-size: 17px
-}
-
-
-.nav-tabs-custom .nav-tabs li:not(.active) a {
-color: black;
-font-size: 17px
-}
-
-#quarto-dashboard-header {
-    display: none !important;
-}
-
 .navbar-logo {
   min-height: 48px;
   min-width: 192px;
 }
 
-.navbar {
-  background-color: #1a6ecc;
+/* Legacy bootstrap navbar sizing (kept from original) */
+div.navbar-inverse.navbar-fixed-top {
+  font-size: 17px;
 }
 
+/* ================================
+   Tabsets (Bootstrap/Quarto)
+   Fix: readable text on blue headers
+==================================*/
+
+/* Inactive tabs when tabs sit on a blue header (e.g., inside .card-header) */
+.card-header .nav-tabs .nav-link,
+.chart-title-container .nav-tabs .nav-link {
+  color: var(--text-on-blue) !important;
+  font-size: 17px;
+}
+
+/* Hover/Focus (still on blue background) */
+.card-header .nav-tabs .nav-link:hover,
+.card-header .nav-tabs .nav-link:focus,
+.chart-title-container .nav-tabs .nav-link:hover,
+.chart-title-container .nav-tabs .nav-link:focus {
+  color: #e6f2ff !important;
+}
+
+/* Active tab: white pill for contrast, blue text */
+.card-header .nav-tabs .nav-link.active,
+.chart-title-container .nav-tabs .nav-link.active {
+  background-color: #fff !important;
+  color: var(--brand-blue) !important;
+  border-color: var(--muted-border) var(--muted-border) #fff !important;
+  font-weight: 600;
+}
+
+/* Generic/fallback tab styling (tabs not placed on blue areas) */
+.nav-tabs .nav-link {
+  color: var(--text-default);
+  font-size: 17px;
+}
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  color: var(--brand-blue-mid);
+}
+.nav-tabs .nav-link.active {
+  color: var(--brand-blue-mid);
+  background-color: #fff;
+  border-color: var(--muted-border) var(--muted-border) #fff;
+  font-weight: 600;
+}
+
+/* Remove deprecated custom selectors that didn't match markup
+   (Replaced by .nav-tabs .nav-link rules above)
+   .nav-tabs-custom .nav-tabs li.active a { ... }
+   .nav-tabs-custom .nav-tabs li:not(.active) a { ... }
+*/
+
+/* ================================
+   Chart/table sizing 
+==================================*/
+div.chart-shim.bootstrap-table.flowing-content-shim { font-size: 16px; }
+div.chart-stage.chartstage-flex { font-size: 16px; }
+
+/* ================================
+   Quarto dashboard header
+==================================*/
+#quarto-dashboard-header { display: none !important; }
+
+/* ================================
+   Cookie banner
+==================================*/
 #cookie-banner {
-	top: 0;
-	left: 0;
-	width: 100%;
-	background-color: rgba(26,25,68,0.95);
-	color:#FFF;
-	padding: 10px;
-	text-align: left;
-	border-bottom: 5px solid #3878c5;
-	z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(26,25,68,0.95);
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 5px solid #3878c5;
+  z-index: 2000;
 }
 
 .cookies-infobar {
-background-color: rgba(26,25,68,0.95);
-color: #fff;
-width: 100%;
-left: 0;
-right: 0;
-top: 0;
-padding: 10px;
-text-align: left;
+  background-color: rgba(26,25,68,0.95);
+  color: #fff;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  text-align: left;
 }
 
-.cookies-infobar.cookies-infobar_accepted {
-  display: none;
-}
+.cookies-infobar.cookies-infobar_accepted { display: none; }
 
-.cookies-infobar_wrapper {
-  margin: 10px;
-}
+.cookies-infobar_wrapper { margin: 10px; }
 
-.cookies-infobar a {
-  color: inherit;
-}
+.cookies-infobar a { color: inherit; }
 
 .cookies-infobar_btn {
   display: inline-block;
   padding: 5px 10px;
-  background: #0f8243;
+  background: var(--success);
   text-decoration: none;
   color: #fff;
   text-transform: none;
   font-size: 1.2em;
 }
 
-a.cookies-infobar_btn, a.cookies-infobar_btn_reject, a.cookiesbarlink {
-	color: #fff !important;
+a.cookies-infobar_btn,
+a.cookies-infobar_btn_reject,
+a.cookiesbarlink {
+  color: #fff !important;
 }
 
 .cookies-infobar_btn_reject {
   display: inline-block;
   padding: 5px 10px;
-  background: #6d6e72;
+  background: var(--gray-600);
   text-decoration: none;
   border-radius: 3px;
   color: #fff;
   text-transform: none;
   font-size: 1.2em;
-}
-
-/* Make the active nav item stand out */
-.navbar-nav .nav-link.active {
-  background-color: #007acc; /* Highlight color */
-  color: white !important;
-  font-weight: bold;
-  border-radius: 4px;
-}
-
-/* Optional: change hover effect for active tab */
-.navbar-nav .nav-link.active:hover {
-  background-color: #005f99;
 }

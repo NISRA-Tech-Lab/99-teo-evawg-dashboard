@@ -23,7 +23,7 @@ website:
             href: recorded-crime-homicide.qmd
           - text: Victims
             href: recorded-crime-victims.qmd
-          - text: Policing district
+          - text: Policing district map
             href: recorded-crime-policing-district.qmd
       - href: domestic-abuse.qmd
         text: Domestic Abuse
