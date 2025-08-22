@@ -25,16 +25,16 @@ make_rc_map <- function(df, value_col, title_lab) {
     tm_basemap("Esri.WorldGrayCanvas") +
     tm_polygons(
       col = value_col,
-      n = 3,
-      style = "quantile",
-      palette = "Blues",
+      n = 4,
+      style = "cont",
+      palette = "Reds",
       alpha = 0.5,
       border.alpha = 1,
       legend.show = TRUE,
       title = title_lab,   
       popup.vars = setNames(
         c("LGDNAME", value_col),
-        c("Council area: ", paste0(title_lab, " value: "))
+        c("Police District: ", paste0(title_lab, " Offences: "))
       )
     ) +
     tm_scale_bar(width = 250) +
@@ -61,7 +61,7 @@ make_rc_map <- function(df, value_col, title_lab) {
 #### Sexual Offences
 
 ```{r}
-make_rc_map(NI_map_data, "sexual_value", "Sexual Offences")
+make_rc_map(NI_map_data, "sexual_value", "Sexual")
 ```
 
 #### Stalking and Harassment
@@ -73,7 +73,7 @@ make_rc_map(NI_map_data, "stalking_value", "Stalking and Harassment")
 #### Violence Against the Person <span class="tab-break">(Excluding Stalking and Harassment)</span>
 
 ```{r}
-make_rc_map(NI_map_data, "violence_value", "Violence Against the Person (Excluding Stalking and Harassment) ")
+make_rc_map(NI_map_data, "violence_value", "Violence Against the Person (Excluding Stalking and Harassment)")
 ```
 
 #### Other
