@@ -116,9 +116,9 @@ DA_chart2 <- plot_ly(
   labels = ~`Crime Type`,
   values = ~Percentage,
   type = 'pie',
-  text = ~`Crime Type`,  
+  text = ~paste0(Percentage, "%"),   # show % inside
   textinfo = "text",
-  textposition = "outside",
+  textposition = "inside",
   sort = FALSE,
   direction = "clockwise",
   marker = list(colors = nisra_colours[1:5]),
@@ -132,21 +132,16 @@ DA_chart2 <- plot_ly(
   layout(
     title = " ",
     font = list(family = "Arial", size = 14),
-    showlegend = FALSE,
-    pie = list(
-      direction = "clockwise",   
-      rotation = 0               
-    )) %>% 
-  add_trace(data = DA_chart2_data,
-  labels = ~`Crime Type`,
-  values = ~Percentage,
-  type = 'pie',
-  text = ~paste0(Percentage, "%"),  
-  textinfo = "text",
-  textposition = "inside",
-  sort = FALSE,
-  direction = "clockwise") %>% 
-  config(displayModeBar = FALSE) 
+    showlegend = TRUE,   # ✅ turn legend back on
+    legend = list(
+      orientation = "v", # vertical legend on the right
+      x = 1,
+      xanchor = "left",
+      y = 0.5,
+      yanchor = "middle"
+    )
+  ) %>%
+  config(displayModeBar = FALSE)
 
 div(
   DA_chart2,
@@ -160,9 +155,6 @@ div(
     )
   )
 )
-
-
-
 ```
 
 #### Chart 3
