@@ -81,7 +81,7 @@ prc_plot1 <- plot_ly(police_recorded_crime_historical_chart1, x = ~Year) %>%
     marker = list(color = nisra_colours[3])
   ) %>%
   layout(
-    margin = list(t = 60, r = 140),  
+    margin = list(t = 60, r = 140, b = 80),  
     xaxis = list(
       type = "category",
       categoryorder = "array",
@@ -208,7 +208,7 @@ prc_plot2 <- plot_ly(police_recorded_crime_historical_chart2, x = ~Year) %>%
     marker = list(color = nisra_colours[3])
   ) %>%
   layout(
-    margin = list(t = 60, r = 140),  # extra right margin for the legend outside the plot
+    margin = list(t = 60, r = 140, b = 80),  # extra right margin for the legend outside the plot
     xaxis = list(
       type = "category",
       categoryorder = "array",

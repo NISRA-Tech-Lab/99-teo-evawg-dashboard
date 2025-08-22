@@ -23,21 +23,18 @@ source(here("data_prep/recordedcrime_data_prep.R"))
 # Prepare ticks for category years like "2024/25"
 tick_every_5 <- homicide_age_gender$Year[seq(1, length(homicide_age_gender$Year), by = 5)]
 
-homicide_plot<- plot_ly(homicide_age_gender, x = ~Year) %>%
+homicide_plot <- plot_ly(homicide_age_gender, x = ~Year) %>%
   add_trace(
     y = ~`Female <18`,
     name = "Female <18",
     text = ~paste(
       Year,
-      paste0(
-        "Female <18: ",
-        format(`Female <18`, big.mark = ",")
-      ),
+      paste0("Female <18: ", format(`Female <18`, big.mark = ",")),
       sep = "<br>"
     ),
     hoverinfo = "text",
     type = "scatter", mode = "lines+markers",
-    line = list(color = nisra_colours[4]),   # choose a new colour index
+    line = list(color = nisra_colours[4]),
     marker = list(color = nisra_colours[4])
   ) %>%
   add_trace(
@@ -45,10 +42,7 @@ homicide_plot<- plot_ly(homicide_age_gender, x = ~Year) %>%
     name = "Female 18+",
     text = ~paste(
       Year,
-      paste0(
-        "Female 18+: ",
-        format(`Female 18+`, big.mark = ",")
-      ),
+      paste0("Female 18+: ", format(`Female 18+`, big.mark = ",")),
       sep = "<br>"
     ),
     hoverinfo = "text",
@@ -61,10 +55,7 @@ homicide_plot<- plot_ly(homicide_age_gender, x = ~Year) %>%
     name = "Male <18",
     text = ~paste(
       Year,
-      paste0(
-        "Male <18: ",
-        format(`Male <18`, big.mark = ",")
-      ),
+      paste0("Male <18: ", format(`Male <18`, big.mark = ",")),
       sep = "<br>"
     ),
     hoverinfo = "text",
@@ -77,10 +68,7 @@ homicide_plot<- plot_ly(homicide_age_gender, x = ~Year) %>%
     name = "Male 18+",
     text = ~paste(
       Year,
-      paste0(
-        "Male 18+: ",
-        format(`Male 18+`, big.mark = ",")
-      ),
+      paste0("Male 18+: ", format(`Male 18+`, big.mark = ",")),
       sep = "<br>"
     ),
     hoverinfo = "text",
@@ -93,18 +81,16 @@ homicide_plot<- plot_ly(homicide_age_gender, x = ~Year) %>%
     name = "All Homicides",
     text = ~paste(
       Year,
-      paste0(
-        "All Homicides: ",
-        format(`All Homicides`, big.mark = ",")
-      ),
+      paste0("All Homicides: ", format(`All Homicides`, big.mark = ",")),
       sep = "<br>"
     ),
     hoverinfo = "text",
     type = "scatter", mode = "lines+markers",
     line = list(color = nisra_colours[5]),
-    marker = list(color = nisra_colours[5])) %>% 
+    marker = list(color = nisra_colours[5])
+  ) %>%
   layout(
-    margin = list(t = 50),
+    margin = list(t = 60, r = 160, b = 80),   # 👈 give more room on the right
     xaxis = list(
       type = "category",
       categoryorder = "array",
@@ -138,7 +124,13 @@ homicide_plot<- plot_ly(homicide_age_gender, x = ~Year) %>%
         font = list(size = 14)
       )
     ),
-    legend = list(x = 1, xref = "paper", xanchor = "right")
+    legend = list(
+      x = 1.05,          # 👈 move legend outside
+      xref = "paper",
+      xanchor = "left",
+      y = 1,
+      yanchor = "top"
+    )
   ) %>%
   config(displayModeBar = FALSE)
 

@@ -52,7 +52,7 @@ layout(
     )
   ),
   font = list(family = "Arial", size = 12),
-  margin = list(l = 150, t = 80)
+  margin = list(l = 150, t = 80, b = 80)
 ) %>%
   config(displayModeBar = FALSE)
 

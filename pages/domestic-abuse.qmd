@@ -44,10 +44,16 @@ DA_chart1 <- plot_ly(
   ) %>%
   layout(
     showlegend = TRUE,
-    legend = list(x = 1, xref = "paper", xanchor = "right",
-                  y = 1, yref = "paper", yanchor = "bottom"),
+    legend = list(
+      x = 1.05,          
+      xref = "paper",
+      xanchor = "left",
+      y = 1,
+      yref = "paper",
+      yanchor = "top"
+    ),
     font = list(family = "Arial", size = 14),
-    margin = list(t = 40),
+    margin = list(t = 40, r = 120, b = 80),  
     xaxis = list(
       title = list(text = "Year", standoff = 10),
       type = "category",  
