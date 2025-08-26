@@ -38,6 +38,19 @@ To render one page at a time, set this line in the `render_dashboard.R` file to 
 
 ## Important Files & Folders
 
+### Data folder
+The `data` folder should include the following data files:
+   - `nilt_historical_chart1.xlsx`
+   - `nilt_historical_chart2.xlsx`
+   - `nilt_historical_chart3.xlsx`
+   - `ylt_historical_chart1.xlsx`
+   - `ylt_historical_chart2.xlsx`
+   - `police_recorded_crime_historical_chart1.xlsx`
+   - `police_recorded_crime_historical_chart2.xlsx`
+   - The current years data for NILT e.g. `NILT23TEOv2.sav`
+   - The current years data for YLT e.g. `YLT2024.sav`
+   
+
 ### Data Prep and associated pages.
 There are 4 data prpe files that read in, and prepare, all the data for the .qmd pages that contain charts or maps.
 
@@ -49,5 +62,7 @@ There are 4 data prpe files that read in, and prepare, all the data for the .qmd
 | pps_data_prep.R             | public-prosecution.qmd                                               |
 
 The 'Home' page content is within the `index.qmd` file. Quarto dashboards always use the `index.qmd` file as it's home page and will be the defaulkt page that is used for links on the dashboard title etc.
+
+Ensure that the
 
 
