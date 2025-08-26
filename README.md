@@ -26,7 +26,7 @@ This project includes the `renv` package to manage R packages and dependencies. 
 #### Repository Configuration
 The `.Rprofile` script dynamically configures package repositories based on available shared drives and includes a fallback to CRAN. This ensures that the correct versions of required packages are sourced from internal or public repositories.
 
-#### Important Files & Folders
+### Important Files & Folders
 There are 4 data prpe files that read in, and prepare, all the data for the .qmd pages that contain charts or maps.
 
 | Data prep file             | Page                                                                 |
@@ -35,3 +35,7 @@ There are 4 data prpe files that read in, and prepare, all the data for the .qmd
 | recordedcrime_data_prep.R   | recorded-crime-police.qmd<br>recorded-crime-homicide.qmd<br>recorded-crime-victims.qmd<br>recorded-crime-policing-district.qmd |
 | domabuse_data_prep.R        | domestic-abuse.qmd                                                   |
 | pps_data_prep.R             | public-prosecution.qmd                                               |
+
+The 'Home' page content is within the `index.qmd` file. Quarto dashboards always use the `index.qmd` file as it's home page and will be the defaulkt page that is used for links on the dashboard title etc.
+
+
