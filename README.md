@@ -81,7 +81,7 @@ The `config.R` file contains information and settings that are required for the 
    - `data_folder`: This variable contains the directory location information for the data folder.   
    - Current-year variables that need set each year for the various sections of the dashboard:   
            - `currentyear`: The current year that the publication is being created in.   
-           - Other current-year variables that should be set to the current-year that you have the data for e.g. `nilt_currentyear' may be set to `2023` but `da_currentyear` (domestic abuse) may be set to `2024/25`.
+           - Other current-year variables that should be set to the current-year that you have the data for e.g. `nilt_currentyear` may be set to `2023` but `da_currentyear` (domestic abuse) may be set to `2024/25`.
 
 
 
