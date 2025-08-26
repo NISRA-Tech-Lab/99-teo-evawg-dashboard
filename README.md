@@ -1,11 +1,11 @@
 # EVAWG Quarto Dashboard
 
-## Project Overview
+## PROJECT OVERVIEW
 This project facilitates the creation of a Quarto-based website for the *EVAWG Gender-based Violence - Prevelance* dahsboard.   
 
 Data for the dashboard is read in and prepared in files in the `data` folder.  Once the data is read in, content (charts, maps, text etc) can be created on the various `.qmd` files within the `pages` folder. Once the publication content is created it can then be rendered and the output saved to the `docs` folder.
 
-### Prerequisites
+## PREREQUISITES
 
 - **R 4.4**, **RStudio 2024.04.1-748**, and **GIT for Windows** are required. All are available from ITAssist Store on your desktop.
 - All required R packages are listed in `config.R`. By correctly initializing and restoring `renv`, all necessary dependencies will be installed automatically.
@@ -16,7 +16,7 @@ git config --global user.name "GithubUsername"
 git config --global user.email firstname.lastname@daera-ni.gov.uk
 ```
 
-### Using `renv` for Dependency Management
+## RENV
 
 This project includes the `renv` package to manage R packages and dependencies. The `.Rprofile` file ensures that the appropriate repositories are set up, and `renv` is activated upon loading the project.
 
@@ -28,7 +28,7 @@ This project includes the `renv` package to manage R packages and dependencies. 
 #### Repository Configuration
 The `.Rprofile` script dynamically configures package repositories based on available shared drives and includes a fallback to CRAN. This ensures that the correct versions of required packages are sourced from internal or public repositories.
 
-## **Render the Dashboard**
+## RENDERING THE DASHBOARD
    - Open the `render_dashboard.R` script.
    - Ensure this line `quarto_render(input = here("pages")` is set to "pages".
    - Click **Source** or press `Ctrl + Shift + S` to run the script and generate the updated website.
@@ -97,7 +97,7 @@ The `_quarto.yml` file is swithin the `pages` folder and is responsible for:
 `href: index.qmd text: Home`
 This means that the `index.qmd` page is being read in but it will be called `Home` on the dashboard menu.
 
-### Charts
+## CHARTS
 
 For the charts in the code the R charting package **Plotly** is used. Some
 helpful resources are below:
@@ -142,7 +142,7 @@ are more links on styling other charts also.
 - [Bar chart plolty R attributes](https://plotly.com/r/reference/bar/)
 - [Horizontal Bar Charts in R](https://plotly.com/r/horizontal-bar-charts/)
 
-## Useful links
+## USEFUL LINKS
 - [Quarto dashboards](https://quarto.org/docs/dashboards/) - Help with dashboard layouts for individual pages
 - [Quarto websites](https://quarto.org/docs/websites/) - Help with programming over all navigation
 
