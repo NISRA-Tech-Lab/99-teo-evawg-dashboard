@@ -101,7 +101,7 @@ This means that the `index.qmd` page is being read in but it will be called `Hom
 | STEP             | NOTE                                                                 |
 |-----------------------------|----------------------------------------------------------------------|
 | Update data.            | Insert new `.sav` files for the current NILT & YLT year's data into the `data` folder. If any of these file names are different from the previous year then update the variables where this data is read in on the relevant data_prep pages (e.g. `main_data_prep`) . Update any URL or data portal links.                                                  |
-| Check `data_folder` variable.    | Located in `config.R`. It is recommened you store the project data folder in a shared drive. Update this variable with the link to the saved location. This enables the data in the `data` folder can be read into the R project. |
+| Check `data_folder` variable.    | Located in `config.R`. It is recommened you store the project `data` folder in a shared drive. Update this variable with the link to the saved location. This ensures the data in the `data` folder can be read into the R project. |
 | Set current year varibales.        | Located in `config.R`. E.g. `ylt_currentyear`                                                   |
 | Update any relevant links & notes.             | Located under various charts throughout the dashboard on the .qmd pages (in `pages` folder).                                              |
 
