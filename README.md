@@ -3,7 +3,7 @@
 ## PROJECT OVERVIEW
 This project facilitates the creation of a Quarto-based website for the *EVAWG Gender-based Violence - Prevelance* dashboard.   
 
-Data for the dashboard is read in and prepared in files in the `data` folder.  Once the data is read in, content (charts, maps, text etc) can be created on the various `.qmd` files within the `pages` folder. Once the publication content is created it can then be rendered and the output saved to the `docs` folder.
+Data for the dashboard is read in from data in the `data` folder and prepared in R files stored in the `data_prep` folder.  Once the data is read in and prepared, content (charts, maps, text etc) can be created on the various `.qmd` files within the `pages` folder. Once the publication content is created it can then be rendered and the output saved to the `docs` folder.
 
 ## PREREQUISITES
 
