@@ -12,15 +12,6 @@ nilt_currentyr_data <- read.spss(
     age_18_29 = ifelse(RAGE_num >= 18 & RAGE_num <= 29, "yes", "no")
   )
 
-nilt_previousyr_data <- read.spss(
-  paste0(data_folder, "/NILT 2022.sav"),
-  to.data.frame = TRUE
-) %>%
-  mutate(
-    RAGE_num = as.numeric(as.character(RAGE)),
-    age_18_29 = ifelse(RAGE_num >= 18 & RAGE_num <= 29, "yes", "no")
-  )
-
 
 nilt_historical_chart1 <- read_excel(
   paste0(data_folder, "/nilt_historical_chart1.xlsx")
@@ -40,10 +31,6 @@ ylt_currentyr_data <- read.spss(
   to.data.frame = TRUE
 )
 
-ylt_previousyr_data <- read.spss(
-  paste0(data_folder, "/ylt23w1.sav"),
-  to.data.frame = TRUE
-)
 
 ylt_historical_chart1 <- read_excel(
   paste0(data_folder, "/ylt_historical_chart1.xlsx")
