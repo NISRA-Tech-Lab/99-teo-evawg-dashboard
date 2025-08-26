@@ -26,7 +26,19 @@ This project includes the `renv` package to manage R packages and dependencies. 
 #### Repository Configuration
 The `.Rprofile` script dynamically configures package repositories based on available shared drives and includes a fallback to CRAN. This ensures that the correct versions of required packages are sourced from internal or public repositories.
 
-### Important Files & Folders
+## **Render the Dashboard**
+   - Open the `render_dashboard.R` script.
+   - Ensure this line `quarto_render(input = here("pages")` is set to "pages".
+   - Click **Source** or press `Ctrl + Shift + S` to run the script and generate the updated website.
+   - After execution, the website will automatically open in your default web browser.
+   - The rendered html file will also be saved in your 'docs' folder. Open the `index.html` file to open the dashboard in a browser.
+
+To render one page at a time, set this line in the `render_dashboard.R` file to the name of your page:
+  - `quarto_render(input = here("pages/NILT")
+
+## Important Files & Folders
+
+### Data Prep and associated pages.
 There are 4 data prpe files that read in, and prepare, all the data for the .qmd pages that contain charts or maps.
 
 | Data prep file             | Page                                                                 |
