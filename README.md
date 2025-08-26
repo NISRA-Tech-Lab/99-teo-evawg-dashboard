@@ -82,6 +82,18 @@ The `config.R` file contains information and settings that are required for the 
    - Current-year variables that need set each year for the various sections of the dashboard:   
            - `currentyear`: The current year that the publication is being created in.   
            - Other current-year variables that should be set to the current-year that you have the data for e.g. `nilt_currentyear` may be set to `2023` but `da_currentyear` (domestic abuse) may be set to `2024/25`.
+   - NISRA colour palette is set.
+
+## .YML 
+The `_quarto.yml` file is swithin the `pages` folder and is responsible for:
+   - Setting dashboard title.
+   - Dashboard navigation set-up.
+   - Page titles.
+   - Setting icons on the menu (e.g the home icon)
+
+`href` referes to the .qmd file that you want to be on the menu and dahsboard. `text` referes to the name of the page. For example:
+`href: index.qmd text: Home`
+This means that the `index.qmd` page is being read in but it will be called `Home` on the dashboard menu.
 
 
 
