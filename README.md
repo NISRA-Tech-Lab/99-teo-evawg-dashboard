@@ -77,7 +77,7 @@ There are 4 data prep files that read in, and prepare, all the data for the .qmd
 
 The 'Home' page content is within the `index.qmd` file. Quarto dashboards always use the `index.qmd` file as it's home page and will be the default page that is used for links on the dashboard title etc.
 
-## CONFIG
+## CONFIGURATION
 The `config.R` file contains information and settings that are required for the production of the dashboard to run smoothly:
    - R package list.
    - `data_folder`: This variable contains the directory location information for the data folder.   
@@ -96,6 +96,55 @@ The `_quarto.yml` file is swithin the `pages` folder and is responsible for:
 `href` referes to the .qmd file that you want to be on the menu and dahsboard. `text` referes to the name of the page. For example:
 `href: index.qmd text: Home`
 This means that the `index.qmd` page is being read in but it will be called `Home` on the dashboard menu.
+
+### Charts
+
+For the charts in the code the R charting package **Plotly** is used. Some
+helpful resources are below:
+
+- [Pie Charts in R](https://plotly.com/r/pie-charts/)
+- [Plotly R Open Source Graphing Library](https://plotly.com/r/#:~:text=Plotly's%20R%20graphing%20library%20makes,3D%20(WebGL%20based)%20charts.)
+- [Plotly R Library Basic Charts](https://plotly.com/r/basic-charts/)
+- [Plotly R Library Statistical Charts](https://plotly.com/r/statistical-charts/)
+- [GitHub Plotly](<https://gist.github.com/aagarw30/800c4da26eebbe2331860872d31720c1>)
+- [Cheatsheets for Plotly](<https://images.plot.ly/plotly-documentation/images/r_cheat_sheet.pdf>)
+
+The code chunk for each chart generally follows a similar pattern. Normally a 
+data frame created earlier in one of the data prep files is fed into the `plotly` function
+and named, for example `homicide_plot`. Chart parameters are set like chart
+`type`, `label`, `values`, `x` and `y` variables, `markers` and `line` aesthetics
+like font, size and colour. Other details about the chart like name, label text
+and [hover text](https://plotly.com/r/hover-text-and-formatting/) are set next. 
+
+Sometimes, in charts with multiple lines or bars, the
+[add_trace](https://plotly.com/r/creating-and-updating-figures/#adding-traces)
+function is used to add additional variables.
+
+Following this there is a layout section that sets the aesthetics of the chart
+as a whole like axis styling, titles, legends, margins, fonts etc.
+[`layout` attributes in plotly](https://plotly.com/r/reference/layout/). Where
+required [chart annotations](https://plotly.com/r/text-and-annotations/) are
+added in the layout section. Annotations are used to label lines, bars and as
+axis titles to help meet accessibility requirements. After the layout section
+there is a line of code `config(displayModeBar = FALSE)` that removes `plotly`
+logos and other unnecessary tools.
+
+There are many different attributes that are used in the code that help to style
+and format the charts. The links below have more information on the different
+types of charts in the report and their corresponding styling attributes. There
+are more links on styling other charts also.
+
+- [Pie Charts in R](https://plotly.com/r/pie-charts/)
+- [Pie chart plolty R attributes](https://plotly.com/r/reference/pie/)
+- [Line Plots in R](https://plotly.com/r/line-charts/)
+- [Line chart plolty R attributes](https://plotly.com/r/reference/)
+- [Bar Charts in R](https://plotly.com/r/bar-charts/)
+- [Bar chart plolty R attributes](https://plotly.com/r/reference/bar/)
+- [Horizontal Bar Charts in R](https://plotly.com/r/horizontal-bar-charts/)
+
+## Useful links
+- [Quarto dashboards](https://quarto.org/docs/dashboards/) - Help with dashboard layouts for individual pages
+- [Quarto websites](https://quarto.org/docs/websites/) - Help with programming over all navigation
 
 
 
