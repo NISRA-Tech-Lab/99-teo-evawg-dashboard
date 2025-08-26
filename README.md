@@ -34,7 +34,7 @@ The `.Rprofile` script dynamically configures package repositories based on avai
    - The rendered html file will also be saved in your 'docs' folder. Open the `index.html` file to open the dashboard in a browser.
 
 To render one page at a time, set this line in the `render_dashboard.R` file to the name of your page:
-  - `quarto_render(input = here("pages/NILT")
+  - `quarto_render(input = here("pages/NILT")`
 
 ## Important Files & Folders
 
