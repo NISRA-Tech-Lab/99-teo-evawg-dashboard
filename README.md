@@ -60,11 +60,11 @@ The `.xlsx` files in the `data` folder are all historical files that are read in
 Data from URL links are read in on the `domabuse_data_prep.R` and `recordedcrime_data_prep.R` files. 
 
 ### NISRA Data Portal
-Data is pulled in from the NIsra Data Portal on the `pps_data_prep` file.
+Data is pulled in from the Nisra Data Portal on the `pps_data_prep` file.
    
 
 ### Data Prep and associated pages.
-There are 4 data prpe files that read in, and prepare, all the data for the .qmd pages that contain charts or maps.
+There are 4 data prep files that read in, and prepare, all the data for the .qmd pages that contain charts or maps.
 
 | Data prep file             | Page                                                                 |
 |-----------------------------|----------------------------------------------------------------------|
@@ -73,7 +73,15 @@ There are 4 data prpe files that read in, and prepare, all the data for the .qmd
 | domabuse_data_prep.R        | domestic-abuse.qmd                                                   |
 | pps_data_prep.R             | public-prosecution.qmd                                               |
 
-The 'Home' page content is within the `index.qmd` file. Quarto dashboards always use the `index.qmd` file as it's home page and will be the defaulkt page that is used for links on the dashboard title etc.
+The 'Home' page content is within the `index.qmd` file. Quarto dashboards always use the `index.qmd` file as it's home page and will be the default page that is used for links on the dashboard title etc.
+
+## CONFIG
+The `config.R` file contains information and settings that are required for the production of the dashboard to run smoothly:
+   - R package list.
+   - `data_folder`: This variable contains the directory location information for the data folder.
+   - Current-year variables that need set each year for the various sections of the dashboard:
+           - `currentyear`: The current year that the publication is being created in.
+           - Other current-year variables that should be set to the current-year that you have the data for e.g. `nilt_currentyear' may be set to `2023` but `da_currentyear` (domestic abuse) may be set to `2024/25`.
 
 
 
