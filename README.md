@@ -36,9 +36,13 @@ The `.Rprofile` script dynamically configures package repositories based on avai
 To render one page at a time, set this line in the `render_dashboard.R` file to the name of your page:
   - `quarto_render(input = here("pages/NILT")`
 
-## Important Files & Folders
+## DATA
+Data for this dashboard comes from 3 different sources:
+   - Data files (.xlsx and .sav) within the `data` folder.
+   - URL links
+   - NISRA Data Portal
 
-### Data folder
+### `data` folder
 The `data` folder should include the following data files:
    - `nilt_historical_chart1.xlsx`
    - `nilt_historical_chart2.xlsx`
@@ -49,6 +53,14 @@ The `data` folder should include the following data files:
    - `police_recorded_crime_historical_chart2.xlsx`
    - The current years data for NILT e.g. `NILT23TEOv2.sav`
    - The current years data for YLT e.g. `YLT2024.sav`
+
+The `.xlsx` files in the `data` folder are all historical files that are read in each year before the new year's data is appended onto them and written out to form a new version of the file which is then read in again the next year. Never delete these historical data files. It is recommended you save a copy of them somewhere. 
+
+### URL links
+Data from URL links are read in on the `domabuse_data_prep.R` and `recordedcrime_data_prep.R` files. 
+
+### NISRA Data Portal
+Data is pulled in from the NIsra Data Portal on the `pps_data_prep` file.
    
 
 ### Data Prep and associated pages.
@@ -63,6 +75,6 @@ There are 4 data prpe files that read in, and prepare, all the data for the .qmd
 
 The 'Home' page content is within the `index.qmd` file. Quarto dashboards always use the `index.qmd` file as it's home page and will be the defaulkt page that is used for links on the dashboard title etc.
 
-Ensure that the
+
 
 
