@@ -208,32 +208,3 @@ a.cookiesbarlink {
   text-transform: none;
   font-size: 1.2em;
 }
-
-* ================================
-   Map hover/click text styling
-==================================*/
-
-/* Leaflet tooltips (hover labels) */
-.leaflet-tooltip {
-  font-size: 16px;  /* increase size */
-  font-weight: 500; /* optional for better readability */
-}
-
-/* Leaflet popups (click labels) */
-.leaflet-popup-content {
-  font-size: 16px;  /* increase size */
-  line-height: 1.4;
-}
-
-/* Mapbox GL tooltips/popups (if using Mapbox) */
-.mapboxgl-popup-content {
-  font-size: 16px;
-  line-height: 1.4;
-}
-
-/* Generic fallback for map tooltips/popups */
-.map-tooltip,
-.map-popup {
-  font-size: 16px;
-  line-height: 1.4;
-}

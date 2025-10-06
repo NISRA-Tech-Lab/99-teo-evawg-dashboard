@@ -8,29 +8,9 @@ website:
     left:
       - href: index.qmd
         text: Home
-        icon: bi-house-door-fill
-      - text: Gender-based Violence
-        menu: 
-          - text: Adults
-            href: NILT.qmd
-          - text: Age 16
-            href: YLT.qmd      
-      - text: Recorded Crime
-        menu: 
-          - text: Police recorded crime
-            href: recorded-crime-police.qmd
-          - text: Homicide
-            href: recorded-crime-homicide.qmd
-          - text: Victims
-            href: recorded-crime-victims.qmd
-          - text: Policing district map
-            href: recorded-crime-policing-district.qmd
-      - href: domestic-abuse.qmd
-        text: Domestic Abuse
-      - href: public-prosecution.qmd
-        text: Public Prosecution Service
-      - href: user-notes.qmd
-        text: User notes
+      - href: page_1.qmd
+        text: Page 1
+
 format:
   dashboard:
     css: style.css
