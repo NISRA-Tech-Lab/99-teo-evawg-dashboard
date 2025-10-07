@@ -1,5 +1,6 @@
 ---
 title: "Home"
+page-layout: full
 ---
 
 
@@ -9,4 +10,48 @@ title: "Home"
 library(here)
 source(here("data_prep/data_prep.R"))
 ```
+
+
+## My Dashboard Grid
+
+
+```{=html}
+
+<div id="nisra-grid">
+  <div class="tile-group">
+    <div class="tile">INSERT TEXT</div>
+    <div class="sub-tile">INSERT TEXT</div>
+  </div>
+  <div class="tile-group">
+    <div class="tile">INSERT TEXT</div>
+    <div class="sub-tile">INSERT TEXT</div>
+  </div>
+  <div class="tile-group">
+    <div class="tile">INSERT TEXT</div>
+    <div class="sub-tile">INSERT TEXT</div>
+  </div>
+  <div class="tile-group">
+    <div class="tile">INSERT TEXT</div>
+    <div class="sub-tile">INSERT TEXT</div>
+  </div>
+  <div class="tile-group">
+    <div class="tile">INSERT TEXT</div>
+    <div class="sub-tile">INSERT TEXT</div>
+  </div>
+  <div class="tile-group">
+    <div class="tile">INSERT TEXT</div>
+    <div class="sub-tile">INSERT TEXT</div>
+  </div>
+  <div class="tile-group">
+    <div class="tile">INSERT TEXT</div>
+    <div class="sub-tile">INSERT TEXT</div>
+  </div>
+  <div class="tile-group">
+    <div class="tile">INSERT TEXT</div>
+    <div class="sub-tile">INSERT TEXT</div>
+  </div>
+</div>
+```
+
+
 

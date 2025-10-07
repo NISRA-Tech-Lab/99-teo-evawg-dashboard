@@ -3,7 +3,7 @@
 ==================================*/
 :root {
   --brand-blue: #1a6ecc;   /* Primary brand */
-  --brand-blue-dark: #005f99;
+  --brand-blue-dark: #00205b;
   --brand-blue-mid: #007acc;
   --text-on-blue: #ffffff; /* High-contrast text on blue */
   --text-default: #1a1a1a;
@@ -46,7 +46,7 @@ div.chart-title {
    Navbar & branding
 ==================================*/
 .navbar {
-  background-color: var(--brand-blue);
+  background-color: var(--brand-blue-dark);
 }
 
 /* Ensure all navbar links/brand are readable on blue */
@@ -207,4 +207,77 @@ a.cookiesbarlink {
   color: #fff;
   text-transform: none;
   font-size: 1.2em;
+}
+
+
+
+
+
+
+
+
+
+/* ===== LOCKED 4-per-row grid (wins against theme rules) ===== */
+#nisra-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;  /* exactly 4 columns */
+  gap: 14px !important;
+  justify-items: center !important;   /* center each column’s content */
+  align-items: start !important;
+  width: 100% !important;
+  margin: 20px 0 !important;
+  box-sizing: border-box;
+}
+
+/* Size knob: set the exact tile width once, columns will stay at 4 */
+#nisra-grid .tile-group {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+
+  /* 👇 tweak this single line to resize the boxes */
+  width: 260px !important;            /* try 240px or 280px */
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#nisra-grid .tile {
+  width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  border: 2px solid #00205b;
+  border-radius: 8px;
+  background: #f5f9ff;
+  color: #00205b;
+  font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#nisra-grid .sub-tile {
+  width: 100% !important;
+  border: 1.5px solid #00205b;
+  border-radius: 6px;
+  background: #fff;
+  color: #00205b;
+  text-align: center;
+  font-weight: 500;
+  padding: 8px;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: background-color .2s ease, color .2s ease;
+}
+#nisra-grid .sub-tile:hover { background: #732777; color: #fff; }
+
+/* Responsive: 2 per row on tablet, 1 per row on mobile */
+@media (max-width: 900px) {
+  #nisra-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  #nisra-grid .tile-group { width: 300px !important; }
+}
+@media (max-width: 600px) {
+  #nisra-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+  #nisra-grid .tile-group { width: min(90vw, 360px) !important; }
 }
