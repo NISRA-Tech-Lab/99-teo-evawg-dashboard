@@ -216,7 +216,6 @@ a.cookiesbarlink {
 
 
 
-
 /* ===== LOCKED 4-per-row grid (wins against theme rules) ===== */
 #nisra-grid {
   display: grid !important;
@@ -227,6 +226,11 @@ a.cookiesbarlink {
   width: 100% !important;
   margin: 20px 0 !important;
   box-sizing: border-box;
+
+  /* knobs */
+  --grid-gap: 14px;   /* keep in sync with gap above */
+  --tile-w: 260px;    /* single tile-group width (try 240px or 280px) */
+  --sub-rect-h: 48px; /* base height for sub-tiles */
 }
 
 /* Size knob: set the exact tile width once, columns will stay at 4 */
@@ -236,8 +240,7 @@ a.cookiesbarlink {
   align-items: center !important;
   gap: 8px !important;
 
-  /* 👇 tweak this single line to resize the boxes */
-  width: 260px !important;            /* try 240px or 280px */
+  width: var(--tile-w) !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
 }
@@ -257,8 +260,10 @@ a.cookiesbarlink {
   box-sizing: border-box;
 }
 
+/* ===== Sub-tiles (link-ready) ===== */
 #nisra-grid .sub-tile {
   width: 100% !important;
+  min-height: var(--sub-rect-h);
   border: 1.5px solid #00205b;
   border-radius: 6px;
   background: #fff;
@@ -268,16 +273,83 @@ a.cookiesbarlink {
   padding: 8px;
   font-size: clamp(0.9rem, 1vw, 1rem);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  transition: background-color .2s ease, color .2s ease;
+  display: flex; align-items: center; justify-content: center;
+
+  /* smooth hover transitions + gentle lift */
+  transition: background-color 0.25s ease,
+              color 0.25s ease,
+              transform 0.15s ease;
+  text-decoration: none; /* if/when used as <a> */
 }
-#nisra-grid .sub-tile:hover { background: #732777; color: #fff; }
+
+#nisra-grid .sub-tile:hover {
+  background: #732777;  /* your existing hover color */
+  color: #fff;
+  transform: translateY(-1.5px); /* subtle lift for consistency */
+  cursor: pointer;
+}
+
+/* ==== Bottom wide rectangles (each covers columns 1–2 and 3–4) ==== */
+#nisra-grid .wide-rect {
+  width: calc((var(--tile-w) * 2) + var(--grid-gap));
+  max-width: 100%;
+  justify-self: center;
+  min-height: calc(var(--sub-rect-h) * 2);
+  border: 1.5px solid #00205b;
+  border-radius: 6px;
+  color: #fff; /* white text for contrast */
+  font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 12px;
+  box-sizing: border-box;
+
+  /* smooth hover animation */
+  transition: background-color 0.25s ease, transform 0.15s ease;
+  text-decoration: none; /* if/when used as <a> */
+}
+
+/* Explicit placement + base colors */
+#nisra-grid .wide-rect.left  {
+  grid-column: 1 / 3;
+  background: #3878c5;  /* blue left rectangle */
+}
+#nisra-grid .wide-rect.right {
+  grid-column: 3 / 5;
+  background: #68a41e;  /* green right rectangle */
+}
+
+/* Hover: darker + slight lift */
+#nisra-grid .wide-rect.left:hover {
+  background: #2d64a3;  /* darker blue */
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+#nisra-grid .wide-rect.right:hover {
+  background: #558718;  /* darker green */
+  transform: translateY(-2px);
+  cursor: pointer;
+}
 
 /* Responsive: 2 per row on tablet, 1 per row on mobile */
 @media (max-width: 900px) {
   #nisra-grid { grid-template-columns: repeat(2, 1fr) !important; }
   #nisra-grid .tile-group { width: 300px !important; }
+
+  /* On tablet, stack wide rects full-width for readability */
+  #nisra-grid .wide-rect.left,
+  #nisra-grid .wide-rect.right {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
 }
+
 @media (max-width: 600px) {
   #nisra-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
   #nisra-grid .tile-group { width: min(90vw, 360px) !important; }
+  #nisra-grid .wide-rect.left,
+  #nisra-grid .wide-rect.right {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
 }
