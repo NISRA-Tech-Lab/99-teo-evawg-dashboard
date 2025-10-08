@@ -53,8 +53,8 @@ source(here("data_prep/data_prep.R"))
   </div>
 
   <!-- Two bottom rectangles aligned to pairs of columns -->
-  <div class="wide-rect left">WIDE RECTANGLE A</div>   <!-- covers columns 1–2 -->
-  <div class="wide-rect right">WIDE RECTANGLE B</div>  <!-- covers columns 3–4 -->
+  <div class="wide-rect left">Using this Dashboard</div>   <!-- covers columns 1–2 -->
+  <div class="wide-rect right">Help & Support</div>  <!-- covers columns 3–4 -->
 </div>
 
 ```
