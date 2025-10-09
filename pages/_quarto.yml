@@ -2,15 +2,23 @@ project:
   type: website
   output-dir: ../docs
 
-
 website:
-  title: "Gender-based Violence - Prevalence"
+  title: "Ending Violence Against<br>Women and Girls"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - href: page_1.qmd
         text: Page 1
+      - href: page_2.qmd
+        text: Page 2
+      - href: page_3.qmd
+        text: Page 3
+      - href: page_4.qmd
+        text: Page 4
+      - href: page_5.qmd
+        text: Page 5
+
 
 format:
   dashboard:
@@ -23,4 +31,10 @@ format:
       text: |
         <div id = "cookie-banner"></div>
         <script src = "cookies_script.js"></script>
-
+    include-after-body:
+      text: |
+        <footer id="site-footer">
+          <div class="footer-content">
+            <p>© 2025 The Executive Office | Ending Violence Against Women and Girls Dashboard</p>
+          </div>
+        </footer>

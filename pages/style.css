@@ -49,8 +49,21 @@ div.chart-title {
   background-color: var(--brand-blue-dark);
 }
 
-/* Ensure all navbar links/brand are readable on blue */
-.navbar .navbar-brand,
+/* --- Title (brand) styling --- */
+.navbar .navbar-brand {
+  color: var(--text-on-blue) !important;
+  font-size: 24px;       /* ⬅️ Larger title text */
+  font-weight: 700;      /* Bold title */
+  line-height: 1.25;     /* Better spacing for two lines */
+  white-space: normal;   /* Allow wrapping for <br> */
+  display: inline-block; /* Keep tidy inline behavior */
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* --- Nav links (menu items) styling --- */
 .navbar .nav-link {
   color: var(--text-on-blue) !important;
   font-size: 17px;
@@ -133,12 +146,6 @@ div.navbar-inverse.navbar-fixed-top {
   font-weight: 600;
 }
 
-/* Remove deprecated custom selectors that didn't match markup
-   (Replaced by .nav-tabs .nav-link rules above)
-   .nav-tabs-custom .nav-tabs li.active a { ... }
-   .nav-tabs-custom .nav-tabs li:not(.active) a { ... }
-*/
-
 /* ================================
    Chart/table sizing 
 ==================================*/
@@ -209,37 +216,29 @@ a.cookiesbarlink {
   font-size: 1.2em;
 }
 
-
-
-
-
-
-
+/* =====HOME PAGE LAYOUT ===== */
 
 /* ===== LOCKED 4-per-row grid (wins against theme rules) ===== */
 #nisra-grid {
   display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;  /* exactly 4 columns */
+  grid-template-columns: repeat(4, 1fr) !important;
   gap: 14px !important;
-  justify-items: center !important;   /* center each column’s content */
+  justify-items: center !important;
   align-items: start !important;
   width: 100% !important;
   margin: 20px 0 !important;
   box-sizing: border-box;
-
-  /* knobs */
-  --grid-gap: 14px;   /* keep in sync with gap above */
-  --tile-w: 260px;    /* single tile-group width (try 240px or 280px) */
-  --sub-rect-h: 48px; /* base height for sub-tiles */
+  position: relative; /* ✅ prevent overlap stacking */
+  --grid-gap: 14px;
+  --tile-w: 260px;
+  --sub-rect-h: 48px;
 }
 
-/* Size knob: set the exact tile width once, columns will stay at 4 */
 #nisra-grid .tile-group {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   gap: 8px !important;
-
   width: var(--tile-w) !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
@@ -260,7 +259,6 @@ a.cookiesbarlink {
   box-sizing: border-box;
 }
 
-/* ===== Sub-tiles (link-ready) ===== */
 #nisra-grid .sub-tile {
   width: 100% !important;
   min-height: var(--sub-rect-h);
@@ -274,22 +272,17 @@ a.cookiesbarlink {
   font-size: clamp(0.9rem, 1vw, 1rem);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   display: flex; align-items: center; justify-content: center;
-
-  /* smooth hover transitions + gentle lift */
-  transition: background-color 0.25s ease,
-              color 0.25s ease,
-              transform 0.15s ease;
-  text-decoration: none; /* if/when used as <a> */
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
+  text-decoration: none;
 }
 
 #nisra-grid .sub-tile:hover {
-  background: #732777;  /* your existing hover color */
+  background: #732777;
   color: #fff;
-  transform: translateY(-1.5px); /* subtle lift for consistency */
+  transform: translateY(-1.5px);
   cursor: pointer;
 }
 
-/* ==== Bottom wide rectangles (each covers columns 1–2 and 3–4) ==== */
 #nisra-grid .wide-rect {
   width: calc((var(--tile-w) * 2) + var(--grid-gap));
   max-width: 100%;
@@ -297,36 +290,32 @@ a.cookiesbarlink {
   min-height: calc(var(--sub-rect-h) * 2);
   border: 1.5px solid #00205b;
   border-radius: 6px;
-  color: #fff; /* white text for contrast */
+  color: #fff;
   font-weight: 600;
   display: flex; align-items: center; justify-content: center;
   text-align: center;
   padding: 12px;
   box-sizing: border-box;
-
-  /* smooth hover animation */
   transition: background-color 0.25s ease, transform 0.15s ease;
-  text-decoration: none; /* if/when used as <a> */
+  text-decoration: none;
 }
 
-/* Explicit placement + base colors */
 #nisra-grid .wide-rect.left  {
   grid-column: 1 / 3;
-  background: #3878c5;  /* blue left rectangle */
+  background: #3878c5;
 }
 #nisra-grid .wide-rect.right {
   grid-column: 3 / 5;
-  background: #68a41e;  /* green right rectangle */
+  background: #68a41e;
 }
 
-/* Hover: darker + slight lift */
 #nisra-grid .wide-rect.left:hover {
-  background: #2d64a3;  /* darker blue */
+  background: #2d64a3;
   transform: translateY(-2px);
   cursor: pointer;
 }
 #nisra-grid .wide-rect.right:hover {
-  background: #558718;  /* darker green */
+  background: #558718;
   transform: translateY(-2px);
   cursor: pointer;
 }
@@ -335,8 +324,6 @@ a.cookiesbarlink {
 @media (max-width: 900px) {
   #nisra-grid { grid-template-columns: repeat(2, 1fr) !important; }
   #nisra-grid .tile-group { width: 300px !important; }
-
-  /* On tablet, stack wide rects full-width for readability */
   #nisra-grid .wide-rect.left,
   #nisra-grid .wide-rect.right {
     grid-column: 1 / -1;
@@ -354,8 +341,51 @@ a.cookiesbarlink {
   }
 }
 
+/* ================================
+   Sticky footer layout fix
+==================================*/
+html, body { height: 100%; }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
+#quarto-content,
+main,
+.page-columns {
+  flex: 1 0 auto;
+}
 
+#site-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  clear: both;
+  position: relative;
+  z-index: 1;
+}
 
+/* Optional fallback padding if needed */
+main, #quarto-content { padding-bottom: 80px; }
 
+/* ================================
+   Footer
+==================================*/
+#site-footer {
+  background-color: var(--brand-blue-dark);
+  color: var(--text-on-blue);
+  text-align: center;
+  padding: 15px 10px;   /* controls footer depth */
+  font-size: 16px;
+  margin-top: 40px;     /* space before footer starts */
+}
 
+#site-footer .footer-content p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Optional: add a subtle top border for separation */
+#site-footer {
+  border-top: 4px solid var(--brand-blue-mid);
+}
