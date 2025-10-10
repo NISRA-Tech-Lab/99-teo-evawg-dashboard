@@ -2,9 +2,13 @@ project:
   type: website
   output-dir: ../docs
 
+
 website:
-  title: "Ending Violence Against<br>Women and Girls"
+  # Metadata only (we hide the brand in the navbar via CSS)
+  title: "Ending Violence Against Women and Girls"
+
   navbar:
+    pinned: false
     left:
       - href: index.qmd
         text: Home
@@ -19,18 +23,54 @@ website:
       - href: page_5.qmd
         text: Page 5
 
-
 format:
   dashboard:
     css: style.css
     fig-responsive: true
-    include-in-header: 
+
+    include-in-header:
       text: |
-        <script src = "dashboard.js"></script>
+        <script src="dashboard.js"></script>
+
+        <!-- Keep custom header BEFORE Quarto navbar, even if Quarto re-renders -->
+        <script>
+          (function () {
+            function placeHeader() {
+              var hdr = document.getElementById("quarto-header");
+              var custom = document.getElementById("custom-site-header");
+              if (!hdr || !custom || !hdr.parentNode) return;
+
+              // If custom header isn't right before the navbar, move it there
+              if (custom.nextElementSibling !== hdr) {
+                hdr.parentNode.insertBefore(custom, hdr);
+              }
+            }
+
+            placeHeader();
+            document.addEventListener("DOMContentLoaded", placeHeader);
+            window.addEventListener("load", placeHeader);
+
+            // If the DOM changes (e.g., theme hydration), enforce order again
+            var mo = new MutationObserver(placeHeader);
+            mo.observe(document.body, { childList: true, subtree: true });
+          })();
+        </script>
+
     include-before-body:
       text: |
-        <div id = "cookie-banner"></div>
-        <script src = "cookies_script.js"></script>
+        <!-- Custom dark-blue header (title centered, TEO left, NISRA right) -->
+        <div id="custom-site-header" class="custom-site-header">
+          <div class="custom-site-header__inner">
+            <img src="images/teo_logo.png" alt="The Executive Office" class="custom-site-header__logo custom-site-header__logo--left">
+            <h1 class="custom-site-header__title">Ending Violence Against Women and Girls</h1>
+            <img src="images/nisra_logo.svg" alt="NISRA" class="custom-site-header__logo custom-site-header__logo--right">
+          </div>
+        </div>
+
+        <!-- Cookie consent -->
+        <div id="cookie-banner"></div>
+        <script src="cookies_script.js"></script>
+
     include-after-body:
       text: |
         <footer id="site-footer">
