@@ -12,16 +12,20 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: page_1.qmd
-        text: Page 1
-      - href: page_2.qmd
-        text: Page 2
-      - href: page_3.qmd
-        text: Page 3
-      - href: page_4.qmd
-        text: Page 4
-      - href: page_5.qmd
-        text: Page 5
+      - href: focus_on_women.qmd
+        text: Focus on women
+      - href: focus_on_girls.qmd
+        text: Focus on girls
+      - href: reported_crime.qmd
+        text: Reported crime
+      - href: domestic_abuse.qmd
+        text: Domestic abuse
+      - href: attitudes_to_reporting.qmd
+        text: Attitudes to reporting
+      - href: case_processing_times.qmd
+        text: Case processing times
+      - href: information.qmd
+        text: Information
 
 format:
   dashboard:

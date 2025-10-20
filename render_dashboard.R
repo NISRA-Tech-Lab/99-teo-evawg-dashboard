@@ -6,7 +6,7 @@ library(here)
 
 # Run to render website
 
-quarto_render(input = here("pages/index.qmd"),
+quarto_render(input = here("pages"),
               as_job = FALSE)
 
 
