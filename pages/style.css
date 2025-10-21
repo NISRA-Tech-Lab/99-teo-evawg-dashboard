@@ -25,10 +25,10 @@ body{min-height:100vh;display:flex;flex-direction:column}
 #quarto-content,main,.page-columns{flex:1 0 auto}
 
 /* ================================
-   CUSTOM TOP HEADER (always above navbar)
+   CUSTOM TOP HEADER
 ==================================*/
 #custom-site-header.custom-site-header{
-  background:#00205b !important;   /* force dark blue */
+  background:#00205b !important;
   color:#fff !important;
   border-bottom:4px solid var(--brand-blue-mid);
   width:100%;
@@ -38,8 +38,6 @@ body{min-height:100vh;display:flex;flex-direction:column}
   max-width:1200px !important;
   margin:0 auto !important;
   padding:12px 16px !important;
-
-  /* 3-column grid: [logo-left] [TITLE] [logo-right] */
   display:grid !important;
   grid-template-columns:auto 1fr auto !important;
   align-items:center !important;
@@ -64,7 +62,7 @@ body{min-height:100vh;display:flex;flex-direction:column}
 .custom-site-header__logo--left{ grid-column:1 !important; justify-self:start !important; }
 .custom-site-header__logo--right{ grid-column:3 !important; justify-self:end !important; }
 
-/* Mobile */
+/* Mobile header */
 @media (max-width:640px){
   .custom-site-header__inner{
     grid-template-columns:1fr !important;
@@ -76,16 +74,16 @@ body{min-height:100vh;display:flex;flex-direction:column}
 }
 
 /* ================================
-   Native navbar (links only) below header
+   Navbar
 ==================================*/
 #quarto-header .navbar,
 #quarto-header .navbar.bg-primary,
 .navbar.bg-primary,
 .navbar.navbar-expand-lg{
-  background:#00205b !important;   /* same dark blue */
+  background:#00205b !important;
   background-image:none !important;
 }
-#quarto-header .navbar-brand{ display:none !important; } /* hide site title in navbar */
+#quarto-header .navbar-brand{ display:none !important; }
 
 .navbar .nav-link{ color:var(--text-on-blue) !important; font-size:17px; }
 .navbar-nav .nav-link.active{
@@ -109,13 +107,10 @@ div.chart-title{
 .card-header,.chart-title-container{ background:var(--brand-blue); color:var(--text-on-blue); }
 .card-header .nav-tabs,.chart-title-container .nav-tabs{ border-bottom-color:transparent; }
 
-/* Tabsets */
 .card-header .nav-tabs .nav-link,
 .chart-title-container .nav-tabs .nav-link{ color:var(--text-on-blue) !important; font-size:17px; }
 .card-header .nav-tabs .nav-link:hover,
-.card-header .nav-tabs .nav-link:focus,
-.chart-title-container .nav-tabs .nav-link:hover,
-.chart-title-container .nav-tabs .nav-link:focus{ color:#e6f2ff !important; }
+.chart-title-container .nav-tabs .nav-link:hover{ color:#e6f2ff !important; }
 .card-header .nav-tabs .nav-link.active,
 .chart-title-container .nav-tabs .nav-link.active{
   background:#fff !important; color:var(--brand-blue) !important;
@@ -167,11 +162,9 @@ div.chart-stage.chartstage-flex{ font-size:16px; }
   background:#f5f9ff; color:#00205b; font-weight:600; display:flex; align-items:center; justify-content:center;
   text-align:center; font-size:clamp(0.9rem,1.2vw,1.1rem); padding:10px; box-sizing:border-box;
 }
-
-/* 🔧 Wide rectangles: equal sizing and placement */
 #nisra-grid .wide-rect{
   width:100% !important;
-  grid-column:span 2 !important;  /* equal two-column span */
+  grid-column:span 2 !important;
   min-height:calc(var(--sub-rect-h) * 2) !important;
   border:1.5px solid #00205b; border-radius:6px; color:#fff; font-weight:600;
   display:flex; align-items:center; justify-content:center; text-align:center; padding:12px; box-sizing:border-box;
@@ -181,14 +174,10 @@ div.chart-stage.chartstage-flex{ font-size:16px; }
 #nisra-grid .wide-rect.right { background:#68a41e; }
 #nisra-grid .wide-rect.left:hover  { background:#2d64a3; transform:translateY(-2px); cursor:pointer; }
 #nisra-grid .wide-rect.right:hover { background:#558718; transform:translateY(-2px); cursor:pointer; }
-
-/* Desktop: left spans cols 1–2, right spans 3–4 */
 @media (min-width:901px){
   #nisra-grid .wide-rect.left  { grid-column:1 / span 2 !important; }
   #nisra-grid .wide-rect.right { grid-column:3 / span 2 !important; }
 }
-
-/* ✅ Sub-tiles: restore even if they live outside #nisra-grid */
 #nisra-grid .sub-tile, .sub-tile{
   width:100% !important;
   min-height:var(--sub-rect-h);
@@ -208,8 +197,6 @@ div.chart-stage.chartstage-flex{ font-size:16px; }
 #nisra-grid .sub-tile:hover, .sub-tile:hover{
   background:#732777; color:#fff; transform:translateY(-1.5px); cursor:pointer;
 }
-
-/* Responsive grid */
 @media (max-width:900px){
   #nisra-grid{ grid-template-columns:repeat(2, minmax(0,1fr)) !important; }
   #nisra-grid .tile-group{ width:300px !important; }
@@ -230,13 +217,7 @@ div.chart-stage.chartstage-flex{ font-size:16px; }
 }
 #site-footer .footer-content p{margin:0;line-height:1.5}
 
-
-/* ===== PLACE THESE AT THE VERY END OF style.css ===== */
-
-/* Quarto sometimes pins the navbar and adds body padding. Unpin it. */
 body.nav-fixed { padding-top: 0 !important; }
-
-/* Kill any fixed positioning on the navbar so it sits below your custom header */
 #quarto-header,
 #quarto-header .navbar,
 .navbar.fixed-top,
@@ -245,9 +226,183 @@ body.nav-fixed { padding-top: 0 !important; }
   position: static !important;
   top: auto !important;
   inset: auto !important;
-  z-index: 100 !important; /* lower than cookie banner, fine for normal flow */
+  z-index: 100 !important;
 }
-
-/* Optional: ensure your custom header visually sits above the navbar if needed */
 #custom-site-header { z-index: 150 !important; position: relative; }
 
+/* ================================
+   Key Figure Boxes + Toggle Switch
+==================================*/
+
+/* Toggle switch styling */
+.sex-toggle {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:600;
+  font-size:16px;
+  color:var(--text-default);
+  justify-content:flex-end;
+}
+.sex-toggle input[type="checkbox"] { display:none; }
+.switch {
+  position:relative;
+  display:inline-block;
+  width:46px;
+  height:24px;
+}
+.switch::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background-color:#ccc;
+  border-radius:24px;
+  transition:background-color 0.25s;
+}
+.switch::after {
+  content:"";
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background-color:#fff;
+  transition:transform 0.25s;
+}
+.sex-toggle input:checked + .switch::before { background-color:var(--brand-blue-mid); }
+.sex-toggle input:checked + .switch::after { transform:translateX(22px); }
+
+/* Male visibility */
+.male-hidden .male-data { display:none !important; }
+.key-figure-box .male-data {
+  margin-top:4px;
+  font-weight:600;
+  color:var(--brand-blue);
+  line-height:1.2;
+}
+
+/* Wrapper for section */
+.key-figure-wrapper{
+  width:100%;
+  max-width:1200px;
+  margin:10px auto 16px;
+  padding:0 12px;
+  box-sizing:border-box;
+}
+
+/* Toggle above, right-aligned */
+.key-figure-wrapper .sex-toggle{
+  margin:0 0 10px 0;
+  justify-content:flex-end;
+}
+
+/* Four equal-width boxes */
+.key-figure-strip{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--grid-gap);
+  align-items:stretch;
+}
+
+/* Box appearance */
+.key-figure-strip .key-figure-box{
+  width:100%;
+  height:calc(var(--tile-w) * 2 / 3);
+  border:2px solid var(--brand-blue-dark);
+  border-radius:8px;
+  background:#f5f9ff;
+  color:#00205b;
+  font-weight:600;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-align:center;
+  font-size:clamp(0.9rem,1.05vw,1.1rem);
+  padding:12px;
+  box-sizing:border-box;
+}
+
+/* Text hierarchy inside boxes */
+.kf-head{
+  color:#732777;
+  font-weight:800;
+  font-size:clamp(1.5rem,2.4vw,2rem);  /* 👈 Bigger, more prominent */
+  line-height:1.1;
+  margin-bottom:6px;
+}
+
+.kf-male{
+  color:var(--brand-blue);
+  font-weight:600;
+  font-size:clamp(1rem,1.3vw,1.2rem);
+  line-height:1.2;
+}
+
+.kf-foot{
+  color:var(--text-default);
+  font-weight:600;
+  font-size:clamp(0.92rem,1vw,1rem);
+  line-height:1.25;
+  margin-top:auto;
+}
+
+/* Responsive: 2-column then 1-column */
+@media (max-width:980px){
+  .key-figure-strip{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:520px){
+  .key-figure-strip{ grid-template-columns:1fr; }
+}
+
+/* Compact the boxes that have a male line when males are hidden */
+.male-hidden .key-figure-strip .has-male{
+  justify-content:center;     /* no big vertical gap */
+  gap:10px;                   /* comfy spacing between head and foot */
+  padding-top:16px;
+  padding-bottom:16px;
+}
+
+/* Slightly bump the headline and bring the footer up a touch */
+.male-hidden .key-figure-strip .has-male .kf-head{
+  font-size:clamp(1.6rem,2.6vw,2.1rem);
+  margin-bottom:2px;
+}
+.male-hidden .key-figure-strip .has-male .kf-foot{
+  margin-top:0;               /* don't force it to the bottom */
+}
+
+/* Optional: hide the (now invisible) male spacer completely just in case */
+.male-hidden .key-figure-strip .has-male .male-data{ display:none !important; }
+
+/* --- Make sure the toggle bar is always visible and above the grid --- */
+#sexToggleBar{
+  display:flex !important;
+  align-items:center;
+  gap:10px;
+  justify-content:flex-end;
+  margin:0 0 10px 0;
+  visibility:visible !important;
+}
+
+#sexToggleBar .switch{ display:inline-block !important; }
+
+/* If male content is hidden, DO NOT hide the toggle bar */
+.male-hidden #sexToggleBar{ display:flex !important; }
+
+/* Compact mode when male line is hidden (only for boxes that have a male line) */
+.male-hidden .key-figure-strip .has-male{
+  justify-content:center;
+  gap:10px;
+  padding-top:16px;
+  padding-bottom:16px;
+}
+.male-hidden .key-figure-strip .has-male .kf-head{
+  font-size:clamp(1.6rem,2.6vw,2.1rem);
+  margin-bottom:2px;
+}
+.male-hidden .key-figure-strip .has-male .kf-foot{
+  margin-top:0;
+}
+/* (This line is redundant with your global rule, but keeps it local & safe) */
+.male-hidden .key-figure-strip .has-male .male-data{ display:none !important; }

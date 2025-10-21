@@ -6,7 +6,7 @@ library(here)
 
 # Run to render website
 
-quarto_render(input = here("pages"),
+quarto_render(input = here("pages/focus_on_women.qmd"),
               as_job = FALSE)
 
 
