@@ -1,5 +1,6 @@
 ---
 title: "Focus on women"
+page-layout: full
 ---
 
 
