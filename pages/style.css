@@ -2,8 +2,8 @@
    Core variables
 ==================================*/
 :root{
-  --brand-blue-dark:#00205b;   /* Dark blue header/footer */
-  --brand-blue-mid:#007acc;    /* Accent underline */
+  --brand-blue-dark:#00205b;
+  --brand-blue-mid:#007acc;
   --brand-blue:#1a6ecc;
   --text-on-blue:#fff;
   --text-default:#1a1a1a;
@@ -25,7 +25,7 @@ body{min-height:100vh;display:flex;flex-direction:column}
 #quarto-content,main,.page-columns{flex:1 0 auto}
 
 /* ================================
-   CUSTOM TOP HEADER
+   Custom Top Header
 ==================================*/
 #custom-site-header.custom-site-header{
   background:#00205b !important;
@@ -62,7 +62,7 @@ body{min-height:100vh;display:flex;flex-direction:column}
 .custom-site-header__logo--left{ grid-column:1 !important; justify-self:start !important; }
 .custom-site-header__logo--right{ grid-column:3 !important; justify-self:end !important; }
 
-/* Mobile header */
+/* Mobile Header */
 @media (max-width:640px){
   .custom-site-header__inner{
     grid-template-columns:1fr !important;
@@ -98,7 +98,7 @@ body{min-height:100vh;display:flex;flex-direction:column}
 }
 
 /* ================================
-   Cards / titles
+   Cards / Titles
 ==================================*/
 div.chart-title{
   font-size:17px; background:var(--brand-blue);
@@ -124,7 +124,7 @@ div.chart-title{
 }
 
 /* ================================
-   Charts / tables sizing
+   Charts / Tables
 ==================================*/
 div.chart-shim.bootstrap-table.flowing-content-shim{ font-size:16px; }
 div.chart-stage.chartstage-flex{ font-size:16px; }
@@ -275,12 +275,19 @@ body.nav-fixed { padding-top: 0 !important; }
 
 /* Male visibility */
 .male-hidden .male-data { display:none !important; }
-.key-figure-box .male-data {
-  margin-top:4px;
-  font-weight:600;
-  color:var(--brand-blue);
-  line-height:1.2;
+
+/* Compact layout when male data hidden */
+.male-hidden .key-figure-strip .has-male{
+  justify-content:center;
+  gap:10px;
+  padding-top:16px;
+  padding-bottom:16px;
 }
+.male-hidden .key-figure-strip .has-male .kf-head{
+  font-size:clamp(1.6rem,2.6vw,2.1rem);
+  margin-bottom:2px;
+}
+.male-hidden .key-figure-strip .has-male .kf-foot{ margin-top:0; }
 
 /* Wrapper for section */
 .key-figure-wrapper{
@@ -297,7 +304,7 @@ body.nav-fixed { padding-top: 0 !important; }
   justify-content:flex-end;
 }
 
-/* Four equal-width boxes */
+/* Four equal-width boxes grid */
 .key-figure-strip{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -305,10 +312,11 @@ body.nav-fixed { padding-top: 0 !important; }
   align-items:stretch;
 }
 
-/* Box appearance */
+/* Box appearance and auto height */
 .key-figure-strip .key-figure-box{
   width:100%;
-  height:calc(var(--tile-w) * 2 / 3);
+  min-height:calc(var(--tile-w) * 2 / 3);
+  height:auto;
   border:2px solid var(--brand-blue-dark);
   border-radius:8px;
   background:#f5f9ff;
@@ -323,28 +331,50 @@ body.nav-fixed { padding-top: 0 !important; }
   box-sizing:border-box;
 }
 
-/* Text hierarchy inside boxes */
+/* ================================
+   Text hierarchy inside boxes
+==================================*/
+
+/* Big purple headline (women) */
 .kf-head{
   color:#732777;
   font-weight:800;
-  font-size:clamp(1.5rem,2.4vw,2rem);  /* 👈 Bigger, more prominent */
+  font-size:clamp(1.6rem,2.6vw,2.2rem);
   line-height:1.1;
-  margin-bottom:6px;
+  margin-bottom:4px;
 }
 
+/* Dual headline for two same-size stats (box 3) */
+.kf-dual{
+  color:#732777;
+  font-weight:750;
+  font-size:clamp(1.2rem,2vw,1.6rem); /* ↓ smaller at all screen sizes */
+  line-height:1.15;
+  margin:2px 0;
+}
+
+/* Male figure (slightly smaller than female) */
 .kf-male{
   color:var(--brand-blue);
-  font-weight:600;
-  font-size:clamp(1rem,1.3vw,1.2rem);
-  line-height:1.2;
+  font-weight:700;
+  font-size:clamp(1.3rem,2vw,1.6rem);
+  line-height:1.15;
+  margin:3px 0;
 }
 
+/* Descriptor text */
 .kf-foot{
   color:var(--text-default);
   font-weight:600;
-  font-size:clamp(0.92rem,1vw,1rem);
+  font-size:clamp(0.95rem,1vw,1.05rem);
   line-height:1.25;
   margin-top:auto;
+}
+
+/* Allow text wrapping */
+.kf-head, .kf-dual, .kf-male, .kf-foot {
+  white-space:normal;
+  word-break:break-word;
 }
 
 /* Responsive: 2-column then 1-column */
@@ -355,54 +385,18 @@ body.nav-fixed { padding-top: 0 !important; }
   .key-figure-strip{ grid-template-columns:1fr; }
 }
 
-/* Compact the boxes that have a male line when males are hidden */
-.male-hidden .key-figure-strip .has-male{
-  justify-content:center;     /* no big vertical gap */
-  gap:10px;                   /* comfy spacing between head and foot */
-  padding-top:16px;
-  padding-bottom:16px;
-}
-
-/* Slightly bump the headline and bring the footer up a touch */
-.male-hidden .key-figure-strip .has-male .kf-head{
-  font-size:clamp(1.6rem,2.6vw,2.1rem);
-  margin-bottom:2px;
-}
-.male-hidden .key-figure-strip .has-male .kf-foot{
-  margin-top:0;               /* don't force it to the bottom */
-}
-
-/* Optional: hide the (now invisible) male spacer completely just in case */
-.male-hidden .key-figure-strip .has-male .male-data{ display:none !important; }
-
-/* --- Make sure the toggle bar is always visible and above the grid --- */
-#sexToggleBar{
-  display:flex !important;
-  align-items:center;
-  gap:10px;
-  justify-content:flex-end;
-  margin:0 0 10px 0;
-  visibility:visible !important;
-}
-
-#sexToggleBar .switch{ display:inline-block !important; }
-
-/* If male content is hidden, DO NOT hide the toggle bar */
-.male-hidden #sexToggleBar{ display:flex !important; }
-
-/* Compact mode when male line is hidden (only for boxes that have a male line) */
-.male-hidden .key-figure-strip .has-male{
+/* ========================================
+   Center content vertically in boxes
+   that have no male-data line
+======================================== */
+.key-figure-box:not(.has-male){
   justify-content:center;
-  gap:10px;
-  padding-top:16px;
-  padding-bottom:16px;
 }
-.male-hidden .key-figure-strip .has-male .kf-head{
-  font-size:clamp(1.6rem,2.6vw,2.1rem);
-  margin-bottom:2px;
+
+/* optional fine-tune: give equal spacing between lines */
+.key-figure-box:not(.has-male) .kf-head{
+  margin-bottom:6px;
 }
-.male-hidden .key-figure-strip .has-male .kf-foot{
+.key-figure-box:not(.has-male) .kf-foot{
   margin-top:0;
 }
-/* (This line is redundant with your global rule, but keeps it local & safe) */
-.male-hidden .key-figure-strip .has-male .male-data{ display:none !important; }

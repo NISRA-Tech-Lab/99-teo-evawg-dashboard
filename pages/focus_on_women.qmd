@@ -17,9 +17,9 @@ source(here("data_prep/data_prep.R"))
 <div class="key-figure-wrapper">
   <!-- Toggle ABOVE and OUTSIDE the grid -->
   <div class="sex-toggle" id="sexToggleBar">
-    <span>Show male figures</span>
+    <span>Male comparison</span>
     <label class="switch-wrap">
-      <input id="maleToggle" type="checkbox" aria-label="Show male figures">
+      <input id="maleToggle" type="checkbox" aria-label="Male comparison">
       <span class="switch" aria-hidden="true"></span>
     </label>
   </div>
@@ -39,8 +39,8 @@ source(here("data_prep/data_prep.R"))
     </div>
 
     <div class="key-figure-box">
-      <div class="kf-head">xx% of women aged 18–29</div>
-      <div class="kf-male">yy% of women aged 30+</div>
+      <div class="kf-dual">xx% of women aged 18–29 and</div>
+      <div class="kf-dual">yy% of women aged 30+</div>
       <div class="kf-foot">experienced psychological violence in the last five years</div>
     </div>
 
