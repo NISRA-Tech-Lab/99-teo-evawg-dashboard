@@ -1,5 +1,6 @@
 ---
 title: "Domestic abuse"
+page-layout: full
 ---
 
 

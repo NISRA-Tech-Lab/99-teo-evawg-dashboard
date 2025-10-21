@@ -1,5 +1,6 @@
 ---
 title: "Attitudes to reporting"
+page-layout: full
 ---
 
 

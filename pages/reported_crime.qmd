@@ -1,5 +1,6 @@
 ---
 title: "Reported crime"
+page-layout: full
 ---
 
 
