@@ -14,9 +14,70 @@ source(here("data_prep/data_prep.R"))
 
 
 
-```{r}
+```{=html}
+<div class="key-figure-wrapper">
+  <!-- Toggle ABOVE and OUTSIDE the grid -->
+  <div class="sex-toggle" id="sexToggleBar">
+    <span>Male comparison</span>
+    <label class="switch-wrap">
+      <input id="maleToggle" type="checkbox" aria-label="Male comparison">
+      <span class="switch" aria-hidden="true"></span>
+    </label>
+  </div>
 
+  <!-- Four boxes in one row -->
+  <div class="key-figure-strip">
+    <div class="key-figure-box has-male">
+      <div class="kf-head">x% of girls</div>
+      <div class="kf-male male-data">x% of boys</div>
+      <div class="kf-foot">experienced physical violence in the last year</div>
+    </div>
 
+    <div class="key-figure-box has-male">
+      <div class="kf-head">x% of girls</div>
+      <div class="kf-male male-data">x% of boys</div>
+      <div class="kf-foot">experienced sexual violence in the last year</div>
+    </div>
+
+    <div class="key-figure-box has-male">
+      <div class="kf-head">x% of girls</div>
+      <div class="kf-male male-data">x% of boys</div>
+      <div class="kf-foot">experienced psychological violence in the last year</div>
+    </div>
+
+    <div class="key-figure-box has-male">
+      <div class="kf-head">x% of girls</div>
+      <div class="kf-male male-data">x% of boys</div>
+      <div class="kf-foot">experienced online violence in the last year </div>
+    </div>
+  </div>
+</div>
 ```
 
+
+```{=html}
+<script>
+(function(){
+  const STORAGE_KEY = "showMaleFigures";
+  const root = document.documentElement;
+  const toggle = document.getElementById("maleToggle");
+
+  function apply(showMale){
+    root.classList.toggle("male-hidden", !showMale);
+    window.dispatchEvent(new CustomEvent("male-visibility-change", { detail: { showMale } }));
+  }
+
+  const saved = localStorage.getItem(STORAGE_KEY);
+  const showMale = saved === null ? false : saved === "true";
+  toggle.checked = showMale;
+  apply(showMale);
+
+  toggle.addEventListener("change", () => {
+    const v = toggle.checked;
+    localStorage.setItem(STORAGE_KEY, String(v));
+    apply(v);
+  });
+})();
+</script>
+```
 
