@@ -28,14 +28,14 @@ source(here("data_prep/data_prep.R"))
   <!-- Four boxes in one row -->
   <div class="key-figure-strip">
     <div class="key-figure-box has-male">
-      <div class="kf-head">25% of women</div>
-      <div class="kf-male male-data">18% of men</div>
+      <div class="kf-head">x% of women</div>
+      <div class="kf-male male-data">x% of men</div>
       <div class="kf-foot">experienced violence in the last five years</div>
     </div>
 
     <div class="key-figure-box has-male">
-      <div class="kf-head">10% of women</div>
-      <div class="kf-male male-data">6% of men</div>
+      <div class="kf-head">x% of women</div>
+      <div class="kf-male male-data">x% of men</div>
       <div class="kf-foot">experienced sexual violence in the last five years</div>
     </div>
 
