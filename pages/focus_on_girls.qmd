@@ -54,30 +54,6 @@ source(here("data_prep/data_prep.R"))
 </div>
 ```
 
-
-```{=html}
-<script>
-(function(){
-  const STORAGE_KEY = "showMaleFigures";
-  const root = document.documentElement;
-  const toggle = document.getElementById("maleToggle");
-
-  function apply(showMale){
-    root.classList.toggle("male-hidden", !showMale);
-    window.dispatchEvent(new CustomEvent("male-visibility-change", { detail: { showMale } }));
-  }
-
-  const saved = localStorage.getItem(STORAGE_KEY);
-  const showMale = saved === null ? false : saved === "true";
-  toggle.checked = showMale;
-  apply(showMale);
-
-  toggle.addEventListener("change", () => {
-    const v = toggle.checked;
-    localStorage.setItem(STORAGE_KEY, String(v));
-    apply(v);
-  });
-})();
-</script>
-```
+{{< include "_includes/definitions_focus_on_girls.html" >}}
+{{< include "_includes/male_figures_js_function.html" >}}
 

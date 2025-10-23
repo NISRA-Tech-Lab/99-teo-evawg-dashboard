@@ -20,3 +20,4 @@ source(here("data_prep/data_prep.R"))
 ```
 
 
+{{< include "_includes/male_figures_js_function.html" >}}

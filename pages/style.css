@@ -400,3 +400,23 @@ body.nav-fixed { padding-top: 0 !important; }
 .key-figure-box:not(.has-male) .kf-foot{
   margin-top:0;
 }
+
+/* ========================================
+"Definition" and "What does it mean?" boxes
+======================================== */
+.accordion-button {
+  background-color: var(--brand-blue-dark);
+  color: #fff;
+  font-weight: 600;
+}
+.accordion-button.collapsed {
+  background-color: var(--brand-blue-mid);
+}
+.accordion-body {
+  background: #f5f9ff;
+  color: var(--text-default);
+}
+/* Remove anchor link icons from accordion headings */
+.accordion .anchorjs-link {
+  display: none !important;
+}
