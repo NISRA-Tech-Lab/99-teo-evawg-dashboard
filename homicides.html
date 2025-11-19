@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gender-based Violence - Homicides</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  
+  <!-- Bootstrap CSS/JS (v5.3.3) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Icons & Charts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js" integrity="sha512-Hn1w6YiiFw6p6S2lXv6yKeqTk0PLVzeCwWY9n32beuPjQ5HLcvz5l2QsP+KilEr1ws37rCTw3bZpvfvVIeTh0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <link rel="icon" href="assets/img/icon/favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="icon" type="image/png" href="assets/img/icon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/icon/favicon.svg" />
+  <link rel="shortcut icon" href="assets/img/icon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Gender-based violence" />
+
+  <!-- MapLibre GL -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css">
+  <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-export@4.1.0/dist/maplibre-gl-export.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-export@4.1.0/dist/maplibre-gl-export.umd.js"></script>
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+<nav id ="nav"></nav>
+
+<div class="w-100 text-center current-page py-2">
+    This page uses data from the Young Life and Times (YLT) survey to measure prevalence of gender-based violence. This relates to the EVAWG strategy.
+</div>
+
+<div class="container-fluid">
+        <div class="py-2">
+        <div class="row justify-content-center">
+
+            <div class="col-10 col-md-5 col-xl-3 py-2">
+                <div class="card h-100 blue-bg">
+                    <div class="card-body text-center">
+                        <p class="display-6">13 women killed by an intimate partner</p>
+                        <p>Between Jan 2020 and Dec 2023</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-10 col-md-5 col-xl-3 py-2">
+                <div class="card h-100 blue-bg">
+                    <div class="card-body text-center">
+                        <p class="display-6">13 men killed by an intimate partner</p>
+                        <p>Between Jan 2020 and Dec 2023</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<div class="row py-4">
+    <div class="col-12">
+        <div class="card h-100 w-100">
+            <div class="card-header text-center">
+                Victims of homicide by gender and age
+            </div>
+            <div class="card-body text-center">
+                Line chart goes here
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+            <!-- Third row - Definitions -->
+
+            <div class="accordion py-4" id="infoAccordion">
+                <div class="row g-3">
+
+                <!-- Definitions Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="def-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#def-collapse"
+                            aria-expanded="false" aria-controls="def-collapse">
+                            Definitions
+                        </button>
+                    </h2>
+                </div>
+
+                <!-- What does this mean Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="mean-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#mean-collapse"
+                            aria-expanded="false" aria-controls="mean-collapse">
+                            What does this mean?
+                        </button>
+                    </h2>
+                </div>
+
+            </div>
+
+            <!-- CONTENT AREAS -->
+
+            <div id="def-collapse" class="accordion-collapse collapse"
+                aria-labelledby="def-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>Definitions</h2>
+                    <p><strong>From YLT survey:</strong> Gender-based violence is violence, abuse and harm directed against a person because of that person’s gender, or violence that affects people of a particular gender disproportionately.</p>
+
+        <p>Based on this definition, and regardless of your gender, have you personally experienced any of the following in the last year because of your gender?</p>
+
+        <ul>
+          <li><strong>Physical Violence:</strong> Being beaten, slapped, pushed or restrained.</li>
+          <li><strong>Sexual Violence:</strong> Upskirting, unwanted touching, being coerced into sexual acts.</li>
+          <li><strong>Psychological Violence:</strong> Being insulted, stalked, harassed, controlled against your will, or threatened with violence.</li>
+          <li><strong>Online Violence:</strong> Receiving threats online or via social media, online trolling, or being sent or being asked for intimate images against your will.</li>
+                </div>
+            </div>
+
+            <div id="mean-collapse" class="accordion-collapse collapse"
+                aria-labelledby="mean-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>What does this mean?</h2>
+                    <p>Questions relating to gender-based violence have been included in the <strong>Young Life and Times (YLT)</strong> survey since 2022 to attempt to gain more understanding of the prevalence of gender-based violence in Northern Ireland.</p>
+        <p>The YLT is a representative survey of 16-year-olds in Northern Ireland, and respondents are provided with definitions of gender-based violence. The data from this survey represents self-reported experience of gender-based violence.</p>
+        <p>After initial question development, a time series will be developed in future years from a baseline in 2023. Economic violence was not asked in the YLT survey due to the age of respondents.</p>
+                </div>
+            </div>
+
+    </div>
+
+
+
+        </div>
+        
+    </main>
+</div>
+
+<footer id = "footer"></footer>
+
+<script type = "module" src="src/homicides.js"></script>
+
+
+</body>
