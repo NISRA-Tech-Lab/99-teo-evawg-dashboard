@@ -46,16 +46,16 @@ export function insertNavButtons(page) {
 
   nav.innerHTML +=
   `<div class="row">
-    <div id="home-btn" class="col mx-2 nav-btn"><a href="index.html">Home</a></div>
-    <div id="prevalence-violence-nilt-btn" class="col mx-2 nav-btn"><a href="prevalence-violence-nilt.html">Prevalence of violence (women and men)</a></div>
-    <div id="prevalence-violence-ylt-btn" class="col mx-2 nav-btn"><a href="prevalence-violence-ylt.html">Prevalence of violence (girls and boys)</a></div>
-    <div id="victims-btn" class="col mx-2 nav-btn"><a href="victims.html">Victims of crime and offences</a></div>
-    <div id="homicides-btn" class="col mx-2 nav-btn"><a href="homicides.html">Homicides</a></div>
-    <div id="prevalence-of-domestic-abuse-btn" class="col mx-2 nav-btn"><a href="prevalence-of-domestic-abuse.html">Prevalence of domestic abuse</a></div>
-    <div id="domestic-abuse-reports-btn" class="col mx-2 nav-btn"><a href="domestic-abuse-reports.html">Domestic abuse reports to police</a></div>
-    <div id="case-processing-times-btn" class="col mx-2 nav-btn"><a href="case-processing-times.html">Case processing times</a></div>
-    <div id="maps-btn" class="col mx-2 nav-btn"><a href="maps.html">Maps</a></div>
-    <div id="information-btn" class="col mx-2 nav-btn"><a href="information.html">Information</a></div>
+    <a id="home-btn" class="col mx-2 nav-btn" href="/">Home</a>
+    <a id="prevalence-violence-nilt-btn" class="col mx-2 nav-btn" href="prevalence-violence-nilt.html">Prevalence of violence (women and men)</a>
+    <a id="prevalence-violence-ylt-btn" class="col mx-2 nav-btn" href="prevalence-violence-ylt.html">Prevalence of violence (girls and boys)</a>
+    <a id="victims-btn" class="col mx-2 nav-btn" href="victims.html">Victims of crime and offences</a>
+    <a id="homicides-btn" class="col mx-2 nav-btn" href="homicides.html">Homicides</a>
+    <a id="prevalence-of-domestic-abuse-btn" class="col mx-2 nav-btn" href="prevalence-of-domestic-abuse.html">Prevalence of domestic abuse</a>
+    <a id="domestic-abuse-reports-btn" class="col mx-2 nav-btn" href="domestic-abuse-reports.html">Domestic abuse reports to police</a>
+    <a id="case-processing-times-btn" class="col mx-2 nav-btn" href="case-processing-times.html">Case processing times</a>
+    <a id="maps-btn" class="col mx-2 nav-btn" href="maps.html">Maps</a>
+    <a id="information-btn" class="col mx-2 nav-btn" href="information.html">Information</a>
   </div>`;
 
   const currentPage = document.getElementById(`${page}-btn`);
