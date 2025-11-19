@@ -47,7 +47,8 @@ export function insertNavButtons(page) {
   nav.innerHTML +=
   `<div class="row py-1">
     <div id="home-btn" class="col mx-2"><a href="index.html">Home</a></div>
-    <div id="prevalence-of-violence-btn" class=col mx-2"><a href="prevalence-of-violence.html">Prevalence of violence (women and men)</a></div>
+    <div id="prevalence-violence-nilt-btn" class=col mx-2"><a href="prevalence-violence-nilt.html">Prevalence of violence (women and men)</a></div>
+    <div id="prevalence-violence-ylt-btn" class=col mx-2"><a href="prevalence-violence-ylt.html">Prevalence of violence (girls and boys)</a></div>
     <div id="victims-btn" class=col mx-2"><a href="victims.html">Victims of crime and offences</a></div>
     <div id="homicides-btn" class=col mx-2"><a href="homicides.html">Homicides</a></div>
     <div id="prevalence-of-domestic-abuse-btn" class=col mx-2"><a href="prevalence-of-domestic-abuse.html">Prevalence of domestic abuse</a></div>

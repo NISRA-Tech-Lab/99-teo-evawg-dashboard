@@ -4,6 +4,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     insertHeader();
     insertFooter();
-    insertNavButtons("prevalence-of-violence");
+    insertNavButtons("prevalence-violence-nilt");
 
 })
