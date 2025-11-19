@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gender-based Violence - Prevalence of violence (women and men)</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  
+  <!-- Bootstrap CSS/JS (v5.3.3) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Icons & Charts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js" integrity="sha512-Hn1w6YiiFw6p6S2lXv6yKeqTk0PLVzeCwWY9n32beuPjQ5HLcvz5l2QsP+KilEr1ws37rCTw3bZpvfvVIeTh0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <link rel="icon" href="assets/img/icon/favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="icon" type="image/png" href="assets/img/icon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/icon/favicon.svg" />
+  <link rel="shortcut icon" href="assets/img/icon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Gender-based violence" />
+
+  <!-- MapLibre GL -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css">
+  <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-export@4.1.0/dist/maplibre-gl-export.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-export@4.1.0/dist/maplibre-gl-export.umd.js"></script>
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+<nav id ="nav"></nav>
+
+<div class="w-100 text-center current-page py-2">
+    Crime data on this page is recorded by the police on their administrative system. This relates to the domestic violence strategy. 
+</div>
+
+<div class="container-fluid">
+    <!-- Main Content -->
+    <main>
+        
+        <div class = "py-2">
+            <!-- First row - cards -->
+            <div class="row">
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <strong>Violence against the person</strong>
+                            <p class="display-6">47% of victims are female</p>
+                            <p>X% of victims are male</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <strong>Stalking and harassment</strong>
+                            <p>10,366 offences</p>
+                            <p>64% of victims were female</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <strong>Online violence</strong>
+                            <p>10,366 offences</p>
+                            <p>64% female</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <strong>Sexual offences</strong>
+                            <p>4,090 offences</p>
+                            <p>76% of victims were female</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second row - tables and charts -->
+            <div class="row py-4">
+                <div class="col-12 col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Police recorded crime by offence 1998/99 - 2023/24
+                        </div>
+                        <div class="card-body">
+                            Line chart goes here
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Police recorded online crime by offence 1998/99 - 2023/24
+                        </div>
+                        <div class="card-body">
+                            Line chart goes here
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Victims of police recorded crime by crime type and gender 2007 - 2023
+                        </div>
+                        <div class="card-body">
+                            Line chart goes here
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third row - Definitions -->
+
+            <div class="accordion py-4" id="infoAccordion">
+                <div class="row g-3">
+
+                <!-- Definitions Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="def-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#def-collapse"
+                            aria-expanded="false" aria-controls="def-collapse">
+                            Definitions
+                        </button>
+                    </h2>
+                </div>
+
+                <!-- What does this mean Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="mean-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#mean-collapse"
+                            aria-expanded="false" aria-controls="mean-collapse">
+                            What does this mean?
+                        </button>
+                    </h2>
+                </div>
+
+            </div>
+
+            <!-- CONTENT AREAS -->
+
+            <div id="def-collapse" class="accordion-collapse collapse"
+                aria-labelledby="def-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>Definitions</h2>
+                    <p>Your definitions text goes here...</p>
+                </div>
+            </div>
+
+            <div id="mean-collapse" class="accordion-collapse collapse"
+                aria-labelledby="mean-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>What does this mean?</h2>
+                    <p>Explanation text goes here...</p>
+                </div>
+            </div>
+
+    </div>
+
+
+
+        </div>
+        
+    </main>
+</div>
+
+<footer id = "footer"></footer>
+
+<script type = "module" src="src/victims.js"></script>
+
+
+</body>
