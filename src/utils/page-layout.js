@@ -1,6 +1,3 @@
-
-
-
 export function insertHeader () {
 
     const nav = document.getElementById("nav");
@@ -41,6 +38,27 @@ export function insertHeader () {
     </div>
 </div>
 `
+}
+
+export function insertNavButtons(page) {
+
+  const nav = document.getElementById("nav");
+
+  nav.innerHTML +=
+  `<div class="row py-1">
+    <div id="home-btn" class="col mx-2"><a href="index.html">Home</a></div>
+    <div id="prevalence-of-violence-btn" class=col mx-2"><a href="prevalence-of-violence.html">Prevalence of violence (women and men)</a></div>
+    <div id="victims-btn" class=col mx-2"><a href="victims.html">Victims of crime and offences</a></div>
+    <div id="homicides-btn" class=col mx-2"><a href="homicides.html">Homicides</a></div>
+    <div id="prevalence-of-domestic-abuse-btn" class=col mx-2"><a href="prevalence-of-domestic-abuse.html">Prevalence of domestic abuse</a></div>
+    <div id="domestic-abuse-reports-btn" class=col mx-2"><a href="domestic-abuse-reports.html">Domestic abuse reports to police</a></div>
+    <div id="case-processing-times-btn" class=col mx-2"><a href="case-processing-times.html">Case processing times</a></div>
+    <div id="maps-btn" class=col mx-2"><a href="maps.html">Maps</a></div>
+    <div id="information-btn" class=col mx-2"><a href="information.html">Information</a></div>
+  </div>`;
+
+  document.getElementById(`${page}-btn`).classList.add("current-page");
+
 }
 
 export function insertFooter () {
