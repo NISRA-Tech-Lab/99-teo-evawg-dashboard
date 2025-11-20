@@ -305,3 +305,7 @@ nav a {
   cursor: pointer;
 }
 
+canvas {
+  min-height: 30vh;
+}
+
