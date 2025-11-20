@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gender-based Violence - Homicides</title>
+  <title>Gender-based Violence - Case processing times</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
@@ -40,47 +40,68 @@
 <nav id ="nav"></nav>
 
 <div class="w-100 text-center current-page py-2">
-    Crime data on this page is recorded by the police on their administrative system. This relates to the domestic violence strategy.
+    The data on this page is administrative data collected through the NI Courts. They are published annually in xxxx. 
+
+
 </div>
 
 <div class="container-fluid">
-        <div class="py-2">
-        <div class="row justify-content-center">
-
-            <div class="col-12 col-xl-3 py-2">
-                <div class="card h-100 blue-bg">
-                    <div class="card-body text-center">
-                        <p class="display-6">13 women killed by an intimate partner</p>
-                        <p>Between Jan 2020 and Dec 2023</p>
+    <!-- Main Content -->
+    <main>
+        
+        <div class = "py-2">
+            <!-- First row - cards -->
+<div class="row justify-content-center">
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6">757 days</p>
+                            <p>average time for sexual offences</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6">x days</p>
+                            <p>average time for domestic abuse related case</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6">234 days</p>
+                            <p>average time for all cases</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-xl-3 py-2">
-                <div class="card h-100 blue-bg">
-                    <div class="card-body text-center">
-                        <p class="display-6">13 men killed by an intimate partner</p>
-                        <p>Between Jan 2020 and Dec 2023</p>
-                    </div>
-                </div>
+           <!-- Second row - tables and charts -->
+<div class="row py-4">
+    <div class="col-12 col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                Case processing time xxxx year
             </div>
-
+            <div class="card-body">
+                Bar chart goes here
+            </div>
         </div>
     </div>
-
-<div class="row py-4">
-    <div class="col-12">
-        <div class="card h-100 w-100">
-            <div class="card-header text-center">
-                Victims of homicide by gender and age
+    
+    <div class="col-12 col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                Time taken for domestic abuse related cases and all criminal cases from date incident reported/detected to disposal at court, 2022/23 to 2024/25
             </div>
-            <div class="card-body text-center">
-                Line chart goes here
+            <div class="card-body">
+                Bar chart goes here
             </div>
         </div>
     </div>
 </div>
-    
 
             <!-- Third row - Definitions -->
 
@@ -117,15 +138,7 @@
                 aria-labelledby="def-heading" data-bs-parent="#infoAccordion">
                 <div class="accordion-body">
                     <h2>Definitions</h2>
-                    <p><strong>From YLT survey:</strong> Gender-based violence is violence, abuse and harm directed against a person because of that person’s gender, or violence that affects people of a particular gender disproportionately.</p>
-
-        <p>Based on this definition, and regardless of your gender, have you personally experienced any of the following in the last year because of your gender?</p>
-
-        <ul>
-          <li><strong>Physical Violence:</strong> Being beaten, slapped, pushed or restrained.</li>
-          <li><strong>Sexual Violence:</strong> Upskirting, unwanted touching, being coerced into sexual acts.</li>
-          <li><strong>Psychological Violence:</strong> Being insulted, stalked, harassed, controlled against your will, or threatened with violence.</li>
-          <li><strong>Online Violence:</strong> Receiving threats online or via social media, online trolling, or being sent or being asked for intimate images against your will.</li>
+                     <p>Definitions goes here....</p>
                 </div>
             </div>
 
@@ -133,9 +146,7 @@
                 aria-labelledby="mean-heading" data-bs-parent="#infoAccordion">
                 <div class="accordion-body">
                     <h2>What does this mean?</h2>
-                    <p>Questions relating to gender-based violence have been included in the <strong>Young Life and Times (YLT)</strong> survey since 2022 to attempt to gain more understanding of the prevalence of gender-based violence in Northern Ireland.</p>
-        <p>The YLT is a representative survey of 16-year-olds in Northern Ireland, and respondents are provided with definitions of gender-based violence. The data from this survey represents self-reported experience of gender-based violence.</p>
-        <p>After initial question development, a time series will be developed in future years from a baseline in 2023. Economic violence was not asked in the YLT survey due to the age of respondents.</p>
+                    <p>What does this mean text goes here....</p>
                 </div>
             </div>
 
@@ -150,7 +161,7 @@
 
 <footer id = "footer"></footer>
 
-<script type = "module" src="src/homicides.js"></script>
+<script type = "module" src="src/case-processing-times.js"></script>
 
 
 </body>
