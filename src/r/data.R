@@ -109,11 +109,7 @@ for (matrix in matrix_list) {
   all_data[[matrix]]$data <- data_list
 }
 
-write_json(all_data, "public/data/data.json", prettify = TRUE)
 
-
-
-
-
-                    
-                    
+if (!dir.exists("public")) dir.create("public")
+if (!dir.exists("public/data")) dir.create("public/data")
+write_json(all_data, "public/data/data.json", pretty = TRUE, auto_unbox = TRUE)                 
