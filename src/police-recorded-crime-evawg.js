@@ -11,6 +11,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertNavButtons("police-recorded-crime-evawg");
     maleComparison();
     let data = await readData("PRCVCTM");
+    let online_data = await readData("PRCONL");
     
     // Update values
     const stat = "All crimes recorded by the police";
@@ -32,15 +33,24 @@ window.addEventListener("DOMContentLoaded", async () => {
     //// Violence against the person
     const violence_victims = data.data[stat][latest_year]
         ["Violence with injury (including homicide & death/serious injury by unlawful driving)"]
-        ["All ages"]["All persons"];
+        ["All ages"]["All persons"] +
+        data.data[stat][latest_year]
+            ["Violence without injury"]
+            ["All ages"]["All persons"];
 
     const female_violence_victims = data.data[stat][latest_year]
         ["Violence with injury (including homicide & death/serious injury by unlawful driving)"]
-        ["All ages"]["Female"];
+        ["All ages"]["Female"] +
+        data.data[stat][latest_year]
+            ["Violence without injury"]
+            ["All ages"]["All persons"];
 
     const male_violence_victims = data.data[stat][latest_year]
         ["Violence with injury (including homicide & death/serious injury by unlawful driving)"]
-        ["All ages"]["Male"];    
+        ["All ages"]["Male"] +
+        data.data[stat][latest_year]
+            ["Violence without injury"]
+            ["All ages"]["All persons"];    
 
     document.getElementById("violence-female").textContent = Math.round(female_violence_victims / violence_victims * 100);
     document.getElementById("violence-male").textContent = Math.round(male_violence_victims / violence_victims * 100);
@@ -259,10 +269,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         data: bar_data,
         options: {
             indexAxis: "y",
-            maintainAspectRatio: false,   // let the canvas size control the chart
+            maintainAspectRatio: false, 
             layout: {
                 padding: {
-                    right: 40             // extra room for end labels
+                    right: 40
                 }
             },
             plugins: {
@@ -271,7 +281,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                     align: 'right',
                     formatter: (v) => v.toLocaleString(),
                     color: '#000',
-                    clamp: true           // keep inside chart area
+                    clamp: true           
                 }
             },
             scales: {
@@ -285,7 +295,7 @@ window.addEventListener("DOMContentLoaded", async () => {
                     ticks: {
                         callback: function(value) {
                             const label = this.getLabelForValue(value);
-                            return wrapLabel(label, 35); // tweak width to taste
+                            return wrapLabel(label, 35); 
                         }
                     }
                 }

@@ -11,6 +11,10 @@
 </div>
 
 <div class="container-fluid">
+
+    <main>
+        <div id="male-comparison-switch"></div>
+    
         <div class="py-2">
         <div class="row justify-content-center">
 
@@ -39,10 +43,10 @@
     <div class="col-12">
         <div class="card h-100 w-100">
             <div class="card-header text-center">
-                Victims of homicide by gender and age
+                Victims of homicide aged 18+, <span class="first-year"></span> to <span class="latest-year"></span>
             </div>
             <div class="card-body text-center">
-                Line chart goes here
+                <canvas id="homicide-line"></canvas>
             </div>
         </div>
     </div>
