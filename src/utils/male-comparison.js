@@ -10,19 +10,32 @@ export function maleComparison () {
         </div>
     </div>
   `
-
   const male_comparison = document.getElementById("male-comparison");
   const male_figs = document.getElementsByClassName("male-fig");
 
-  male_comparison.addEventListener("change", function () {
-
+  function hideMaleFigs () {
     for (let i = 0; i < male_figs.length; i ++) {
-        if (male_comparison.checked) {
-            male_figs[i].classList.remove("d-none");
-        } else {
-            male_figs[i].classList.add("d-none");
-        }
+      if (male_comparison.checked) {
+          male_figs[i].classList.remove("d-none");
+      } else {
+          male_figs[i].classList.add("d-none");
+      }
     }
+  }
+
+  if (localStorage.getItem("maleComparison") == null) {
+    localStorage.setItem("maleComparison", male_comparison.checked);
+  } else {
+    const showMale = localStorage.getItem("maleComparison") === null ? false : localStorage.getItem("maleComparison") === "true";
+    male_comparison.checked = showMale;
+    hideMaleFigs();
+    
+  }
+  
+
+  male_comparison.addEventListener("change", function () {
+    hideMaleFigs()
+    localStorage.setItem("maleComparison", male_comparison.checked);
   });
 
 }

@@ -118,9 +118,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     const barChart =new Chart(ctx, config_bar); 
 
     const male_comparison = document.getElementById("male-comparison");
+    let showMales = male_comparison.checked;
+    barChart.data.datasets[1].hidden = !showMales;
     
     male_comparison.addEventListener("change", function () {
-        const showMales = male_comparison.checked;
+        showMales = male_comparison.checked;
 
         // dataset index 1 is the "Males (%)" series
         barChart.data.datasets[1].hidden = !showMales;
