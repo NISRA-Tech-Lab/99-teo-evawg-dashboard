@@ -26,10 +26,8 @@ export function maleComparison () {
   if (localStorage.getItem("maleComparison") == null) {
     localStorage.setItem("maleComparison", male_comparison.checked);
   } else {
-    const showMale = localStorage.getItem("maleComparison") === null ? false : localStorage.getItem("maleComparison") === "true";
-    male_comparison.checked = showMale;
+    male_comparison.checked = localStorage.getItem("maleComparison") === null ? false : localStorage.getItem("maleComparison") === "true";
     hideMaleFigs();
-    
   }
   
 

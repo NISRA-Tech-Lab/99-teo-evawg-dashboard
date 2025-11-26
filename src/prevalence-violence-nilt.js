@@ -113,19 +113,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     const ctx = bar_canvas.getContext('2d');
     const barChart = new Chart(ctx, config_bar); 
 
-    const male_comparison = document.getElementById("male-comparison");
-    let showMales = male_comparison.checked;
-    barChart.data.datasets[1].hidden = !showMales;
-    
-    male_comparison.addEventListener("change", function () {
-        showMales = male_comparison.checked;
-
-        // dataset index 1 is the "Males (%)" series
-        barChart.data.datasets[1].hidden = !showMales;
-
-        barChart.update();
-    });
-
     // Create line chart
     const line_canvas = document.getElementById("prevalence-nilt-line");
 
@@ -134,17 +121,29 @@ window.addEventListener("DOMContentLoaded", async () => {
     let line_values = [];
     for (let i = 0; i < violence_types.length; i ++) {
 
-        let values = [];
+        let female_values = [];
+        let male_values = [];
         for (let j = 0; j < years.length; j ++) {
-            values.push(data.data[stat][years[j]][`${violence_types[i]} violence`]["All respondents"])
+            female_values.push(data.data[stat][years[j]][`${violence_types[i]} violence`]["Gender - Female"]);
+            male_values.push(data.data[stat][years[j]][`${violence_types[i]} violence`]["Gender - Male"]);
         }
 
         line_values.push({axis: "y",
-            label: `${violence_types[i]} violence`,
-            data: values,
+            label: `${violence_types[i]} violence - Female`,
+            data: female_values,
             fill: false,
             backgroundColor: line_colours[i],
             borderColor: line_colours[i],
+            borderWidth: 2
+        });
+
+        line_values.push({axis: "y",
+            label: `${violence_types[i]} violence - Male`,
+            data: male_values,
+            fill: false,
+            backgroundColor: line_colours[i],
+            borderColor: line_colours[i],
+            borderDash: [6, 4],
             borderWidth: 2
         });
     }
@@ -178,7 +177,33 @@ window.addEventListener("DOMContentLoaded", async () => {
     };
 
     const ctx_line = line_canvas.getContext('2d');
-    new Chart(ctx_line, config_line); 
+    const lineChart = new Chart(ctx_line, config_line); 
+
+    // Toggle male comparison in charts
+    const male_comparison = document.getElementById("male-comparison");
+    let showMales = male_comparison.checked;
+    barChart.data.datasets[1].hidden = !showMales;
+
+    for (let i = 0; i < lineChart.data.datasets.length; i ++) {
+        if (i % 2 == 1) {
+            lineChart.data.datasets[i].hidden = !showMales;
+        }
+    }
     
+    male_comparison.addEventListener("change", function () {
+        showMales = male_comparison.checked;
+
+        // dataset index 1 is the "Males (%)" series
+        barChart.data.datasets[1].hidden = !showMales;
+
+        for (let i = 0; i < lineChart.data.datasets.length; i ++) {
+            if (i % 2 == 1) {
+                lineChart.data.datasets[i].hidden = !showMales;
+            }
+        }
+
+        barChart.update();
+        lineChart.update();
+    });
 
 })

@@ -49,6 +49,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     // Create bar chart
     const violence_types = Object.keys(data.data[stat][latest_year])
+        .filter(x => x !== "No violence")
         .map(x => x.replace(/ violence$/, ""));
 
     let girl_bars = [];
