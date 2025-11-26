@@ -38,6 +38,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("psychological-male").textContent = data.data[stat][latest_year][`Physchological violence`][`Gender - Male`];
     
     
+       
+
+    // Create bar chart
     const violence_types = Object.keys(data.data[stat][latest_year])
         .filter(x => x !== "Other types of violence")
         .map(x => x.replace(/ violence$/, ""));
@@ -47,9 +50,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     for (let i = 0; i < violence_types.length; i ++) {
         female_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Female`]);
         male_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Male`]);
-    }    
+    } 
 
-    // Create bar chart
     const bar_canvas = document.getElementById("prevalence-nilt-bar");
 
     const bar_data = {
@@ -107,7 +109,18 @@ window.addEventListener("DOMContentLoaded", async () => {
     };
 
     const ctx = bar_canvas.getContext('2d');
-    new Chart(ctx, config_bar); 
+    const barChart =new Chart(ctx, config_bar); 
+
+    const male_comparison = document.getElementById("male-comparison");
+    
+    male_comparison.onchange = function () {
+        const showMales = male_comparison.checked;
+
+        // dataset index 1 is the "Males (%)" series
+        barChart.data.datasets[1].hidden = !showMales;
+
+        barChart.update();
+    }
 
     // Create line chart
     const line_canvas = document.getElementById("prevalence-nilt-line");
