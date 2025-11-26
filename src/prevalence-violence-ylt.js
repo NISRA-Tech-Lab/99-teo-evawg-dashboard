@@ -1,10 +1,12 @@
 import { insertHeader, insertFooter, insertNavButtons } from "./utils/page-layout.js"
 import { readData } from "./utils/read-data.js"
+import { maleComparison } from "./utils/male-comparison.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
 
     insertHeader();
     insertFooter();
+    maleComparison();
     insertNavButtons("prevalence-violence-ylt");
     let data = await readData("EXPVLYTHEQ");
 
