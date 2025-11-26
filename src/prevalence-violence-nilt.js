@@ -113,14 +113,14 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     const male_comparison = document.getElementById("male-comparison");
     
-    male_comparison.onchange = function () {
+    male_comparison.addEventListener("change", function () {
         const showMales = male_comparison.checked;
 
         // dataset index 1 is the "Males (%)" series
         barChart.data.datasets[1].hidden = !showMales;
 
         barChart.update();
-    }
+    });
 
     // Create line chart
     const line_canvas = document.getElementById("prevalence-nilt-line");

@@ -14,7 +14,7 @@ export function maleComparison () {
   const male_comparison = document.getElementById("male-comparison");
   const male_figs = document.getElementsByClassName("male-fig");
 
-  male_comparison.onchange = function () {
+  male_comparison.addEventListener("change", function () {
 
     for (let i = 0; i < male_figs.length; i ++) {
         if (male_comparison.checked) {
@@ -23,6 +23,6 @@ export function maleComparison () {
             male_figs[i].classList.add("d-none");
         }
     }
-  }
+  });
 
 }
