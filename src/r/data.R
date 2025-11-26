@@ -11,8 +11,8 @@ matrix_list <- c(
   "EXPVLADEQ",
   "EXPVLYTHEQ",
   "PRCONL",
-  "PRCPD")
-
+  "PRCPD"
+)
 
 # API Key ####
 api_key <- "801aaca4bcf0030599c019f4efa8b89032e5e6aa1de4a629a7f7e9a86db7fb8c"
@@ -21,7 +21,6 @@ api_key <- "801aaca4bcf0030599c019f4efa8b89032e5e6aa1de4a629a7f7e9a86db7fb8c"
 
 fetch_dataset <- function(matrix,
                           api_key,
-                          label = NULL,
                           max_attempts = Inf,
                           wait_seconds = 2) {
   attempt <- 1
@@ -47,7 +46,7 @@ fetch_dataset <- function(matrix,
       },
       error = function(e) {
         message(sprintf("Error fetching %s (attempt %d): %s", 
-                        ifelse(is.null(label), matrix, label), 
+                        matrix, 
                         attempt, e$message))
         return(NULL)
       }

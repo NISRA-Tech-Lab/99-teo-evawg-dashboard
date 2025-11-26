@@ -279,8 +279,16 @@ nav a {
 }
 
 .purple-bg {
-  background-color: #893B67;
+  background-color: #732777;
   color: #fff;
+}
+
+.green-bg {
+  background-color: #68A41E;
+}
+
+.green-bg a {
+  color: #000;
 }
 
 /* White text + white caret for collapsed state */
