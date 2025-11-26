@@ -48,6 +48,8 @@
 <div class="container-fluid">
     <!-- Main Content -->
     <main>
+
+        <div id="male-comparison-switch"></div>
         
         <div class = "py-2">
             <!-- First row - cards -->
@@ -57,7 +59,7 @@
                     <div class="card h-100 blue-bg">
                         <div class="card-body">
                             <p class="display-6"><span id="violence-female"></span>% of women</p>
-                            <p><span id="violence-male">% of men</p>
+                            <p class="male-fig"><span id="violence-male">% of men</p>
                             <p>experienced violence in the past 5 years</p>
                         </div>
                     </div>
@@ -66,7 +68,7 @@
                     <div class="card h-100 blue-bg">
                         <div class="card-body">
                             <p class="display-6"><span id="economic-female"></span>% of women</p>
-                            <p><span id="economic-male"></span>% of men</p>
+                            <p class="male-fig"><span id="economic-male"></span>% of men</p>
                             <p>experienced economic violence</p>
                         </div>
                     </div>
@@ -75,7 +77,7 @@
                     <div class="card h-100 blue-bg">
                         <div class="card-body">
                             <p class="display-6"><span id="sexual-female"></span>% of women</p>
-                            <p><span id="sexual-male"></span>% of men</p>
+                            <p class="male-fig"><span id="sexual-male"></span>% of men</p>
                             <p>experienced sexual violence</p>
                         </div>
                     </div>
@@ -84,7 +86,7 @@
                     <div class="card h-100 blue-bg">
                         <div class="card-body">
                             <p class="display-6"><span id="physical-female"></span>% of women</p>
-                            <p><span id="physical-male"></span>% of men</p>
+                            <p class="male-fig"><span id="physical-male"></span>% of men</p>
                             <p>experienced physical violence</p>
                         </div>
                     </div>
@@ -93,7 +95,7 @@
                     <div class="card h-100 blue-bg">
                         <div class="card-body">
                             <p class="display-6"><span id="psychological-female"></span>% of women</p>
-                            <p><span id="psychological-male"></span>% of men</p>
+                            <p class="male-fig"><span id="psychological-male"></span>% of men</p>
                             <p>experienced psychological violence</p>
                         </div>
                     </div>
@@ -109,7 +111,7 @@
                             Experiences of gender-based violence, <span class="latest-year"></span>
                         </div>
                         <div class="card-body">
-                            <table id="prevalence-violence-nilt-table" class="table table-sm table-bordered mb-0"></table>
+                            <canvas id="prevalence-nilt-bar"></canvas>
                         </div>
                     </div>
                 </div>
@@ -119,7 +121,7 @@
                             Experiences of gender-based violence by age, <span class="latest-year"></span>
                         </div>
                         <div class="card-body">
-                            <canvas id="prevalence-nilt-bar"></canvas>
+                            
                         </div>
                     </div>
                 </div>

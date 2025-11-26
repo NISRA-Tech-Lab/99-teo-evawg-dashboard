@@ -1,10 +1,12 @@
 import { insertHeader, insertFooter, insertNavButtons } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js"
+import { maleComparison } from "./utils/male-comparison.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
 
     insertHeader();
     insertFooter();
+    maleComparison();
     insertNavButtons("prevalence-violence-nilt");
     let data = await readData("EXPVLADEQ");
 
@@ -35,48 +37,16 @@ window.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("psychological-female").textContent = data.data[stat][latest_year][`Physchological violence`][`Gender - Female`];
     document.getElementById("psychological-male").textContent = data.data[stat][latest_year][`Physchological violence`][`Gender - Male`];
     
-    // Create table
-    const table = document.getElementById("prevalence-violence-nilt-table");
-    let tr = document.createElement("tr");
     
-    const headings = ["", "Female", "Male", "NI"];
-    for (let i = 0; i < headings.length; i ++) {
-        let th = document.createElement("th");
-        th.textContent = headings[i];
-        th.style.textAlign = "right";
-        tr.appendChild(th);
-    }
+    const violence_types = Object.keys(data.data[stat][latest_year])
+        .filter(x => x !== "Other types of violence")
+        .map(x => x.replace(/ violence$/, ""));
 
-    table.appendChild(tr);
-
-    const violence_types = ["Online", "Economic", "Sexual", "Physical", "Physchological"];
     let female_bars = [];
     let male_bars = [];
     for (let i = 0; i < violence_types.length; i ++) {
-        tr = document.createElement("tr");
-
-        let row_name = document.createElement("td");
-        row_name.textContent = violence_types[i];
-        tr.appendChild(row_name);
-
         female_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Female`]);
-        let female = document.createElement("td");
-        female.textContent = female_bars[i];
-        female.style.textAlign = "right";
-        tr.appendChild(female);
-
         male_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Male`]);
-        let male = document.createElement("td");
-        male.textContent = male_bars[i];
-        male.style.textAlign = "right";
-        tr.appendChild(male);
-
-        let ni = document.createElement("td");
-        ni.textContent = data.data[stat][latest_year][`${violence_types[i]} violence`][`All respondents`];
-        ni.style.textAlign = "right";
-        tr.appendChild(ni);
-
-        table.appendChild(tr);
     }    
 
     // Create bar chart
