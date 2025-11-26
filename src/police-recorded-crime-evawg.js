@@ -5,6 +5,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     await insertHead("Police recorded crime - EVAWG")
     insertHeader();
     insertFooter();
-    insertNavButtons("victims");
+    insertNavButtons("police-recorded-crime-evawg");
 
 })

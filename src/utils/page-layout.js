@@ -49,7 +49,7 @@ export function insertNavButtons(page) {
     <a id="home-btn" class="col mx-2 nav-btn" href="/">Home</a>
     <a id="prevalence-violence-nilt-btn" class="col mx-2 nav-btn" href="prevalence-violence-nilt.html">Violence against women and men</a>
     <a id="prevalence-violence-ylt-btn" class="col mx-2 nav-btn" href="prevalence-violence-ylt.html">Violence against girls and boys</a>
-    <a id="victims-btn" class="col mx-2 nav-btn" href="victims.html">Police recorded crime - EVAWG</a>
+    <a id="police-recorded-crime-evawg-btn" class="col mx-2 nav-btn" href="police-recorded-crime-evawg.html">Police recorded crime - EVAWG</a>
     <a id="homicides-btn" class="col mx-2 nav-btn" href="homicides.html">Homicides</a>
     <a id="prevalence-of-domestic-abuse-btn" class="col mx-2 nav-btn" href="prevalence-of-domestic-abuse.html">Domestic abuse</a>
     <a id="domestic-abuse-reported-btn" class="col mx-2 nav-btn" href="domestic-abuse-reported.html">Police recorded crime - Domestic abuse</a>
