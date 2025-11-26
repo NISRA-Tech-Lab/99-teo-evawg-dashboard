@@ -1,6 +1,7 @@
 import { maleComparison } from "./utils/male-comparison.js";
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js";
+import { wrapLabel } from "./utils/wrap-label.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
 
@@ -280,6 +281,12 @@ window.addEventListener("DOMContentLoaded", async () => {
                 y: {
                     grid: {
                         display: false
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            const label = this.getLabelForValue(value);
+                            return wrapLabel(label, 35); // tweak width to taste
+                        }
                     }
                 }
             }

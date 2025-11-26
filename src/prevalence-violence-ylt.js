@@ -35,7 +35,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     const violence_girl = 100 - Number(no_violence_girl);
     const violence_boy   = 100 - Number(no_violence_boy);
 
-
     document.getElementById("violence-girl").textContent = violence_girl;
     document.getElementById("violence-boy").textContent  = violence_boy;
     document.getElementById("online-girl").textContent = data.data[stat][latest_year][`Online violence`][`Gender - Female`];
