@@ -1,16 +1,17 @@
-import { insertHeader, insertFooter, insertNavButtons } from "./utils/page-layout.js"
+import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js"
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
 
+    await insertHead("Violence against girls and boys")
     insertHeader();
     insertFooter();
     maleComparison();
     insertNavButtons("prevalence-violence-ylt");
     let data = await readData("EXPVLYTHEQ");
 
-// Update values
+    // Update values
 
     const stat = "Victims of gender-based violence";
 

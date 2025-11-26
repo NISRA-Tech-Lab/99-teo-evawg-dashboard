@@ -136,3 +136,50 @@ export function insertFooter () {
       </ul>
     </div>`
 }
+
+export async function insertHead(title) {
+  const head = document.head;
+
+  // Clear existing head safely if you really need to
+  head.innerHTML = `
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gender-based Violence - ${title}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="icon" href="assets/img/icon/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="icon" type="image/png" href="assets/img/icon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/img/icon/favicon.svg" />
+    <link rel="shortcut icon" href="assets/img/icon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Gender-based violence" />
+
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css">
+    <link href="https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-export@4.1.0/dist/maplibre-gl-export.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/styles.css">
+  `;
+
+  // helper to load scripts in order
+  const loadScript = (src) =>
+    new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = src;
+      s.defer = true;
+      s.onload = resolve;
+      s.onerror = reject;
+      head.appendChild(s);
+    });
+
+  await loadScript("https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js");
+  await loadScript("https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js");
+  await loadScript("https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js");
+  await loadScript("https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2");
+  await loadScript("https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js");
+  await loadScript("https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-export@4.1.0/dist/maplibre-gl-export.umd.js");
+
+}

@@ -1,7 +1,8 @@
-import { insertHeader, insertFooter, insertNavButtons } from "./utils/page-layout.js"
+import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js"
 
 window.addEventListener("DOMContentLoaded", async () => {
 
+    await insertHead("Case processing times")
     insertHeader();
     insertFooter();
     insertNavButtons("case-processing-times");
