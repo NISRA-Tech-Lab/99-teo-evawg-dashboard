@@ -1,4 +1,4 @@
-import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js"
+import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js"
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
 
@@ -68,7 +68,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             label: 'Girls (%)',
             data: girl_bars,
             fill: false,
-            backgroundColor: '#893B67',
+            backgroundColor: chart_colours[0],
             borderWidth: 1
         },
         {
@@ -76,7 +76,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             label: 'Boys (%)',
             data: boy_bars,
             fill: false,
-            backgroundColor: '#4E95D9',
+            backgroundColor: chart_colours[1],
             borderWidth: 1
         }]
     };

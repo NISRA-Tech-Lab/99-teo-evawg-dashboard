@@ -13,6 +13,8 @@
 <div class="container-fluid">
     <!-- Main Content -->
     <main>
+
+        <div id="male-comparison-switch"></div>
         
         <div class = "py-2">
             <!-- First row - cards -->
@@ -21,8 +23,8 @@
                     <div class="card h-100 blue-bg">
                         <div class="card-body">
                             <strong>Violence against the person</strong>
-                            <p class="display-6">47% of victims are female</p>
-                            <p>X% of victims are male</p>
+                            <p class="display-6"><span id="violence-female"></span>% of victims are female</p>
+                            <p class="male-fig"><span id="violence-male"></span>% of victims are male</p>
                         </div>
                     </div>
                 </div>
@@ -30,8 +32,18 @@
                     <div class="card h-100 blue-bg">
                         <div class="card-body">
                             <strong>Stalking and harassment</strong>
-                            <p>10,366 offences</p>
-                            <p>64% of victims were female</p>
+                            <p class="display-6"><span id="stalking-female"></span>% of victims are female</p>
+                            <p class="male-fig"><span id="stalking-male"></span>% of victims are male</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            
+                            <strong>Sexual offences</strong>
+                            <p class="display-6"><span id="sex-female"></span>% of victims are female</p>
+                            <p class="male-fig"><span id="sex-male"></span>% of victims are male</p>
                         </div>
                     </div>
                 </div>
@@ -39,17 +51,8 @@
                     <div class="card h-100 blue-bg">
                         <div class="card-body">
                             <strong>Online violence</strong>
-                            <p>10,366 offences</p>
-                            <p>64% female</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-xl-3 py-2">
-                    <div class="card h-100 blue-bg">
-                        <div class="card-body">
-                            <strong>Sexual offences</strong>
-                            <p>4,090 offences</p>
-                            <p>76% of victims were female</p>
+                            <p class="display-6"><span id="online-female"></span>% of victims are female</p>
+                            <p class="male-fig"><span id="online-male"></span>% of victims are male</p>
                         </div>
                     </div>
                 </div>
@@ -60,30 +63,30 @@
                 <div class="col-12 col-xl-4">
                     <div class="card h-100">
                         <div class="card-header">
-                            Police recorded crime by offence 1998/99 - 2023/24
+                            Victims of sexual offences, <span class="first-year"></span> to <span class="latest-year"></span>
                         </div>
                         <div class="card-body">
-                            Line chart goes here
+                            <canvas id="sexual-offences-line"></canvas>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-xl-4">
                     <div class="card h-100">
                         <div class="card-header">
-                            Police recorded online crime by offence 1998/99 - 2023/24
+                            Victims of stalking and harassment, <span class="first-year"></span> to <span class="latest-year"></span>
                         </div>
                         <div class="card-body">
-                            Line chart goes here
+                            <canvas id="stalking-line"></canvas>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-xl-4">
                     <div class="card h-100">
                         <div class="card-header">
-                            Victims of police recorded crime by crime type and gender 2007 - 2023
+                            Victims of violent crimes, <span class="latest-year"></span>
                         </div>
                         <div class="card-body">
-                            Line chart goes here
+                            <canvas id="violence-bar"></canvas>
                         </div>
                     </div>
                 </div>

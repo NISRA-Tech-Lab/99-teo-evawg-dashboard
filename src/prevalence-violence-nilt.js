@@ -1,4 +1,4 @@
-import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js";
+import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
 
@@ -63,7 +63,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             label: 'Females (%)',
             data: female_bars,
             fill: false,
-            backgroundColor: '#893B67',
+            backgroundColor: chart_colours[0],
             borderWidth: 1
         },
         {
@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             label: 'Males (%)',
             data: male_bars,
             fill: false,
-            backgroundColor: '#4E95D9',
+            backgroundColor: chart_colours[1],
             borderWidth: 1
         }]
     };
@@ -116,8 +116,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     // Create line chart
     const line_canvas = document.getElementById("prevalence-nilt-line");
 
-    const line_colours = ["#4E95D9", "#00205B", "#68A41E", "#732777", "#CE70D2"]
-
     let line_values = [];
     for (let i = 0; i < violence_types.length; i ++) {
 
@@ -132,8 +130,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             label: `${violence_types[i]} violence - Female`,
             data: female_values,
             fill: false,
-            backgroundColor: line_colours[i],
-            borderColor: line_colours[i],
+            backgroundColor: chart_colours[i],
+            borderColor: chart_colours[i],
             borderWidth: 2
         });
 
@@ -141,8 +139,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             label: `${violence_types[i]} violence - Male`,
             data: male_values,
             fill: false,
-            backgroundColor: line_colours[i],
-            borderColor: line_colours[i],
+            backgroundColor: chart_colours[i],
+            borderColor: chart_colours[i],
             borderDash: [6, 4],
             borderWidth: 2
         });

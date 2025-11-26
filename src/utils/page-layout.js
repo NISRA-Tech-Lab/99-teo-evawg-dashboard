@@ -183,3 +183,5 @@ export async function insertHead(title) {
   await loadScript("https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-export@4.1.0/dist/maplibre-gl-export.umd.js");
 
 }
+
+export const chart_colours = ["#4E95D9", "#00205B", "#68A41E", "#732777", "#CE70D2"];
