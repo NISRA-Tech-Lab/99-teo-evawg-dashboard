@@ -1,4 +1,4 @@
-import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js";
+import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js"
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
 
@@ -36,7 +36,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     const violence_girl = 100 - Number(no_violence_girl);
     const violence_boy   = 100 - Number(no_violence_boy);
 
-
     document.getElementById("violence-girl").textContent = violence_girl;
     document.getElementById("violence-boy").textContent  = violence_boy;
     document.getElementById("online-girl").textContent = data.data[stat][latest_year][`Online violence`][`Gender - Female`];
@@ -69,7 +68,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             label: 'Girls (%)',
             data: girl_bars,
             fill: false,
-            backgroundColor: '#893B67',
+            backgroundColor: chart_colours[0],
             borderWidth: 1
         },
         {
@@ -77,7 +76,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             label: 'Boys (%)',
             data: boy_bars,
             fill: false,
-            backgroundColor: '#4E95D9',
+            backgroundColor: chart_colours[1],
             borderWidth: 1
         }]
     };
