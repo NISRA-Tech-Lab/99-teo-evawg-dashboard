@@ -1,4 +1,5 @@
 import { maleComparison } from "./utils/male-comparison.js";
+import { createMaleFemaleLineChart } from "./utils/male-female-line.js";
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js";
 import { wrapLabel } from "./utils/wrap-label.js";
@@ -11,7 +12,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertNavButtons("police-recorded-crime-evawg");
     maleComparison();
     let data = await readData("PRCVCTM");
-    let online_data = await readData("PRCONL");
     
     // Update values
     const stat = "All crimes recorded by the police";
@@ -104,127 +104,25 @@ window.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("online-male").textContent = Math.round(male_online_victims / online_victims * 100);
 
     // Sexual offences line chart
-    const line_canvas = document.getElementById("sexual-offences-line");
-
-    let line_values = [];
-    let female_values = [];
-    let male_values = [];
-    for (let j = 0; j < years.length; j ++) {
-        female_values.push(data.data[stat][years[j]]["Sexual offences"]["All ages"]["Female"]);
-        male_values.push(data.data[stat][years[j]]["Sexual offences"]["All ages"]["Male"]);
-    }
-
-    line_values.push({axis: "y",
-        label: "Female",
-        data: female_values,
-        fill: false,
-        backgroundColor: chart_colours[0],
-        borderColor: chart_colours[0],
-        borderWidth: 2
+    createMaleFemaleLineChart({
+        data,
+        stat,
+        years,
+        female_selection: ["Sexual offences", "All ages", "Female"],
+        male_selection: ["Sexual offences", "All ages", "Male"],
+        canvas_id: "sexual-offences-line"
     });
-
-    line_values.push({axis: "y",
-        label: "Males",
-        data: male_values,
-        fill: false,
-        backgroundColor: chart_colours[1],
-        borderColor: chart_colours[1],
-        borderWidth: 2
-    });
-
-
-    const line_data = {
-        labels: years,
-        datasets: line_values
-    };
-
-    const config_line = {
-        type: 'line',
-        data: line_data,
-        options: {
-            maintainAspectRatio: false,   // let the canvas size control the chart
-            layout: {
-                padding: {
-                    right: 40             // extra room for end labels
-                }
-            },
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        }
-    };
-
-    const ctx_line = line_canvas.getContext('2d');
-    const sexual_line_chart = new Chart(ctx_line, config_line);
 
     // Stalking and harassment line chart
-    const stalking_line_canvas = document.getElementById("stalking-line");
-
-    line_values = [];
-    female_values = [];
-    male_values = [];
-    for (let j = 0; j < years.length; j ++) {
-        female_values.push(data.data[stat][years[j]]["Stalking and harassment"]["All ages"]["Female"]);
-        male_values.push(data.data[stat][years[j]]["Stalking and harassment"]["All ages"]["Male"]);
-    }
-
-    line_values.push({axis: "y",
-        label: "Female",
-        data: female_values,
-        fill: false,
-        backgroundColor: chart_colours[0],
-        borderColor: chart_colours[0],
-        borderWidth: 2
+    createMaleFemaleLineChart({
+        data,
+        stat,
+        years,
+        female_selection: ["Stalking and harassment", "All ages", "Female"],
+        male_selection: ["Stalking and harassment", "All ages", "Male"],
+        canvas_id: "stalking-line"
     });
-
-    line_values.push({axis: "y",
-        label: "Males",
-        data: male_values,
-        fill: false,
-        backgroundColor: chart_colours[1],
-        borderColor: chart_colours[1],
-        borderWidth: 2
-    });
-
-
-    const stalking_line_data = {
-        labels: years,
-        datasets: line_values
-    };
-
-    const stalking_config_line = {
-        type: 'line',
-        data: stalking_line_data,
-        options: {
-            maintainAspectRatio: false,   // let the canvas size control the chart
-            layout: {
-                padding: {
-                    right: 40             // extra room for end labels
-                }
-            },
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        }
-    };
-
-    const stalking_ctx_line = stalking_line_canvas.getContext('2d');
-    const stalking_line_chart = new Chart(stalking_ctx_line, stalking_config_line);
-
+   
     // Create bar chart
     const violence_types = [
         "Violence with injury (including homicide & death/serious injury by unlawful driving)",
