@@ -1,10 +1,11 @@
-import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js"
+import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
 
+
 window.addEventListener("DOMContentLoaded", async () => {
 
-    await insertHead("Violence against girls and boys")
+    await insertHead("Violence against girls and boys");
     insertHeader();
     insertFooter();
     maleComparison();
@@ -116,11 +117,86 @@ window.addEventListener("DOMContentLoaded", async () => {
     };
 
     const ctx = bar_canvas.getContext('2d');
-    const barChart =new Chart(ctx, config_bar); 
+    const barChart = new Chart(ctx, config_bar); 
 
+
+
+    // Create line chart
+    const line_canvas = document.getElementById("prevalence-ylt-line");
+
+    const line_colours = ["#4E95D9", "#00205B", "#68A41E", "#732777", "#CE70D2"]
+
+    let line_values = [];
+    for (let i = 0; i < violence_types.length; i ++) {
+
+        let girl_values = [];
+        let boy_values = [];
+        for (let j = 0; j < years.length; j ++) {
+            girl_values.push(data.data[stat][years[j]][`${violence_types[i]} violence`]["Gender - Female"]);
+            boy_values.push(data.data[stat][years[j]][`${violence_types[i]} violence`]["Gender - Male"]);
+        }
+
+        line_values.push({axis: "y",
+            label: `${violence_types[i]} violence - Female`,
+            data: girl_values,
+            fill: false,
+            backgroundColor: line_colours[i],
+            borderColor: line_colours[i],
+            borderWidth: 2
+        });
+
+        line_values.push({axis: "y",
+            label: `${violence_types[i]} violence - Male`,
+            data: boy_values,
+            fill: false,
+            backgroundColor: line_colours[i],
+            borderColor: line_colours[i],
+            borderDash: [6, 4],
+            borderWidth: 2
+        });
+    }
+
+    const line_data = {
+        labels: years,
+        datasets: line_values
+    };
+
+    const config_line = {
+        type: 'line',
+        data: line_data,
+        options: {
+            maintainAspectRatio: false,   // let the canvas size control the chart
+            layout: {
+                padding: {
+                    right: 40             // extra room for end labels
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    };
+
+    const ctx_line = line_canvas.getContext('2d');
+    const lineChart = new Chart(ctx_line, config_line); 
+
+    // Toggle male comparison in charts
     const male_comparison = document.getElementById("male-comparison");
     let showMales = male_comparison.checked;
     barChart.data.datasets[1].hidden = !showMales;
+
+    for (let i = 0; i < lineChart.data.datasets.length; i ++) {
+        if (i % 2 == 1) {
+            lineChart.data.datasets[i].hidden = !showMales;
+        }
+    }
     
     male_comparison.addEventListener("change", function () {
         showMales = male_comparison.checked;
@@ -128,7 +204,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         // dataset index 1 is the "Males (%)" series
         barChart.data.datasets[1].hidden = !showMales;
 
+        for (let i = 0; i < lineChart.data.datasets.length; i ++) {
+            if (i % 2 == 1) {
+                lineChart.data.datasets[i].hidden = !showMales;
+            }
+        }
+
         barChart.update();
+        lineChart.update();
     });
 
 
