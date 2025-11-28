@@ -1,6 +1,7 @@
     
 import { chart_colours } from "./page-layout.js";
 import { wrapLabel } from "./wrap-label.js";
+import { getSelectedGender } from "./get-selected-gender.js";
 
 export function createMaleFemaleLineChart({data, stat, years, female_selection, male_selection, canvas_id}) {
 
@@ -11,18 +12,16 @@ export function createMaleFemaleLineChart({data, stat, years, female_selection, 
     let male_values = [];
 
     for (let i = 0; i < years.length; i++) {
-    const base = data.data[stat][years[i]];   // start point for that year
+        const base = data.data[stat][years[i]];   // start point for that year
 
-    if (female_selection.includes("No violence")) {
-        female_values.push(100 - getNested(base, female_selection));
-        male_values.push(100 - getNested(base, male_selection));
-    } else {
-        female_values.push(getNested(base, female_selection));
-        male_values.push(getNested(base, male_selection));
-    }
-    }
-
-    
+        if (female_selection.includes("No violence")) {
+            female_values.push(100 - getNested(base, female_selection));
+            male_values.push(100 - getNested(base, male_selection));
+        } else {
+            female_values.push(getNested(base, female_selection));
+            male_values.push(getNested(base, male_selection));
+        }
+    }    
 
     line_values.push({axis: "y",
         label: "Female",
@@ -74,14 +73,21 @@ export function createMaleFemaleLineChart({data, stat, years, female_selection, 
     const ctx_line = line_canvas.getContext('2d');
     const line_chart = new Chart(ctx_line, config_line);
 
-    const male_comparison = document.getElementById("male-comparison");
-    let showMales = male_comparison.checked;
+    let selectedGender = getSelectedGender(); 
+    const gender_form = document.getElementById("gender-form");
 
-    line_chart.data.datasets[1].hidden = !showMales;
+    let show_males = selectedGender != "female";
+    let show_females = selectedGender != "male";
 
-    male_comparison.addEventListener("change", function () {
-        showMales = male_comparison.checked;
-        line_chart.data.datasets[1].hidden = !showMales;
+    line_chart.data.datasets[1].hidden = !show_males;
+    line_chart.data.datasets[0].hidden = !show_females;
+
+    gender_form.addEventListener("change", function () {
+        selectedGender = getSelectedGender(); 
+        show_males = selectedGender != "female";
+        show_females = selectedGender != "male";
+        line_chart.data.datasets[1].hidden = !show_males;
+        line_chart.data.datasets[0].hidden = !show_females;
         line_chart.update();
     });
 
@@ -176,20 +182,24 @@ export function createViolenceTypeBarChart({data, stat, year, violence_types, ca
     };
 
     const ctx = bar_canvas.getContext('2d');
-    const barChart = new Chart(ctx, config_bar); 
+    const bar_chart = new Chart(ctx, config_bar); 
 
-    // Toggle male comparison in charts
-    const male_comparison = document.getElementById("male-comparison");
-    let showMales = male_comparison.checked;
-    barChart.data.datasets[1].hidden = !showMales;
-    
-    male_comparison.addEventListener("change", function () {
-        showMales = male_comparison.checked;
+    let selectedGender = getSelectedGender(); 
+    const gender_form = document.getElementById("gender-form");
 
-        // dataset index 1 is the "Males (%)" series
-        barChart.data.datasets[1].hidden = !showMales;
+    let show_males = selectedGender != "female";
+    let show_females = selectedGender != "male";
 
-        barChart.update();
+    bar_chart.data.datasets[1].hidden = !show_males;
+    bar_chart.data.datasets[0].hidden = !show_females;
+
+    gender_form.addEventListener("change", function () {
+        selectedGender = getSelectedGender(); 
+        show_males = selectedGender != "female";
+        show_females = selectedGender != "male";
+        bar_chart.data.datasets[1].hidden = !show_males;
+        bar_chart.data.datasets[0].hidden = !show_females;
+        bar_chart.update();
     });
 
 
