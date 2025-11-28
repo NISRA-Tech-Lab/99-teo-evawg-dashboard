@@ -57,74 +57,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         stat,
         year: latest_year,
         violence_types,
-        canvas_id: "prevalence-ylt-bar"
+        canvas_id: "prevalence-ylt-bar",
+        label_format: "%"
     });
-
-    // let girl_bars = [];
-    // let boy_bars = [];
-    // for (let i = 0; i < violence_types.length; i ++) {
-    //     girl_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Female`]);
-    //     boy_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Male`]);
-    // } 
-
-    // const bar_canvas = document.getElementById("prevalence-ylt-bar");
-
-    // const bar_data = {
-    //     labels: violence_types,
-    //     datasets: [{
-    //         axis: 'y',
-    //         label: 'Girls (%)',
-    //         data: girl_bars,
-    //         fill: false,
-    //         backgroundColor: chart_colours[0],
-    //         borderWidth: 1
-    //     },
-    //     {
-    //         axis: 'y',
-    //         label: 'Boys (%)',
-    //         data: boy_bars,
-    //         fill: false,
-    //         backgroundColor: chart_colours[1],
-    //         borderWidth: 1
-    //     }]
-    // };
-
-    // const config_bar = {
-    //     type: 'bar',
-    //     data: bar_data,
-    //     options: {
-    //         indexAxis: "y",
-    //         maintainAspectRatio: false,   // let the canvas size control the chart
-    //         layout: {
-    //             padding: {
-    //                 right: 40             // extra room for end labels
-    //             }
-    //         },
-    //         plugins: {
-    //             datalabels: {
-    //                 anchor: 'end',
-    //                 align: 'right',
-    //                 formatter: (v) => v + '%',
-    //                 color: '#000',
-    //                 clamp: true           // keep inside chart area
-    //             }
-    //         },
-    //         scales: {
-    //             x: {
-    //                 beginAtZero: true
-    //             },
-    //             y: {
-    //                 grid: {
-    //                     display: false
-    //                 }
-    //             }
-    //         }
-    //     },
-    //     plugins: [ChartDataLabels]
-    // };
-
-    // const ctx = bar_canvas.getContext('2d');
-    // const barChart = new Chart(ctx, config_bar); 
 
     // Create line chart
     createMaleFemaleLineChart({

@@ -1,5 +1,6 @@
     
 import { chart_colours } from "./page-layout.js";
+import { wrapLabel } from "./wrap-label.js";
 
 export function createMaleFemaleLineChart({data, stat, years, female_selection, male_selection, canvas_id}) {
 
@@ -86,15 +87,26 @@ export function createMaleFemaleLineChart({data, stat, years, female_selection, 
 
 }
 
-export function createViolenceTypeBarChart({data, stat, year, violence_types, canvas_id}) {
+export function createViolenceTypeBarChart({data, stat, year, violence_types, canvas_id, label_format}) {
+
+    
 
     let female_bars = [];
     let male_bars = [];
     for (let i = 0; i < violence_types.length; i ++) {
-        let female_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Female"));
-        let male_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Male"));
-        female_bars.push(data.data[stat][year][violence_types[i]][female_key]);
-        male_bars.push(data.data[stat][year][violence_types[i]][male_key]);
+        if (data.label == "Police recorded crime - victims of crime") {
+             female_bars.push(data.data[stat][year]
+                [violence_types[i]]
+                ["All ages"]["Female"]);
+            male_bars.push(data.data[stat][year]
+                [violence_types[i]]
+                ["All ages"]["Male"]);
+        } else {
+            let female_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Female"));
+            let male_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Male"));
+            female_bars.push(data.data[stat][year][violence_types[i]][female_key]);
+            male_bars.push(data.data[stat][year][violence_types[i]][male_key]);
+        }
     } 
 
     const bar_canvas = document.getElementById(canvas_id);
@@ -103,7 +115,7 @@ export function createViolenceTypeBarChart({data, stat, year, violence_types, ca
         labels: violence_types,
         datasets: [{
             axis: 'y',
-            label: 'Females (%)',
+            label: `Females${label_format === "%" ? " (%)" : ""}`,
             data: female_bars,
             fill: false,
             backgroundColor: chart_colours[0],
@@ -111,7 +123,7 @@ export function createViolenceTypeBarChart({data, stat, year, violence_types, ca
         },
         {
             axis: 'y',
-            label: 'Males (%)',
+            label: `Males${label_format === "%" ? " (%)" : ""}`,
             data: male_bars,
             fill: false,
             backgroundColor: chart_colours[1],
@@ -134,7 +146,11 @@ export function createViolenceTypeBarChart({data, stat, year, violence_types, ca
                 datalabels: {
                     anchor: 'end',
                     align: 'right',
-                    formatter: (v) => v + '%',
+                    formatter: (v) => {
+                        if (label_format === "%") return `${v}%`;
+                        if (label_format === ",") return Number(v).toLocaleString();
+                        return v; // fallback if something else shows up
+                        },
                     color: '#000',
                     clamp: true           // keep inside chart area
                 }
@@ -146,6 +162,12 @@ export function createViolenceTypeBarChart({data, stat, year, violence_types, ca
                 y: {
                     grid: {
                         display: false
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            const label = this.getLabelForValue(value);
+                            return wrapLabel(label, 35); 
+                        }
                     }
                 }
             }

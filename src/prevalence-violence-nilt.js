@@ -51,7 +51,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         stat,
         year: latest_year,
         violence_types,
-        canvas_id: "prevalence-nilt-bar"
+        canvas_id: "prevalence-nilt-bar",
+        label_format: "%"
     });
 
     // Create line chart
