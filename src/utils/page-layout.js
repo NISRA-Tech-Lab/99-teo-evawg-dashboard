@@ -100,22 +100,22 @@ export function insertFooter () {
           <ul class="list-inline">
             <li class="list-inline-item">
               <a href="https://www.facebook.com/nisra.gov.uk">
-                <img src="assets/img/logo/facebook-brands-solid-full.svg" class="img-50"/>
+                <img src="assets/img/logo/facebook-brands-solid-full.svg" title="Facebook" role="img" class="img-50"/>
               </a>
             </li>
             <li class="list-inline-item">
               <a href="https://x.com/NISRA/">
-                <img src="assets/img/logo/x-twitter-brands-solid-full.svg" class="img-50"/>
+                <img src="assets/img/logo/x-twitter-brands-solid-full.svg" title="Twitter/X" role="img" class="img-50"/>
               </a>
             </li>
             <li class="list-inline-item">
               <a href="https://www.youtube.com/user/nisrastats">
-                <img src="assets/img/logo/youtube-brands-solid-full.svg" class="img-50"/>
+                <img src="assets/img/logo/youtube-brands-solid-full.svg" title="YouTube" role="img" class="img-50"/>
               </a>
             </li>
             <li class="list-inline-item">
               <a href="https://www.linkedin.com/company/northern-ireland-statistics-and-research-agency/">
-                <img src="assets/img/logo/linkedin-in-brands-solid-full.svg" class="img-50"/>
+                <img src="assets/img/logo/linkedin-in-brands-solid-full.svg" title="LinkedIn" role="img" class="img-50"/>
               </a>
             </li>
           </ul>
@@ -132,7 +132,7 @@ export function insertFooter () {
         <li class="list-inline-item">|</li>
         <li class="list-inline-item"><a href="https://www.nisra.gov.uk/nisra-privacy-notice">Privacy</a></li>
         <li class="list-inline-item">|</li>
-        <li class="list-inline-item"><a href="https://www.nisra.gov.uk/accessibility-statement-nisra">Accessibility Statement</a></li>
+        <li class="list-inline-item"><a href="https://datavis.nisra.gov.uk/dissemination/accessibility-statement-visualisations.html">Accessibility Statement</a></li>
       </ul>
     </div>`
 }
