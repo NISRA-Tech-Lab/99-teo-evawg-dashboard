@@ -1,7 +1,7 @@
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js"
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
-import { createMaleFemaleLineChart } from "./utils/charts.js";
+import { createMaleFemaleLineChart, createViolenceTypeBarChart } from "./utils/charts.js";
 
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -50,74 +50,81 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     // Create bar chart
     const violence_types = Object.keys(data.data[stat][latest_year])
-        .filter(x => x !== "No violence")
-        .map(x => x.replace(/ violence$/, ""));
+        .filter(x => x !== "No violence");
 
-    let girl_bars = [];
-    let boy_bars = [];
-    for (let i = 0; i < violence_types.length; i ++) {
-        girl_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Female`]);
-        boy_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Male`]);
-    } 
+    createViolenceTypeBarChart({
+        data,
+        stat,
+        year: latest_year,
+        violence_types,
+        canvas_id: "prevalence-ylt-bar"
+    });
 
-    const bar_canvas = document.getElementById("prevalence-ylt-bar");
+    // let girl_bars = [];
+    // let boy_bars = [];
+    // for (let i = 0; i < violence_types.length; i ++) {
+    //     girl_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Female`]);
+    //     boy_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Male`]);
+    // } 
 
-    const bar_data = {
-        labels: violence_types,
-        datasets: [{
-            axis: 'y',
-            label: 'Girls (%)',
-            data: girl_bars,
-            fill: false,
-            backgroundColor: chart_colours[0],
-            borderWidth: 1
-        },
-        {
-            axis: 'y',
-            label: 'Boys (%)',
-            data: boy_bars,
-            fill: false,
-            backgroundColor: chart_colours[1],
-            borderWidth: 1
-        }]
-    };
+    // const bar_canvas = document.getElementById("prevalence-ylt-bar");
 
-    const config_bar = {
-        type: 'bar',
-        data: bar_data,
-        options: {
-            indexAxis: "y",
-            maintainAspectRatio: false,   // let the canvas size control the chart
-            layout: {
-                padding: {
-                    right: 40             // extra room for end labels
-                }
-            },
-            plugins: {
-                datalabels: {
-                    anchor: 'end',
-                    align: 'right',
-                    formatter: (v) => v + '%',
-                    color: '#000',
-                    clamp: true           // keep inside chart area
-                }
-            },
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    grid: {
-                        display: false
-                    }
-                }
-            }
-        },
-        plugins: [ChartDataLabels]
-    };
+    // const bar_data = {
+    //     labels: violence_types,
+    //     datasets: [{
+    //         axis: 'y',
+    //         label: 'Girls (%)',
+    //         data: girl_bars,
+    //         fill: false,
+    //         backgroundColor: chart_colours[0],
+    //         borderWidth: 1
+    //     },
+    //     {
+    //         axis: 'y',
+    //         label: 'Boys (%)',
+    //         data: boy_bars,
+    //         fill: false,
+    //         backgroundColor: chart_colours[1],
+    //         borderWidth: 1
+    //     }]
+    // };
 
-    const ctx = bar_canvas.getContext('2d');
-    const barChart = new Chart(ctx, config_bar); 
+    // const config_bar = {
+    //     type: 'bar',
+    //     data: bar_data,
+    //     options: {
+    //         indexAxis: "y",
+    //         maintainAspectRatio: false,   // let the canvas size control the chart
+    //         layout: {
+    //             padding: {
+    //                 right: 40             // extra room for end labels
+    //             }
+    //         },
+    //         plugins: {
+    //             datalabels: {
+    //                 anchor: 'end',
+    //                 align: 'right',
+    //                 formatter: (v) => v + '%',
+    //                 color: '#000',
+    //                 clamp: true           // keep inside chart area
+    //             }
+    //         },
+    //         scales: {
+    //             x: {
+    //                 beginAtZero: true
+    //             },
+    //             y: {
+    //                 grid: {
+    //                     display: false
+    //                 }
+    //             }
+    //         }
+    //     },
+    //     plugins: [ChartDataLabels]
+    // };
+
+    // const ctx = bar_canvas.getContext('2d');
+    // const barChart = new Chart(ctx, config_bar); 
 
     // Create line chart
     createMaleFemaleLineChart({
@@ -128,22 +135,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             male_selection: ["No violence", "Gender - Male"],
             canvas_id: "prevalence-ylt-line"
         });
-    
 
-    // Toggle male comparison in charts
-    const male_comparison = document.getElementById("male-comparison");
-    let showMales = male_comparison.checked;
-    barChart.data.datasets[1].hidden = !showMales;
-
-    male_comparison.addEventListener("change", function () {
-        showMales = male_comparison.checked;
-
-        // dataset index 1 is the "Males (%)" series
-        barChart.data.datasets[1].hidden = !showMales;
-
-        barChart.update();
-
-    });
 
 
 })

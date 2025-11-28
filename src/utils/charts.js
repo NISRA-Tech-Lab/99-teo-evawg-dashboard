@@ -91,11 +91,13 @@ export function createViolenceTypeBarChart({data, stat, year, violence_types, ca
     let female_bars = [];
     let male_bars = [];
     for (let i = 0; i < violence_types.length; i ++) {
-        female_bars.push(data.data[stat][year][violence_types[i]][`Sex - Female`]);
-        male_bars.push(data.data[stat][year][violence_types[i]][`Sex - Male`]);
+        let female_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Female"));
+        let male_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Male"));
+        female_bars.push(data.data[stat][year][violence_types[i]][female_key]);
+        male_bars.push(data.data[stat][year][violence_types[i]][male_key]);
     } 
 
-    const bar_canvas = document.getElementById("prevalence-nilt-bar");
+    const bar_canvas = document.getElementById(canvas_id);
 
     const bar_data = {
         labels: violence_types,
