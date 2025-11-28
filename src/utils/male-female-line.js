@@ -12,9 +12,16 @@ export function createMaleFemaleLineChart({data, stat, years, female_selection, 
     for (let i = 0; i < years.length; i++) {
     const base = data.data[stat][years[i]];   // start point for that year
 
-    female_values.push(getNested(base, female_selection));
-    male_values.push(getNested(base, male_selection));
+    if (female_selection.includes("No violence")) {
+        female_values.push(100 - getNested(base, female_selection));
+        male_values.push(100 - getNested(base, male_selection));
+    } else {
+        female_values.push(getNested(base, female_selection));
+        male_values.push(getNested(base, male_selection));
     }
+    }
+
+    
 
     line_values.push({axis: "y",
         label: "Female",
