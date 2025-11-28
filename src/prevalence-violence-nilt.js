@@ -14,6 +14,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     // Update values
 
+    console.log(data)
     const stat = "Adult victims of gender-based violence";
 
     const years = Object.keys(data.data[stat]);
@@ -30,14 +31,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         year_spans[i].textContent = latest_year;
     }
 
-    document.getElementById("economic-female").textContent = data.data[stat][latest_year][`Economic violence`][`Gender - Female`];
-    document.getElementById("economic-male").textContent = data.data[stat][latest_year][`Economic violence`][`Gender - Male`];
-    document.getElementById("sexual-female").textContent = data.data[stat][latest_year][`Sexual violence`][`Gender - Female`];
-    document.getElementById("sexual-male").textContent = data.data[stat][latest_year][`Sexual violence`][`Gender - Male`];
-    document.getElementById("physical-female").textContent = data.data[stat][latest_year][`Physical violence`][`Gender - Female`];
-    document.getElementById("physical-male").textContent = data.data[stat][latest_year][`Physical violence`][`Gender - Male`];
-    document.getElementById("psychological-female").textContent = data.data[stat][latest_year][`Physchological violence`][`Gender - Female`];
-    document.getElementById("psychological-male").textContent = data.data[stat][latest_year][`Physchological violence`][`Gender - Male`];
+    document.getElementById("economic-female").textContent = data.data[stat][latest_year][`Economic violence`][`Sex - Female`];
+    document.getElementById("economic-male").textContent = data.data[stat][latest_year][`Economic violence`][`Sex - Male`];
+    document.getElementById("sexual-female").textContent = data.data[stat][latest_year][`Sexual violence`][`Sex - Female`];
+    document.getElementById("sexual-male").textContent = data.data[stat][latest_year][`Sexual violence`][`Sex - Male`];
+    document.getElementById("physical-female").textContent = data.data[stat][latest_year][`Physical violence`][`Sex - Female`];
+    document.getElementById("physical-male").textContent = data.data[stat][latest_year][`Physical violence`][`Sex - Male`];
+    document.getElementById("psychological-female").textContent = data.data[stat][latest_year][`Psychological violence`][`Sex - Female`];
+    document.getElementById("psychological-male").textContent = data.data[stat][latest_year][`Psychological violence`][`Sex - Male`];
     
     
        
@@ -50,8 +51,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     let female_bars = [];
     let male_bars = [];
     for (let i = 0; i < violence_types.length; i ++) {
-        female_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Female`]);
-        male_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Gender - Male`]);
+        female_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Sex - Female`]);
+        male_bars.push(data.data[stat][latest_year][`${violence_types[i]} violence`][`Sex - Male`]);
     } 
 
     const bar_canvas = document.getElementById("prevalence-nilt-bar");
@@ -122,8 +123,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         let female_values = [];
         let male_values = [];
         for (let j = 0; j < years.length; j ++) {
-            female_values.push(data.data[stat][years[j]][`${violence_types[i]} violence`]["Gender - Female"]);
-            male_values.push(data.data[stat][years[j]][`${violence_types[i]} violence`]["Gender - Male"]);
+            female_values.push(data.data[stat][years[j]][`${violence_types[i]} violence`]["Sex - Female"]);
+            male_values.push(data.data[stat][years[j]][`${violence_types[i]} violence`]["Sex - Male"]);
         }
 
         line_values.push({axis: "y",
