@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+
+  <!-- Top Navbar -->
+<nav id ="nav"></nav>
+
+<div class="w-100 text-center current-page py-2">
+    This page uses data from the Young Life and Times (YLT) survey to measure prevalence of gender-based violence. This relates to the EVAWG strategy.
+</div>
+
+<div class="container-fluid">
+    <!-- Main Content -->
+    <main>
+
+        <div id="male-comparison-switch"></div>
+        <div class = "py-2">
+            <!-- First row - cards -->
+            <div class="row justify-content-center">
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 navy-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="violence-girl"></span>% of girls</p>
+                            <p class="male-fig"><span id="violence-boy"></span>% of boys</p>
+                            <p>experienced violence in the past 5 years</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="physical-girl"></span>% of girls</p>
+                            <p class="male-fig"><span id="physical-boy"></span>% of boys</p>
+                            <p>experienced physical violence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="sexual-girl"></span>% of girls</p>
+                            <p class="male-fig"><span id="sexual-boy"></span>% of boys</p>
+                            <p>experienced sexual violence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="psychological-girl"></span>% of girls</p>
+                            <p class="male-fig"><span id="psychological-boy"></span>% of boys</p>
+                            <p>experienced psychological violence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="online-girl"></span>% of girls</p>
+                            <p class="male-fig"><span id="online-boy"></span>% of boys</p>
+                            <p>experienced online violence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second row - tables and charts -->
+<div class="row py-4">
+    <div class="col-12 col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                16-year-olds experiences of gender-based violence, <span class="latest-year"></span>
+            </div>
+            <div class="card-body">
+                <canvas id="prevalence-ylt-bar"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                16-year-olds experiences of gender-based violence <span class="first-year"></span> to <span class="latest-year"></span>
+            </div>
+            <div class="card-body">
+                <canvas id="prevalence-ylt-line"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- Third row - Definitions -->
+
+            <div class="accordion py-4" id="infoAccordion">
+                <div class="row g-3">
+
+                <!-- Definitions Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="def-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#def-collapse"
+                            aria-expanded="false" aria-controls="def-collapse">
+                            Definitions
+                        </button>
+                    </h2>
+                </div>
+
+                <!-- What does this mean Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="mean-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#mean-collapse"
+                            aria-expanded="false" aria-controls="mean-collapse">
+                            What does this mean?
+                        </button>
+                    </h2>
+                </div>
+
+            </div>
+
+            <!-- CONTENT AREAS -->
+
+            <div id="def-collapse" class="accordion-collapse collapse"
+                aria-labelledby="def-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>Definitions</h2>
+                    <p><strong>From YLT survey:</strong> Gender-based violence is violence, abuse and harm directed against a person because of that person’s gender, or violence that affects people of a particular gender disproportionately.</p>
+
+        <p>Based on this definition, and regardless of your gender, have you personally experienced any of the following in the last year because of your gender?</p>
+
+        <ul>
+          <li><strong>Physical Violence:</strong> Being beaten, slapped, pushed or restrained.</li>
+          <li><strong>Sexual Violence:</strong> Upskirting, unwanted touching, being coerced into sexual acts.</li>
+          <li><strong>Psychological Violence:</strong> Being insulted, stalked, harassed, controlled against your will, or threatened with violence.</li>
+          <li><strong>Online Violence:</strong> Receiving threats online or via social media, online trolling, or being sent or being asked for intimate images against your will.</li>
+                </div>
+            </div>
+
+            <div id="mean-collapse" class="accordion-collapse collapse"
+                aria-labelledby="mean-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>What does this mean?</h2>
+                    <p>Questions relating to gender-based violence have been included in the <strong>Young Life and Times (YLT)</strong> survey since 2022 to attempt to gain more understanding of the prevalence of gender-based violence in Northern Ireland.</p>
+        <p>The YLT is a representative survey of 16-year-olds in Northern Ireland, and respondents are provided with definitions of gender-based violence. The data from this survey represents self-reported experience of gender-based violence.</p>
+        <p>After initial question development, a time series will be developed in future years from a baseline in 2023. Economic violence was not asked in the YLT survey due to the age of respondents.</p>
+                </div>
+            </div>
+
+    </div>
+
+
+
+        </div>
+        
+    </main>
+</div>
+
+<footer id = "footer"></footer>
+
+<script type = "module" src="src/prevalence-violence-ylt.js"></script>
+
+
+</body>

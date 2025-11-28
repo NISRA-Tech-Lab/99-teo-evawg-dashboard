@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+
+  <!-- Top Navbar -->
+<nav id ="nav"></nav>
+
+<div class="w-100 text-center current-page py-2">
+    This page uses data from the Safe Community Survey to measure prevalence of domestic violence.
+
+</div>
+
+<div class="container-fluid">
+    <!-- Main Content -->
+    <main>
+
+        <div id="male-comparison-switch"></div>
+        <div class = "py-2">
+            <!-- First row - cards -->
+            <div class="row">
+                <div class="col-xl-1"></div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6"><span id="lifetime-female"></span>% of women</p>
+                            <p class="male-fig"><span id="lifetime-male"></span>% of men</p>
+                            <p>experienced domestic violence in their lifetime</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6"><span id="three-year-female"></span>% of women</p>
+                            <p class="male-fig"><span id="three-year-male"></span>% of men</p>
+                            <p>experienced domestic violence in the last 3 years</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6"><span id="non-physical-female"></span>% of women</p>
+                            <p class="male-fig"><span id="non-physical-male"></span>% of men</p>
+                            <p>experienced non-physical abuse</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6"><span id="threats-female"></span>% of women</p>
+                            <p class="male-fig"><span id="threats-male"></span>% of men</p>
+                            <p>experienced threats</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6"><span id="force-female"></span>% of women</p>
+                            <p class="male-fig"><span id="force-male"></span>% of men</p>
+                            <p>experienced force</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-1"></div>
+            </div>
+
+            <!-- Second row - tables and charts -->
+            <div class="row py-4">
+                <div class="col-12 col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Prevalence of domestic abuse among adults, by gender
+                        </div>
+                        <div class="card-body">
+                            Bar chart goes here
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Percentage reporting domestic violence in the last 3 years 2018/19
+                        </div>
+                        <div class="card-body">
+                            Table goes here
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Relationship of perpatrator to victim
+                        </div>
+                        <div class="card-body">
+                            Bar chart goes here
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third row - Definitions -->
+
+            <div class="accordion py-4" id="infoAccordion">
+                <div class="row g-3">
+
+                <!-- Definitions Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="def-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#def-collapse"
+                            aria-expanded="false" aria-controls="def-collapse">
+                            Definitions
+                        </button>
+                    </h2>
+                </div>
+
+                <!-- What does this mean Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="mean-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#mean-collapse"
+                            aria-expanded="false" aria-controls="mean-collapse">
+                            What does this mean?
+                        </button>
+                    </h2>
+                </div>
+
+            </div>
+
+            <!-- CONTENT AREAS -->
+
+            <div id="def-collapse" class="accordion-collapse collapse"
+                aria-labelledby="def-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>Definitions</h2>
+                     <p>Definitions goes here....</p>
+                </div>
+            </div>
+
+            <div id="mean-collapse" class="accordion-collapse collapse"
+                aria-labelledby="mean-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>What does this mean?</h2>
+                    <p>What does this mean text goes here....</p>
+                </div>
+            </div>
+
+    </div>
+
+
+
+        </div>
+        
+    </main>
+</div>
+
+<footer id = "footer"></footer>
+
+<script type = "module" src="src/prevalence-of-domestic-abuse.js"></script>
+
+
+</body>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+
+  <!-- Top Navbar -->
+<nav id ="nav"></nav>
+
+<div class="w-100 text-center current-page py-2">
+    The data on this page is administrative data collected through the police recorded crime system. They are published annually in xxxx. 
+ 
+
+
+</div>
+
+<div class="container-fluid">
+    <!-- Main Content -->
+    <main>
+        
+        <div class = "py-2">
+
+           <!-- Second row - tables and charts -->
+<div class="row py-4">
+    <div class="col-12 col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                Distribution of gender-based violence crimes across NI.
+            </div>
+            <div class="card-body">
+                Instructions on how to use the maps
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                Maps
+            </div>
+            <div class="card-body">
+                Insert maps
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- Third row - Definitions -->
+
+            <div class="accordion py-4" id="infoAccordion">
+                <div class="row g-3">
+
+                <!-- Definitions Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="def-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#def-collapse"
+                            aria-expanded="false" aria-controls="def-collapse">
+                            Definitions
+                        </button>
+                    </h2>
+                </div>
+
+                <!-- What does this mean Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="mean-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#mean-collapse"
+                            aria-expanded="false" aria-controls="mean-collapse">
+                            What does this mean?
+                        </button>
+                    </h2>
+                </div>
+
+            </div>
+
+            <!-- CONTENT AREAS -->
+
+            <div id="def-collapse" class="accordion-collapse collapse"
+                aria-labelledby="def-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>Definitions</h2>
+                     <p>Definitions goes here....</p>
+                </div>
+            </div>
+
+            <div id="mean-collapse" class="accordion-collapse collapse"
+                aria-labelledby="mean-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>What does this mean?</h2>
+                    <p>What does this mean text goes here....</p>
+                </div>
+            </div>
+
+    </div>
+
+
+
+        </div>
+        
+    </main>
+</div>
+
+<footer id = "footer"></footer>
+
+<script type = "module" src="src/maps.js"></script>
+
+
+</body>

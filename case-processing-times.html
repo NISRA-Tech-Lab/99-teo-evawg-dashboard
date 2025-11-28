@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+
+  <!-- Top Navbar -->
+<nav id ="nav"></nav>
+
+<div class="w-100 text-center current-page py-2">
+    The data on this page is administrative data collected through the NI Courts. They are published annually in xxxx. 
+
+
+</div>
+
+<div class="container-fluid">
+    <!-- Main Content -->
+    <main>
+        
+        <div class = "py-2">
+            <!-- First row - cards -->
+<div class="row justify-content-center">
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6">757 days</p>
+                            <p>average time for sexual offences</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6">x days</p>
+                            <p>average time for domestic abuse related case</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="display-6">234 days</p>
+                            <p>average time for all cases</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           <!-- Second row - tables and charts -->
+<div class="row py-4">
+    <div class="col-12 col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                Case processing time xxxx year
+            </div>
+            <div class="card-body">
+                Bar chart goes here
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-xl-6">
+        <div class="card h-100">
+            <div class="card-header">
+                Time taken for domestic abuse related cases and all criminal cases from date incident reported/detected to disposal at court, 2022/23 to 2024/25
+            </div>
+            <div class="card-body">
+                Bar chart goes here
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- Third row - Definitions -->
+
+            <div class="accordion py-4" id="infoAccordion">
+                <div class="row g-3">
+
+                <!-- Definitions Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="def-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#def-collapse"
+                            aria-expanded="false" aria-controls="def-collapse">
+                            Definitions
+                        </button>
+                    </h2>
+                </div>
+
+                <!-- What does this mean Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="mean-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#mean-collapse"
+                            aria-expanded="false" aria-controls="mean-collapse">
+                            What does this mean?
+                        </button>
+                    </h2>
+                </div>
+
+            </div>
+
+            <!-- CONTENT AREAS -->
+
+            <div id="def-collapse" class="accordion-collapse collapse"
+                aria-labelledby="def-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>Definitions</h2>
+                     <p>Definitions goes here....</p>
+                </div>
+            </div>
+
+            <div id="mean-collapse" class="accordion-collapse collapse"
+                aria-labelledby="mean-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>What does this mean?</h2>
+                    <p>What does this mean text goes here....</p>
+                </div>
+            </div>
+
+    </div>
+
+
+
+        </div>
+        
+    </main>
+</div>
+
+<footer id = "footer"></footer>
+
+<script type = "module" src="src/case-processing-times.js"></script>
+
+
+</body>

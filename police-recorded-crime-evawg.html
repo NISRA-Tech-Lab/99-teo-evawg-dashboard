@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+
+  <!-- Top Navbar -->
+<nav id ="nav"></nav>
+
+<div class="w-100 text-center current-page py-2">
+    Crime data on this page is recorded by the police on their administrative system. This relates to the domestic violence strategy. 
+</div>
+
+<div class="container-fluid">
+    <!-- Main Content -->
+    <main>
+
+        <div id="male-comparison-switch"></div>
+        
+        <div class = "py-2">
+            <!-- First row - cards -->
+            <div class="row">
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <strong>Violence against the person</strong>
+                            <p class="female-fig display-6"><span id="violence-female"></span>% of victims are female</p>
+                            <p class="male-fig"><span id="violence-male"></span>% of victims are male</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <strong>Stalking and harassment</strong>
+                            <p class="female-fig display-6"><span id="stalking-female"></span>% of victims are female</p>
+                            <p class="male-fig"><span id="stalking-male"></span>% of victims are male</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            
+                            <strong>Sexual offences</strong>
+                            <p class="female-fig display-6"><span id="sex-female"></span>% of victims are female</p>
+                            <p class="male-fig"><span id="sex-male"></span>% of victims are male</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-3 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <strong>Online violence</strong>
+                            <p class="female-fig display-6"><span id="online-female"></span>% of victims are female</p>
+                            <p class="male-fig"><span id="online-male"></span>% of victims are male</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second row - tables and charts -->
+            <div class="row py-4">
+                <div class="col-12 col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Victims of sexual offences, <span class="first-year"></span> to <span class="latest-year"></span>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="sexual-offences-line"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Victims of stalking and harassment, <span class="first-year"></span> to <span class="latest-year"></span>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="stalking-line"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Victims of violent crimes, <span class="latest-year"></span>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="violence-bar"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third row - Definitions -->
+
+            <div class="accordion py-4" id="infoAccordion">
+                <div class="row g-3">
+
+                <!-- Definitions Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="def-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#def-collapse"
+                            aria-expanded="false" aria-controls="def-collapse">
+                            Definitions
+                        </button>
+                    </h2>
+                </div>
+
+                <!-- What does this mean Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header" id="mean-heading">
+                        <button class="accordion-button collapsed navy-bg" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#mean-collapse"
+                            aria-expanded="false" aria-controls="mean-collapse">
+                            What does this mean?
+                        </button>
+                    </h2>
+                </div>
+
+            </div>
+
+            <!-- CONTENT AREAS -->
+
+            <div id="def-collapse" class="accordion-collapse collapse"
+                aria-labelledby="def-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>Definitions</h2>
+                    <p>Your definitions text goes here...</p>
+                </div>
+            </div>
+
+            <div id="mean-collapse" class="accordion-collapse collapse"
+                aria-labelledby="mean-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>What does this mean?</h2>
+                    <p>Explanation text goes here...</p>
+                </div>
+            </div>
+
+    </div>
+
+
+
+        </div>
+        
+    </main>
+</div>
+
+<footer id = "footer"></footer>
+
+<script type = "module" src="src/police-recorded-crime-evawg.js"></script>
+
+
+</body>

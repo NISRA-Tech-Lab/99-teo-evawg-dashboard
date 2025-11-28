@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+
+  <!-- Top Navbar -->
+<nav id ="nav"></nav>
+
+<div class="w-100 text-center current-page py-2">
+    Data on this page is from the Northern Ireland Life and Times (NILT) survey to measure prevalence of gender-based violence. This information relates to the EVAWG strategy.
+</div>
+
+<div class="container-fluid">
+    <!-- Main Content -->
+    <main>
+
+        <div id="male-comparison-switch"></div>
+        
+        <div class = "py-2">
+            <!-- First row - cards -->
+            <div class="row">
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 navy-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="violence-female"></span>% of women</p>
+                            <p class="male-fig"><span id="violence-male"></span>% of men</p>
+                            <p>experienced violence in the past 5 years</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="physical-female"></span>% of women</p>
+                            <p class="male-fig"><span id="physical-male"></span>% of men</p>
+                            <p>experienced physical violence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="sexual-female"></span>% of women</p>
+                            <p class="male-fig"><span id="sexual-male"></span>% of men</p>
+                            <p>experienced sexual violence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="psychological-female"></span>% of women</p>
+                            <p class="male-fig"><span id="psychological-male"></span>% of men</p>
+                            <p>experienced psychological violence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="economic-female"></span>% of women</p>
+                            <p class="male-fig"><span id="economic-male"></span>% of men</p>
+                            <p>experienced economic violence</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-2 py-2">
+                    <div class="card h-100 blue-bg">
+                        <div class="card-body">
+                            <p class="female-fig display-6"><span id="online-female"></span>% of women</p>
+                            <p class="male-fig"><span id="online-male"></span>% of men</p>
+                            <p>experienced online violence</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Second row - tables and charts -->
+            <div class="row">
+                <div class="col-12 col-xl-4 py-2">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Experiences of gender-based violence, <span class="latest-year"></span>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="prevalence-nilt-bar"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4 py-2">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Experiences of gender-based violence by age, <span class="latest-year"></span>
+                        </div>
+                        <div class="card-body">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4 py-2">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            Experiences of gender-based violence <span class="first-year"></span> to <span class="latest-year"></span>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="prevalence-nilt-line"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third row - Definitions -->
+
+            <div class="accordion py-4" id="infoAccordion">
+                <div class="row g-3">
+
+                <!-- Definitions Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header h-100" id="def-heading">
+                        <button class="accordion-button collapsed navy-bg h-100" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#def-collapse"
+                            aria-expanded="false" aria-controls="def-collapse">
+                            Definitions
+                        </button>
+                    </h2>
+                </div>
+
+                <!-- What does this mean Button -->
+                <div class="col-6">
+                    <h2 class="accordion-header h-100" id="mean-heading">
+                        <button class="accordion-button collapsed navy-bg h-100" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#mean-collapse"
+                            aria-expanded="false" aria-controls="mean-collapse">
+                            What does this mean?
+                        </button>
+                    </h2>
+                </div>
+
+            </div>
+
+            <!-- CONTENT AREAS -->
+
+            <div id="def-collapse" class="accordion-collapse collapse"
+                aria-labelledby="def-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>Definitions</h2>
+                     <p><strong>From NILT survey:</strong> Gender-based violence is violence directed against a person because of that person’s gender, or violence that affects people of a particular gender disproportionately. It does not only relate to physical assaults but also includes words and actions that can cause someone to feel afraid, anxious or humiliated.</p>
+        <p>Based on this definition, and regardless of your gender, have you personally experienced any of the following in the last five years?</p>
+        <ul>
+          <li><strong>Physical Violence:</strong> Being beaten, slapped, pushed, kicked, choked, restrained, a weapon or any other force being used against you in a way that causes harm.</li>
+          <li><strong>Sexual Violence:</strong> Being forced or coerced into having sex against your will or into sexual practices or acts you didn’t want to engage in, including unwanted attempted sex and sexual acts, or being choked or restrained.</li>
+          <li><strong>Psychological Violence:</strong> Being insulted, stalked, harassed, threatened, humiliated, denigrated or controlled against your will.</li>
+          <li><strong>Economic Violence:</strong> Someone controlling your finances and spending and other resources against your will.</li>
+          <li><strong>Online Violence:</strong> Receiving threats online or via social media, online trolling, or being sent or being asked for intimate images against your will.</li>
+          <li><strong>Other types of violence (GBVOTHER):</strong> Please write in.</li>
+        </ul>
+                </div>
+            </div>
+
+            <div id="mean-collapse" class="accordion-collapse collapse"
+                aria-labelledby="mean-heading" data-bs-parent="#infoAccordion">
+                <div class="accordion-body">
+                    <h2>What does this mean?</h2>
+                    <p>Questions relating to gender-based violence have been included in the <strong>Northern Ireland Life and Times (NILT)</strong> survey since 2022 to attempt to gain more understanding of the prevalence of gender-based violence in Northern Ireland.</p>
+        <p>The NILT is a representative survey of adults in Northern Ireland, and respondents are provided with definitions of gender-based violence. The data from this survey represents self-reported experience of gender-based violence.</p>
+        <p>After initial question development, a time series will be developed in future years from a baseline in 2023.</p>
+                </div>
+            </div>
+
+    </div>
+
+
+
+        </div>
+        
+    </main>
+</div>
+
+<footer id = "footer"></footer>
+
+<script type = "module" src="src/prevalence-violence-nilt.js"></script>
+
+
+</body>
