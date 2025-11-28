@@ -1,5 +1,5 @@
 import { maleComparison } from "./utils/male-comparison.js";
-import { createMaleFemaleLineChart } from "./utils/male-female-line.js";
+import { createMaleFemaleLineChart } from "./utils/charts.js";
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js";
 import { wrapLabel } from "./utils/wrap-label.js";

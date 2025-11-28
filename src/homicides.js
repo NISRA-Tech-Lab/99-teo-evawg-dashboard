@@ -1,7 +1,7 @@
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { maleComparison } from "./utils/male-comparison.js";
 import { readData } from "./utils/read-data.js";
-import { createMaleFemaleLineChart } from "./utils/male-female-line.js";
+import { createMaleFemaleLineChart } from "./utils/charts.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
 
