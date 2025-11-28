@@ -2,7 +2,7 @@ import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
 import { createMaleFemaleLineChart, createViolenceTypeBarChart } from "./utils/charts.js";
-
+import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
 
@@ -14,22 +14,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     let data = await readData("EXPVLADEQ");
 
     // Update values
-
     const stat = "Adult victims of gender-based violence";
-
-    const years = Object.keys(data.data[stat]);
-    const first_year = years[0];
-    const latest_year = years[years.length - 1];
-
-    const first_year_spans = document.getElementsByClassName("first-year");
-     for (let i = 0; i < first_year_spans.length; i ++) {
-        first_year_spans[i].textContent = first_year;
-    }
-
-    const year_spans = document.getElementsByClassName("latest-year");
-    for (let i = 0; i < year_spans.length; i ++) {
-        year_spans[i].textContent = latest_year;
-    }
+    
+    updateYearSpans(data, stat);
 
     document.getElementById("economic-female").textContent = data.data[stat][latest_year][`Economic violence`][`Sex - Female`];
     document.getElementById("economic-male").textContent = data.data[stat][latest_year][`Economic violence`][`Sex - Male`];

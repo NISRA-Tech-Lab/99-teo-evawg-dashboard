@@ -2,7 +2,7 @@ import { maleComparison } from "./utils/male-comparison.js";
 import { createMaleFemaleLineChart, createViolenceTypeBarChart } from "./utils/charts.js";
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js";
-import { wrapLabel } from "./utils/wrap-label.js";
+import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
 
@@ -16,19 +16,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     // Update values
     const stat = "All crimes recorded by the police";
 
-    const years = Object.keys(data.data[stat]);
-    const first_year = years[0];
-    const latest_year = years[years.length - 1];
-
-    const first_year_spans = document.getElementsByClassName("first-year");
-     for (let i = 0; i < first_year_spans.length; i ++) {
-        first_year_spans[i].textContent = first_year;
-    }
-
-    const year_spans = document.getElementsByClassName("latest-year");
-    for (let i = 0; i < year_spans.length; i ++) {
-        year_spans[i].textContent = latest_year;
-    }
+    updateYearSpans(data, stat);
 
     //// Violence against the person
     const violence_victims = data.data[stat][latest_year]
