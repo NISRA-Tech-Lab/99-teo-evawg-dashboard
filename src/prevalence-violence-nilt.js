@@ -3,6 +3,7 @@ import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
 import { createMaleFemaleLineChart, createViolenceTypeBarChart } from "./utils/charts.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
+import { insertValue } from "./utils/insert-value.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
 
@@ -18,16 +19,21 @@ window.addEventListener("DOMContentLoaded", async () => {
     
     updateYearSpans(data, stat);
 
-    document.getElementById("economic-female").textContent = data.data[stat][latest_year][`Economic violence`][`Sex - Female`];
-    document.getElementById("economic-male").textContent = data.data[stat][latest_year][`Economic violence`][`Sex - Male`];
-    document.getElementById("sexual-female").textContent = data.data[stat][latest_year][`Sexual violence`][`Sex - Female`];
-    document.getElementById("sexual-male").textContent = data.data[stat][latest_year][`Sexual violence`][`Sex - Male`];
-    document.getElementById("physical-female").textContent = data.data[stat][latest_year][`Physical violence`][`Sex - Female`];
-    document.getElementById("physical-male").textContent = data.data[stat][latest_year][`Physical violence`][`Sex - Male`];
-    document.getElementById("psychological-female").textContent = data.data[stat][latest_year][`Psychological violence`][`Sex - Female`];
-    document.getElementById("psychological-male").textContent = data.data[stat][latest_year][`Psychological violence`][`Sex - Male`];
-    document.getElementById("online-female").textContent = data.data[stat][latest_year][`Online violence`][`Sex - Female`];
-    document.getElementById("online-male").textContent = data.data[stat][latest_year][`Online violence`][`Sex - Male`];
+    insertValue("economic-female", data, stat, latest_year, ["Economic violence", "Sex - Female"]);
+    insertValue("economic-male", data, stat, latest_year, ["Economic violence", "Sex - Male"]);
+
+    insertValue("sexual-female", data, stat, latest_year, ["Sexual violence", "Sex - Female"]);
+    insertValue("sexual-male", data, stat, latest_year, ["Sexual violence", "Sex - Male"]);
+
+    insertValue("physical-female", data, stat, latest_year, ["Physical violence", "Sex - Female"]);
+    insertValue("physical-male", data, stat, latest_year, ["Physical violence", "Sex - Male"]);
+
+    insertValue("psychological-female", data, stat, latest_year, ["Psychological violence", "Sex - Female"]);
+    insertValue("psychological-male", data, stat, latest_year, ["Psychological violence", "Sex - Male"]);
+
+    insertValue("online-female", data, stat, latest_year, ["Online violence", "Sex - Female"]);
+    insertValue("online-male", data, stat, latest_year, ["Online violence", "Sex - Male"]);
+
 
     // Create bar chart
     const violence_types = Object.keys(data.data[stat][latest_year])

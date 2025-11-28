@@ -2,6 +2,7 @@
 import { chart_colours } from "./page-layout.js";
 import { wrapLabel } from "./wrap-label.js";
 import { getSelectedGender } from "./get-selected-gender.js";
+import { getNested } from "./get-nested.js";
 
 export function createMaleFemaleLineChart({data, stat, years, female_selection, male_selection, canvas_id}) {
 
@@ -205,6 +206,4 @@ export function createViolenceTypeBarChart({data, stat, year, violence_types, ca
 
 }
 
-function getNested(obj, path) {
-  return path.reduce((acc, key) => acc?.[key], obj);
-}
+
