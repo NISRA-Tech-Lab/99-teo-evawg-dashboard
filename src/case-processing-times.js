@@ -5,6 +5,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     await insertHead("Case processing times")
     insertHeader();
     insertFooter();
-    insertNavButtons("case-processing-times");
+    insertNavButtons();
 
 })

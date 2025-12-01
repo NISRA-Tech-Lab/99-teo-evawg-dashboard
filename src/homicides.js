@@ -9,7 +9,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     await insertHead("Homicides");
     insertHeader();
     insertFooter();
-    insertNavButtons("homicides");
+    insertNavButtons();
     maleComparison();
     let data = await readData("PRCHOM");
 

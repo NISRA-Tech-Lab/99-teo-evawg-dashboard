@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     await insertHead("Police recorded crime - EVAWG")
     insertHeader();
     insertFooter();
-    insertNavButtons("police-recorded-crime-evawg");
+    insertNavButtons();
     maleComparison();
     let data = await readData("PRCVCTM");
     
