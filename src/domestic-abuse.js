@@ -34,6 +34,17 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertValue("force-female", data.data[stat][latest_year]["Force"]["Lifetime (since age 16)"]["Female"]);
     insertValue("force-male",   data.data[stat][latest_year]["Force"]["Lifetime (since age 16)"]["Male"]);
 
+// Create bar chart
+    const violence_types = Object.keys(data.data[stat][latest_year]["Any domestic abuse"])
 
+
+    createViolenceTypeBarChart({
+        data,
+        stat,
+        year: latest_year,
+        violence_types,
+        canvas_id: "domestic-abuse1-bar",
+        label_format: "%"
+    });
 
 })

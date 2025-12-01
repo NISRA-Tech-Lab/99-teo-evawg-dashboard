@@ -108,6 +108,13 @@ export function createViolenceTypeBarChart({data, stat, year, violence_types, ca
             male_bars.push(data.data[stat][year]
                 [violence_types[i]]
                 ["All ages"]["Male"]);
+            } else if (data.label == "Experience of domestic abuse") {
+             female_bars.push(data.data[stat][year]["Any domestic abuse"]
+                [violence_types[i]]
+                ["Female"]);
+            male_bars.push(data.data[stat][year]["Any domestic abuse"]
+                [violence_types[i]]
+                ["Male"]);   
         } else {
             let female_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Female"));
             let male_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Male"));
