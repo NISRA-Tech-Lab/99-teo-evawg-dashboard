@@ -3,6 +3,7 @@ import { createMaleFemaleLineChart, createViolenceTypeBarChart } from "./utils/c
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
+import { insertValue } from "./utils/insert-value.js";
 
 window.addEventListener("DOMContentLoaded", async () => {
 
@@ -40,8 +41,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             ["Violence without injury"]
             ["All ages"]["All persons"];    
 
-    document.getElementById("violence-female").textContent = Math.round(female_violence_victims / violence_victims * 100);
-    document.getElementById("violence-male").textContent = Math.round(male_violence_victims / violence_victims * 100);
+    insertValue("violence-female", Math.round(female_violence_victims / violence_victims * 100));
+    insertValue("violence-male", Math.round(male_violence_victims / violence_victims * 100));
 
     //// Stalking and harassment
     const stalking_victims = data.data[stat][latest_year]
@@ -56,8 +57,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         ["Stalking and harassment"]
         ["All ages"]["Male"]
 
-    document.getElementById("stalking-female").textContent = Math.round(female_stalking_victims / stalking_victims * 100);
-    document.getElementById("stalking-male").textContent = Math.round(male_stalking_victims / stalking_victims * 100);
+    insertValue("stalking-female", = Math.round(female_stalking_victims / stalking_victims * 100));
+    insertValue("stalking-male", Math.round(male_stalking_victims / stalking_victims * 100));
 
     //// Sexual offences
     const sex_victims = data.data[stat][latest_year]
@@ -72,8 +73,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         ["Sexual offences"]
         ["All ages"]["Male"]
 
-    document.getElementById("sex-female").textContent = Math.round(female_sex_victims / sex_victims * 100);
-    document.getElementById("sex-male").textContent = Math.round(male_sex_victims / sex_victims * 100);
+    insertValue("sex-female", Math.round(female_sex_victims / sex_victims * 100));
+    insertValue("sex-male", Math.round(male_sex_victims / sex_victims * 100));
 
     //// Online violence
     const online_victims = data.data[stat][latest_year]
@@ -88,8 +89,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         ["Violence without injury"]
         ["All ages"]["Male"]
 
-    document.getElementById("online-female").textContent = Math.round(female_online_victims / online_victims * 100);
-    document.getElementById("online-male").textContent = Math.round(male_online_victims / online_victims * 100);
+    insertValue("online-female", Math.round(female_online_victims / online_victims * 100));
+    insertValue("online-male", Math.round(male_online_victims / online_victims * 100));
 
     // Sexual offences line chart
     createMaleFemaleLineChart({

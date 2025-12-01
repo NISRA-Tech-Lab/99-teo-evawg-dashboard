@@ -21,35 +21,20 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     updateYearSpans(data, stat);
 
-    insertValue(
-        "violence-girl",
-        data,
-        stat,
-        latest_year,
-        ["No violence", "Gender - Female"],
-        (v) => 100 - v
-    );
-    
-    insertValue(
-        "violence-boy",
-        data,
-        stat,
-        latest_year,
-        ["No violence", "Gender - Male"],
-        (v) => 100 - v
-    );
+    insertValue("violence-girl", 100 - data.data[stat][latest_year]["No violence"]["Gender - Female"]);
+    insertValue("violence-boy",  100 - data.data[stat][latest_year]["No violence"]["Gender - Male"]);
 
-    insertValue("online-girl", data, stat, latest_year, ["Online violence", "Gender - Female"]);
-    insertValue("online-boy",  data, stat, latest_year, ["Online violence", "Gender - Male"]);
+    insertValue("online-girl", data.data[stat][latest_year]["Online violence"]["Gender - Female"]);
+    insertValue("online-boy",  data.data[stat][latest_year]["Online violence"]["Gender - Male"]);
 
-    insertValue("sexual-girl", data, stat, latest_year, ["Sexual violence", "Gender - Female"]);
-    insertValue("sexual-boy",  data, stat, latest_year, ["Sexual violence", "Gender - Male"]);
+    insertValue("sexual-girl", data.data[stat][latest_year]["Sexual violence"]["Gender - Female"]);
+    insertValue("sexual-boy",  data.data[stat][latest_year]["Sexual violence"]["Gender - Male"]);
 
-    insertValue("psychological-girl", data, stat, latest_year, ["Psychological violence", "Gender - Female"]);
-    insertValue("psychological-boy",  data, stat, latest_year, ["Psychological violence", "Gender - Male"]);
+    insertValue("psychological-girl", data.data[stat][latest_year]["Psychological violence"]["Gender - Female"]);
+    insertValue("psychological-boy",  data.data[stat][latest_year]["Psychological violence"]["Gender - Male"]);
 
-    insertValue("physical-girl", data, stat, latest_year, ["Physical violence", "Gender - Female"]);
-    insertValue("physical-boy",  data, stat, latest_year, ["Physical violence", "Gender - Male"]);
+    insertValue("physical-girl", data.data[stat][latest_year]["Physical violence"]["Gender - Female"]);
+    insertValue("physical-boy",  data.data[stat][latest_year]["Physical violence"]["Gender - Male"]);
 
     // Create bar chart
     const violence_types = Object.keys(data.data[stat][latest_year])
