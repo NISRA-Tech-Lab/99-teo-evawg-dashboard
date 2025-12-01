@@ -57,7 +57,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         ["Stalking and harassment"]
         ["All ages"]["Male"]
 
-    insertValue("stalking-female", = Math.round(female_stalking_victims / stalking_victims * 100));
+    insertValue("stalking-female", Math.round(female_stalking_victims / stalking_victims * 100));
     insertValue("stalking-male", Math.round(male_stalking_victims / stalking_victims * 100));
 
     //// Sexual offences
