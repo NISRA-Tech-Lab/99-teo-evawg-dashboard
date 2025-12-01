@@ -1,5 +1,5 @@
 import { maleComparison } from "./utils/male-comparison.js";
-import { createMaleFemaleLineChart, createViolenceTypeBarChart } from "./utils/charts.js";
+import { createMaleFemaleLineChart, createBarChart, createPRCData } from "./utils/charts.js";
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
@@ -118,11 +118,11 @@ window.addEventListener("DOMContentLoaded", async () => {
         "Violence without injury"
     ];
 
-    createViolenceTypeBarChart({
-        data,
-        stat,
-        year: latest_year,
-        violence_types,
+    const chart_data = createPRCData({data, stat, year: latest_year, violence_types});
+    
+    createBarChart({
+        chart_data,
+        categories: violence_types,
         canvas_id: "violence-bar",
         label_format: ","
     });

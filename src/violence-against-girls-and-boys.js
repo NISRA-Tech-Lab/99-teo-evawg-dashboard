@@ -1,7 +1,7 @@
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js"
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
-import { createMaleFemaleLineChart, createViolenceTypeBarChart } from "./utils/charts.js";
+import { createMaleFemaleLineChart, createBarChart, createBarChartData } from "./utils/charts.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 import { insertValue } from "./utils/insert-value.js";
 
@@ -40,11 +40,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     const violence_types = Object.keys(data.data[stat][latest_year])
         .filter(x => x !== "No violence");
 
-    createViolenceTypeBarChart({
-        data,
-        stat,
-        year: latest_year,
-        violence_types,
+    const chart_data = createBarChartData({data, stat, year: latest_year, violence_types});
+    
+    createBarChart({
+        chart_data,
+        categories: violence_types,
         canvas_id: "prevalence-ylt-bar",
         label_format: "%"
     });

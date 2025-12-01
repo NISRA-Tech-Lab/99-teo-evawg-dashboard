@@ -94,43 +94,88 @@ export function createMaleFemaleLineChart({data, stat, years, female_selection, 
 
 }
 
-export function createViolenceTypeBarChart({data, stat, year, violence_types, canvas_id, label_format}) {
-
-    
+export function createBarChartData({data, stat, year, violence_types}) {   
 
     let female_bars = [];
     let male_bars = [];
     for (let i = 0; i < violence_types.length; i ++) {
-        if (data.label == "Police recorded crime - victims of crime") {
+        let female_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Female"));
+        let male_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Male"));
+        female_bars.push(data.data[stat][year][violence_types[i]][female_key]);
+        male_bars.push(data.data[stat][year][violence_types[i]][male_key]);
+    }
+
+    return {female: female_bars,
+            male: male_bars};    
+
+}
+
+export function createPRCData ({data, stat, year, violence_types}) {   
+
+    let female_bars = [];
+    let male_bars = [];
+    for (let i = 0; i < violence_types.length; i ++) {
              female_bars.push(data.data[stat][year]
                 [violence_types[i]]
                 ["All ages"]["Female"]);
             male_bars.push(data.data[stat][year]
                 [violence_types[i]]
                 ["All ages"]["Male"]);
-            } else if (data.label == "Experience of domestic abuse") {
-             female_bars.push(data.data[stat][year]["Any domestic abuse"]
-                [violence_types[i]]
+    }
+
+    return {female: female_bars,
+            male: male_bars};    
+
+}
+
+// Domestic abuse specific functions
+// 
+export function createDAData({data, stat, year, time_periods, da_type}) {   
+
+    let female_bars = [];
+    let male_bars = [];
+    for (let i = 0; i < time_periods.length; i ++) {
+             female_bars.push(data.data[stat][year][da_type]
+                [time_periods[i]]
                 ["Female"]);
-            male_bars.push(data.data[stat][year]["Any domestic abuse"]
-                [violence_types[i]]
-                ["Male"]);   
-        } else {
-            let female_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Female"));
-            let male_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Male"));
-            female_bars.push(data.data[stat][year][violence_types[i]][female_key]);
-            male_bars.push(data.data[stat][year][violence_types[i]][male_key]);
-        }
-    } 
+            male_bars.push(data.data[stat][year][da_type]
+                [time_periods[i]]
+                ["Male"]);
+    }
+
+    return {female: female_bars,
+            male: male_bars};    
+
+}
+
+export function createDALast3Data({data, stat, year, da_types}) {   
+
+    let female_bars = [];
+    let male_bars = [];
+    for (let i = 0; i < da_types.length; i ++) {
+             female_bars.push(data.data[stat][year][da_types[i]]
+                [["Recent (last 3 years)"]]
+                ["Female"]);
+            male_bars.push(data.data[stat][year][da_types[i]]
+                [["Recent (last 3 years)"]]
+                ["Male"]);
+    }
+
+    return {female: female_bars,
+            male: male_bars};    
+
+}
+
+export function createBarChart({chart_data, categories, canvas_id, label_format}) {
 
     const bar_canvas = document.getElementById(canvas_id);
 
     const bar_data = {
-        labels: violence_types,
+        labels: categories,
         datasets: [{
             axis: 'y',
             label: `Females${label_format === "%" ? " (%)" : ""}`,
-            data: female_bars,
+            data: chart_data.female,
             fill: false,
             backgroundColor: chart_colours[0],
             borderWidth: 1
@@ -138,7 +183,7 @@ export function createViolenceTypeBarChart({data, stat, year, violence_types, ca
         {
             axis: 'y',
             label: `Males${label_format === "%" ? " (%)" : ""}`,
-            data: male_bars,
+            data: chart_data.male,
             fill: false,
             backgroundColor: chart_colours[1],
             borderWidth: 1

@@ -1,7 +1,7 @@
-import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js"
+import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js"
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
-import { createMaleFemaleLineChart, createViolenceTypeBarChart } from "./utils/charts.js";
+import { createDAData, createBarChart, createDALast3Data } from "./utils/charts.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 import { insertValue } from "./utils/insert-value.js";
 
@@ -35,16 +35,27 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertValue("force-male",   data.data[stat][latest_year]["Force"]["Lifetime (since age 16)"]["Male"]);
 
 // Create bar chart
-    const violence_types = Object.keys(data.data[stat][latest_year]["Any domestic abuse"])
+    const time_periods = Object.keys(data.data[stat][latest_year]["Any domestic abuse"]);
 
+    const chart_data = createDAData({data, stat, year: latest_year, time_periods, da_type: "Any domestic abuse"});
+    console.log(chart_data)
 
-    createViolenceTypeBarChart({
-        data,
-        stat,
-        year: latest_year,
-        violence_types,
-        canvas_id: "domestic-abuse1-bar",
+    createBarChart({
+        chart_data,
+        categories: time_periods,
+        canvas_id: "domestic-abuse-1-bar",
         label_format: "%"
     });
+
+    const da_types = ["Non-physical abuse", "Threats", "Force", "Any domestic abuse"];
+
+    const chart_data_2 = createDALast3Data({data, stat, year: latest_year, da_types});
+    
+    createBarChart({
+        chart_data: chart_data_2,
+        categories: da_types,
+        canvas_id: "domestic-abuse-2-bar",
+        label_format: "%"
+    }); 
 
 })
