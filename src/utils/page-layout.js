@@ -47,12 +47,12 @@ export function insertNavButtons(page) {
   nav.innerHTML +=
   `<div class="row">
     <a id="home-btn" class="col mx-2 nav-btn" href="/">Home</a>
-    <a id="prevalence-violence-nilt-btn" class="col mx-2 nav-btn" href="prevalence-violence-nilt.html">Violence against women and men</a>
-    <a id="prevalence-violence-ylt-btn" class="col mx-2 nav-btn" href="prevalence-violence-ylt.html">Violence against girls and boys</a>
+    <a id="violence-against-women-and-men-btn" class="col mx-2 nav-btn" href="violence-against-women-and-men.html">Violence against women and men</a>
+    <a id="violence-against-girls-and-boys-btn" class="col mx-2 nav-btn" href="violence-against-girls-and-boys.html">Violence against girls and boys</a>
     <a id="police-recorded-crime-evawg-btn" class="col mx-2 nav-btn" href="police-recorded-crime-evawg.html">Police recorded crime - EVAWG</a>
     <a id="homicides-btn" class="col mx-2 nav-btn" href="homicides.html">Homicides</a>
-    <a id="prevalence-of-domestic-abuse-btn" class="col mx-2 nav-btn" href="prevalence-of-domestic-abuse.html">Domestic abuse</a>
-    <a id="domestic-abuse-reported-btn" class="col mx-2 nav-btn" href="domestic-abuse-reported.html">Police recorded crime - Domestic abuse</a>
+    <a id="domestic-abuse-btn" class="col mx-2 nav-btn" href="domestic-abuse.html">Domestic abuse</a>
+    <a id="police-recorded-crime-domestic-abuse-btn" class="col mx-2 nav-btn" href="police-recorded-crime-domestic-abuse.html">Police recorded crime - Domestic abuse</a>
     <a id="case-processing-times-btn" class="col mx-2 nav-btn" href="case-processing-times.html">Case processing times</a>
     <a id="maps-btn" class="col mx-2 nav-btn" href="maps.html">Maps</a>
     <a id="information-btn" class="col mx-2 nav-btn" href="information.html">Information</a>

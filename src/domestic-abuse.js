@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertHeader();
     insertFooter();
     maleComparison();
-    insertNavButtons("prevalence-of-domestic-abuse");
+    insertNavButtons("domestic-abuse");
     let data = await readData("EXPDA");
 
      // Update values
