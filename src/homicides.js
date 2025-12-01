@@ -23,9 +23,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         data,
         stat,
         years,
-        female_selection: ["All ages", "Female"],
-        male_selection: ["All ages", "Male"],
-        canvas_id: "homicide-line"
+        female_selection: ["18+ years", "Female"],
+        male_selection: ["18+ years", "Male"],
+        canvas_id: "18-plus-homicide-line"
     });
     
 })
