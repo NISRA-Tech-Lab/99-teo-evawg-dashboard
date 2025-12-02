@@ -5,6 +5,9 @@ let geojsonData;       // cache shapes between calls
 
 export async function plotMap(data, stat, latest_year, crimeType) {
 
+  document.getElementById("map-title").innerText =
+    `Police recorded crime - ${crimeType} by Local Government District, ${latest_year}`;
+
   const lgds = Object.keys(data.data[stat][latest_year])
         .filter(lgd => lgd !== "Northern Ireland");
 
@@ -70,8 +73,8 @@ export async function plotMap(data, stat, latest_year, crimeType) {
   // =========================================================
   // Otherwise, create map once, add layers, events, etc.
   // =========================================================
-  let initial_zoom = window.innerWidth < 768 ? 6 : 7; 
-  let bounds = [[-9.20, 53.58], [-4.53, 55.72]];
+  let initial_zoom = 1;
+  let bounds = [[-9.3, 53.58], [-4.3, 55.72]];
 
   map = new maplibregl.Map({
       container: 'map-container',
@@ -225,4 +228,5 @@ function updateLegend(range_min, range_max, unitLabel = "") {
       `).join("")}
     </div>
   `;
+
 }
