@@ -40,7 +40,7 @@ export function insertHeader () {
 `
 }
 
-export function insertNavButtons(page) {
+export function insertNavButtons() {
 
   const nav = document.getElementById("nav");
 
@@ -58,6 +58,7 @@ export function insertNavButtons(page) {
     <a id="information-btn" class="col mx-2 nav-btn" href="information.html">Information</a>
   </div>`;
 
+  const page = window.location.pathname.replace("/", "").replace(".html", "");
   const currentPage = document.getElementById(`${page}-btn`);
   currentPage.classList.add("current-page");
   currentPage.classList.remove("nav-btn");

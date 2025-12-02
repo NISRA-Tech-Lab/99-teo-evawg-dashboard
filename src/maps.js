@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     await insertHead("Maps");
     insertHeader();
     insertFooter();
-    insertNavButtons("maps");
+    insertNavButtons();
     const data = await readData("PRCPD");
 
     let stat = "All crimes recorded by the police";
