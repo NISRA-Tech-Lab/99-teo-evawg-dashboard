@@ -94,15 +94,15 @@ export function createMaleFemaleLineChart({data, stat, years, female_selection, 
 
 }
 
-export function createBarChartData({data, stat, year, violence_types}) {   
+export function createBarChartData({data, stat, year, categories}) {   
 
     let female_bars = [];
     let male_bars = [];
-    for (let i = 0; i < violence_types.length; i ++) {
-        let female_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Female"));
-        let male_key = Object.keys(data.data[stat][year][violence_types[i]]).filter(x => x.includes("Male"));
-        female_bars.push(data.data[stat][year][violence_types[i]][female_key]);
-        male_bars.push(data.data[stat][year][violence_types[i]][male_key]);
+    for (let i = 0; i < categories.length; i ++) {
+        let female_key = Object.keys(data.data[stat][year][categories[i]]).filter(x => x.includes("Female"));
+        let male_key = Object.keys(data.data[stat][year][categories[i]]).filter(x => x.includes("Male"));
+        female_bars.push(data.data[stat][year][categories[i]][female_key]);
+        male_bars.push(data.data[stat][year][categories[i]][male_key]);
     }
 
     return {female: female_bars,

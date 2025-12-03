@@ -1,7 +1,7 @@
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { maleComparison } from "./utils/male-comparison.js";
 import { readData } from "./utils/read-data.js";
-import { createMaleFemaleLineChart,createBarChartData, createBarChart  } from "./utils/charts.js";
+import { createMaleFemaleLineChart, createBarChartData, createBarChart  } from "./utils/charts.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 import { insertValue } from "./utils/insert-value.js";
 
@@ -27,14 +27,14 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertValue("homicide-box3-boy", data.data[stat][latest_year]["Under 18 years"]["Male"]);
 
     // Create bar chart
-    const violence_types = Object.keys(data.data[stat][latest_year])
-    .filter(x => x !== "All ages");
+    const age_groups = Object.keys(data.data[stat][latest_year])
+        .filter(x => x !== "All ages");
 
-    const chart_data = createBarChartData({data, stat, year: latest_year, violence_types});
+    const chart_data = createBarChartData({data, stat, year: latest_year, categories: age_groups});
     
     createBarChart({
         chart_data,
-        categories: violence_types,
+        categories: age_groups,
         canvas_id: "homicide-bar",
     });
     

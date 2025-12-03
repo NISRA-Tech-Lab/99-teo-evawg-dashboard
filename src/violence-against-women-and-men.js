@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const violence_types = Object.keys(data.data[stat][latest_year])
         .filter(x => x !== "Other types of violence")
 
-    const chart_data = createBarChartData({data, stat, year: latest_year, violence_types});
+    const chart_data = createBarChartData({data, stat, year: latest_year, categories: violence_types});
 
     createBarChart({
         chart_data,
