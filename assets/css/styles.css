@@ -283,6 +283,11 @@ nav a {
   color: #fff;
 }
 
+.light-purple-bg {
+  background-color: #CE70D2;
+  /* color: #fff; */
+}
+
 .green-bg {
   background-color: #68A41E;
 }

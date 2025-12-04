@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
     
     // Create line chart
-        createMaleFemaleLineChart({
+    createMaleFemaleLineChart({
         data,
         stat,
         years,

@@ -157,7 +157,7 @@ export async function insertHead(title) {
     <link rel="icon" type="image/svg+xml" href="assets/img/icon/favicon.svg" />
     <link rel="shortcut icon" href="assets/img/icon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/img/icon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Gender-based violence" />
+    <meta name="apple-mobile-web-app-title" content="Gender-based violence - ${title}" />
 
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css">
     <link href="https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-export@4.1.0/dist/maplibre-gl-export.css" rel="stylesheet" />
