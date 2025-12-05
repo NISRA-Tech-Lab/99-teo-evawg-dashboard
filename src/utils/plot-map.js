@@ -73,7 +73,7 @@ export async function plotMap(data, stat, latest_year, crimeType) {
   // =========================================================
   // Otherwise, create map once, add layers, events, etc.
   // =========================================================
-  let initial_zoom = 1;
+  let initial_zoom = 7;
   let bounds = [[-9.3, 53.58], [-4.3, 55.72]];
 
   map = new maplibregl.Map({
