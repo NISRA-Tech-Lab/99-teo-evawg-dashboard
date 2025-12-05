@@ -16,24 +16,28 @@ export function insertHeader () {
     </div>
 
     <!-- Main navbar row -->
-    <div class="d-flex align-items-center justify-content-between w-100 py-3 px-2">
+    <div class="d-flex row align-items-center justify-content-between w-100 py-3 px-2">
 
         <!-- Left: NISRA logo -->
-        <a class="navbar-brand ps-2 d-flex align-items-center" href="./">
-            <img src="assets/img/logo/nisra-only-white.svg" 
-                 alt="NISRA logo" height="60" class="me-3">
-        </a>
+        <div class="col">
+          <a class="navbar-brand ps-2 d-flex align-items-center" href="./">
+              <img src="assets/img/logo/nisra-only-white.svg" 
+                  alt="NISRA logo" height="60" class="me-3">
+          </a>
+        </div>
 
         <!-- Center: Page title -->
-        <div class="flex-grow-1 text-center">
+        <div class="col flex-grow-1 text-center">
             <h1 class="mb-0 text-white fs-2 app-title">Gender-based violence</h1>
         </div>
 
         <!-- Right: TEO logo -->
-        <a class="navbar-brand pe-2 d-flex align-items-center" href="./">
-            <img src="assets/img/logo/teo-white.png" 
-                 alt="TEO logo" height="60" class="ms-3">
-        </a>
+        <div class = "col">
+          <a class="navbar-brand pe-2 d-flex align-items-center justify-content-end" href="./">
+              <img src="assets/img/logo/teo-white.png" 
+                  alt="TEO logo" height="60" class="ms-3">
+          </a>
+        </div>
 
     </div>
 </div>

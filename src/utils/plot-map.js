@@ -75,11 +75,12 @@ export async function plotMap(data, stat, latest_year, crimeType) {
   // =========================================================
   let initial_zoom = 7;
   let bounds = [[-9.3, 53.58], [-4.3, 55.72]];
+  let centre = [(bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2];
 
   map = new maplibregl.Map({
       container: 'map-container',
       style: 'public/map/style-omt.json',
-      center: [-6.85, 54.67],
+      center: centre,
       zoom: initial_zoom,
       minZoom: initial_zoom,
       maxZoom: initial_zoom + 7,
