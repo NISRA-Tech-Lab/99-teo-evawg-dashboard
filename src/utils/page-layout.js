@@ -50,7 +50,7 @@ export function insertNavButtons() {
 
   nav.innerHTML +=
   `<div class="row">
-    <a id="home-btn" class="col mx-2 nav-btn" href="/">Home</a>
+    <a id="home-btn" class="col mx-2 nav-btn" href="index.html">Home</a>
     <a id="violence-against-women-and-men-btn" class="col mx-2 nav-btn" href="violence-against-women-and-men.html">Violence against women and men</a>
     <a id="violence-against-girls-and-boys-btn" class="col mx-2 nav-btn" href="violence-against-girls-and-boys.html">Violence against girls and boys</a>
     <a id="police-recorded-crime-evawg-btn" class="col mx-2 nav-btn" href="police-recorded-crime-evawg.html">Police recorded crime - EVAWG</a>
@@ -63,7 +63,9 @@ export function insertNavButtons() {
   </div>`;
 
   const page = window.location.pathname.replace("/", "").replace(".html", "");
+  console.log(page);
   const currentPage = document.getElementById(`${page}-btn`);
+  console.log(currentPage);
   currentPage.classList.add("current-page");
   currentPage.classList.remove("nav-btn");
   currentPage.innerHTML = currentPage.textContent;
