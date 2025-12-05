@@ -62,7 +62,7 @@ export function insertNavButtons() {
     <a id="information-btn" class="col mx-2 nav-btn" href="information.html">Information</a>
   </div>`;
 
-  const page = window.location.pathname.replace("/", "").replace(".html", "");
+  const page = window.location.pathname.replace("/", "").replace(".html", "").replace("99-teo-evawg-dashboard/", "");
   console.log(page);
   const currentPage = document.getElementById(`${page}-btn`);
   console.log(currentPage);
