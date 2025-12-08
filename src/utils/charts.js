@@ -4,7 +4,7 @@ import { wrapLabel } from "./wrap-label.js";
 import { getSelectedGender } from "./get-selected-gender.js";
 import { getNested } from "./get-nested.js";
 
-export function createMaleFemaleLineChart({data, stat, years, female_selection, male_selection, canvas_id}) {
+export function createMaleFemaleLineChart({data, stat, years, line_1, line_2, canvas_id, label_1 = "Female", label_2 = "Male"}) {
 
     const line_canvas = document.getElementById(canvas_id);
 
@@ -15,17 +15,17 @@ export function createMaleFemaleLineChart({data, stat, years, female_selection, 
     for (let i = 0; i < years.length; i++) {
         const base = data.data[stat][years[i]];   // start point for that year
 
-        if (female_selection.includes("No violence")) {
-            female_values.push(100 - getNested(base, female_selection));
-            male_values.push(100 - getNested(base, male_selection));
+        if (line_1.includes("No violence")) {
+            female_values.push(100 - getNested(base, line_1));
+            male_values.push(100 - getNested(base, line_2));
         } else {
-            female_values.push(getNested(base, female_selection));
-            male_values.push(getNested(base, male_selection));
+            female_values.push(getNested(base, line_1));
+            male_values.push(getNested(base, line_2));
         }
     }    
 
     line_values.push({axis: "y",
-        label: "Female",
+        label: label_1,
         data: female_values,
         fill: false,
         backgroundColor: chart_colours[0],
@@ -34,7 +34,7 @@ export function createMaleFemaleLineChart({data, stat, years, female_selection, 
     });
 
     line_values.push({axis: "y",
-        label: "Male",
+        label: label_2,
         data: male_values,
         fill: false,
         backgroundColor: chart_colours[1],

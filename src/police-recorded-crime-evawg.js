@@ -97,8 +97,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         data,
         stat,
         years,
-        female_selection: ["Sexual offences", "All ages", "Female"],
-        male_selection: ["Sexual offences", "All ages", "Male"],
+        line_1: ["Sexual offences", "All ages", "Female"],
+        line_2: ["Sexual offences", "All ages", "Male"],
         canvas_id: "sexual-offences-line"
     });
 
@@ -107,8 +107,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         data,
         stat,
         years,
-        female_selection: ["Stalking and harassment", "All ages", "Female"],
-        male_selection: ["Stalking and harassment", "All ages", "Male"],
+        line_1: ["Stalking and harassment", "All ages", "Female"],
+        line_2: ["Stalking and harassment", "All ages", "Male"],
         canvas_id: "stalking-line"
     });
    
