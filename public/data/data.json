@@ -287,7 +287,7 @@
             "All persons": 11
           },
           "All ages": {
-            "Female": 8,
+            "Female": 2,
             "Male": 11,
             "All persons": 13
           }
@@ -32643,73 +32643,73 @@
         "2018/19": {
           "Any domestic abuse": {
             "Lifetime (since age 16)": {
-              "Female": 14.1,
-              "Male": 23.1,
+              "Female": 23.1,
+              "Male": 14.1,
               "All persons": 18.8
             },
             "Recent (last 3 years)": {
-              "Female": 10.6,
-              "Male": 13.7,
+              "Female": 13.7,
+              "Male": 10.6,
               "All persons": 12.3
             }
           },
           "Non-physical abuse": {
             "Lifetime (since age 16)": {
-              "Female": 12.6,
-              "Male": 19.7,
+              "Female": 19.7,
+              "Male": 12.6,
               "All persons": 16.4
             },
             "Recent (last 3 years)": {
-              "Female": 8.3,
-              "Male": 10.2,
+              "Female": 10.2,
+              "Male": 8.3,
               "All persons": 9.3
             }
           },
           "Threats or force": {
             "Lifetime (since age 16)": {
-              "Female": 5.2,
-              "Male": 15.9,
+              "Female": 15.9,
+              "Male": 5.2,
               "All persons": 10.9
             },
             "Recent (last 3 years)": {
-              "Female": 3.2,
-              "Male": 7.4,
+              "Female": 7.4,
+              "Male": 3.2,
               "All persons": 5.4
             }
           },
           "Threats": {
             "Lifetime (since age 16)": {
-              "Female": 2.1,
-              "Male": 7.1,
+              "Female": 7.1,
+              "Male": 2.1,
               "All persons": 4.8
             },
             "Recent (last 3 years)": {
-              "Female": 0.7,
-              "Male": 1.5,
+              "Female": 1.5,
+              "Male": 0.7,
               "All persons": 1.1
             }
           },
           "Force": {
             "Lifetime (since age 16)": {
-              "Female": 4.6,
-              "Male": 15,
+              "Female": 15,
+              "Male": 4.6,
               "All persons": 10.1
             },
             "Recent (last 3 years)": {
-              "Female": 2.5,
-              "Male": 6.7,
+              "Female": 6.7,
+              "Male": 2.5,
               "All persons": 4.7
             }
           },
           "All abuse types": {
             "Lifetime (since age 16)": {
-              "Female": 38.6,
-              "Male": 80.8,
+              "Female": 80.8,
+              "Male": 38.6,
               "All persons": 61
             },
             "Recent (last 3 years)": {
-              "Female": 25.3,
-              "Male": 39.5,
+              "Female": 39.5,
+              "Male": 25.3,
               "All persons": 32.8
             }
           }
@@ -35179,6 +35179,217 @@
             "Miscellaneous crimes against society": 32.9,
             "Total police recorded crime": 30.4
           }
+        }
+      }
+    }
+  },
+  "INDPRCASEEQ": {
+    "label": "Indicator - Processing times for criminal cases",
+    "data": {
+      "Average time taken to complete criminal cases": {
+        "2013/14": {
+          "Northern Ireland": 143,
+          "Sex - Male": 145,
+          "Sex - Female": 137,
+          "Age - Youth": 192,
+          "Age - Adult": 141,
+          "Offence category - Violence Against the Person": 217,
+          "Offence category - Sexual": 558,
+          "Offence category - Robbery/ Theft/ Burglary": 191,
+          "Offence category - Criminal Damage/ Public Order": 141,
+          "Offence category - Drugs": 177,
+          "Offence category - Motoring": 113,
+          "Offence category - Other": 203,
+          "Court type - Crown Court": 492,
+          "Court type - Adult magistrates' courts": 129,
+          "Court type - Youth magistrates' courts": 177
+        },
+        "2014/15": {
+          "Northern Ireland": 143,
+          "Sex - Male": 143,
+          "Sex - Female": 142,
+          "Age - Youth": 168,
+          "Age - Adult": 141,
+          "Offence category - Violence Against the Person": 207,
+          "Offence category - Sexual": 528,
+          "Offence category - Robbery/ Theft/ Burglary": 175,
+          "Offence category - Criminal Damage/ Public Order": 135,
+          "Offence category - Drugs": 178,
+          "Offence category - Motoring": 118,
+          "Offence category - Other": 205,
+          "Court type - Crown Court": 476,
+          "Court type - Adult magistrates' courts": 132,
+          "Court type - Youth magistrates' courts": 161
+        },
+        "2015/16": {
+          "Northern Ireland": 146,
+          "Sex - Male": 146,
+          "Sex - Female": 146,
+          "Age - Youth": 186,
+          "Age - Adult": 144,
+          "Offence category - Violence Against the Person": 210,
+          "Offence category - Sexual": 470,
+          "Offence category - Robbery/ Theft/ Burglary": 183,
+          "Offence category - Criminal Damage/ Public Order": 143,
+          "Offence category - Drugs": 168,
+          "Offence category - Motoring": 119,
+          "Offence category - Other": 192,
+          "Court type - Crown Court": 515,
+          "Court type - Adult magistrates' courts": 138,
+          "Court type - Youth magistrates' courts": 183
+        },
+        "2016/17": {
+          "Northern Ireland": 165,
+          "Sex - Male": 163,
+          "Sex - Female": 170,
+          "Age - Youth": 206,
+          "Age - Adult": 162,
+          "Offence category - Violence Against the Person": 240,
+          "Offence category - Sexual": 623,
+          "Offence category - Robbery/ Theft/ Burglary": 220,
+          "Offence category - Criminal Damage/ Public Order": 153,
+          "Offence category - Drugs": 202,
+          "Offence category - Motoring": 130,
+          "Offence category - Other": 225,
+          "Court type - Crown Court": 584,
+          "Court type - Adult magistrates' courts": 147,
+          "Court type - Youth magistrates' courts": 196
+        },
+        "2017/18": {
+          "Northern Ireland": 162,
+          "Sex - Male": 161,
+          "Sex - Female": 164,
+          "Age - Youth": 211,
+          "Age - Adult": 159,
+          "Offence category - Violence Against the Person": 229,
+          "Offence category - Sexual": 622,
+          "Offence category - Robbery/ Theft/ Burglary": 216,
+          "Offence category - Criminal Damage/ Public Order": 157,
+          "Offence category - Drugs": 183,
+          "Offence category - Motoring": 139,
+          "Offence category - Other": 232,
+          "Court type - Crown Court": 558,
+          "Court type - Adult magistrates' courts": 150,
+          "Court type - Youth magistrates' courts": 200
+        },
+        "2018/19": {
+          "Northern Ireland": 167,
+          "Sex - Male": 167,
+          "Sex - Female": 167,
+          "Age - Youth": 215,
+          "Age - Adult": 164,
+          "Offence category - Violence Against the Person": 244,
+          "Offence category - Sexual": 667,
+          "Offence category - Robbery/ Theft/ Burglary": 229,
+          "Offence category - Criminal Damage/ Public Order": 152,
+          "Offence category - Drugs": 181,
+          "Offence category - Motoring": 141,
+          "Offence category - Other": 240,
+          "Court type - Crown Court": 551,
+          "Court type - Adult magistrates' courts": 154,
+          "Court type - Youth magistrates' courts": 204
+        },
+        "2019/20": {
+          "Northern Ireland": 149,
+          "Sex - Male": 150,
+          "Sex - Female": 143,
+          "Age - Youth": 214,
+          "Age - Adult": 146,
+          "Offence category - Violence Against the Person": 219,
+          "Offence category - Sexual": 698,
+          "Offence category - Robbery/ Theft/ Burglary": 212,
+          "Offence category - Criminal Damage/ Public Order": 146,
+          "Offence category - Drugs": 166,
+          "Offence category - Motoring": 119,
+          "Offence category - Other": 241,
+          "Court type - Crown Court": 565,
+          "Court type - Adult magistrates' courts": 136,
+          "Court type - Youth magistrates' courts": 203
+        },
+        "2020/21": {
+          "Northern Ireland": 193,
+          "Sex - Male": 193,
+          "Sex - Female": 192,
+          "Age - Youth": 280,
+          "Age - Adult": 189,
+          "Offence category - Violence Against the Person": 267,
+          "Offence category - Sexual": 582,
+          "Offence category - Robbery/ Theft/ Burglary": 259,
+          "Offence category - Criminal Damage/ Public Order": 195,
+          "Offence category - Drugs": 229,
+          "Offence category - Motoring": 153,
+          "Offence category - Other": 315,
+          "Court type - Crown Court": 582,
+          "Court type - Adult magistrates' courts": 179,
+          "Court type - Youth magistrates' courts": 272
+        },
+        "2021/22": {
+          "Northern Ireland": 226,
+          "Sex - Male": 224,
+          "Sex - Female": 238,
+          "Age - Youth": 332,
+          "Age - Adult": 223,
+          "Offence category - Violence Against the Person": 244,
+          "Offence category - Sexual": 742,
+          "Offence category - Robbery/ Theft/ Burglary": 305,
+          "Offence category - Criminal Damage/ Public Order": 209,
+          "Offence category - Drugs": 263,
+          "Offence category - Motoring": 192,
+          "Offence category - Other": 306,
+          "Court type - Crown Court": 727,
+          "Court type - Adult magistrates' courts": 207,
+          "Court type - Youth magistrates' courts": 308
+        },
+        "2022/23": {
+          "Northern Ireland": 206,
+          "Sex - Male": 207,
+          "Sex - Female": 202,
+          "Age - Youth": 258,
+          "Age - Adult": 204,
+          "Offence category - Violence Against the Person": 234,
+          "Offence category - Sexual": 757,
+          "Offence category - Robbery/ Theft/ Burglary": 253,
+          "Offence category - Criminal Damage/ Public Order": 198,
+          "Offence category - Drugs": 272,
+          "Offence category - Motoring": 164,
+          "Offence category - Other": 378,
+          "Court type - Crown Court": 756,
+          "Court type - Adult magistrates' courts": 189,
+          "Court type - Youth magistrates' courts": 233
+        },
+        "2023/24": {
+          "Northern Ireland": 190,
+          "Sex - Male": 190,
+          "Sex - Female": 192,
+          "Age - Youth": 270,
+          "Age - Adult": 188,
+          "Offence category - Violence Against the Person": 223,
+          "Offence category - Sexual": 675,
+          "Offence category - Robbery/ Theft/ Burglary": 224,
+          "Offence category - Criminal Damage/ Public Order": 168,
+          "Offence category - Drugs": 238,
+          "Offence category - Motoring": 162,
+          "Offence category - Other": 313,
+          "Court type - Crown Court": 702,
+          "Court type - Adult magistrates' courts": 176,
+          "Court type - Youth magistrates' courts": 256
+        },
+        "2024/25": {
+          "Northern Ireland": 189,
+          "Sex - Male": 190,
+          "Sex - Female": 189,
+          "Age - Youth": 263,
+          "Age - Adult": 187,
+          "Offence category - Violence Against the Person": 223,
+          "Offence category - Sexual": 630,
+          "Offence category - Robbery/ Theft/ Burglary": 242,
+          "Offence category - Criminal Damage/ Public Order": 167,
+          "Offence category - Drugs": 249,
+          "Offence category - Motoring": 152,
+          "Offence category - Other": 359,
+          "Court type - Crown Court": 752,
+          "Court type - Adult magistrates' courts": 174,
+          "Court type - Youth magistrates' courts": 244
         }
       }
     }

@@ -62,10 +62,9 @@ export function insertNavButtons() {
     <a id="information-btn" class="col mx-2 nav-btn" href="information.html">Information</a>
   </div>`;
 
-  const page = window.location.pathname.replace("/", "").replace(".html", "").replace("99-teo-evawg-dashboard/", "");
-  console.log(page);
+  const pathname = window.location.pathname;
+  const page = pathname.slice(pathname.lastIndexOf("/") + 1, pathname.indexOf(".html"));
   const currentPage = document.getElementById(`${page}-btn`);
-  console.log(currentPage);
   currentPage.classList.add("current-page");
   currentPage.classList.remove("nav-btn");
   currentPage.innerHTML = currentPage.textContent;
@@ -191,4 +190,4 @@ export async function insertHead(title) {
 
 }
 
-export const chart_colours = ["#4E95D9", "#00205B", "#68A41E", "#732777", "#CE70D2"];
+export const chart_colours = ["#4E95D9", "#00205B", "#68A41E", "#732777", "#ce70d2"];
