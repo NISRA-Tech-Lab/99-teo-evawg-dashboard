@@ -53,8 +53,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             data,
             stat,
             years,
-            female_selection: ["Physical violence", "Sex - Female"],
-            male_selection: ["Physical violence", "Sex - Male"],
+            line_1: ["Physical violence", "Sex - Female"],
+            line_2: ["Physical violence", "Sex - Male"],
             canvas_id: "prevalence-nilt-line"
         });    
 

@@ -43,8 +43,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         data,
         stat,
         years,
-        female_selection: ["Under 18 years", "Female"],
-        male_selection: ["Under 18 years", "Male"],
+        line_1: ["Under 18 years", "Female"],
+        line_2: ["Under 18 years", "Male"],
         canvas_id: "under-18-homicide-line"
     });
 
@@ -52,8 +52,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         data,
         stat,
         years,
-        female_selection: ["18+ years", "Female"],
-        male_selection: ["18+ years", "Male"],
+        line_1: ["18+ years", "Female"],
+        line_2: ["18+ years", "Male"],
         canvas_id: "18-plus-homicide-line"
     });
     

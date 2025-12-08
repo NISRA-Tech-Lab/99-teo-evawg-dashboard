@@ -54,8 +54,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             data,
             stat,
             years,
-            female_selection: ["No violence", "Gender - Female"],
-            male_selection: ["No violence", "Gender - Male"],
+            line_1: ["No violence", "Gender - Female"],
+            line_2: ["No violence", "Gender - Male"],
             canvas_id: "prevalence-ylt-line"
         });
 
