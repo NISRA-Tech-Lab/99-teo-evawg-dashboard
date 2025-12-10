@@ -4,7 +4,7 @@ import { wrapLabel } from "./wrap-label.js";
 import { getSelectedGender } from "./get-selected-gender.js";
 import { getNested } from "./get-nested.js";
 
-export function createMaleFemaleLineChart({data, stat, years, line_1, line_2, canvas_id, label_1 = "Female", label_2 = "Male"}) {
+export function createLineChart({data, stat, years, line_1, line_2, label_1 = "Female", label_2 = "Male", canvas_id}) {
 
     const line_canvas = document.getElementById(canvas_id);
 
@@ -74,23 +74,27 @@ export function createMaleFemaleLineChart({data, stat, years, line_1, line_2, ca
     const ctx_line = line_canvas.getContext('2d');
     const line_chart = new Chart(ctx_line, config_line);
 
-    let selectedGender = getSelectedGender(); 
     const gender_form = document.getElementById("gender-form");
+    if (gender_form) {
+        let selectedGender = getSelectedGender(); 
+        
+        console.log(gender_form == null)
 
-    let show_males = selectedGender != "female";
-    let show_females = selectedGender != "male";
+        let show_males = selectedGender != "female";
+        let show_females = selectedGender != "male";
 
-    line_chart.data.datasets[1].hidden = !show_males;
-    line_chart.data.datasets[0].hidden = !show_females;
-
-    gender_form.addEventListener("change", function () {
-        selectedGender = getSelectedGender(); 
-        show_males = selectedGender != "female";
-        show_females = selectedGender != "male";
         line_chart.data.datasets[1].hidden = !show_males;
         line_chart.data.datasets[0].hidden = !show_females;
-        line_chart.update();
-    });
+
+        gender_form.addEventListener("change", function () {
+            selectedGender = getSelectedGender(); 
+            show_males = selectedGender != "female";
+            show_females = selectedGender != "male";
+            line_chart.data.datasets[1].hidden = !show_males;
+            line_chart.data.datasets[0].hidden = !show_females;
+            line_chart.update();
+        });
+    }
 
 }
 

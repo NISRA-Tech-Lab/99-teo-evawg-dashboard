@@ -1,7 +1,7 @@
 import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
 import { maleComparison } from "./utils/male-comparison.js";
 import { readData } from "./utils/read-data.js";
-import { createMaleFemaleLineChart, createBarChartData, createBarChart  } from "./utils/charts.js";
+import { createLineChart, createBarChartData, createBarChart  } from "./utils/charts.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 import { insertValue } from "./utils/insert-value.js";
 
@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
     
     // Create line chart
-    createMaleFemaleLineChart({
+    createLineChart({
         data,
         stat,
         years,
@@ -48,7 +48,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         canvas_id: "under-18-homicide-line"
     });
 
-    createMaleFemaleLineChart({
+    createLineChart({
         data,
         stat,
         years,

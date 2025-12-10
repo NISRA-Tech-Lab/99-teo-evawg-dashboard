@@ -1,6 +1,6 @@
 import { maleComparison } from "./utils/male-comparison.js";
-import { createMaleFemaleLineChart, createBarChart, createPRCData } from "./utils/charts.js";
-import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js";
+import { createLineChart, createBarChart, createPRCData } from "./utils/charts.js";
+import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js";
 import { readData } from "./utils/read-data.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 import { insertValue } from "./utils/insert-value.js";
@@ -32,14 +32,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         ["All ages"]["Female"] +
         data.data[stat][latest_year]
             ["Violence without injury"]
-            ["All ages"]["All persons"];
+            ["All ages"]["Female"];
 
     const male_violence_victims = data.data[stat][latest_year]
         ["Violence with injury (including homicide & death/serious injury by unlawful driving)"]
         ["All ages"]["Male"] +
         data.data[stat][latest_year]
             ["Violence without injury"]
-            ["All ages"]["All persons"];    
+            ["All ages"]["Male"];    
 
     insertValue("violence-female", Math.round(female_violence_victims / violence_victims * 100));
     insertValue("violence-male", Math.round(male_violence_victims / violence_victims * 100));
@@ -93,7 +93,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertValue("online-male", Math.round(male_online_victims / online_victims * 100));
 
     // Sexual offences line chart
-    createMaleFemaleLineChart({
+    createLineChart({
         data,
         stat,
         years,
@@ -103,7 +103,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Stalking and harassment line chart
-    createMaleFemaleLineChart({
+    createLineChart({
         data,
         stat,
         years,
