@@ -17,6 +17,10 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     updateYearSpans(data, stat);
 
+    insertValue("sexual-case-processing", data.data[stat][latest_year]["Offence category - Sexual"]);
+    insertValue("all-case-processing", data.data[stat][latest_year]["Northern Ireland"]);
+
+
     // Create line chart
     createLineChart({
         data,
