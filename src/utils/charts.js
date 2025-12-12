@@ -4,7 +4,7 @@ import { wrapLabel } from "./wrap-label.js";
 import { getSelectedGender } from "./get-selected-gender.js";
 import { getNested } from "./get-nested.js";
 
-export function createLineChart({data, stat, years, line_1, line_2, label_1 = "Female", label_2 = "Male", canvas_id}) {
+export function createLineChart({data, stat, years, line_1, line_2, label_1 = "Female (%)", label_2 = "Male (%)", canvas_id}) {
 
     const line_canvas = document.getElementById(canvas_id);
 
@@ -59,10 +59,11 @@ export function createLineChart({data, stat, years, line_1, line_2, label_1 = "F
                 }
             },
             scales: {
-                x: {
-                    beginAtZero: true
-                },
                 y: {
+                  beginAtZero: true,
+                  ticks: {
+                    precision: 0,
+                  },
                     grid: {
                         display: false
                     }
@@ -174,7 +175,7 @@ export function createBarChart({ chart_data, categories, canvas_id, label_format
 
   const makeDataset = (gender) => ({
     axis: "y",
-    label: `${gender === "female" ? "Females" : "Males"}${label_format === "%" ? " (%)" : ""}`,
+    label: `${gender === "female" ? "Female" : "Male"}${label_format === "%" ? " (%)" : ""}`,
     data: gender === "female" ? chart_data.female : chart_data.male,
     fill: false,
     backgroundColor: gender === "female" ? chart_colours[0] : chart_colours[1],

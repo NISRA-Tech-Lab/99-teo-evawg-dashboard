@@ -44,7 +44,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         stat,
         years,
         line_1: ["Under 18 years", "Female"],
+        label_1: "Female",
         line_2: ["Under 18 years", "Male"],
+        label_2: "Male",
         canvas_id: "under-18-homicide-line"
     });
 
@@ -53,7 +55,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         stat,
         years,
         line_1: ["18+ years", "Female"],
+        label_1: "Female",
         line_2: ["18+ years", "Male"],
+        label_2: "Male",
         canvas_id: "18-plus-homicide-line"
     });
     

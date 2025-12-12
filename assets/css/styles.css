@@ -309,8 +309,7 @@ canvas {
 
 /* Only when expanded (i.e., NOT collapsed) */
 .accordion-button:not(.collapsed) {
-  /* if navy-bg is a class you already use, copy those rules here */
-  background-color: var(--navy, #0b2d4d);
+  background-color: #00205B;
   color: #fff;
 }
 
@@ -319,10 +318,34 @@ canvas {
   filter: brightness(0) invert(1);
 }
 
-#info-card {
-  border: none;
+.accordion-button {
+  border-left: 2px solid #00205B;
+  border-top: 2px solid #00205B;
+  border-bottom: 2px solid #00205B;
+  color: #00205B;
+  font-size: 0.75em;
 }
 
-#infoCard:has(.accordion-collapse.show) { 
-  border: 1px solid var(--bs-border-color);
+#info-card {
+  border: 2px solid #00205B;
+}
+
+
+.info-card-wrap {
+  display: grid;
+  grid-template-rows: 0fr;   /* closed */
+  opacity: 0;
+  transition: grid-template-rows .35s ease, opacity .25s ease;
+}
+
+/* prevent content from spilling during animation */
+.info-card-wrap > .card{
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* open when any accordion section inside is open */
+.info-card-wrap:has(.accordion-collapse.show){
+  grid-template-rows: 1fr;   /* open */
+  opacity: 1;
 }

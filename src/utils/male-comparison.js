@@ -13,11 +13,11 @@ export function maleComparison () {
       </div>
     <div class="form-check me-2">
         <input class="form-check-input" type="radio" name="gender-select" id="female-comparison" value="female" >
-        <label class="form-check-label" for="female-comparison">Females only</label>
+        <label class="form-check-label" for="female-comparison">Female only</label>
       </div>
       <div class="form-check me-2">
         <input class="form-check-input" type="radio" name="gender-select" id="male-comparison" value="male" >
-        <label class="form-check-label" for="male-comparison">Males only</label>
+        <label class="form-check-label" for="male-comparison">Male only</label>
       </div>
       </form>
       
