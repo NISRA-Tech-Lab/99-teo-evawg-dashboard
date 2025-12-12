@@ -63,7 +63,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const update_date = new Date(data.updated).toLocaleDateString("en-GB",
         {
             day: "2-digit", 
-            month: "short",
+            month: "long",
             year: "numeric"
         });
 
@@ -87,7 +87,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         <p>The Violence Against Women and Girls (VAWG) module of NILT is sponsored by The Executive Office.</p>
         <p>This data is available on the <a href="https://ppdata.nisra.gov.uk/table/EXPVLADEQ" target="_blank">NISRA Data Portal</a>.</p>
         <p>Statistical publications relating to the EVAWG stragegy can be found on the <a href="https://www.executiveoffice-ni.gov.uk/topics/ending-violence-against-women-and-girls-evawg" target="_blank">Executive Office website</a>.</p>
-        <p>Updates: Data updated annually. Last update: ${update_date}.</p>`,
+        <p><strong>Updates:</strong> Data updated annually. <strong>Last update:</strong> ${update_date}.</p>`,
 
         `<h2>What does this mean?</h2>
         <p>Questions relating to gender-based violence have been included in the <strong>Northern Ireland Life and Times (NILT)</strong> survey since 2022 to attempt to gain more understanding of the prevalence of gender-based violence in Northern Ireland.</p>
