@@ -65,6 +65,9 @@ export async function plotMap(data, stat, latest_year, crimeType) {
   // =========================================================
   // If map already exists, just update the source and return
   // =========================================================
+
+  renderTable(lgds, values);
+  
   if (map && map.getSource("shapes")) {
       map.getSource("shapes").setData(styledGeojson);
       return;
@@ -191,6 +194,7 @@ export async function plotMap(data, stat, latest_year, crimeType) {
     });
 
   });
+
 }
 
 export function getColour(normOrBin) {
@@ -230,4 +234,45 @@ function updateLegend(range_min, range_max, unitLabel = "") {
     </div>
   `;
 
+}
+
+
+function renderTable(lgds, values) {
+  const table = document.getElementById("map-data-table");
+  if (!table) return;
+
+  // Clear previous content (prevents duplicates + enables updates)
+  table.innerHTML = "";
+
+  const thead = document.createElement("thead");
+  const trh = document.createElement("tr");
+
+  const th1 = document.createElement("th");
+  th1.innerText = "Local Government District";
+
+  const th2 = document.createElement("th");
+  th2.style.textAlign = "right";
+  th2.innerText = "Crimes recorded";
+
+  trh.appendChild(th1);
+  trh.appendChild(th2);
+  thead.appendChild(trh);
+  table.appendChild(thead);
+
+  const tbody = document.createElement("tbody");
+  for (let i = 0; i < lgds.length; i++) {
+    const tr = document.createElement("tr");
+
+    const td1 = document.createElement("td");
+    td1.innerText = lgds[i];
+
+    const td2 = document.createElement("td");
+    td2.style.textAlign = "right";
+    td2.innerText = (values[i] == null) ? "n/a" : Number(values[i]).toLocaleString("en-GB");
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
 }

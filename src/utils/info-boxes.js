@@ -6,7 +6,7 @@ export function populateInfoBoxes(labels, content) {
     for (let i = 0; i < labels.length; i ++) {
 
         let button_style = "";
-        if (i == labels.length -1) {
+        if (i == labels.length - 1) {
             button_style = "border-right: 2px solid #00205B;border-top-right-radius: 0.5rem; border-bottom-right-radius: 0.5rem;";
         } else if (i == 0) {
             button_style = "border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem;";
