@@ -45,31 +45,87 @@ export function insertHeader () {
 }
 
 export function insertNavButtons() {
-
   const nav = document.getElementById("nav");
 
-  nav.innerHTML +=
-  `<div class="row">
-    <a id="home-btn" class="col mx-2 nav-btn" href="index.html">Home</a>
-    <a id="violence-against-women-and-men-btn" class="col mx-2 nav-btn" href="violence-against-women-and-men.html">Violence against women and men</a>
-    <a id="violence-against-girls-and-boys-btn" class="col mx-2 nav-btn" href="violence-against-girls-and-boys.html">Violence against girls and boys</a>
-    <a id="police-recorded-crime-evawg-btn" class="col mx-2 nav-btn" href="police-recorded-crime-evawg.html">Police recorded crime - EVAWG</a>
-    <a id="homicides-btn" class="col mx-2 nav-btn" href="homicides.html">Homicides</a>
-    <a id="domestic-abuse-btn" class="col mx-2 nav-btn" href="domestic-abuse.html">Domestic abuse</a>
-    <a id="police-recorded-crime-domestic-abuse-btn" class="col mx-2 nav-btn" href="police-recorded-crime-domestic-abuse.html">Police recorded crime - Domestic abuse</a>
-    <a id="case-processing-times-btn" class="col mx-2 nav-btn" href="case-processing-times.html">Case processing times</a>
-    <a id="maps-btn" class="col mx-2 nav-btn" href="maps.html">Maps</a>
-    <a id="information-btn" class="col mx-2 nav-btn" href="information.html">Information</a>
-  </div>`;
+  const links = [
+    { id: "home-btn", href: "index.html", text: "Home" },
+    { id: "violence-against-women-and-men-btn", href: "violence-against-women-and-men.html", text: "Violence against women and men" },
+    { id: "violence-against-girls-and-boys-btn", href: "violence-against-girls-and-boys.html", text: "Violence against girls and boys" },
+    { id: "police-recorded-crime-evawg-btn", href: "police-recorded-crime-evawg.html", text: "Police recorded crime - EVAWG" },
+    { id: "homicides-btn", href: "homicides.html", text: "Homicides" },
+    { id: "domestic-abuse-btn", href: "domestic-abuse.html", text: "Domestic abuse" },
+    { id: "police-recorded-crime-domestic-abuse-btn", href: "police-recorded-crime-domestic-abuse.html", text: "Police recorded crime - Domestic abuse" },
+    { id: "case-processing-times-btn", href: "case-processing-times.html", text: "Case processing times" },
+    { id: "maps-btn", href: "maps.html", text: "Maps" },
+    { id: "information-btn", href: "information.html", text: "Information" },
+  ];
 
   const pathname = window.location.pathname;
-  const page = pathname.slice(pathname.lastIndexOf("/") + 1, pathname.indexOf(".html"));
-  const currentPage = document.getElementById(`${page}-btn`);
-  currentPage.classList.add("current-page");
-  currentPage.classList.remove("nav-btn");
-  currentPage.innerHTML = currentPage.textContent;
+  const file = pathname.slice(pathname.lastIndexOf("/") + 1) || "index.html";
+  const pageKey = file.replace(".html", "");
 
+  // Desktop: row of buttons (lg+). Mobile: hamburger dropdown (<lg).
+  nav.innerHTML += `
+    <div class="container-fluid px-2">
+
+      <!-- Mobile only -->
+
+      <div class="d-lg-none w-100 text-center pb-2">
+        <div class="dropdown d-inline-block">
+          <button class="btn btn-light dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            aria-label="Open menu">
+            <span class="me-1">Menu</span>
+            <i class="bi bi-list" aria-hidden="true"></i>
+          </button>
+
+          <!-- optional: keep menu centered under button -->
+          <ul class="dropdown-menu start-50 translate-middle-x">
+            ${links
+            .map(
+              (l) => `
+                <li>
+                  <a class="dropdown-item ${l.id === `${pageKey}-btn` ? "active" : ""}"
+                    id="${l.id}-mobile"
+                    href="${l.href}">
+                    ${l.text}
+                  </a>
+                </li>`
+            )
+            .join("")}
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- Desktop only -->
+      <div class="d-none d-lg-block">
+        <div class="row g-2">
+          ${links
+            .map(
+              (l) => `
+                <a id="${l.id}" class="col nav-btn" href="${l.href}">
+                  ${l.text}
+                </a>`
+            )
+            .join("")}
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  // Apply current-page styling to the DESKTOP buttons (to match your existing CSS)
+  const currentDesktop = document.getElementById(`${pageKey}-btn`);
+  if (currentDesktop) {
+    currentDesktop.classList.add("current-page");
+    currentDesktop.classList.remove("nav-btn");
+    currentDesktop.innerHTML = currentDesktop.textContent;
+  }
 }
+
 
 export function insertFooter () {
 
