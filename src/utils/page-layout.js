@@ -246,4 +246,4 @@ export async function insertHead(title) {
 
 }
 
-export const chart_colours = ["#4E95D9", "#00205B", "#68A41E", "#732777", "#ce70d2"];
+

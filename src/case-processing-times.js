@@ -1,6 +1,6 @@
 import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js"
 import { readData } from "./utils/read-data.js";
-import { createLineChart, createBarChartData, createBarChart  } from "./utils/charts.js";
+import { createLineChart } from "./utils/charts.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 import { insertValue } from "./utils/insert-value.js";
 

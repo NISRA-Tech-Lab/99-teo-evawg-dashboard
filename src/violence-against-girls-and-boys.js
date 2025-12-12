@@ -1,4 +1,4 @@
-import { insertHeader, insertFooter, insertNavButtons, insertHead, chart_colours } from "./utils/page-layout.js"
+import { insertHeader, insertFooter, insertNavButtons, insertHead } from "./utils/page-layout.js"
 import { readData } from "./utils/read-data.js"
 import { maleComparison } from "./utils/male-comparison.js";
 import { createLineChart, createBarChart, createBarChartData } from "./utils/charts.js";
