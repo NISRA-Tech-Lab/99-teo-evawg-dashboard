@@ -116,6 +116,7 @@ for (portal in matrix_list) {
     }
   
     all_data[[matrix]]$label <- raw_data$label
+    all_data[[matrix]]$updated <- as.Date(raw_data$updated)
     all_data[[matrix]]$data <- data_list
   }
 }

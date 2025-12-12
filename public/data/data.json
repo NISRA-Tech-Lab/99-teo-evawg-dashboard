@@ -1,6 +1,7 @@
 {
   "PRCHOM": {
     "label": "Police recorded crime - victims of homicide",
+    "updated": "2025-12-08",
     "data": {
       "All homicides": {
         "2007/08": {
@@ -314,6 +315,7 @@
   },
   "PRCVCTM": {
     "label": "Police recorded crime - victims of crime",
+    "updated": "2025-11-14",
     "data": {
       "All crimes recorded by the police": {
         "2007/08": {
@@ -32555,6 +32557,7 @@
   },
   "DOMAC": {
     "label": "Domestic abuse crimes and sanction outcomes",
+    "updated": "2025-11-13",
     "data": {
       "All domestic abuse crimes": {
         "2023/24": {
@@ -32638,6 +32641,7 @@
   },
   "EXPDA": {
     "label": "Experience of domestic abuse",
+    "updated": "2025-12-08",
     "data": {
       "Victims of domestic abuse": {
         "2018/19": {
@@ -32719,6 +32723,7 @@
   },
   "EXPVLADEQ": {
     "label": "Experience of gender-based violence - adults",
+    "updated": "2025-11-27",
     "data": {
       "Adult victims of gender-based violence": {
         "2022": {
@@ -32984,6 +32989,7 @@
   },
   "EXPVLYTHEQ": {
     "label": "Experience of gender-based violence - 16 year olds",
+    "updated": "2025-11-17",
     "data": {
       "Victims of gender-based violence": {
         "2023": {
@@ -33115,6 +33121,7 @@
   },
   "PRCONL": {
     "label": "Police recorded crime - online crime",
+    "updated": "2025-11-13",
     "data": {
       "All online crimes": {
         "2014/15": {
@@ -33362,6 +33369,7 @@
   },
   "PRCPD": {
     "label": "Police recorded crime and sanction outcomes",
+    "updated": "2025-11-13",
     "data": {
       "All crimes recorded by the police": {
         "2023/24": {
@@ -35185,6 +35193,7 @@
   },
   "INDPRCASEEQ": {
     "label": "Indicator - Processing times for criminal cases",
+    "updated": "2025-10-07",
     "data": {
       "Average time taken to complete criminal cases": {
         "2013/14": {

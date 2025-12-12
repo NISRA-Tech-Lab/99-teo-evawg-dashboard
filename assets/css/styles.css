@@ -270,10 +270,6 @@ nav a {
   border: 2px solid #732777;
 }
 
-.blue-bg {
-  background-color: #4E95D9;
-}
-
 .blue-bg a, .purple-bg a {
   color: #fff;
 }
@@ -296,16 +292,6 @@ nav a {
   color: #000;
 }
 
-/* White text + white caret for collapsed state */
-.accordion-button.navy-bg::after {
-  filter: invert(1) brightness(200%);
-}
-
-/* Keep caret white when expanded */
-.accordion-button.navy-bg:not(.collapsed)::after {
-  filter: invert(1) brightness(200%);
-}
-
 /* Your custom background */
 .navy-bg {
   background-color: #00205B !important;
@@ -321,3 +307,22 @@ canvas {
   min-height: 50vh;
 }
 
+/* Only when expanded (i.e., NOT collapsed) */
+.accordion-button:not(.collapsed) {
+  /* if navy-bg is a class you already use, copy those rules here */
+  background-color: var(--navy, #0b2d4d);
+  color: #fff;
+}
+
+/* optional: keep the little chevron readable */
+.accordion-button:not(.collapsed)::after {
+  filter: brightness(0) invert(1);
+}
+
+#info-card {
+  border: none;
+}
+
+#infoCard:has(.accordion-collapse.show) { 
+  border: 1px solid var(--bs-border-color);
+}

@@ -77,8 +77,6 @@ export function createLineChart({data, stat, years, line_1, line_2, label_1 = "F
     const gender_form = document.getElementById("gender-form");
     if (gender_form) {
         let selectedGender = getSelectedGender(); 
-        
-        console.log(gender_form == null)
 
         let show_males = selectedGender != "female";
         let show_females = selectedGender != "male";
