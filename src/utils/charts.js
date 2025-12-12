@@ -78,23 +78,24 @@ export function createLineChart({data, stat, years, line_1, line_2, label_1 = "F
     if (gender_form) {
         let selectedGender = getSelectedGender(); 
 
-        let show_males = selectedGender != "female";
-        let show_females = selectedGender != "male";
+        const datasetsForSelection = (sel) => {
+            if (sel === "female") return [line_values[0]];
+            if (sel === "male") return [line_values[1]];
+            return [line_values[0], line_values[1]]; // "both" / default
+        };
 
-        line_chart.data.datasets[1].hidden = !show_males;
-        line_chart.data.datasets[0].hidden = !show_females;
+        line_chart.data.datasets = datasetsForSelection(selectedGender);
+        line_chart.update();
 
         gender_form.addEventListener("change", function () {
             selectedGender = getSelectedGender(); 
-            show_males = selectedGender != "female";
-            show_females = selectedGender != "male";
-            line_chart.data.datasets[1].hidden = !show_males;
-            line_chart.data.datasets[0].hidden = !show_females;
+            line_chart.data.datasets = datasetsForSelection(selectedGender);
             line_chart.update();
         });
     }
 
 }
+
 
 export function createBarChartData({data, stat, year, categories}) {   
 
@@ -168,96 +169,83 @@ export function createDALast3Data({data, stat, year, da_types}) {
 
 }
 
-export function createBarChart({chart_data, categories, canvas_id, label_format}) {
+export function createBarChart({ chart_data, categories, canvas_id, label_format }) {
+  const bar_canvas = document.getElementById(canvas_id);
 
-    const bar_canvas = document.getElementById(canvas_id);
+  const makeDataset = (gender) => ({
+    axis: "y",
+    label: `${gender === "female" ? "Females" : "Males"}${label_format === "%" ? " (%)" : ""}`,
+    data: gender === "female" ? chart_data.female : chart_data.male,
+    fill: false,
+    backgroundColor: gender === "female" ? chart_colours[0] : chart_colours[1],
+    borderWidth: 1
+  });
 
-    const bar_data = {
-        labels: categories,
-        datasets: [{
-            axis: 'y',
-            label: `Females${label_format === "%" ? " (%)" : ""}`,
-            data: chart_data.female,
-            fill: false,
-            backgroundColor: chart_colours[0],
-            borderWidth: 1
+  const baseOptions = {
+    indexAxis: "y",
+    maintainAspectRatio: false,
+    layout: { padding: { right: 40 } },
+    plugins: {
+      datalabels: {
+        anchor: "end",
+        align: "right",
+        formatter: (v) => {
+          if (label_format === "%") return `${v}%`;
+          if (label_format === ",") return Number(v).toLocaleString();
+          return v;
         },
-        {
-            axis: 'y',
-            label: `Males${label_format === "%" ? " (%)" : ""}`,
-            data: chart_data.male,
-            fill: false,
-            backgroundColor: chart_colours[1],
-            borderWidth: 1
-        }]
-    };
+        color: "#000",
+        clamp: true
+      }
+    },
+    scales: {
+      x: { beginAtZero: true },
+      y: {
+        grid: { display: false },
+        ticks: {
+          callback: function (value) {
+            const label = this.getLabelForValue(value);
+            return wrapLabel(label, 35);
+          }
+        }
+      }
+    }
+  };
 
-    const config_bar = {
-        type: 'bar',
-        data: bar_data,
-        options: {
-            indexAxis: "y",
-            maintainAspectRatio: false,   // let the canvas size control the chart
-            layout: {
-                padding: {
-                    right: 40             // extra room for end labels
-                }
-            },
-            plugins: {
-                datalabels: {
-                    anchor: 'end',
-                    align: 'right',
-                    formatter: (v) => {
-                        if (label_format === "%") return `${v}%`;
-                        if (label_format === ",") return Number(v).toLocaleString();
-                        return v; // fallback if something else shows up
-                        },
-                    color: '#000',
-                    clamp: true           // keep inside chart area
-                }
-            },
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        callback: function(value) {
-                            const label = this.getLabelForValue(value);
-                            return wrapLabel(label, 35); 
-                        }
-                    }
-                }
-            }
-        },
-        plugins: [ChartDataLabels]
-    };
+  function datasetsForSelection(sel) {
+    if (sel === "female") return [makeDataset("female")];
+    if (sel === "male") return [makeDataset("male")];
+    return [makeDataset("female"), makeDataset("male")]; // "both" / default
+  }
 
-    const ctx = bar_canvas.getContext('2d');
-    const bar_chart = new Chart(ctx, config_bar); 
+  // initial chart
+  const ctx = bar_canvas.getContext("2d");
+  let selectedGender = getSelectedGender();
 
-    let selectedGender = getSelectedGender(); 
-    const gender_form = document.getElementById("gender-form");
+  const bar_chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: categories,
+      datasets: datasetsForSelection(selectedGender)
+    },
+    options: baseOptions,
+    plugins: [ChartDataLabels]
+  });
 
-    let show_males = selectedGender != "female";
-    let show_females = selectedGender != "male";
+  const gender_form = document.getElementById("gender-form");
 
-    bar_chart.data.datasets[1].hidden = !show_males;
-    bar_chart.data.datasets[0].hidden = !show_females;
+  // IMPORTANT: replace datasets (so legend updates), then redraw
+  gender_form.addEventListener("change", function () {
+    selectedGender = getSelectedGender();
 
-    gender_form.addEventListener("change", function () {
-        selectedGender = getSelectedGender(); 
-        show_males = selectedGender != "female";
-        show_females = selectedGender != "male";
-        bar_chart.data.datasets[1].hidden = !show_males;
-        bar_chart.data.datasets[0].hidden = !show_females;
-        bar_chart.update();
-    });
+    bar_chart.data.datasets = datasetsForSelection(selectedGender);
 
+    // clears + re-renders with new legend items
+    bar_chart.update();
+  });
 
+  return bar_chart;
 }
+
 
 
