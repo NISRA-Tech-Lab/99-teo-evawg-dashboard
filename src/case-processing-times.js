@@ -3,6 +3,9 @@ import { readData } from "./utils/read-data.js";
 import { createLineChart } from "./utils/charts.js";
 import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 import { insertValue } from "./utils/insert-value.js";
+import { populateInfoBoxes } from "./utils/info-boxes.js";
+
+
 
 window.addEventListener("DOMContentLoaded", async () => {
 
@@ -32,5 +35,39 @@ window.addEventListener("DOMContentLoaded", async () => {
         label_2: "Sexual offences",
         canvas_id: "case-processing-sexual-line",
     });
+
+    // Populate info boxes
+        const update_date = new Date(data.updated).toLocaleDateString("en-GB",
+            {
+                day: "2-digit", 
+                month: "long",
+                year: "numeric"
+            });
+    
+        populateInfoBoxes(
+            ["Definitions", "Source", "What does the data mean?"],
+            [
+            `<p>The Case Processing Time is based on the principal offence (main offence) at disposal. Where an offender is prosecuted or convicted of several offences on the same occasion, only one offence, the principal offence, is counted. Statistical coverage is restricted to those criminal prosecutions which were brought on behalf of the Police Service for Northern Ireland, the National Crime Agency, the Airport Constabulary or Harbour Police.</p>`,
+
+`<p>The most recent average Case Processing Times for Criminal Cases dealt with in the Crown and magistrates’ courts in Northern Ireland are annually and refers to the time from which the offence was reported to, or detected by, the police.</p>
+<p>This data is based on all court cases – Crown Court, adult magistrates’ court, and youth magistrates’ court.</p>
+<p>Average is measured as the median number of days taken, i.e., the number of days at which 50% of those cases included under counting rules has been completed. This is an overview of the time taken for a case to be disposed at court from the date that case began its journey through the criminal justice system, based on a start point of the date the offence was reported to, or detected by, the PSNI.</p>
+<p>This data is available on the <a href="https://ppdata.nisra.gov.uk/table/INDPRCASEEQ" target="_blank">NISRA Data Portal</a>.</p>
+<p>Statistical publications can be found on the <a href="https://www.justice-ni.gov.uk/articles/case-processing-times" target="_blank">relevant publication page</a>.</p>
+<p><strong>Updates:</strong> Data updated quarterly. <strong>Last update:</strong> ${update_date}.</p>`,
+
+`<p>This tab shows how long it takes for cases related to violence and abuse to progress through the court system, from initial charge to final outcome.</p>
+<ul>
+    <li><strong>What it tells us:</strong> It highlights average and median processing times for different types of cases, giving insight into how quickly justice is delivered.</li>
+    <li><strong>Why it matters:</strong> Delays in case processing can impact victims’ confidence in the justice system and prolong trauma. Understanding these timelines helps identify where improvements are needed.</li>
+    <li><strong>How to use it:</strong> Use this data to inform discussions on court efficiency, resource allocation, and victim support during lengthy proceedings. It can also guide policy aimed at reducing delays.</li>
+    <li><strong>Limitations:</strong> Figures reflect completed cases only and may be influenced by case complexity, availability of court resources, and procedural requirements. They do not capture informal resolutions or cases withdrawn before trial.</li>
+</ul>`
+
+
+            
+            ]
+        );
+
 
 })
