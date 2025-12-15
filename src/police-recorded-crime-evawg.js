@@ -141,7 +141,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             });
     
         populateInfoBoxes(
-            ["Definitions", "Police Recorded Crime", "What does the data mean?"],
+            ["Definitions", "Source", "What does the data mean?"],
             [
             `<p>The tab presents data on victims of the following offences as reported through the PSNI Recorded Crime System:</p>
 <ul>

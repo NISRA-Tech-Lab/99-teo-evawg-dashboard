@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             });
     
         populateInfoBoxes(
-            ["Definitions", "Police Recorded Crime", "What does the data mean?"],
+            ["Definitions", "Source", "What does the data mean?"],
             [
             `<p>The Police Service for Northern Ireland defines homicide as murder, manslaughter, corporate manslaughter and infanticide. In certain cases, it is shown separately, for example murder is classified to homicide, attempted murder is classified to violence with injury and conspiracy to murder is classified to violence without injury.</p>`,
 
