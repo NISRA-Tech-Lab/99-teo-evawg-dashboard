@@ -244,6 +244,8 @@ export async function insertHead(title) {
   await loadScript("https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js");
   await loadScript("https://cdn.jsdelivr.net/npm/@watergis/maplibre-gl-export@4.1.0/dist/maplibre-gl-export.umd.js");
 
+  document.body.removeAttribute("style");
+
 }
 
 

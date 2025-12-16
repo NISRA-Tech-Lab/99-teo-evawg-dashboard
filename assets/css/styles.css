@@ -22,11 +22,6 @@ h3 { font-size: 21px; line-height: 1.143; font-weight: 400; }
 h4 { font-size: 18px; line-height: 1.333; font-weight: 400; }
 @media (min-width: 992px) { h4 { font-size: 21px; line-height: 1.286; } }
 
-/* Page background (main content area) */
-main { 
-  
-  min-height: 75vh;
- }
 
 /* External link indicator (scope to main so footer links aren’t doubled) */
 main a[target="_blank"]::after {
@@ -217,7 +212,7 @@ nav a {
   color: #fff;
 }
 
-nav a[target="_blank"]::after {
+#strategies a[target="_blank"]::after, nav a[target="_blank"]::after {
   content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11"><g fill="none" stroke="white" stroke-width="1"><path d="M0 3h2V0h12v8h-2v3H0zm13-2H3v6h10zM2 4H1v4h1zm-1 6h10V8H1z"/></g></svg>');
   display: inline-block;
   width: 14px;
@@ -304,7 +299,7 @@ nav a {
 }
 
 canvas {
-  min-height: 50vh;
+  min-height: 30vh;
 }
 
 /* Only when expanded (i.e., NOT collapsed) */
