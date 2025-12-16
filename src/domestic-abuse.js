@@ -10,7 +10,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await insertHead("Domestic abuse")
     insertHeader();
-    insertFooter();
     maleComparison();
     insertNavButtons();
     let data = await readData("EXPDA");
@@ -104,6 +103,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             
             ]
         );
+
+        insertFooter();
 
     
 

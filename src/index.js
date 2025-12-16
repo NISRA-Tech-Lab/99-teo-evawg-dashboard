@@ -8,7 +8,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await insertHead("Home");
     insertHeader();
-    insertFooter();
 
     // Insert values into homepage cards
 
@@ -65,7 +64,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         ["For help and support"],
         [`<a href="https://www.executiveoffice-ni.gov.uk/articles/support-services-executiveoffice" target="_blank">Support Services</a>
         <p>The information on this page will direct you to services that will support you if you have concerns about an issue of coercive control.</p>
-`]
+        `]
     )
+
+    insertFooter();
 
 })

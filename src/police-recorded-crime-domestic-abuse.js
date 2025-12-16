@@ -4,7 +4,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await insertHead("Police recorded crime - Domestice abuse")
     insertHeader();
-    insertFooter();
     insertNavButtons();
 
+
+    insertFooter();
 })

@@ -4,8 +4,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await insertHead("Information");
     insertHeader();
-    insertFooter();
     insertNavButtons();
-    
+    insertFooter();
 
 })

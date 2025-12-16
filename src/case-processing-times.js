@@ -5,13 +5,10 @@ import { years, latest_year, updateYearSpans } from "./utils/update-years.js";
 import { insertValue } from "./utils/insert-value.js";
 import { populateInfoBoxes } from "./utils/info-boxes.js";
 
-
-
 window.addEventListener("DOMContentLoaded", async () => {
 
     await insertHead("Case processing times")
     insertHeader();
-    insertFooter();
     insertNavButtons();
     let data = await readData("INDPRCASEEQ");
 
@@ -69,5 +66,6 @@ window.addEventListener("DOMContentLoaded", async () => {
             ]
         );
 
+        insertFooter();
 
 })

@@ -132,7 +132,6 @@ export function insertFooter () {
     const footer = document.getElementById("footer");
 
     footer.classList.add("footer");
-    footer.classList.add("mt-auto");
     footer.classList.add("py-4");
     footer.classList.add("bg-nisra");
     footer.classList.add("text-nisra");
@@ -197,6 +196,19 @@ export function insertFooter () {
         <li class="list-inline-item"><a href="https://datavis.nisra.gov.uk/dissemination/accessibility-statement-visualisations.html">Accessibility Statement</a></li>
       </ul>
     </div>`
+
+    
+    
+    function adjustFooterMargin() {
+      const margin_needed = (window.innerHeight - document.getElementById("nav").clientHeight - document.getElementById("content").clientHeight - footer.clientHeight) - 4;
+      footer.style.marginTop = (margin_needed) > 0 ? `${margin_needed}px` : "0px";
+    }
+
+    adjustFooterMargin();
+    window.addEventListener("resize", adjustFooterMargin); 
+
+
+
 }
 
 export async function insertHead(title) {

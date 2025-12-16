@@ -10,7 +10,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await insertHead("Violence against women and men");
     insertHeader();
-    insertFooter();
     maleComparison();
     insertNavButtons();
     let data = await readData("EXPVLADEQ");    
@@ -97,5 +96,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         
         ]
     );
+
+    insertFooter();
 
 })

@@ -7,7 +7,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await insertHead("Maps");
     insertHeader();
-    insertFooter();
     insertNavButtons();
     const data = await readData("PRCPD");
 
@@ -66,5 +65,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             
             ]
         );
+
+        insertFooter();
 
 });
