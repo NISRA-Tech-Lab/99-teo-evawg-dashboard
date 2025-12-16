@@ -13,11 +13,17 @@ window.addEventListener("DOMContentLoaded", async () => {
     maleComparison();
     insertNavButtons();
     let data = await readData("EXPVLADEQ");    
+    let types_data = await readData("EXPVEQ")
+    
 
     // Update values
     const stat = "Adult victims of gender-based violence";
     
     updateYearSpans(data, stat);
+
+    insertValue("violence-female", 100 - types_data.data["Adult victims of violence"][latest_year]["No forms of violence"]["Female"]);    
+    insertValue("violence-male", 100 - types_data.data["Adult victims of violence"][latest_year]["No forms of violence"]["Male"]);    
+
 
     insertValue("economic-female", data.data[stat][latest_year]["Economic violence"]["Sex - Female"]);
     insertValue("economic-male", data.data[stat][latest_year]["Economic violence"]["Sex - Male"]);

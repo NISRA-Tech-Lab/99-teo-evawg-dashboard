@@ -15,8 +15,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     const EXPVLYTHEQ = await readData("EXPVLYTHEQ");
     const EXPVLYTHEQ_stat = "Victims of gender-based violence"
     updateYearSpans(EXPVLYTHEQ, EXPVLYTHEQ_stat);
+    console.log(EXPVLYTHEQ)
 
-    insertValue("violence-girl", 100 - EXPVLYTHEQ.data[EXPVLYTHEQ_stat][latest_year]["No violence"]["Gender - Female"]);
+    insertValue("violence-girl", 100 - EXPVLYTHEQ.data[EXPVLYTHEQ_stat][latest_year]["No violence"]["Sex - Female"]);
 
     // % of victims of sexual offences are women
     const PRCVCTM = await readData("PRCVCTM");

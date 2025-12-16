@@ -13,28 +13,29 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertHeader();
     maleComparison();
     insertNavButtons();
-    let data = await readData("EXPVLYTHEQ");
 
+    let data = await readData("EXPVLYTHEQ");
+    
     // Update values
 
     const stat = "Victims of gender-based violence";
 
     updateYearSpans(data, stat);
 
-    insertValue("violence-girl", 100 - data.data[stat][latest_year]["No violence"]["Gender - Female"]);
-    insertValue("violence-boy",  100 - data.data[stat][latest_year]["No violence"]["Gender - Male"]);
+    insertValue("violence-girl", 100 - data.data[stat][latest_year]["No violence"]["Sex - Female"]);
+    insertValue("violence-boy",  100 - data.data[stat][latest_year]["No violence"]["Sex - Male"]);
 
-    insertValue("online-girl", data.data[stat][latest_year]["Online violence"]["Gender - Female"]);
-    insertValue("online-boy",  data.data[stat][latest_year]["Online violence"]["Gender - Male"]);
+    insertValue("online-girl", data.data[stat][latest_year]["Online violence"]["Sex - Female"]);
+    insertValue("online-boy",  data.data[stat][latest_year]["Online violence"]["Sex - Male"]);
 
-    insertValue("sexual-girl", data.data[stat][latest_year]["Sexual violence"]["Gender - Female"]);
-    insertValue("sexual-boy",  data.data[stat][latest_year]["Sexual violence"]["Gender - Male"]);
+    insertValue("sexual-girl", data.data[stat][latest_year]["Sexual violence"]["Sex - Female"]);
+    insertValue("sexual-boy",  data.data[stat][latest_year]["Sexual violence"]["Sex - Male"]);
 
-    insertValue("psychological-girl", data.data[stat][latest_year]["Psychological violence"]["Gender - Female"]);
-    insertValue("psychological-boy",  data.data[stat][latest_year]["Psychological violence"]["Gender - Male"]);
+    insertValue("psychological-girl", data.data[stat][latest_year]["Psychological violence"]["Sex - Female"]);
+    insertValue("psychological-boy",  data.data[stat][latest_year]["Psychological violence"]["Sex - Male"]);
 
-    insertValue("physical-girl", data.data[stat][latest_year]["Physical violence"]["Gender - Female"]);
-    insertValue("physical-boy",  data.data[stat][latest_year]["Physical violence"]["Gender - Male"]);
+    insertValue("physical-girl", data.data[stat][latest_year]["Physical violence"]["Sex - Female"]);
+    insertValue("physical-boy",  data.data[stat][latest_year]["Physical violence"]["Sex - Male"]);
 
     // Create bar chart
     const violence_types = Object.keys(data.data[stat][latest_year])
@@ -54,8 +55,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             data,
             stat,
             years,
-            line_1: ["No violence", "Gender - Female"],
-            line_2: ["No violence", "Gender - Male"],
+            line_1: ["No violence", "Sex - Female"],
+            line_2: ["No violence", "Sex - Male"],
             canvas_id: "prevalence-ylt-line"
         });
 

@@ -20,9 +20,9 @@ export function insertHeader () {
 
         <!-- Left: NISRA logo -->
         <div class="col">
-          <a class="navbar-brand ps-2 d-flex align-items-center" href="./">
+          <a class="navbar-brand ps-2 d-flex align-items-center" href="https://www.nisra.gov.uk/">
               <img src="assets/img/logo/nisra-only-white.svg" 
-                  alt="NISRA logo" height="60" class="me-3">
+                  alt="NISRA logo" height="60" class="me-3" role="img" title="NISRA">
           </a>
         </div>
 

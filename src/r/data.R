@@ -12,10 +12,12 @@ matrix_list <- list(
     "EXPVLADEQ",
     "EXPVLYTHEQ",
     "PRCONL",
-    "PRCPD"
+    "PRCPD",
+    "EXPVEQ",
+    "EXPVLADAS"
   ),
   data_portal = c(
-    "INDPRCASEEQ" 
+    "INDPRCASEEQ"
   )
 )
 
@@ -42,33 +44,33 @@ fetch_dataset <- function(matrix,
           "/JSON-stat/2.0/en?apiKey=",
           api_key
         )
-        
+
         json_data <- fromJSON(txt = url)
-        
+
         # Check if API itself returned "error" field
         if ("error" %in% names(json_data)) {
           stop("API returned error field")
         }
-        
+
         return(json_data)  # ✅ success, return immediately
       },
       error = function(e) {
-        message(sprintf("Error fetching %s (attempt %d): %s", 
-                        matrix, 
+        message(sprintf("Error fetching %s (attempt %d): %s",
+                        matrix,
                         attempt, e$message))
         return(NULL)
       }
     )
-    
+
     if (!is.null(result)) {
       return(result)  # break loop if successful
     }
-    
+
     attempt <- attempt + 1
     if (attempt > max_attempts) {
       stop("Max attempts reached without success.")
     }
-    
+
     Sys.sleep(wait_seconds)  # backoff before retry
   }
 }
@@ -78,43 +80,43 @@ all_data <- list()
 
 
 for (portal in matrix_list) {
-  
+
   for (matrix in portal) {
-  
+
     raw_data <- fetch_dataset(matrix, api_key, pp_portal = matrix %in% matrix_list$pp_portal)
-  
+
     dimensions <- names(raw_data$dimension)
     size <- raw_data$size
-  
+
     reshaped_data <- data.frame(value = as.numeric(raw_data$value))
-  
+
     for (i in seq_along(dimensions)) {
       dimension_cats <- unlist(raw_data$dimension[[dimensions[[i]]]]$category$label)
-  
+
       dimension_col <- c()
-  
+
       for (cat in dimension_cats) {
         if (i == length(dimensions)) {
           dimension_col <- c(dimension_col, cat)
         } else {
           dimension_col <- c(dimension_col, rep(cat, prod(size[(i + 1):length(size)])))
         }
-  
+
       }
-  
+
       reshaped_data[[dimensions[i]]] <- dimension_col
     }
-  
+
     reshaped_data <- reshaped_data %>%
       relocate(value, .after = dimensions[[length(dimensions)]])
-  
+
     data_list <- list()
-  
+
     for (i in seq_len(nrow(reshaped_data))) {
       keys <- map(dimensions, ~ reshaped_data[[.x]][i])
       pluck(data_list, !!!keys) <- reshaped_data$value[i]
     }
-  
+
     all_data[[matrix]]$label <- raw_data$label
     all_data[[matrix]]$updated <- as.Date(raw_data$updated)
     all_data[[matrix]]$data <- data_list
