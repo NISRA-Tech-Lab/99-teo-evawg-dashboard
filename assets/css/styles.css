@@ -244,6 +244,7 @@ nav a {
 
 .card-body p {
   margin: 0;
+  line-height: normal;
 }
 
 .blue-bg {
@@ -291,6 +292,11 @@ nav a {
 .navy-bg {
   background-color: #00205B !important;
   color: #fff !important;
+}
+
+.nav-btn {
+  background-color: #3878c5;
+  border: 2px solid #00205B;
 }
 
 .nav-btn:hover {

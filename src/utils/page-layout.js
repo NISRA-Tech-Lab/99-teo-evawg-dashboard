@@ -106,7 +106,7 @@ export function insertNavButtons() {
           ${links
             .map(
               (l) => `
-                <a id="${l.id}" class="col nav-btn" href="${l.href}">
+                <a id="${l.id}" class="col nav-btn d-flex justify-content-center align-items-end text-center" href="${l.href}">
                   ${l.text}
                 </a>`
             )
