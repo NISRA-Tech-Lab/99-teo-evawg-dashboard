@@ -35,80 +35,6 @@ main a[target="_blank"]::after {
   background-color: var(--bs-secondary-color, #6c757d); /* follows Bootstrap’s text-secondary */
 }
 
-
-
-/* ===========================
-   Sidebar / Offcanvas
-   =========================== */
-.sidebar { background-color: #e5e5e5; }
-
-/* Mobile/tablet width (Bootstrap offcanvas var) */
-.sidebar.offcanvas { --bs-offcanvas-width: 320px; }
-
-/* Desktop (≥992px): make offcanvas behave like static panel */
-@media (min-width: 992px) {
-  #sidebar.offcanvas-lg {
-    position: static !important;
-    transform: none !important;
-    visibility: visible !important;
-    border-right: 1px solid var(--bs-border-color);
-    background-color: transparent;
-    box-shadow: none;
-    height: 100%;
-  }
-  #sidebar.offcanvas-lg .offcanvas-body {
-    display: block;          /* override Bootstrap flex to stack children */
-    height: auto;
-    max-height: none;
-    overflow: visible;
-  }
-  #sidebar.offcanvas-lg .offcanvas-body > * { width: 100%; }
-}
-
-/* Disable offcanvas animation only when body has .offcanvas-no-anim */
-.offcanvas-no-anim .offcanvas,
-.offcanvas-no-anim .offcanvas-backdrop {
-  transition: none !important;
-  animation: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .offcanvas,
-  .offcanvas-backdrop {
-    transition: none !important;
-    animation: none !important;
-  }
-}
-
-/* Sidebar form widths (scoped; won’t affect forms elsewhere) */
-.sidebar label,
-.sidebar select { width: 100%; }
-
-/* ===========================
-   Global search overlay (inside sidebar)
-   =========================== */
-.sidebar-search { position: relative; }
-#global-search-results {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  left: 0;
-  right: 0;
-  z-index: 2000;
-  max-height: 50vh;
-  overflow: auto;
-  display: none;
-  background: var(--bs-body-bg);
-  border: 1px solid var(--bs-border-color);
-  border-radius: var(--bs-border-radius);
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-}
-.sidebar-search.has-results #global-search-results { display: block; }
-#global-search-results .list-group-item {
-  border: 0;
-  border-bottom: 1px solid var(--bs-border-color);
-}
-#global-search-results .list-group-item:last-child { border-bottom: 0; }
-
 /* ===========================
    Map & Legend
    =========================== */
@@ -210,6 +136,7 @@ main a[target="_blank"]::after {
 
 nav a {
   color: #fff;
+  text-decoration: none;
 }
 
 #strategies a[target="_blank"]::after, nav a[target="_blank"]::after {
@@ -218,7 +145,6 @@ nav a {
   width: 14px;
   height: 11px;
   margin: 0 5px 0 5px;
-  vertical-align: text-top;
 }
 
 table tr:not(:has(th)):hover {
@@ -231,10 +157,6 @@ table tr:not(:has(th)):hover {
 
 .btn-primary {
   background-color: #3878c5;
-}
-
-nav a {
-  text-decoration: none;
 }
 
 .current-page {
