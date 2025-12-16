@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     maleComparison();
     insertNavButtons();
     let data = await readData("EXPVLADEQ");    
-    let types_data = await readData("EXPVEQ")
+    let types_data = await readData("EXPVEQ");
     
 
     // Update values

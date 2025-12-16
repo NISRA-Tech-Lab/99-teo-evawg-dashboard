@@ -5,7 +5,7 @@ import { getNested } from "./get-nested.js";
 
 const chart_colours = ["#4E95D9", "#00205B", "#68A41E", "#732777", "#ce70d2"];
 
-export function createLineChart({data, stat, years, line_1, line_2, label_1 = "Female (%)", label_2 = "Male (%)", canvas_id}) {
+export function createLineChart({data, stat, years, line_1, line_2, label_1 = "Female", label_2 = "Male", canvas_id}) {
 
     const line_canvas = document.getElementById(canvas_id);
 
@@ -176,7 +176,7 @@ export function createBarChart({ chart_data, categories, canvas_id, label_format
 
   const makeDataset = (gender) => ({
     axis: "y",
-    label: `${gender === "female" ? "Female" : "Male"}${label_format === "%" ? " (%)" : ""}`,
+    label: `${gender === "female" ? "Female" : "Male"}`,
     data: gender === "female" ? chart_data.female : chart_data.male,
     fill: false,
     backgroundColor: gender === "female" ? chart_colours[0] : chart_colours[1],

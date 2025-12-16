@@ -10,12 +10,16 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertHeader();
 
     // Insert values into homepage cards
+    const EXPVEQ = await readData("EXPVEQ");
+    const EXPVEQ_stat = "Adult victims of violence";
+    updateYearSpans(EXPVEQ, EXPVEQ_stat);
+
+    insertValue("violence-women", 100 - EXPVEQ.data[EXPVEQ_stat][latest_year]["No forms of violence"]["Female"]);   
 
     // % of 16-year-old girls have experienced violence
     const EXPVLYTHEQ = await readData("EXPVLYTHEQ");
     const EXPVLYTHEQ_stat = "Victims of gender-based violence"
     updateYearSpans(EXPVLYTHEQ, EXPVLYTHEQ_stat);
-    console.log(EXPVLYTHEQ)
 
     insertValue("violence-girl", 100 - EXPVLYTHEQ.data[EXPVLYTHEQ_stat][latest_year]["No violence"]["Sex - Female"]);
 
@@ -59,7 +63,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     updateYearSpans(INDPRCASEEQ, INDPRCASEEQ_stat);
 
     insertValue("sexual-days", INDPRCASEEQ.data[INDPRCASEEQ_stat][latest_year]["Offence category - Sexual"]);
-    insertValue("violence-days", INDPRCASEEQ.data[INDPRCASEEQ_stat][latest_year]["Offence category - Violence Against the Person"]);
+    insertValue("all-days", INDPRCASEEQ.data[INDPRCASEEQ_stat][latest_year]["Northern Ireland"]);
 
     populateInfoBoxes(
         ["For help and support"],
@@ -68,6 +72,13 @@ window.addEventListener("DOMContentLoaded", async () => {
         `]
     )
 
+    const first_card_body = document.querySelectorAll(".card-body")[0];
+    const map_img = document.getElementById("map-img");
+    
+    map_img.height = first_card_body.clientHeight;
+    map_img.width = map_img.naturalWidth / map_img.naturalHeight * map_img.height;
+    
+    
     insertFooter();
 
 })
