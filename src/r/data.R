@@ -7,14 +7,16 @@ matrix_list <- list(
   pp_portal = c(
     "PRCHOM",
     "PRCVCTM",
-    "DOMAC", 
+    "DOMAC",
     "EXPDA",
     "EXPVLADEQ",
     "EXPVLYTHEQ",
     "PRCONL",
     "PRCPD",
-    "EXPVEQ",
-    "EXPVLADAS"
+    "EXPVLADAS",
+    "DOMACLGD",
+    "EXPVAS",
+    "CPTDAC"
   ),
   data_portal = c(
     "INDPRCASEEQ"

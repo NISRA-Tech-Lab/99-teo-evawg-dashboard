@@ -16,7 +16,7 @@ export function createLineChart({data, stat, years, line_1, line_2, label_1 = "F
     for (let i = 0; i < years.length; i++) {
         const base = data.data[stat][years[i]];   // start point for that year
 
-        if (line_1.includes("No violence")) {
+        if (line_1.includes("No violence") || line_1.includes("No forms of violence")) {
             female_values.push(100 - getNested(base, line_1));
             male_values.push(100 - getNested(base, line_2));
         } else {

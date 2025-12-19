@@ -13,17 +13,17 @@ window.addEventListener("DOMContentLoaded", async () => {
     maleComparison();
     insertNavButtons();
     let data = await readData("EXPVLADEQ");    
-    let types_data = await readData("EXPVEQ");
+    let types_data = await readData("EXPVAS");
     
 
     // Update values
     const stat = "Adult victims of gender-based violence";
+    const types_stat = "Adult victims of violence";
     
     updateYearSpans(data, stat);
 
-    insertValue("violence-female", 100 - types_data.data["Adult victims of violence"][latest_year]["No forms of violence"]["Female"]);    
-    insertValue("violence-male", 100 - types_data.data["Adult victims of violence"][latest_year]["No forms of violence"]["Male"]);    
-
+    insertValue("violence-female", 100 - types_data.data[types_stat][latest_year]["No forms of violence"]["Female"]);    
+    insertValue("violence-male", 100 - types_data.data[types_stat][latest_year]["No forms of violence"]["Male"]);    
 
     insertValue("economic-female", data.data[stat][latest_year]["Economic violence"]["Sex - Female"]);
     insertValue("economic-male", data.data[stat][latest_year]["Economic violence"]["Sex - Male"]);
@@ -53,14 +53,16 @@ window.addEventListener("DOMContentLoaded", async () => {
         canvas_id: "prevalence-nilt-bar",
         label_format: "%"
     });
+    
+    const types_years = Object.keys(types_data.data[types_stat]);
 
     // Create line chart
     createLineChart({
-            data,
-            stat,
-            years,
-            line_1: ["Physical violence", "Sex - Female"],
-            line_2: ["Physical violence", "Sex - Male"],
+            data: types_data,
+            stat: types_stat,
+            years: types_years,
+            line_1: ["No forms of violence", "Female"],
+            line_2: ["No forms of violence", "Male"],
             canvas_id: "prevalence-nilt-line"
         });
 
