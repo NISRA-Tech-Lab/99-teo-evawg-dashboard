@@ -21,7 +21,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Run data portal structure
+      - name: Read data from portal
         run: Rscript -e 'source("src/r/data.R")'
 
       - name: Commit results

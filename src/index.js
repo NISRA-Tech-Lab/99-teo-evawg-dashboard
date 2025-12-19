@@ -72,12 +72,26 @@ window.addEventListener("DOMContentLoaded", async () => {
         `]
     )
 
-    const first_card_body = document.querySelectorAll(".card-body")[0];
-    const map_img = document.getElementById("map-img");
+    function mapResizeHandler() {
+
+        const first_card_body = document.querySelectorAll(".card-body")[0];
+        const map_img = document.getElementById("map-img");
     
-    map_img.height = first_card_body.clientHeight;
-    map_img.width = map_img.naturalWidth / map_img.naturalHeight * map_img.height;
-    
+        map_img.height = first_card_body.clientHeight;
+        map_img.width = map_img.naturalWidth / map_img.naturalHeight * map_img.height;
+
+        if (map_img.width > first_card_body.clientWidth) {
+            map_img.width = first_card_body.clientWidth;
+            map_img.height = map_img.naturalHeight / map_img.naturalWidth * map_img.width;
+        }
+
+    }
+
+    // Initial resize
+    mapResizeHandler();
+
+    // Resize on window resize
+    window.addEventListener("resize", mapResizeHandler);
     
     insertFooter();
 
