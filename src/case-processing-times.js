@@ -11,14 +11,18 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertHeader();
     insertNavButtons();
     let data = await readData("INDPRCASEEQ");
+    let dom_data = await readData("CPTDAC");
 
         // Update values
     const stat = "Average time taken to complete criminal cases";
+    const dom_stat = "Median days taken to process";
+    const dom_years = Object.keys(dom_data.data[dom_stat]);
 
     updateYearSpans(data, stat);
 
     insertValue("sexual-case-processing", data.data[stat][latest_year]["Offence category - Sexual"]);
     insertValue("all-case-processing", data.data[stat][latest_year]["Northern Ireland"]);
+    insertValue("domestic-days", dom_data.data[dom_stat][latest_year]["All domestic abuse cases"]);
 
 
     // Create line chart
@@ -31,6 +35,19 @@ window.addEventListener("DOMContentLoaded", async () => {
         label_1: "All offences",
         label_2: "Sexual offences",
         canvas_id: "case-processing-sexual-line",
+    });
+
+    
+
+    createLineChart({
+        data: dom_data,
+        stat: dom_stat,
+        years: dom_years,
+        line_1: ["All domestic abuse cases"],
+        line_2: ["All criminal cases"],
+        label_1: "Domestic abuse related cases",
+        label_2: "All criminal cases",
+        canvas_id: "case-processing-domestic-line",
     });
 
     // Populate info boxes

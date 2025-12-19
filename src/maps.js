@@ -16,6 +16,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     const crime_filter = document.getElementById("crime-filter");
     let crime_type = crime_filter.value;
+    console.log(crime_type);
 
     // first draw
     plotMap(data, stat, latest_year, crime_type);

@@ -30,7 +30,7 @@
                 <div class="col-6 col-xl-3 py-2">
                     <div class="card h-100 green-bg">
                         <div class="card-body">
-                            <p class="display-6">x days</p>
+                            <p class="display-6"><span id="domestic-days"></span> days</p>
                             <p>average processing time for domestic abuse related cases</p>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                 <div class="col-6 col-xl-3 py-2">
                     <div class="card h-100 green-bg">
                         <div class="card-body">
-                            <p class="display-6"><span id="all-case-processing"></span> </p>
+                            <p class="display-6"><span id="all-case-processing"></span> days</p>
                             <p>average processing time for all cases</p>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
     <div class="col-12 col-xl-6">
         <div class="card h-100">
             <div class="card-header">
-                Case processing time xxxx year
+                Case processing time <span class="first-year"></span> to <span class="latest-year"></span>
             </div>
             <div class="card-body">
                 <canvas id="case-processing-sexual-line"></canvas> 
@@ -61,10 +61,10 @@
     <div class="col-12 col-xl-6">
         <div class="card h-100">
             <div class="card-header">
-                Time taken for domestic abuse related cases and all criminal cases from date incident reported/detected to disposal at court, 2022/23 to 2024/25
+                Time taken for domestic abuse related cases and all criminal cases from date incident reported/detected to disposal at court, 2022/23 to <span class="latest-year"></span>
             </div>
             <div class="card-body">
-                Bar chart goes here
+                <canvas id="case-processing-domestic-line"></canvas> 
             </div>
         </div>
     </div>
