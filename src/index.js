@@ -10,11 +10,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     insertHeader();
 
     // Insert values into homepage cards
-    const EXPVEQ = await readData("EXPVEQ");
-    const EXPVEQ_stat = "Adult victims of violence";
-    updateYearSpans(EXPVEQ, EXPVEQ_stat);
+    const EXPVAS = await readData("EXPVAS");
+    const EXPVAS_stat = "Adult victims of violence";
+    updateYearSpans(EXPVAS, EXPVAS_stat);
 
-    insertValue("violence-women", 100 - EXPVEQ.data[EXPVEQ_stat][latest_year]["No forms of violence"]["Female"]);   
+    insertValue("violence-women", 100 - EXPVAS.data[EXPVAS_stat][latest_year]["No forms of violence"]["Female"]);   
 
     // % of 16-year-old girls have experienced violence
     const EXPVLYTHEQ = await readData("EXPVLYTHEQ");
