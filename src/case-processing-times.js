@@ -32,8 +32,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         years,
         line_1: ["Northern Ireland"],
         line_2: ["Offence category - Sexual"],
-        label_1: "All offences",
-        label_2: "Sexual offences",
+        label_1: "All criminal cases",
+        label_2: "Sexual offence cases",
         canvas_id: "case-processing-sexual-line",
     });
 
@@ -43,10 +43,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         data: dom_data,
         stat: dom_stat,
         years: dom_years,
-        line_1: ["All domestic abuse cases"],
-        line_2: ["All criminal cases"],
-        label_1: "Domestic abuse related cases",
-        label_2: "All criminal cases",
+        line_2: ["All domestic abuse cases"],
+        line_1: ["All criminal cases"],
+        label_2: "Domestic abuse related cases",
+        label_1: "All criminal cases",
         canvas_id: "case-processing-domestic-line",
     });
 

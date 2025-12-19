@@ -207,7 +207,7 @@ export function createBarChart({ chart_data, categories, canvas_id, label_format
         ticks: {
           callback: function (value) {
             const label = this.getLabelForValue(value);
-            return wrapLabel(label, 35);
+            return wrapLabel(label, 18);
           }
         }
       }

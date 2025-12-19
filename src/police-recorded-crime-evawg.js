@@ -123,10 +123,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     ];
 
     const chart_data = createPRCData({data, stat, year: latest_year, violence_types});
+    console.log(chart_data)
     
     createBarChart({
         chart_data,
-        categories: violence_types,
+        categories: ["Violence with injury", "Violence without injury"],
         canvas_id: "violence-bar",
         label_format: ","
     });
