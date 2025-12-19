@@ -40749,6 +40749,23 @@
       }
     }
   },
+  "DARPV": {
+    "label": "Domestic abuse - relationship of perpetrator to victim",
+    "updated": "2025-12-19",
+    "data": {
+      "Percentage of perpetrators": {
+        "2018/19": {
+          "Current husband, wife or civil partner": 10.5,
+          "Former husband, wife or civil partner": 35.5,
+          "Someone currently dating or seeing casually": 9.1,
+          "Someone formerly dating or seeing casually": 16.8,
+          "Parent, step parent or foster parent": 0.9,
+          "Another family member": 4.5,
+          "Other": 22.7
+        }
+      }
+    }
+  },
   "INDPRCASEEQ": {
     "label": "Indicator - Processing times for criminal cases",
     "updated": "2025-10-07",
