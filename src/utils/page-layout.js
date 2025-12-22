@@ -10,7 +10,7 @@ export function insertHeader () {
     <div class="w-100" style="background-color:#3878c5;">
         <div class="text-white text-center py-2 px-3">
             <strong>We welcome feedback from users through our 
-                <a href="#" target="_blank">short survey</a>
+                <a href="https://dttselfserve.nidirect.gov.uk/NISRA/RateIt#/Gender_based_violence" target="_blank">short survey</a>
             </strong>
         </div>
     </div>
